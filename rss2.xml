@@ -15,7 +15,7 @@
     <atom:link href="https://neroumu.top/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Tue, 21 Jun 2022 11:06:15 GMT</pubDate>
+    <pubDate>Tue, 21 Jun 2022 11:18:14 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -24,9 +24,23 @@
       <guid>https://neroumu.top/2022/06/22/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85ArchLinux/</guid>
       <pubDate>Tue, 21 Jun 2022 23:06:15 GMT</pubDate>
       
+        
+        
+          
+          
+      <description></description>
+          
+        
       
       
       
+      <content:encoded><![CDATA[<h1 id="树莓派到货了"><a href="#树莓派到货了" class="headerlink" title="树莓派到货了"></a>树莓派到货了</h1><p>心心念念的树莓派终于到货了，安装了个 ArchLinux 系统，能跑起来<br>在树莓派上安装 ArchLinux 比在电脑上安装简单太多了吧<br>记录一下安装的流程</p><h2 id="在-SD-卡上安装系统"><a href="#在-SD-卡上安装系统" class="headerlink" title="在 SD 卡上安装系统"></a>在 SD 卡上安装系统</h2><p>ArchLinux 官方就有教程，我这篇记录就当是汉化吧 o(´^｀)o<br><a href="https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-4">https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-4</a></p><ol><li><p>在 SD 卡上分区</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">fdisk /dev/sdX<br></code></pre></td></tr></table></figure></li><li><p>删除旧分区，创建新分区</p></li></ol><ul><li>键入 o ，清除驱动器上的所有分区</li><li>键入 p ，列出分区，此处应该没有任何分区</li><li>输入 n ，然后 p 表示主分区，然后 1 表示驱动器上的第一个分区，然后回车使用默认的第一个扇区，然后输入 +200M 表示最后一个扇区</li><li>键入 t ，然后 c 将第一个分区设置为键入 W95 FAT32 (LBA)</li><li>键入 n ，然后 p 表示主分区，然后 2 表示驱动器上的第二个分区，然后两次 回车 表示默认的第一个和最后一个扇区</li><li>键入 w ，表示写入分区表并推出</li></ul>]]></content:encoded>
+      
+      
+      <category domain="https://neroumu.top/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</category>
+      
+      
+      <category domain="https://neroumu.top/tags/ArchLinux/">ArchLinux</category>
       
       
       <comments>https://neroumu.top/2022/06/22/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85ArchLinux/#disqus_thread</comments>
