@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>aur无法更新下载</title>
+    <link href="/2022/06/23/aur%E6%97%A0%E6%B3%95%E6%9B%B4%E6%96%B0%E4%B8%8B%E8%BD%BD/"/>
+    <url>/2022/06/23/aur%E6%97%A0%E6%B3%95%E6%9B%B4%E6%96%B0%E4%B8%8B%E8%BD%BD/</url>
+    
+    <content type="html"><![CDATA[<h1 id="aur-无法更新和下载"><a href="#aur-无法更新和下载" class="headerlink" title="aur 无法更新和下载"></a>aur 无法更新和下载</h1><p>今天碰到了很无语的事，aur 无法使用</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">request failed: Get &quot;https://aur.tuna.tsinghua.edu.cn/xxxxxx&quot;: dial tcp: lookup aur.tuna.tsinghua.edu.cn: no such host<br></code></pre></td></tr></table></figure><p>翻译过来就是该主机不可达，然后我尝试重新换了一次源，还是没有用<br>就在查着 google 的时候，发现清华的 aur 源关闭了<br>怪不得无法下载，于是换了个官方源</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">yay --aururl &quot;https://aur.archlinux.org&quot; --save<br></code></pre></td></tr></table></figure><p>然后再下载更新，就没问题了</p><hr><p>就很无语，之前下好 yay 的时候不应该换源的，就应该用官方源的<br>官方源慢，但挂上代理之后就快很多了，还是好好用官方源吧</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>踩坑记录</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>aur</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>树莓派安装ArchLinux</title>
     <link href="/2022/06/22/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85ArchLinux/"/>
     <url>/2022/06/22/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85ArchLinux/</url>
