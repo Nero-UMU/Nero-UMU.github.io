@@ -15,7 +15,7 @@
     <atom:link href="https://neroumu.top/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Tue, 28 Jun 2022 16:25:03 GMT</pubDate>
+    <pubDate>Tue, 28 Jun 2022 16:31:58 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -34,7 +34,7 @@
       
       
       
-      <content:encoded><![CDATA[<h1 id=""><a href="#" class="headerlink" title=""></a></h1>]]></content:encoded>
+      <content:encoded><![CDATA[<h1 id="搭建个人网盘"><a href="#搭建个人网盘" class="headerlink" title="搭建个人网盘"></a>搭建个人网盘</h1><p>终于想起来要搭建一个个人网盘，于是学习了一下使用 docker 搭建了一个个人网盘，记录一下搭建的过程<br>使用 mysql 作为数据库</p><h2 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker pull mysql<br>docker pull nextcloud<br></code></pre></td></tr></table></figure>]]></content:encoded>
       
       
       <category domain="https://neroumu.top/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</category>

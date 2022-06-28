@@ -8,7 +8,7 @@
     <link href="/2022/06/29/Docker-%E6%90%AD%E5%BB%BA-nextcloud-%E7%BD%91%E7%9B%98/"/>
     <url>/2022/06/29/Docker-%E6%90%AD%E5%BB%BA-nextcloud-%E7%BD%91%E7%9B%98/</url>
     
-    <content type="html"><![CDATA[<h1 id=""><a href="#" class="headerlink" title=""></a></h1>]]></content>
+    <content type="html"><![CDATA[<h1 id="搭建个人网盘"><a href="#搭建个人网盘" class="headerlink" title="搭建个人网盘"></a>搭建个人网盘</h1><p>终于想起来要搭建一个个人网盘，于是学习了一下使用 docker 搭建了一个个人网盘，记录一下搭建的过程<br>使用 mysql 作为数据库</p><h2 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker pull mysql<br>docker pull nextcloud<br></code></pre></td></tr></table></figure>]]></content>
     
     
     <categories>
