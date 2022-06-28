@@ -15,7 +15,7 @@
     <atom:link href="https://neroumu.top/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Tue, 28 Jun 2022 16:31:58 GMT</pubDate>
+    <pubDate>Tue, 28 Jun 2022 16:43:10 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -34,7 +34,7 @@
       
       
       
-      <content:encoded><![CDATA[<h1 id="搭建个人网盘"><a href="#搭建个人网盘" class="headerlink" title="搭建个人网盘"></a>搭建个人网盘</h1><p>终于想起来要搭建一个个人网盘，于是学习了一下使用 docker 搭建了一个个人网盘，记录一下搭建的过程<br>使用 mysql 作为数据库</p><h2 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker pull mysql<br>docker pull nextcloud<br></code></pre></td></tr></table></figure>]]></content:encoded>
+      <content:encoded><![CDATA[<h1 id="搭建个人网盘"><a href="#搭建个人网盘" class="headerlink" title="搭建个人网盘"></a>搭建个人网盘</h1><p>终于想起来要搭建一个个人网盘，于是学习了一下使用 docker 搭建了一个个人网盘，记录一下搭建的过程<br>使用 mysql 作为数据库</p><h2 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker pull mysql<br>docker pull nextcloud<br></code></pre></td></tr></table></figure><h2 id="运行镜像"><a href="#运行镜像" class="headerlink" title="运行镜像"></a>运行镜像</h2><p>创建并运行 mysql 容器</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker run -d -p 3306:3306 --name nextcloud_db -e MYSQL_ROOT_PASSWORD=371215 mysql<br></code></pre></td></tr></table></figure><p>进入 nextcloud_db 容器，创建一个数据库</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker exec -it nextcloud_db /bin/bash<br></code></pre></td></tr></table></figure><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql">mysql <span class="hljs-operator">-</span>u root <span class="hljs-operator">-</span>p<br><br><span class="hljs-keyword">create</span> database nextcloud;<br></code></pre></td></tr></table></figure><p>创建并运行 nextcloud 容器</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker run -d -p 10101:80 --name nextcloud -v /home/nextcloud:/srv/http nextcloud<br></code></pre></td></tr></table></figure><p>网上很多教程都说要用 <code>--link</code> 参数，但我看了 docker 的文档，上面建议不要使用 <code>--link</code></p>]]></content:encoded>
       
       
       <category domain="https://neroumu.top/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</category>
