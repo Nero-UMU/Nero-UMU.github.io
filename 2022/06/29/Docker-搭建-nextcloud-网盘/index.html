@@ -25,11 +25,16 @@
 <meta property="og:site_name" content="WJK&#39;s BLOG">
 <meta property="og:description" content="搭建个人网盘终于想起来要搭建一个个人网盘，于是学习了一下使用 docker 搭建了一个个人网盘，记录一下搭建的过程使用 mysql 作为数据库 拉取镜像12docker pull mysqldocker pull nextcloud  运行镜像创建并运行 mysql 容器 1docker run -d -p 3306:3306 --name nextcloud_db -e MYSQL_ROOT_P">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://neroumu.top/img/2022-6-29-1.png">
+<meta property="og:image" content="https://neroumu.top/img/2022-6-29-2.png">
+<meta property="og:image" content="https://neroumu.top/img/2022-6-29-3.png">
+<meta property="og:image" content="https://neroumu.top/img/2022-6-29-4.png">
 <meta property="article:published_time" content="2022-06-29T04:24:18.000Z">
-<meta property="article:modified_time" content="2022-06-28T16:43:10.530Z">
+<meta property="article:modified_time" content="2022-06-28T17:32:29.139Z">
 <meta property="article:author" content="W JK">
 <meta property="article:tag" content="nextcloud">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://neroumu.top/img/2022-6-29-1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -282,7 +287,32 @@
 
 <p>创建并运行 nextcloud 容器</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker run -d -p 10101:80 --name nextcloud -v /home/nextcloud:/srv/http nextcloud<br></code></pre></td></tr></table></figure>
-<p>网上很多教程都说要用 <code>--link</code> 参数，但我看了 docker 的文档，上面建议不要使用 <code>--link</code></p>
+<p>网上很多教程都说要用 <code>--link</code> 参数，但我看了 docker 的文档，上面建议不要使用 <code>--link</code> 这个参数<br><img src="/img/2022-6-29-1.png" srcset="/img/loading.gif" lazyload alt="不建议使用这个参数，可能会被移除"><br><a target="_blank" rel="noopener" href="https://docs.docker.com/network/links/">https://docs.docker.com/network/links/</a></p>
+<p>所以我没有使用这个参数，后面也不用必须连接某个容器，可以直接使用网络连接数据库</p>
+<h2 id="设置网盘"><a href="#设置网盘" class="headerlink" title="设置网盘"></a>设置网盘</h2><p>打开浏览器，输入网盘的 IP 地址和端口，设置参数<br><img src="/img/2022-6-29-2.png" srcset="/img/loading.gif" lazyload alt="数据库的地址填ip:port"></p>
+<p>设置好后等就可以了</p>
+<h2 id="内网穿透"><a href="#内网穿透" class="headerlink" title="内网穿透"></a>内网穿透</h2><p>frp 服务端设置 frps.ini</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">[common]<br>bind_port = 7000<br>vhost_http_port = 10086<br></code></pre></td></tr></table></figure>
+<p>启动frps</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">nohup ./frps -c frps.ini &gt; /dev/null 2&gt;&amp;1 &amp;<br></code></pre></td></tr></table></figure>
+
+<p>frp 客户端设置 frpc.ini</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs text">[web]<br>type = http<br>local_port = 10101<br>custom_domains = X.X.X.X<br></code></pre></td></tr></table></figure>
+<p>启动frpc</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">nohup ./frpc -c frpc.ini &gt; /dev/null 2&gt;&amp;1 &amp;<br></code></pre></td></tr></table></figure>
+
+<p>打开浏览器，输入 服务器 IP:10086，会碰到无法访问的问题，这是因为这个 IP 地址不受到信任<br><img src="/img/2022-6-29-3.png" srcset="/img/loading.gif" lazyload></p>
+<p>进入 nextcloud 容器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker exec -it nextcloud /bin/bash<br></code></pre></td></tr></table></figure>
+<p>安装 vim 并修改 &#x2F;var&#x2F;www&#x2F;html&#x2F;nextcloud&#x2F;config&#x2F;config.php 文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">apt-get update<br>apt-get install vim<br>vim /var/www/html/config/config.php<br></code></pre></td></tr></table></figure>
+
+<p>找到 trusted_domains 这一项，在后面的 array 的括号里添加一项服务器的 IP 地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs test">&#x27;trusted_domains&#x27; =&gt; <br>  array (<br>          0 =&gt; &#x27;192.168.0.105:10101&#x27;,<br>          1 =&gt; &#x27;X.X.X.X&#x27;<br>  ),<br></code></pre></td></tr></table></figure>
+
+<p>保存并退出，浏览器刷新一下就可以了<br><img src="/img/2022-6-29-4.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<p>总算是把网盘给搭建好了，后面可以再做一个加速的操作，这样就有一个个人的不限速的网盘了<br>以后可以买几块大的硬盘放家里，存些我自己的数据，随时拿随时取咯 (ᕑᗢᓫ∗)˒</p>
 
                 
               </div>
