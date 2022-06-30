@@ -18,29 +18,26 @@
   <meta name="author" content="W JK">
   <meta name="keywords" content="">
   
-    <meta name="description" content="搭建个人网盘终于想起来要搭建一个个人网盘，于是学习了一下使用 docker 搭建了一个个人网盘，记录一下搭建的过程使用 mysql 作为数据库 拉取镜像12docker pull mysqldocker pull nextcloud  运行镜像创建并运行 mysql 容器 1docker run -d -p 3306:3306 --name nextcloud_db -e MYSQL_ROOT_P">
+    <meta name="description" content="记录一下安装 Arch安装 ArchLinux 作为实体机已经有一段时间了，现在来记录一下安装的过程正好刚才给另外一台主机也安装了 ArchLinux，又加强了一点印象 制作启动盘这里很简单，可以用 ventoy 制作一个启动盘，把 ISO 镜像放进U盘就可以了将U盘插上主机，进入 BIOS 将U盘启动设置为首项重启 开始安装进入 ventoy，选择 ArchLinux 镜像选择  Arch Li">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Docker 搭建 nextcloud 网盘">
-<meta property="og:url" content="https://neroumu.top/2022/06/29/Docker-%E6%90%AD%E5%BB%BA-nextcloud-%E7%BD%91%E7%9B%98/index.html">
+<meta property="og:title" content="UEFI引导安装ArchLinux">
+<meta property="og:url" content="https://neroumu.top/2022/07/01/UEFI%E5%BC%95%E5%AF%BC%E5%AE%89%E8%A3%85ArchLinux/index.html">
 <meta property="og:site_name" content="WJK&#39;s BLOG">
-<meta property="og:description" content="搭建个人网盘终于想起来要搭建一个个人网盘，于是学习了一下使用 docker 搭建了一个个人网盘，记录一下搭建的过程使用 mysql 作为数据库 拉取镜像12docker pull mysqldocker pull nextcloud  运行镜像创建并运行 mysql 容器 1docker run -d -p 3306:3306 --name nextcloud_db -e MYSQL_ROOT_P">
+<meta property="og:description" content="记录一下安装 Arch安装 ArchLinux 作为实体机已经有一段时间了，现在来记录一下安装的过程正好刚才给另外一台主机也安装了 ArchLinux，又加强了一点印象 制作启动盘这里很简单，可以用 ventoy 制作一个启动盘，把 ISO 镜像放进U盘就可以了将U盘插上主机，进入 BIOS 将U盘启动设置为首项重启 开始安装进入 ventoy，选择 ArchLinux 镜像选择  Arch Li">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://neroumu.top/img/2022-6-29-1.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-6-29-2.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-6-29-3.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-6-29-4.png">
-<meta property="article:published_time" content="2022-06-29T04:24:18.000Z">
-<meta property="article:modified_time" content="2022-06-28T18:06:01.232Z">
+<meta property="og:image" content="https://neroumu.top/img/2022-6-30-1.png">
+<meta property="article:published_time" content="2022-06-30T22:48:16.000Z">
+<meta property="article:modified_time" content="2022-06-30T11:07:22.569Z">
 <meta property="article:author" content="W JK">
-<meta property="article:tag" content="nextcloud">
+<meta property="article:tag" content="ArchLinux">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://neroumu.top/img/2022-6-29-1.png">
+<meta name="twitter:image" content="https://neroumu.top/img/2022-6-30-1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Docker 搭建 nextcloud 网盘 - WJK&#39;s BLOG</title>
+  <title>UEFI引导安装ArchLinux - WJK&#39;s BLOG</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -207,7 +204,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Docker 搭建 nextcloud 网盘"></span>
+            <span id="subtitle" data-typed-text="UEFI引导安装ArchLinux"></span>
           
         </div>
 
@@ -218,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-06-29 00:24" pubdate>
-          2022年6月29日 凌晨
+        <time datetime="2022-06-30 18:48" pubdate>
+          2022年6月30日 晚上
         </time>
       </span>
     
@@ -271,51 +268,35 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Docker 搭建 nextcloud 网盘</h1>
+            <h1 style="display: none">UEFI引导安装ArchLinux</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="搭建个人网盘"><a href="#搭建个人网盘" class="headerlink" title="搭建个人网盘"></a>搭建个人网盘</h1><p>终于想起来要搭建一个个人网盘，于是学习了一下使用 docker 搭建了一个个人网盘，记录一下搭建的过程<br>使用 mysql 作为数据库</p>
-<h2 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker pull mysql<br>docker pull nextcloud<br></code></pre></td></tr></table></figure>
+                <h1 id="记录一下安装-Arch"><a href="#记录一下安装-Arch" class="headerlink" title="记录一下安装 Arch"></a>记录一下安装 Arch</h1><p>安装 ArchLinux 作为实体机已经有一段时间了，现在来记录一下安装的过程<br>正好刚才给另外一台主机也安装了 ArchLinux，又加强了一点印象</p>
+<h2 id="制作启动盘"><a href="#制作启动盘" class="headerlink" title="制作启动盘"></a>制作启动盘</h2><p>这里很简单，可以用 ventoy 制作一个启动盘，把 ISO 镜像放进U盘就可以了<br>将U盘插上主机，进入 BIOS 将U盘启动设置为首项<br>重启</p>
+<h2 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h2><p>进入 ventoy，选择 ArchLinux 镜像<br>选择 <code> Arch Linux install medium</code> 进入安装环境</p>
+<h3 id="验证引导模式"><a href="#验证引导模式" class="headerlink" title="验证引导模式"></a>验证引导模式</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ls /sys/firmware/efi/efivars<br></code></pre></td></tr></table></figure>
+<p>如果系统是以 UEFI 模式引导的，会列出该文件夹中的文件，否则会报错<br><img src="/img/2022-6-30-1.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="连接网络"><a href="#连接网络" class="headerlink" title="连接网络"></a>连接网络</h3><p>网络设置是最让我头大的，之前几次想安装 ArchLinux 到实体机上的时候，都卡在了网络这一步<br>后面下载软件的时候一定要记得下载网络管理工具！</p>
+<p>检查网络接口是否已启动</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ip link<br></code></pre></td></tr></table></figure>
 
-<h2 id="运行镜像"><a href="#运行镜像" class="headerlink" title="运行镜像"></a>运行镜像</h2><p>创建并运行 mysql 容器</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker run -d -p 3306:3306 --name nextcloud_db -e MYSQL_ROOT_PASSWORD=371215 mysql<br></code></pre></td></tr></table></figure>
-<p>进入 nextcloud_db 容器，创建一个数据库</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker exec -it nextcloud_db /bin/bash<br></code></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql">mysql <span class="hljs-operator">-</span>u root <span class="hljs-operator">-</span>p<br><br><span class="hljs-keyword">create</span> database nextcloud;<br></code></pre></td></tr></table></figure>
-
-<p>创建并运行 nextcloud 容器</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker run -d -p 10101:80 --name nextcloud \<br>-v /home/nextcloud:/var/www/html \<br>-v /home/nextcloud/apps:/var/www/html/custom_apps \<br>-v /home/nextcloud/config:/var/www/html/config \<br>-v /home/nextcloud/data:/var/www/html/data \<br>nextcloud<br></code></pre></td></tr></table></figure>
 <ul>
-<li>-v 参数表示将镜像中的目录映射到某一个本地目录下</li>
+<li>如果是用网线连接的，插上网线就可以了</li>
+<li>如果是用 WiFi 连接的，可以使用 iwctl 连接</li>
 </ul>
-<p>网上很多教程都说要用 <code>--link</code> 参数，但我看了 docker 的文档，上面建议不要使用 <code>--link</code> 这个参数<br><img src="/img/2022-6-29-1.png" srcset="/img/loading.gif" lazyload alt="不建议使用这个参数，可能会被移除"><br><a target="_blank" rel="noopener" href="https://docs.docker.com/network/links/">https://docs.docker.com/network/links/</a></p>
-<p>所以我没有使用这个参数，后面也不用必须连接某个容器，可以直接使用网络连接数据库</p>
-<h2 id="设置网盘"><a href="#设置网盘" class="headerlink" title="设置网盘"></a>设置网盘</h2><p>打开浏览器，输入网盘的 IP 地址和端口，设置参数<br><img src="/img/2022-6-29-2.png" srcset="/img/loading.gif" lazyload alt="数据库的地址填ip:port"></p>
-<p>设置好后等就可以了</p>
-<h2 id="内网穿透"><a href="#内网穿透" class="headerlink" title="内网穿透"></a>内网穿透</h2><p>frp 服务端设置 frps.ini</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">[common]<br>bind_port = 7000<br>vhost_http_port = 10086<br></code></pre></td></tr></table></figure>
-<p>启动frps</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">nohup ./frps -c frps.ini &gt; /dev/null 2&gt;&amp;1 &amp;<br></code></pre></td></tr></table></figure>
-
-<p>frp 客户端设置 frpc.ini</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs text">[web]<br>type = http<br>local_port = 10101<br>custom_domains = X.X.X.X<br></code></pre></td></tr></table></figure>
-<p>启动frpc</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">nohup ./frpc -c frpc.ini &gt; /dev/null 2&gt;&amp;1 &amp;<br></code></pre></td></tr></table></figure>
-
-<p>打开浏览器，输入 服务器 IP:10086，会碰到无法访问的问题，这是因为这个 IP 地址不受到信任<br><img src="/img/2022-6-29-3.png" srcset="/img/loading.gif" lazyload></p>
-<p>进入 nextcloud 容器</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker exec -it nextcloud /bin/bash<br></code></pre></td></tr></table></figure>
-<p>安装 vim 并修改 &#x2F;var&#x2F;www&#x2F;html&#x2F;nextcloud&#x2F;config&#x2F;config.php 文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">apt-get update<br>apt-get install vim<br>vim /var/www/html/config/config.php<br></code></pre></td></tr></table></figure>
-
-<p>找到 trusted_domains 这一项，在后面的 array 的括号里添加一项服务器的 IP 地址</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs test">&#x27;trusted_domains&#x27; =&gt; <br>  array (<br>          0 =&gt; &#x27;192.168.0.105:10101&#x27;,<br>          1 =&gt; &#x27;X.X.X.X&#x27;<br>  ),<br></code></pre></td></tr></table></figure>
-
-<p>保存并退出，浏览器刷新一下就可以了<br><img src="/img/2022-6-29-4.png" srcset="/img/loading.gif" lazyload></p>
-<hr>
-<p>总算是把网盘给搭建好了，后面可以再做一个加速的操作，这样我就有一个自己的不限速的网盘了<br>以后可以买几块大的硬盘放家里，存些我自己的数据，随时拿随时取咯 (ᕑᗢᓫ∗)˒</p>
+<h4 id="iwctl-连接-WiFi"><a href="#iwctl-连接-WiFi" class="headerlink" title="iwctl 连接 WiFi"></a>iwctl 连接 WiFi</h4><p>进入 iwctl</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">iwctl<br></code></pre></td></tr></table></figure>
+<p>列出所有 WiFi 设备</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">device list<br></code></pre></td></tr></table></figure>
+<p>扫描网络</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">station &lt;device&gt; scan<br></code></pre></td></tr></table></figure>
+<p>列出可用网络</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">station &lt;device&gt; get-networks<br></code></pre></td></tr></table></figure>
+<p>连接到网络</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">station &lt;device&gt; connect &lt;SSID&gt;<br></code></pre></td></tr></table></figure>
+<p>如果有密码输入密码就可以了</p>
 
                 
               </div>
@@ -349,7 +330,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/nextcloud/">#nextcloud</a>
+        <a href="/tags/ArchLinux/">#ArchLinux</a>
       
     </div>
   
@@ -363,18 +344,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/07/01/UEFI%E5%BC%95%E5%AF%BC%E5%AE%89%E8%A3%85ArchLinux/" title="UEFI引导安装ArchLinux">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">UEFI引导安装ArchLinux</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/06/23/aur%E6%97%A0%E6%B3%95%E6%9B%B4%E6%96%B0%E4%B8%8B%E8%BD%BD/" title="aur无法更新下载">
-                        <span class="hidden-mobile">aur无法更新下载</span>
+                      <a href="/2022/06/29/Docker-%E6%90%AD%E5%BB%BA-nextcloud-%E7%BD%91%E7%9B%98/" title="Docker 搭建 nextcloud 网盘">
+                        <span class="hidden-mobile">Docker 搭建 nextcloud 网盘</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
