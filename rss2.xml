@@ -15,7 +15,7 @@
     <atom:link href="https://neroumu.top/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Tue, 05 Jul 2022 16:29:58 GMT</pubDate>
+    <pubDate>Tue, 05 Jul 2022 16:33:30 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -34,7 +34,7 @@
       
       
       
-      <content:encoded><![CDATA[<h1 id=""><a href="#" class="headerlink" title=""></a></h1>]]></content:encoded>
+      <content:encoded><![CDATA[<h1 id="下载器及播放器"><a href="#下载器及播放器" class="headerlink" title="下载器及播放器"></a>下载器及播放器</h1><p>搭建一个下载器和一个播放器，这两个一组合，不就是一个家庭影院嘛<br>想到暑假在家不可能整天都在学习，没事看部电影补补番剧，放松一下也不是不可以<br>于是我就尝试用 Docker 搭建了一个BT下载器和播放器</p><h2 id="搭建下载器"><a href="#搭建下载器" class="headerlink" title="搭建下载器"></a>搭建下载器</h2><p>下载器</p>]]></content:encoded>
       
       
       <category domain="https://neroumu.top/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</category>
