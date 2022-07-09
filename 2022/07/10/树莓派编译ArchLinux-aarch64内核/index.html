@@ -18,27 +18,26 @@
   <meta name="author" content="W JK">
   <meta name="keywords" content="">
   
-    <meta name="description" content="下载器及播放器搭建一个下载器和一个播放器，这两个一组合，不就是一个家庭影院嘛想到暑假在家不可能整天都在学习，没事看部电影补补番剧，放松一下也不是不可以于是我就尝试用 Docker 搭建了一个BT下载器和播放器 搭建下载器下载器用的是 GitHub 上的开源项目 Aria2 Pro (https:&#x2F;&#x2F;github.com&#x2F;P3TERX&#x2F;Aria2-Pro-Docker) 搭建的DockerHub 上">
+    <meta name="description" content="升级树莓派树莓派用了一段时间之后发现，我之前装的系统是32位的 ArchLinux但树莓派4b本身是支持64位系统的，所以捣鼓了一天，把系统升级了一下其实也就是编译了一个系统 编译准备先安装编译需要用到的交叉编译软件 1sudo pacman -S aarch64-linux-gnu-gcc  下载树莓派的内核 1git clone -b rpi-5.15.y --depth&#x3D;1 https:&#x2F;&#x2F;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Docker 搭建下载器及播放器">
-<meta property="og:url" content="https://neroumu.top/2022/07/06/Docker-%E6%90%AD%E5%BB%BA%E4%B8%8B%E8%BD%BD%E5%99%A8%E5%8F%8A%E6%92%AD%E6%94%BE%E5%99%A8/index.html">
+<meta property="og:title" content="树莓派编译ArchLinux aarch64内核">
+<meta property="og:url" content="https://neroumu.top/2022/07/10/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%BC%96%E8%AF%91ArchLinux-aarch64%E5%86%85%E6%A0%B8/index.html">
 <meta property="og:site_name" content="WJK&#39;s BLOG">
-<meta property="og:description" content="下载器及播放器搭建一个下载器和一个播放器，这两个一组合，不就是一个家庭影院嘛想到暑假在家不可能整天都在学习，没事看部电影补补番剧，放松一下也不是不可以于是我就尝试用 Docker 搭建了一个BT下载器和播放器 搭建下载器下载器用的是 GitHub 上的开源项目 Aria2 Pro (https:&#x2F;&#x2F;github.com&#x2F;P3TERX&#x2F;Aria2-Pro-Docker) 搭建的DockerHub 上">
+<meta property="og:description" content="升级树莓派树莓派用了一段时间之后发现，我之前装的系统是32位的 ArchLinux但树莓派4b本身是支持64位系统的，所以捣鼓了一天，把系统升级了一下其实也就是编译了一个系统 编译准备先安装编译需要用到的交叉编译软件 1sudo pacman -S aarch64-linux-gnu-gcc  下载树莓派的内核 1git clone -b rpi-5.15.y --depth&#x3D;1 https:&#x2F;&#x2F;">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://neroumu.top/img/2022-7-6-1.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-7-6-2.png">
-<meta property="article:published_time" content="2022-07-06T04:27:06.000Z">
-<meta property="article:modified_time" content="2022-07-05T17:14:04.798Z">
+<meta property="og:image" content="https://neroumu.top/img/2022-7-9-1.png">
+<meta property="article:published_time" content="2022-07-10T01:00:27.000Z">
+<meta property="article:modified_time" content="2022-07-09T13:34:25.364Z">
 <meta property="article:author" content="W JK">
-<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="aarch64">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://neroumu.top/img/2022-7-6-1.png">
+<meta name="twitter:image" content="https://neroumu.top/img/2022-7-9-1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Docker 搭建下载器及播放器 - WJK&#39;s BLOG</title>
+  <title>树莓派编译ArchLinux aarch64内核 - WJK&#39;s BLOG</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -205,7 +204,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Docker 搭建下载器及播放器"></span>
+            <span id="subtitle" data-typed-text="树莓派编译ArchLinux aarch64内核"></span>
           
         </div>
 
@@ -216,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-07-06 00:27" pubdate>
-          2022年7月6日 凌晨
+        <time datetime="2022-07-09 21:00" pubdate>
+          2022年7月9日 晚上
         </time>
       </span>
     
@@ -269,43 +268,49 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Docker 搭建下载器及播放器</h1>
+            <h1 style="display: none">树莓派编译ArchLinux aarch64内核</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="下载器及播放器"><a href="#下载器及播放器" class="headerlink" title="下载器及播放器"></a>下载器及播放器</h1><p>搭建一个下载器和一个播放器，这两个一组合，不就是一个家庭影院嘛<br>想到暑假在家不可能整天都在学习，没事看部电影补补番剧，放松一下也不是不可以<br>于是我就尝试用 Docker 搭建了一个BT下载器和播放器</p>
-<h2 id="搭建下载器"><a href="#搭建下载器" class="headerlink" title="搭建下载器"></a>搭建下载器</h2><p>下载器用的是 GitHub 上的开源项目 Aria2 Pro (<a target="_blank" rel="noopener" href="https://github.com/P3TERX/Aria2-Pro-Docker">https://github.com/P3TERX/Aria2-Pro-Docker</a>) 搭建的<br>DockerHub 上可以直接拿来用<br>拉取镜像</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker pull p3terx/aria2-pro<br></code></pre></td></tr></table></figure>
+                <h1 id="升级树莓派"><a href="#升级树莓派" class="headerlink" title="升级树莓派"></a>升级树莓派</h1><p>树莓派用了一段时间之后发现，我之前装的系统是32位的 ArchLinux<br>但树莓派4b本身是支持64位系统的，所以捣鼓了一天，把系统升级了一下<br>其实也就是编译了一个系统</p>
+<h2 id="编译准备"><a href="#编译准备" class="headerlink" title="编译准备"></a>编译准备</h2><p>先安装编译需要用到的交叉编译软件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo pacman -S aarch64-linux-gnu-gcc<br></code></pre></td></tr></table></figure>
 
-<p>创建两个文件夹，一个存放配置文件，一个存放下载好的文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir /home/aria2-config<br>mkdir /home/aria2-downloads<br></code></pre></td></tr></table></figure>
+<p>下载树莓派的内核</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git clone -b rpi-5.15.y --depth=1 https://github.com/raspberrypi/linux.git raspberrypi-linux<br></code></pre></td></tr></table></figure>
+<ul>
+<li>-b 表示分支，可以去 GitHub 上选择需要的分支</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://github.com/raspberrypi/linux">https://github.com/raspberrypi/linux</a></p>
+<h2 id="开始编译"><a href="#开始编译" class="headerlink" title="开始编译"></a>开始编译</h2><p>进入下载好的目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd raspberrypi-linux<br>make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- bcm2711_defconfig<br></code></pre></td></tr></table></figure>
 
-<p>创建容器</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker run -d \<br>--name aria2-pro \<br>--restart unless-stopped \<br>--log-opt max-size=1m \<br>--network host \<br>-e PUID=$UID \<br>-e PGID=$GID \<br>-e RPC_SECRET=nero371215 \<br>-e RPC_PORT=6800 \<br>-e LISTEN_PORT=6888 \<br>-v /home/aria2-config:/config \<br>-v /home/aria2-downloads:/downloads \<br>p3terx/aria2-pro<br></code></pre></td></tr></table></figure>
+<p>多线程编译</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- -j 8<br></code></pre></td></tr></table></figure>
+<ul>
+<li>-j 表示同时使用几个线程编译</li>
+</ul>
+<p>将编译好后的整个文件夹拷贝到树莓派中，这里我是直接把 SD 卡挂载到电脑上复制的</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">cp -r raspberrypi-linux /mnt/home/nero<br></code></pre></td></tr></table></figure>
 
-<h2 id="GUI-界面"><a href="#GUI-界面" class="headerlink" title="GUI 界面"></a>GUI 界面</h2><p>下载器只是一个下载器，可以再用 Docker 搭建一个图形化界面出来<br>拉取镜像</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker pull p3terx/ariang<br></code></pre></td></tr></table></figure>
+<h2 id="生成内核模块"><a href="#生成内核模块" class="headerlink" title="生成内核模块"></a>生成内核模块</h2><p>连接上树莓派，进入刚刚复制的目录，进入到 arch&#x2F;arm64&#x2F;boot 中</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd raspberrypi-linux/arch/arm64/boot<br></code></pre></td></tr></table></figure>
 
-<p>创建容器</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker run -d \<br>--name ariang \<br>--restart unless-stopped \<br>--log-opt max-size=1m \<br>-p 6880:6880 \<br>p3terx/ariang<br></code></pre></td></tr></table></figure>
+<p>然后执行如下命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">cp Image /boot/kernel8.img<br>cp dts/broadcom/*.dtb /boot/<br>cp dts/overlays/*.dtb* /boot/overlays/<br>cp dts/overlays/README /boot/overlays/<br></code></pre></td></tr></table></figure>
 
-<p>打开浏览器，进入服务器 IP:6880<br>设置 aria2 pro 设置的token<br><img src="/img/2022-7-6-1.png" srcset="/img/loading.gif" lazyload></p>
-<p>连接成功后就可以使用了</p>
-<h2 id="搭建播放器"><a href="#搭建播放器" class="headerlink" title="搭建播放器"></a>搭建播放器</h2><p>这里我使用的是 GitHub 上的开源项目 jellyfin (<a target="_blank" rel="noopener" href="https://github.com/jellyfin/jellyfin">https://github.com/jellyfin/jellyfin</a>)<br>拉取镜像</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker pull jellyfin/jellyfin<br></code></pre></td></tr></table></figure>
+<p>回到 raspberrypi-linux 目录下<br>安装 kmod 依赖</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo pacman -S kmod<br></code></pre></td></tr></table></figure>
+<p>执行如下命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">make ARCH=arm64 modules_install<br></code></pre></td></tr></table></figure>
 
-<p>创建两个目录，一个配置文件和一个缓存文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir /home/jellyfin-cache<br>mkdir /home/jellyfin-config<br></code></pre></td></tr></table></figure>
-
-<p>创建容器</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker run -d \<br>--name jellyfin \<br>--net=host \<br>--volume /home/jellyfin-config:/config \<br>--volume /home/jellyfin-cache:/cache \<br>--mount type=bind,source=/home/aria2-downloads,target=/media \<br>--restart=unless-stopped \<br>jellyfin/jellyfin<br></code></pre></td></tr></table></figure>
-
-<p>–mount 参数和 -v 或者 –volume 差不多，但在这个地方更建议使用 –mount 参数<br><img src="/img/2022-7-6-2.png" srcset="/img/loading.gif" lazyload alt="更建议使用 --mount"></p>
-<p><a target="_blank" rel="noopener" href="https://docs.docker.com/storage/bind-mounts/">https://docs.docker.com/storage/bind-mounts/</a><br>所以此处使用 –mount 参数</p>
-<p>打开浏览器 进入 IP:8096<br>完成一系列设置后，就可以开始使用播放器了</p>
+<p>最后修改 &#x2F;boot下的 config.txt 文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">arm_64bit=1 kernel=kernel8.img<br></code></pre></td></tr></table></figure>
+<p><img src="/img/2022-7-9-1.png" srcset="/img/loading.gif" lazyload alt="删掉了一行，修改了一行"></p>
+<p>重启 <code>reboot</code></p>
 <hr>
-<p>总算是把下载器和播放器搞定了，下载器有了，播放器有了，大量资源也有了<br>这个暑假不至于学没学到什么，又没有玩到什么了<br>芜湖~起飞 ٩(●˙▿˙●)۶…⋆ฺ</p>
+<p>上午刚考完科目一，99过了，高兴  ♪（＾∀＾●）ﾉｼ<br>下午又捣鼓到了晚上，捣鼓成功了，舒爽 （●´∀｀）♪<br>今天既体会到了高兴，又解决了想做的事情，真是快乐的一天啊 (¦3[▓▓]</p>
 
                 
               </div>
@@ -339,7 +344,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Docker/">#Docker</a>
+        <a href="/tags/aarch64/">#aarch64</a>
       
     </div>
   
@@ -353,18 +358,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/07/10/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%BC%96%E8%AF%91ArchLinux-aarch64%E5%86%85%E6%A0%B8/" title="树莓派编译ArchLinux aarch64内核">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">树莓派编译ArchLinux aarch64内核</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/07/01/UEFI%E5%BC%95%E5%AF%BC%E5%AE%89%E8%A3%85ArchLinux/" title="UEFI引导安装ArchLinux">
-                        <span class="hidden-mobile">UEFI引导安装ArchLinux</span>
+                      <a href="/2022/07/06/Docker-%E6%90%AD%E5%BB%BA%E4%B8%8B%E8%BD%BD%E5%99%A8%E5%8F%8A%E6%92%AD%E6%94%BE%E5%99%A8/" title="Docker 搭建下载器及播放器">
+                        <span class="hidden-mobile">Docker 搭建下载器及播放器</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
