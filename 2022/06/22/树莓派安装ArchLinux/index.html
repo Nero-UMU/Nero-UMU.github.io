@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://neroumu.top/img/posture.png">
 <meta property="article:published_time" content="2022-06-21T23:06:15.000Z">
-<meta property="article:modified_time" content="2022-06-21T11:28:11.962Z">
+<meta property="article:modified_time" content="2022-07-09T08:47:04.408Z">
 <meta property="article:author" content="W JK">
 <meta property="article:tag" content="ArchLinux">
 <meta name="twitter:card" content="summary_large_image">
@@ -309,6 +309,10 @@
 <h2 id="树莓派启动"><a href="#树莓派启动" class="headerlink" title="树莓派启动"></a>树莓派启动</h2><p>将 SD 卡插入树莓派，连上电源，还有网线<br>这样就可以通过 ssh 连接树莓派了<br>默认用户为 alarm 密码为 alarm<br>默认 root 密码为 root</p>
 <p>初始化 pacman 密钥环并填充 Arch Linux ARM 包签名 密钥</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">pacman-key --init<br>pacman-key --populate archlinuxarm<br></code></pre></td></tr></table></figure>
+
+<h2 id="更换国内源"><a href="#更换国内源" class="headerlink" title="更换国内源"></a>更换国内源</h2><p>编辑 &#x2F;etc&#x2F;pacman.d&#x2F;mirrorlist ，最顶部添加</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxarm/$arch/$repo<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pacman -Syyu<br></code></pre></td></tr></table></figure>
 
 <hr>
 <p>心心念念的树莓派终于到了，可以好好玩玩了，暑假有事情做了<br>不过树莓派安装 ArchLinux 也太简单了，照着官方文档做，一下就搞定了<br>下次找个时间写一下电脑安装 ArchLinux 的博客吧 |•’-‘•) ✧</p>
