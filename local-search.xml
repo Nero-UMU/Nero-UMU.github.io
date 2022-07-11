@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>make oldconfig 理解</title>
+    <link href="/2022/07/12/make-oldconfig-%E7%90%86%E8%A7%A3/"/>
+    <url>/2022/07/12/make-oldconfig-%E7%90%86%E8%A7%A3/</url>
+    
+    <content type="html"><![CDATA[<h1 id="对-make-oldconfig-命令的理解"><a href="#对-make-oldconfig-命令的理解" class="headerlink" title="对 make oldconfig 命令的理解"></a>对 make oldconfig 命令的理解</h1><p>Linux 内核会默认一个 .config 文件配置，这是跟着内核走的，使用 <code>make defconfig</code> 可以把这个配置放到 .config 文件中<br>修改 .config 文件，比如使用 <code>make config</code>、<code>make memuconfig</code> 后会修改 .config 文件<br>这时候使用 <code>make oldconfig</code> 命令会把这个配置放到 .config.old 文件中作为备用，表示这个配置已经可以被用来编译了<br>.config 文件就会回到默认配置，而 .config.old 文件就是对当前的配置做了个备份<br>以后就可以直接把 .config.old 里面的配置，放到别的准备编译的内核目录下的 .config 文件中使用了<br>这样就可以很方便的采用现有配置并将其移动到新内核中</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>树莓派编译ArchLinux aarch64内核</title>
     <link href="/2022/07/10/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%BC%96%E8%AF%91ArchLinux-aarch64%E5%86%85%E6%A0%B8/"/>
     <url>/2022/07/10/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%BC%96%E8%AF%91ArchLinux-aarch64%E5%86%85%E6%A0%B8/</url>
