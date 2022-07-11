@@ -18,16 +18,16 @@
   <meta name="author" content="W JK">
   <meta name="keywords" content="">
   
-    <meta name="description" content="对 make oldconfig 命令的理解Linux 内核会默认一个 .config 文件配置，这是跟着内核走的，使用 make defconfig 可以把这个配置放到 .config 文件中修改 .config 文件，比如使用 make config、make memuconfig 后会修改 .config 文件这时候使用 make oldconfig 命令会把这个配置放到 .config.o">
+    <meta name="description" content="对 make oldconfig 命令的理解Linux 内核会默认一个 .config 文件配置，这是跟着内核源文件走的使用 make defconfig 可以把这个配置放到 .config 文件中修改 .config 文件，比如使用 make config、make memuconfig 或者直接编辑 .config 文件使用 make oldconfig 命令会把这个修改了的配置放到 .con">
 <meta property="og:type" content="article">
 <meta property="og:title" content="make oldconfig 理解">
 <meta property="og:url" content="https://neroumu.top/2022/07/12/make-oldconfig-%E7%90%86%E8%A7%A3/index.html">
 <meta property="og:site_name" content="WJK&#39;s BLOG">
-<meta property="og:description" content="对 make oldconfig 命令的理解Linux 内核会默认一个 .config 文件配置，这是跟着内核走的，使用 make defconfig 可以把这个配置放到 .config 文件中修改 .config 文件，比如使用 make config、make memuconfig 后会修改 .config 文件这时候使用 make oldconfig 命令会把这个配置放到 .config.o">
+<meta property="og:description" content="对 make oldconfig 命令的理解Linux 内核会默认一个 .config 文件配置，这是跟着内核源文件走的使用 make defconfig 可以把这个配置放到 .config 文件中修改 .config 文件，比如使用 make config、make memuconfig 或者直接编辑 .config 文件使用 make oldconfig 命令会把这个修改了的配置放到 .con">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://neroumu.top/img/linux.jpg">
 <meta property="article:published_time" content="2022-07-11T22:31:59.000Z">
-<meta property="article:modified_time" content="2022-07-11T10:36:55.695Z">
+<meta property="article:modified_time" content="2022-07-11T10:41:15.756Z">
 <meta property="article:author" content="W JK">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary_large_image">
@@ -273,7 +273,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="对-make-oldconfig-命令的理解"><a href="#对-make-oldconfig-命令的理解" class="headerlink" title="对 make oldconfig 命令的理解"></a>对 make oldconfig 命令的理解</h1><p>Linux 内核会默认一个 .config 文件配置，这是跟着内核走的，使用 <code>make defconfig</code> 可以把这个配置放到 .config 文件中<br>修改 .config 文件，比如使用 <code>make config</code>、<code>make memuconfig</code> 后会修改 .config 文件<br>这时候使用 <code>make oldconfig</code> 命令会把这个配置放到 .config.old 文件中作为备用，表示这个配置已经可以被用来编译了<br>.config 文件就会回到默认配置，而 .config.old 文件就是对当前的配置做了个备份<br>以后就可以直接把 .config.old 里面的配置，放到别的准备编译的内核目录下的 .config 文件中使用了<br>这样就可以很方便的采用现有配置并将其移动到新内核中</p>
+                <h1 id="对-make-oldconfig-命令的理解"><a href="#对-make-oldconfig-命令的理解" class="headerlink" title="对 make oldconfig 命令的理解"></a>对 make oldconfig 命令的理解</h1><p>Linux 内核会默认一个 .config 文件配置，这是跟着内核源文件走的<br>使用 <code>make defconfig</code> 可以把这个配置放到 .config 文件中<br>修改 .config 文件，比如使用 <code>make config</code>、<code>make memuconfig</code> 或者直接编辑 .config 文件<br>使用 <code>make oldconfig</code> 命令会把这个修改了的配置放到 .config.old 文件中作为备用，表示这个配置已经可以被用来编译了<br>.config 文件就会回到默认配置，而 .config.old 文件就是对当前的配置做了个备份<br>以后就可以直接把 .config.old 里面的配置，放到别的准备编译的内核目录下的 .config 文件中使用了<br>这样就可以很方便的采用现有配置并将其移动到新内核中</p>
 
                 
               </div>
