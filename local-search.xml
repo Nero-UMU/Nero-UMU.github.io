@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>wine运行galgame无声音</title>
+    <link href="/2022/12/12/wine%E8%BF%90%E8%A1%8Cgalgame%E6%97%A0%E5%A3%B0%E9%9F%B3/"/>
+    <url>/2022/12/12/wine%E8%BF%90%E8%A1%8Cgalgame%E6%97%A0%E5%A3%B0%E9%9F%B3/</url>
+    
+    <content type="html"><![CDATA[<h1 id="挺久没玩-galgame-了"><a href="#挺久没玩-galgame-了" class="headerlink" title="挺久没玩 galgame 了"></a>挺久没玩 galgame 了</h1><p>自从电脑的系统换成 Linux 之后,就很少玩游戏了,玩也是在 Steam 上下载下来玩,没有了曾经找游戏资源来玩的快乐了<br>加了很多游戏资源群都是安心当一个仓鼠,只收藏,不玩<br>今天心血来潮,下载了个 galgame 来玩,然后尝试用 wine 来玩,但碰到些问题,那就是没有声音<br>没有声音还玩个毛线 galgame 啊!</p><h2 id="Arch-Linux-玩-galgame"><a href="#Arch-Linux-玩-galgame" class="headerlink" title="Arch Linux 玩 galgame"></a>Arch Linux 玩 galgame</h2><p>安装 wine</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo pacman -S wine<br></code></pre></td></tr></table></figure><p>将下载好的游戏全部解压缩到一个目录下,比如下面这样的<br><img src="/img/2022-12-12-1.png" alt="我下的是柚子社的魔女的夜宴（￣▽￣）~*"></p><p>这样就可以运行了</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">wine 游戏运行程序.exe<br></code></pre></td></tr></table></figure><p>然后就可能碰到游戏没有声音的问题,刚开始我以为是游戏内没有开启,但设置了一通后,还是没有声音<br>所以我有理由怀疑是 wine 的问题<br>于是我到 Arch Linux wiki 上寻找解决方法,没想到居然找到了<br><a href="https://wiki.archlinux.org/title/wine">https://wiki.archlinux.org/title/wine</a></p><p>这里面讲到了 wine 可能会没有声音的原因是声音设备没有配置好,而 wine 安装的时候是不会安装声音的驱动的,所以需要自己安装<br><img src="/img/2022-12-12-2.png"></p><p>这里我是 PulseAudio,所以我安装了 lib32-libpulse</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo pacman -S lib32-libpulse<br></code></pre></td></tr></table></figure><p>然后再次尝试运行游戏</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">wine 游戏运行程序.exe<br></code></pre></td></tr></table></figure><p>有声音了,截图就不放了,毕竟声音的无法截图嘛（￣ˇ￣）</p><hr><p>总算是想起来可以在电脑上玩 galgame 啊 （。_。）<br>每天都是在手机上玩游戏,清完体力就下线看漫画去了,果然还是在电脑上玩 galgame 更舒服一些啊（　・ˍ・）<br>谁让电脑屏幕比手机大,色彩还更鲜艳呢 （&gt;▽&lt;）</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>学习记录</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>wine</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Go Context的使用</title>
     <link href="/2022/12/09/Go-Context%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
     <url>/2022/12/09/Go-Context%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
