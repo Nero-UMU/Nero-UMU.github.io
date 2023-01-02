@@ -6,7 +6,7 @@
   <link href="https://neroumu.top/atom.xml" rel="self"/>
   
   <link href="https://neroumu.top/"/>
-  <updated>2023-01-02T15:47:01.311Z</updated>
+  <updated>2023-01-02T17:47:08.352Z</updated>
   <id>https://neroumu.top/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Docker搭建emby播放器</title>
+    <link href="https://neroumu.top/2023/01/03/Docker%E6%90%AD%E5%BB%BAemby%E6%92%AD%E6%94%BE%E5%99%A8/"/>
+    <id>https://neroumu.top/2023/01/03/Docker%E6%90%AD%E5%BB%BAemby%E6%92%AD%E6%94%BE%E5%99%A8/</id>
+    <published>2023-01-03T05:46:12.000Z</published>
+    <updated>2023-01-02T17:47:08.352Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="播放视频"><a href="#播放视频" class="headerlink" title="播放视频"></a>播放视频</h1><p>前面搭建好了视频自动下载器,下载下来可以之间观看,但是我的这些番剧都是放在了我的小主机上的,观看起来还是比较麻烦的<br>于是,我尝试搭建了个 emby 来观看视频<br>其实刚开始我是搭建了 jellyfin 的,但是太多功能不能满足我的需求,所以我还是选择了 emby</p><h2 id="搭建emby"><a href="#搭建emby" class="headerlink" title="搭建emby"></a>搭建emby</h2><h3 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker pull emby/embyserver:latest<br></code></pre></td></tr></table></figure><h3 id="创建容器"><a href="#创建容器" class="headerlink" title="创建容器"></a>创建容器</h3><p>官方在 docker hub 上面有命令可以直接用,但是有些情况不能直接拿来用,要进行修改<br>要根据情况自行删改<br>项目地址 <a href="https://hub.docker.com/r/emby/embyserver">https://hub.docker.com/r/emby/embyserver</a></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker create \<br>--name embyserver \<br>--volume path-to-emby-config:/config \<br>--volume /disk:/mnt/share1 \<br>--net=host \<br>--device /dev/dri:/dev/dri \<br>--publish 8096:8096 \<br>--env UID=1000 \<br>--env GID=1000 \<br>--env GIDLIST=1000,0 \<br>emby/embyserver:latest<br></code></pre></td></tr></table></figure><p>其中 <code>--volume /disk:/mnt/share1</code> 后面的映射目录的格式不能变,只能是 share1,share2…<br>官方的命令里面包含 <code>--device /dev/vchiq:/dev/vchiq</code> 但是我没有加<br>可以通过查看 <code>/dev/vchiq</code> 是否存在来判断是否添加</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ls /dev/vchiq<br></code></pre></td></tr></table></figure><h3 id="配置-emby"><a href="#配置-emby" class="headerlink" title="配置 emby"></a>配置 emby</h3><p>容器启动后,浏览器访问 <code>IP:8096</code> 进入 emby<br>语言选择中文后配置起来很方便,按照自己喜欢来配置,除了要注意一个地方<br>在添加媒体库的时,内容类型选择电视节目,这样重命名后的视频文件才可以被分类<br><img src="/img/2023-1-3-1.png" alt="①处选择电视节目,②处的挂载目录为/mnt/share1下的目录"></p><p>设置好媒体库后,扫描一下就好了,可以看到 sonarr 归类的视频都整整齐齐的在播放列表里面</p><h2 id="客户端播放"><a href="#客户端播放" class="headerlink" title="客户端播放"></a>客户端播放</h2><p>如果我的小主机再强一点就好了,但是不行,一旦emby播放视频,CPU 就会跑满<br><img src="/img/2023-1-3-2.png" alt="直接进入烤机模式"></p><p>所以我找了找其他的客户端,用流视频的方式播放,发现 CPU 的占用降低了许多<br>电脑上可以使用 jellyfin-media-player 来播放<br>项目地址 <a href="https://github.com/jellyfin/jellyfin-media-player">https://github.com/jellyfin/jellyfin-media-player</a><br>可以通过编译来安装,但是我发现 Arch Linux aur 里面有编译好了的二进制包,可以直接安装,很是方便</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">yay jellyfin-media-player <br></code></pre></td></tr></table></figure><p>使用体验和 web 客户端差不多<br><img src="/img/2023-1-3-3.png"><br><img src="/img/2023-1-3-4.png"><br><img src="/img/2023-1-3-5.png" alt="CPU的负担一下就减小了"></p><p>手机端可以下载 Emby For Android,使用起来也不烤机<br><img src="/img/2023-1-3-6.jpg"><br><img src="/img/2023-1-3-7.jpg"></p><hr><p>搭建好了播放器,下载的番剧就可以直接打开看了,不用做任何操作,点开即用 (σﾟ∀ﾟ)σ..:*☆<br>有了这么好的下载器和播放器,这个年可以过的很舒畅了 ( •́ὤ•̀)<br>…<br>话说,下这么多番剧看得完吗 (*ﾟーﾟ)</p>]]></content>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="姿势学习" scheme="https://neroumu.top/categories/%E5%A7%BF%E5%8A%BF%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="emby" scheme="https://neroumu.top/tags/emby/"/>
+    
+  </entry>
   
   <entry>
     <title>Docker搭建自动下载器</title>
