@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://neroumu.top/img/posture.png">
 <meta property="article:published_time" content="2022-12-26T21:09:37.000Z">
-<meta property="article:modified_time" content="2023-01-02T15:47:01.311Z">
+<meta property="article:modified_time" content="2023-01-03T17:26:43.898Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary_large_image">
@@ -310,6 +310,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker create  \<br>--name=qbittorrent  \<br>-e WEBUIPORT=8080  \<br>-e TZ=Asia/Shanghai \<br>-e PUID=1000 \<br>-e PGID=1000 \<br>-p 6881:6881  \<br>-p 6881:6881/udp  \<br>-p 8080:8080  \<br>-v path-to-qbittorrent-config:/config  \<br>-v /disk/downloads:/downloads  \<br>--restart unless-stopped  \<br>linuxserver/qbittorrent:latest<br></code></pre></td></tr></table></figure>
 
 <p>启动容器后,浏览器打开 <code>服务器ip:8080</code> 默认账户 admin,密码 adminadmin<br>设置默认下载位置为 <code>/downloads</code> ,这里设置的是 Docker 容器里面的路径,不是真实的路径<br>如下所示<br><img src="/img/2022-12-26-2.png" srcset="/img/loading.gif" lazyload></p>
+<p><code>注意</code> 此处的默认 Torrent 管理模式要设置为 Automatic(自动)</p>
 <h2 id="sonarr-搭建"><a href="#sonarr-搭建" class="headerlink" title="sonarr 搭建"></a>sonarr 搭建</h2><p>sonarr 如其名,声纳,是一个拿来搜索资源的工具,它可以用来寻找资源,找到后调用下载器下载,下载好后会自动整理文件,非常方便<br>这里也是我踩坑最多的地方,一个不小心就会碰到各种问题</p>
 <p>在用来存放下载文件的目录的同级目录下,创建各种目录,这些目录是用来后面分类用到,随自己喜欢<br>我比较懒,分类就分了三个大类 anime(动画),tv(电视剧),movie(电影)<br>当前目录结构如下</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs text">disk<br>├── anime<br>├── downloads<br>├── movie<br>└── tv<br></code></pre></td></tr></table></figure>
