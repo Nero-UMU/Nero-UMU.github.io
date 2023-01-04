@@ -6,7 +6,7 @@
   <link href="https://neroumu.top/atom.xml" rel="self"/>
   
   <link href="https://neroumu.top/"/>
-  <updated>2023-01-02T17:47:08.352Z</updated>
+  <updated>2023-01-04T10:14:38.507Z</updated>
   <id>https://neroumu.top/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Docker 搭建auto-bangumi</title>
+    <link href="https://neroumu.top/2023/01/05/Docker-%E6%90%AD%E5%BB%BAauto-bangumi/"/>
+    <id>https://neroumu.top/2023/01/05/Docker-%E6%90%AD%E5%BB%BAauto-bangumi/</id>
+    <published>2023-01-04T19:18:32.000Z</published>
+    <updated>2023-01-04T10:14:38.507Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="自动追番工具"><a href="#自动追番工具" class="headerlink" title="自动追番工具"></a>自动追番工具</h1><p>通过 auto-bangumi 可以实现自动下载,自动整理,重命名等工作,只需要在 <a href="https://mikanani.me/">Mikan Project</a> 上订阅想要追的番剧,就可以这样的全自动追番<br>部署起来也很简单,只是有一些小细节需要注意,否则会踩坑</p><h2 id="获取RSS地址"><a href="#获取RSS地址" class="headerlink" title="获取RSS地址"></a>获取RSS地址</h2><p>前往 <a href="https://mikanani.me/">Mikan Project</a> 注册一个账号<br>注册好后进入账号设置,开启高级订阅<br><img src="/img/2023-1-4-1.png"></p><p>订阅一些新番,这样就可以在 <code>我的字幕组订阅更新</code> 的右下角找到 RSS 地址了<br>复制下来,后面要用<br><img src="/img/2023-1-4-2.png"></p><h2 id="qBittorrent-设置"><a href="#qBittorrent-设置" class="headerlink" title="qBittorrent 设置"></a>qBittorrent 设置</h2><p>建议开启一个新的 qBittorrent 来使用,此处的设置与 sonarr 相冲突<br>qBittorrent 的默认下载模式设置为 Manual(手动)<br><img src="/img/2023-1-4-3.png"></p><h2 id="部署-Auto-Bangumi"><a href="#部署-Auto-Bangumi" class="headerlink" title="部署 Auto-Bangumi"></a>部署 Auto-Bangumi</h2><p>拉取镜像</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker pull estrellaxd/auto_bangumi:latest<br></code></pre></td></tr></table></figure><p>官方给的 docker 命令行我尝试过了几次,总是会有各种各样的小毛病,索性用了另外一种方式,docker compose<br>Arch Linux 安装还是很简单的</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo pacman -S docker-compose<br></code></pre></td></tr></table></figure><p>创建一个存放 yaml 文件的目录,在里面创建 docker-compose.yaml 文件</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir AutoBangumi<br>touch docker-compose.yaml<br></code></pre></td></tr></table></figure><p>按实际情况编辑如下配置</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">AutoBangumi:</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">estrellaxd/auto_bangumi:latest</span><br>    <span class="hljs-attr">container_name:</span> <span class="hljs-string">AutoBangumi</span><br>    <span class="hljs-attr">ports:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-number">7892</span><span class="hljs-string">:7892</span><br>    <span class="hljs-attr">depends_on:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">qbittorrent</span><br>    <span class="hljs-attr">volumes:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">path-to-autobangumi-config:/config</span><br>    <span class="hljs-attr">environment:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">PUID=1000</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">PGID=1000</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">TZ=Asia/Shanghai</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">AB_DOWNLOADER_HOST=ip:port</span> <span class="hljs-comment"># qBittorrent的地址</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">AB_DOWNLOADER_USERNAME=admin</span> <span class="hljs-comment"># 用户名,qbittorrent默认为admin</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">AB_DOWNLOADER_PASSWORD=adminadmin</span> <span class="hljs-comment"># 密码,qbittorrent默认为adminadmin</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">AB_INTERVAL_TIME=3600</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">AB_RENAME_FREQ=20</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">AB_METHOD=Advance</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">AB_GROUP_TAG=True</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">AB_NOT_CONTAIN=720|繁体|CHT|JPTC|繁日|\d+-\d+|BIG5</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">AB_DOWNLOAD_PATH=/disk/downloads/auto-bangumi</span> <span class="hljs-comment"># 下载地址</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">AB_RSS=https://mikanani.me/RSS/MyBangumi?token=</span> <span class="hljs-comment"># RSS 地址</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">AB_DEBUG_MODE=False</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">AB_EP_COMPLETE=True</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">AB_WEBUI_PORT=7892</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">AB_RENAME=True</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">AB_ENABLE_TMDB=True</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">AB_LANGUAGE=zh</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">AB_HTTP_PROXY=http://ip:port</span> <span class="hljs-comment"># 代理地址,没有则删除此行</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">AB_RSS_COLLECTOR=True</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">AB_REMOVE_BAD_BT=True</span><br>    <span class="hljs-attr">restart:</span> <span class="hljs-string">unless-stopped</span><br></code></pre></td></tr></table></figure><p>编辑好后,在 AutoBangumi 目录下创建并运行容器</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker compose run -d<br></code></pre></td></tr></table></figure><p>运行成功后,可以打开浏览器进入 <code>服务器ip:7892</code>,可以进入 Auto-Bangumi 的 web 界面<br><img src="/img/2023-1-4-4.png" alt="可以看到我追的两部番剧已经被获取了"></p><p>查看日志,显示搭建完成<br><img src="/img/2023-1-4-5.png"></p><p>等待 qBittorrent 下载完成后,Auto-Bangumi 会自动整理重命名<br><img src="/img/2023-1-4-6.png"></p><p>最后在 emby 中添加 Auto-Bangumi 的目录即可</p><hr><p>终于,我计划了几个月的工程总算完成了 (((o(<em>ﾟ▽ﾟ</em>)o)))<br>以后看番不用再自己动手下载了,靠这些 docker 就可以自动帮我完成,我只需要看就可以了 (づ′▽&#96;)づ<br>不说了,看番去咯 _(:3 」∠ )_</p>]]></content>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    <category term="姿势学习" scheme="https://neroumu.top/categories/%E5%A7%BF%E5%8A%BF%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="Docker" scheme="https://neroumu.top/tags/Docker/"/>
+    
+  </entry>
   
   <entry>
     <title>Docker搭建emby播放器</title>
