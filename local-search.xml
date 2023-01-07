@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Kodi播放Emby视频无法外挂字幕</title>
+    <link href="/2023/01/08/Kodi%E6%92%AD%E6%94%BEEmby%E8%A7%86%E9%A2%91%E6%97%A0%E6%B3%95%E5%A4%96%E6%8C%82%E5%AD%97%E5%B9%95/"/>
+    <url>/2023/01/08/Kodi%E6%92%AD%E6%94%BEEmby%E8%A7%86%E9%A2%91%E6%97%A0%E6%B3%95%E5%A4%96%E6%8C%82%E5%AD%97%E5%B9%95/</url>
+    
+    <content type="html"><![CDATA[<h1 id="找到了一个很棒的播放器"><a href="#找到了一个很棒的播放器" class="headerlink" title="找到了一个很棒的播放器"></a>找到了一个很棒的播放器</h1><p>在尝试了多个可以播放 Emby 视频的播放器后,还是选中了 Kodi<br>Kodi 可以在 Linux 上用,也可以在 Android 上用,而且配置起来一样<br>刚开始用 Kodi 时觉得功能都很不错,除了不能外挂 Emby 服务器上的字幕让我接受不来<br>学习了一段时间后,发现不是 Kodi 的问题,是我的问题 (。﹏。*)<br>Kodi 还是可以使用 Emby 端的外挂字幕的,记录一下解决过程,免得以后再次踩坑</p><h2 id="事先准备"><a href="#事先准备" class="headerlink" title="事先准备"></a>事先准备</h2><p>先安装 Kodi,Arch Linux 库里面有 Kodi,可以直接安装</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo pacman -S kodi<br></code></pre></td></tr></table></figure><p>Kodi 可以设置中文,不过建议最后设置,否则会出现乱码的情况</p><h2 id="Kodi-添加-Emby-源"><a href="#Kodi-添加-Emby-源" class="headerlink" title="Kodi 添加 Emby 源"></a>Kodi 添加 Emby 源</h2><p>打开 Kodi,进入设置<br><img src="/img/2023-1-8-1.png"></p><p>选择文件管理<br><img src="/img/2023-1-8-2.png"></p><p>选择添加源<br><img src="/img/2023-1-8-3.png"></p><p>添加如下 Emby 源<br><img src="/img/2023-1-8-4.png"></p><h2 id="安装-Emby-插件"><a href="#安装-Emby-插件" class="headerlink" title="安装 Emby 插件"></a>安装 Emby 插件</h2><p>选择插件<br><img src="/img/2023-1-8-5.png"></p><p>从 zip 文件安装,如果第一次安装会提醒从 zip 安装不安全,需要设置允许安装<br><img src="/img/2023-1-8-6.png"></p><p>选择 Emby 源<br><img src="/img/2023-1-8-7.png"></p><p>安装第二个稳定版,第一个 beta 版是测试版,可能不稳定<br><img src="/img/2023-1-8-8.png"></p><p>然后再选择从库安装<br><img src="/img/2023-1-8-9.png"></p><p>选择刚才安装的 Emby 库<br><img src="/img/2023-1-8-10.png"></p><p>安装视频插件<br><img src="/img/2023-1-8-11.png"></p><p>安装第一个 Emby 插件<br><img src="/img/2023-1-8-12.png"></p><p>安装完成后会弹出是否安装需要的其他插件,选择 yes 安装即可<br>选择 Emby 的模式时,使用默认,即插件<br>此时会有登陆的弹窗,可以现在就登陆,如果选择不登陆,后面也可以登陆<br><img src="/img/2023-1-8-13.png"></p><h2 id="安装皮肤"><a href="#安装皮肤" class="headerlink" title="安装皮肤"></a>安装皮肤</h2><p><code>一定要安装,否则无法使用 Emby 服务端的外挂字幕</code><br>还是在 Emby 的库里面,选择界面外观<br><img src="/img/2023-1-8-14.png"></p><p>选择皮肤<br><img src="/img/2023-1-8-15.png"></p><p>安装里面唯一一个的皮肤<br><img src="/img/2023-1-8-16.png"></p><p>切换为这个皮肤<br><img src="/img/2023-1-8-17.png"></p><h2 id="设置中文"><a href="#设置中文" class="headerlink" title="设置中文"></a>设置中文</h2><p>中文在最开始就可以设置,但是在安装完皮肤后会使用默认的字符编码,导致中文乱码,所以建议设置完皮肤后再设置中文<br>选择设置<br><img src="/img/2023-1-8-18.png"></p><p>选择界面<br><img src="/img/2023-1-8-19.png"></p><p>设置字体<br><img src="/img/2023-1-8-20.png"></p><p>设置为 Arial<br><img src="/img/2023-1-8-21.png"></p><p>然后在区域中选择语言<br><img src="/img/2023-1-8-22.png"></p><p>设置为简体中文<br><img src="/img/2023-1-8-23.png"></p><h2 id="登陆-Emby"><a href="#登陆-Emby" class="headerlink" title="登陆 Emby"></a>登陆 Emby</h2><p>如果前面没有登陆,此时可以登陆了<br>选择插件<br><img src="/img/2023-1-8-24.png"></p><p>选择我的插件<br><img src="/img/2023-1-8-25.png"></p><p>视频插件<br><img src="/img/2023-1-8-26.png"></p><p>选择刚才安装的 Emby 插件<br><img src="/img/2023-1-8-27.png"></p><p>选择连接至服务器<br><img src="/img/2023-1-8-28.png"></p><h2 id="设置完毕"><a href="#设置完毕" class="headerlink" title="设置完毕"></a>设置完毕</h2><p>现在就可以在播放 Emby 的视频的时候使用服务端的外挂字幕,而不用客户端上传字幕文件了<br><img src="/img/2023-1-8-29.png" alt="还是用的幸运星来做演示"></p><hr><p>搭建好了视频下载和播放环境后,发现客户端不行<br>emmm… Android 端的 Emby for Android 倒是可以用,但是 Linux 端就一言难尽了 o(￣┰￣*)ゞ<br>Linux 端的播放器怎么说呢,就是不行,所以其实我是在寻找 Linux 端的播放器 (°ー°〃)<br>不过 Android 上也可以用 Kodi,设置步骤都是一样的 o(<em>￣▽￣</em>)ブ<br>网上都说用 Kodi,我一开始也是用了的,但就是踩了乱码和外挂字幕的坑,所以就搁置了 Kodi 的方案<br>没想到在我不服气的情况下再次尝试使用 Kodi 时,误打误撞的成功使用了 Emby 端的外挂字幕<br>这刚踩的坑还正好解决了,不记录下来怎么行,万一以后忘了呢 ( ﹁ ﹁ ) ~→</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>踩坑记录</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Kodi</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>自动找番追番</title>
     <link href="/2023/01/06/%E8%87%AA%E5%8A%A8%E6%89%BE%E7%95%AA%E8%BF%BD%E7%95%AA/"/>
     <url>/2023/01/06/%E8%87%AA%E5%8A%A8%E6%89%BE%E7%95%AA%E8%BF%BD%E7%95%AA/</url>
