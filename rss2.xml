@@ -15,8 +15,37 @@
     <atom:link href="https://neroumu.top/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sun, 08 Jan 2023 02:55:53 GMT</pubDate>
+    <pubDate>Wed, 18 Jan 2023 13:42:29 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Docker搭建jellyfin并使用kodi播放</title>
+      <link>https://neroumu.top/2023/01/19/Docker%E6%90%AD%E5%BB%BAjellyfin%E5%B9%B6%E4%BD%BF%E7%94%A8kodi%E6%92%AD%E6%94%BE/</link>
+      <guid>https://neroumu.top/2023/01/19/Docker%E6%90%AD%E5%BB%BAjellyfin%E5%B9%B6%E4%BD%BF%E7%94%A8kodi%E6%92%AD%E6%94%BE/</guid>
+      <pubDate>Wed, 18 Jan 2023 23:44:53 GMT</pubDate>
+      
+        
+        
+          
+          
+      <description></description>
+          
+        
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="还是回到了-Jellyfin"><a href="#还是回到了-Jellyfin" class="headerlink" title="还是回到了 Jellyfin"></a>还是回到了 Jellyfin</h1><p>一些插件只能Jellyfin用,果然还是应该拥抱开源啊,所以我从 Emby 跳回了 Jellyfin<br>之所以重新使用 Jellyfin,是因为 Emby 无法获取番剧的封面图,介绍等信息,也不是 Emby 不行,应该说是 Emby 可以用的插件对中文支持度不高<br>插件 <a href="https://github.com/kookxiang/jellyfin-plugin-bangumi">jellyfin-plugin-bangumi</a> 可以通过 <a href="https://bangumi.tv/">bangumi</a> 的 ID 来获取信息,而且国内可以直连,但是 Emby 不支持手动安装插件,所以无法使用,这也是为什么我又回到 Jellyfin 的原因<br><img src="/img/2023-1-18-1.png" alt="效果明显"><br><img src="/img/2023-1-18-2.png" alt="封面图自动获取"><br><img src="/img/2023-1-18-3.png" alt="剧集信息自动获取"></p><h2 id="搭建-Jellyfin"><a href="#搭建-Jellyfin" class="headerlink" title="搭建 Jellyfin"></a>搭建 Jellyfin</h2><p>很久以前我写过如何用 Docker 搭建 Jellyfin,这次我直接用 Docker-Compose 来搭建,可以直接替换自动追番里面的 Emby 配置<br>拉取镜像</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker pull jellyfin/jellyfin:latest<br></code></pre></td></tr></table></figure><p>编辑 docker-compose.yaml 文件</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&quot;233&quot;</span><br><br><span class="hljs-attr">services:</span><br><br>  <span class="hljs-attr">jellyfin:</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">jellyfin/jellyfin:latest</span><br>    <span class="hljs-attr">container_name:</span> <span class="hljs-string">jellyfin</span><br>    <span class="hljs-attr">user:</span> <span class="hljs-number">1000</span><span class="hljs-string">:1000</span><br>    <span class="hljs-attr">network_mode:</span> <span class="hljs-string">&#x27;host&#x27;</span><br>    <span class="hljs-attr">volumes:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">~/jellyfin-config:/config</span> <span class="hljs-comment"># Jellyfin 配置文件目录</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">~/jellyfin-cache:/cache</span> <span class="hljs-comment"># Jellyfin 缓存文件目录</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/disk:/media</span><br>    <span class="hljs-attr">restart:</span> <span class="hljs-string">&#x27;unless-stopped&#x27;</span><br>    <span class="hljs-attr">environment:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">http_proxy=http://127.0.0.1:2333</span> <span class="hljs-comment"># 代理地址,如果没有则删除本行</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">https_proxy=http://127.0.0.1:2333</span> <span class="hljs-comment"># 代理地址,如果没有则删除本行</span><br>    <span class="hljs-attr">extra_hosts:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;host.docker.internal:host-gateway&quot;</span><br></code></pre></td></tr></table></figure><p>创建并启动容器</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker compose up -d<br></code></pre></td></tr></table></figure><h2 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h2><p>容器创建好后,浏览器打开 <code>IP:8096</code><br>除了先不要导入媒体库以外,其他的按照自己需求设置就好了,设置完成后进入控制台,选择插件,添加插件库<br>仓库地址为 <code>https://jellyfin-plugin-bangumi.pages.dev/repository.json</code><br><img src="/img/2023-1-18-4.png"></p><p>这样就可以在列表里面找到 Bangumi 的插件了,此处由于网络原因可能要等一段时间,有条件的可以在创建容器的时候设置代理地址<br>选择并安装插件<br><img src="/img/2023-1-18-5.png"></p><p>插件安装完成后要重启一次 Jellyfin,直接重启 Docker 容器就好了</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker restart jellyfin<br></code></pre></td></tr></table></figure><p>现在就可以添加媒体库了,因为是用来看番剧的,所以类型选择 Shows(电视节目)<br><img src="/img/2023-1-18-6.png"></p><p>元数据获取都把刚才安装的 Bangumi 放在第一位<br><img src="/img/2023-1-18-7.png"></p><p>然后扫描一遍媒体库就搞定了</p><h2 id="Kodi-安装-Jellyfin-插件"><a href="#Kodi-安装-Jellyfin-插件" class="headerlink" title="Kodi 安装 Jellyfin 插件"></a>Kodi 安装 Jellyfin 插件</h2><p>和 Emby 一样,如果通过浏览器直接观看,CPU 会直接跑满,所以我还是选择了用 Kodi 来观看番剧<br>添加 Jellyfin 文件源 <code>https://kodi.jellyfin.org/</code><br><img src="/img/2023-1-18-8.png"></p><p>从 Jellyfin 文件源中安装 <code>repository.jellyfin.kodi.zip</code><br><img src="/img/2023-1-18-9.png"></p><p>在新添加的 Jellyfin 库中安装 Jellyfin<br><img src="/img/2023-1-18-10.png"></p><p>安装完成后会自动弹出登陆窗口,输入用户名和密码后,导入剧集就完成了<br><img src="/img/2023-1-18-11.png"></p><p>外挂字幕可以正常使用,也没有乱码<br><img src="/img/2023-1-18-12.png" alt="还是用的幸运星做例子"></p><hr><p>用了一段时间的 Emby 后,我的剧集全是文件夹,哪有什么海报墙,应该叫文件夹墙<br>而改成了 Jellyfiin + Bangumi 插件后,才算是有了海报墙,令人赏心悦目 (つ´ω`)つ<br>到目前为止,也没有特别需要 Emby 的高级功能,能用就行,所以我就很丝滑的转 Jellyfin 了 ( •́ὤ•̀)</p>]]></content:encoded>
+      
+      
+      <category domain="https://neroumu.top/categories/%E5%A7%BF%E5%8A%BF%E5%AD%A6%E4%B9%A0/">姿势学习</category>
+      
+      
+      <category domain="https://neroumu.top/tags/Docker/">Docker</category>
+      
+      
+      <comments>https://neroumu.top/2023/01/19/Docker%E6%90%AD%E5%BB%BAjellyfin%E5%B9%B6%E4%BD%BF%E7%94%A8kodi%E6%92%AD%E6%94%BE/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Kodi播放Emby视频无法外挂字幕</title>
