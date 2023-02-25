@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>syncthing设备间文件同步</title>
+    <link href="/2023/02/26/syncthing%E8%AE%BE%E5%A4%87%E9%97%B4%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5/"/>
+    <url>/2023/02/26/syncthing%E8%AE%BE%E5%A4%87%E9%97%B4%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5/</url>
+    
+    <content type="html"><![CDATA[<h1 id="发现了新的文件传输方案"><a href="#发现了新的文件传输方案" class="headerlink" title="发现了新的文件传输方案"></a>发现了新的文件传输方案</h1><p>本来是想搭建一个记笔记的平台的,但是一直无法解决同步问题,于是发现了 syncthing 这样一款文件同步软件<br>虽然这个并没有完美符合我对记笔记的备份需求,但是它本身的功能就很方便,可以一试</p><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>Arch Linux 的官方库可以直接安装</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo pacman -S syncthing<br></code></pre></td></tr></table></figure><p>手机上可以在 F-Droid 里面安装<br><img src="/img/2023-2-26-1.jpg"></p><h2 id="添加设备"><a href="#添加设备" class="headerlink" title="添加设备"></a>添加设备</h2><p>电脑直接运行命令</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">syncthing<br></code></pre></td></tr></table></figure><p>这样就可以打开浏览器访问 <code>localhost:8384</code><br>在此获取到设备 ID<br><img src="/img/2023-2-26-4.jpg"></p><p>在此添加手机<br><img src="/img/2023-2-26-5.jpg"></p><p><img src="/img/2023-2-26-6.jpg"></p><p>手机上在这里获取设备 ID<br><img src="/img/2023-2-26-2.jpg" alt="点击这里复制标识码"></p><p>手机上在此添加电脑<br><img src="/img/2023-2-26-8.jpg"></p><h2 id="添加共享目录"><a href="#添加共享目录" class="headerlink" title="添加共享目录"></a>添加共享目录</h2><p>电脑上添加共享目录<br><img src="/img/2023-2-26-7.jpg"></p><p>手机上添加准备用来共享的文件夹<br><img src="/img/2023-2-26-3.jpg"></p><p>这样手机和电脑上的 syncthing 同时运行的时候,共享文件夹里面的文件就会自动同步了</p><hr><p>本来想要用来做同步笔记的,但是还是无法满足我的需求<br>虽然现在的记笔记方案不需要用 syncthing,但是用来电脑和手机间传文件还是蛮方便的 （・ω・&#x3D;）</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>姿势学习</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>syncthing</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Docker搭建jellyfin并使用kodi播放</title>
     <link href="/2023/01/19/Docker%E6%90%AD%E5%BB%BAjellyfin%E5%B9%B6%E4%BD%BF%E7%94%A8kodi%E6%92%AD%E6%94%BE/"/>
     <url>/2023/01/19/Docker%E6%90%AD%E5%BB%BAjellyfin%E5%B9%B6%E4%BD%BF%E7%94%A8kodi%E6%92%AD%E6%94%BE/</url>
