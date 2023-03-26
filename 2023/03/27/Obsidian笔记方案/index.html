@@ -18,18 +18,18 @@
   <meta name="author" content="NeroUMU">
   <meta name="keywords" content="">
   
-    <meta name="description" content="发现了新的文件传输方案本来是想搭建一个记笔记的平台的,但是一直无法解决同步问题,于是发现了 syncthing 这样一款文件同步软件虽然这个并没有完美符合我对记笔记的备份需求,但是它本身的功能就很方便,可以一试 安装Arch Linux 的官方库可以直接安装 1sudo pacman -S syncthing  手机上可以在 F-Droid 里面安装 添加设备电脑直接运行命令 1syncthing">
+    <meta name="description" content="目前笔记方案一个月前,还用着 Notion 作我的笔记,虽然 Notion 的功能十分强大,我也用了一年多了,但是我还是不得不放弃使用 Notion,转向现在正在用的 Obsidian之所以不再使用 Notion 是因为它的一个致命的问题(至少对我来说) —— 它不支持本地保存Notion 的每一次访问都要向它的服务器发送请求以获取笔记文件,本地没有任何缓存,如果我要查看我的笔记,而网络恰好不怎么">
 <meta property="og:type" content="article">
-<meta property="og:title" content="syncthing设备间文件同步">
-<meta property="og:url" content="https://neroumu.top/2023/02/26/syncthing%E8%AE%BE%E5%A4%87%E9%97%B4%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5/index.html">
+<meta property="og:title" content="Obsidian笔记方案">
+<meta property="og:url" content="https://neroumu.top/2023/03/27/Obsidian%E7%AC%94%E8%AE%B0%E6%96%B9%E6%A1%88/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
-<meta property="og:description" content="发现了新的文件传输方案本来是想搭建一个记笔记的平台的,但是一直无法解决同步问题,于是发现了 syncthing 这样一款文件同步软件虽然这个并没有完美符合我对记笔记的备份需求,但是它本身的功能就很方便,可以一试 安装Arch Linux 的官方库可以直接安装 1sudo pacman -S syncthing  手机上可以在 F-Droid 里面安装 添加设备电脑直接运行命令 1syncthing">
+<meta property="og:description" content="目前笔记方案一个月前,还用着 Notion 作我的笔记,虽然 Notion 的功能十分强大,我也用了一年多了,但是我还是不得不放弃使用 Notion,转向现在正在用的 Obsidian之所以不再使用 Notion 是因为它的一个致命的问题(至少对我来说) —— 它不支持本地保存Notion 的每一次访问都要向它的服务器发送请求以获取笔记文件,本地没有任何缓存,如果我要查看我的笔记,而网络恰好不怎么">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://neroumu.top/img/posture.png">
-<meta property="article:published_time" content="2023-02-26T05:56:30.000Z">
-<meta property="article:modified_time" content="2023-02-25T17:54:02.077Z">
+<meta property="article:published_time" content="2023-03-27T01:50:28.000Z">
+<meta property="article:modified_time" content="2023-03-26T15:33:59.051Z">
 <meta property="article:author" content="NeroUMU">
-<meta property="article:tag" content="syncthing">
+<meta property="article:tag" content="Obsidian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://neroumu.top/img/posture.png">
   
@@ -37,7 +37,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>syncthing设备间文件同步 - NeroUMU&#39;s BLOG</title>
+  <title>Obsidian笔记方案 - NeroUMU&#39;s BLOG</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -205,7 +205,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="syncthing设备间文件同步"></span>
+            <span id="subtitle" data-typed-text="Obsidian笔记方案"></span>
           
         </div>
 
@@ -216,8 +216,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-26 00:56" pubdate>
-          2023年2月26日 凌晨
+        <time datetime="2023-03-26 21:50" pubdate>
+          2023年3月26日 晚上
         </time>
       </span>
     
@@ -229,7 +229,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          399 字
+          1.7k 字
         
       </span>
     
@@ -281,29 +281,30 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">syncthing设备间文件同步</h1>
+            <h1 style="display: none">Obsidian笔记方案</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="发现了新的文件传输方案"><a href="#发现了新的文件传输方案" class="headerlink" title="发现了新的文件传输方案"></a>发现了新的文件传输方案</h1><p>本来是想搭建一个记笔记的平台的,但是一直无法解决同步问题,于是发现了 syncthing 这样一款文件同步软件<br>虽然这个并没有完美符合我对记笔记的备份需求,但是它本身的功能就很方便,可以一试</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>Arch Linux 的官方库可以直接安装</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo pacman -S syncthing<br></code></pre></td></tr></table></figure>
+                <h1 id="目前笔记方案"><a href="#目前笔记方案" class="headerlink" title="目前笔记方案"></a>目前笔记方案</h1><p>一个月前,还用着 Notion 作我的笔记,虽然 Notion 的功能十分强大,我也用了一年多了,但是我还是不得不放弃使用 Notion,转向现在正在用的 Obsidian<br>之所以不再使用 Notion 是因为它的一个致命的问题(至少对我来说) —— 它不支持本地保存<br>Notion 的每一次访问都要向它的服务器发送请求以获取笔记文件,本地没有任何缓存,如果我要查看我的笔记,而网络恰好不怎么流畅的时候,光加载出文字就已经很吃力了,在加载几张图片,那可是十分令人头疼的一件事<br>而且 Notion 的服务器是位于国外的,访问就慢了一道<br>万一哪天它出了什么问题,比如服务器崩溃了,删库跑路了,我的笔记可就再也会不来了<br>所以转移笔记迫在眉睫,于是我就转向了现在的 Obsidian 方案,到目前为止已经用了一个多月了,体验起来很不错</p>
+<h1 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h1><p>Arch Linux 官方库是有现成的包可以直接安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo pacman -S obsidian <br></code></pre></td></tr></table></figure>
 
-<p>手机上可以在 F-Droid 里面安装<br><img src="/img/2023-2-26-1.jpg" srcset="/img/loading.gif" lazyload></p>
-<h2 id="添加设备"><a href="#添加设备" class="headerlink" title="添加设备"></a>添加设备</h2><p>电脑直接运行命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">syncthing<br></code></pre></td></tr></table></figure>
+<p>手机上可以在 Play 商店里面直接安装<br><img src="/img/2023-3-26-1.jpg" srcset="/img/loading.gif" lazyload alt="Play 商店直接搜索就有了"></p>
+<h1 id="笔记同步及备份方案"><a href="#笔记同步及备份方案" class="headerlink" title="笔记同步及备份方案"></a>笔记同步及备份方案</h1><p>软件使用起来很简单,创建一个目录就可以开始记笔记了,可是如果仅仅止步于此的话,那么各个终端的笔记是不能共享的,而且万一丢失了,也是没有备份的,所以需要做好笔记的同步和备份</p>
+<h2 id="使用-Github-备份"><a href="#使用-Github-备份" class="headerlink" title="使用 Github 备份"></a>使用 Github 备份</h2><p>首先在 GitHub 上创建一个项目,并拉取到本地,完成必要的初始化<br>Obsidian 设置根目录为该项目路径<br>然后在 Obsidian 中选择 <code>设置</code> -&gt; <code>第三发插件</code> -&gt; <code>社区插件市场</code> -&gt; <code>安装 Obsidian Git</code><br>第一次安装第三方插件时会提醒关闭安全模式,关闭即可<br>然后在第三方插件里面开启 Obsidian Git,重启软件,这样就可以把笔记同步到自己的 GitHub 的项目里面了</p>
+<p>手机上的步骤类似,不过手机上设置 GitHub 账号用的不是 GitHub 的密码,而是 <code>Personal access tokens</code><br>可以在 GitHub 网页端 <code>Settings</code> -&gt; <code>Developer settings</code> -&gt; <code>Personal access tokens</code> 中创建一个<br>然后在拉取镜像的时候按步骤填写信息就可以了<br>注意在拉取镜像的时候不能使用 SSH 链接(<a href="mailto:&#103;&#105;&#116;&#64;&#x67;&#x69;&#x74;&#104;&#117;&#x62;&#46;&#99;&#x6f;&#109;">&#103;&#105;&#116;&#64;&#x67;&#x69;&#x74;&#104;&#117;&#x62;&#46;&#99;&#x6f;&#109;</a>:XXXX&#x2F;XXXX.git),而应该使用 HTTPS 链接(<a target="_blank" rel="noopener" href="https://github.com/XXXX/XXXX.git">https://github.com/XXXX/XXXX.git</a>)</p>
+<h2 id="使用-WebDAV-同步jin备份"><a href="#使用-WebDAV-同步jin备份" class="headerlink" title="使用 WebDAV 同步jin备份"></a>使用 WebDAV 同步jin备份</h2><p>我使用的 WebDAV 是我通过阿里云盘自建的,如果有其他的 WebDAV 资源可以跳过搭建</p>
+<h3 id="Docker-搭建阿里云盘-WebDAV"><a href="#Docker-搭建阿里云盘-WebDAV" class="headerlink" title="Docker 搭建阿里云盘 WebDAV"></a>Docker 搭建阿里云盘 WebDAV</h3><p>GitHub 上刚好有项目可把阿里云盘当成 WebDAV 来使用,<a target="_blank" rel="noopener" href="https://github.com/messense/aliyundrive-webdav">项目地址</a><br>而且还能用 Docker 搭建,特别方便<br>按照项目的 README 获取到 tocken 后执行下面的命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker run -d --name=aliyundrive-webdav \<br>--restart=unless-stopped -p 28080:8080 \<br>-v /etc/aliyundrive-webdav/:/etc/aliyundrive-webdav/ \<br>-e REFRESH_TOKEN=&#x27;My_TOKENS&#x27; \<br>-e WEBDAV_AUTH_USER=Username \<br>-e WEBDAV_AUTH_PASSWORD=Password \<br>messense/aliyundrive-webdav<br></code></pre></td></tr></table></figure>
 
-<p>这样就可以打开浏览器访问 <code>localhost:8384</code><br>在此获取到设备 ID<br><img src="/img/2023-2-26-4.jpg" srcset="/img/loading.gif" lazyload></p>
-<p>在此添加手机<br><img src="/img/2023-2-26-5.jpg" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/img/2023-2-26-6.jpg" srcset="/img/loading.gif" lazyload></p>
-<p>手机上在这里获取设备 ID<br><img src="/img/2023-2-26-2.jpg" srcset="/img/loading.gif" lazyload alt="点击这里复制标识码"></p>
-<p>手机上在此添加电脑<br><img src="/img/2023-2-26-8.jpg" srcset="/img/loading.gif" lazyload></p>
-<h2 id="添加共享目录"><a href="#添加共享目录" class="headerlink" title="添加共享目录"></a>添加共享目录</h2><p>电脑上添加共享目录<br><img src="/img/2023-2-26-7.jpg" srcset="/img/loading.gif" lazyload></p>
-<p>手机上添加准备用来共享的文件夹<br><img src="/img/2023-2-26-3.jpg" srcset="/img/loading.gif" lazyload></p>
-<p>这样手机和电脑上的 syncthing 同时运行的时候,共享文件夹里面的文件就会自动同步了</p>
+<ul>
+<li>用户名和密码选项可以删除,即不需要账号和密码</li>
+</ul>
+<h3 id="安装并配置-Remotely-Save"><a href="#安装并配置-Remotely-Save" class="headerlink" title="安装并配置 Remotely Save"></a>安装并配置 Remotely Save</h3><p>在 Obsidian 中安装 Remotely Save 第三方插件<br>安装好后进行设置,选择远程服务设置为 WebDAV<br>服务器地址设置为 <code>http://IP-ADDRESS:28080/</code><br>填入用户名和密码就可以使用了</p>
+<p>手机和电脑上设置同一个 WebDAV 服务器就可以在各终端间实现同步和数据备份了</p>
 <hr>
-<p>本来想要用来做同步笔记的,但是还是无法满足我的需求<br>虽然现在的记笔记方案不需要用 syncthing,但是用来电脑和手机间传文件还是蛮方便的 （・ω・&#x3D;）</p>
+<p>还好发现 Notion 的这一大缺点早,不然等以后用的多了,想把笔记迁移都困难<br>现在笔记都已经全部迁移到了 Obsidian 中,目前为止使用起来还是很顺手的 (´∀｀*)</p>
 
                 
               </div>
@@ -337,7 +338,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/syncthing/">#syncthing</a>
+        <a href="/tags/Obsidian/">#Obsidian</a>
       
     </div>
   
@@ -351,18 +352,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/27/Obsidian%E7%AC%94%E8%AE%B0%E6%96%B9%E6%A1%88/" title="Obsidian笔记方案">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Obsidian笔记方案</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/01/19/Docker%E6%90%AD%E5%BB%BAjellyfin%E5%B9%B6%E4%BD%BF%E7%94%A8kodi%E6%92%AD%E6%94%BE/" title="Docker搭建jellyfin并使用kodi播放">
-                        <span class="hidden-mobile">Docker搭建jellyfin并使用kodi播放</span>
+                      <a href="/2023/02/26/syncthing%E8%AE%BE%E5%A4%87%E9%97%B4%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5/" title="syncthing设备间文件同步">
+                        <span class="hidden-mobile">syncthing设备间文件同步</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

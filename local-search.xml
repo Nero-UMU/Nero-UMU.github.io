@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Obsidian笔记方案</title>
+    <link href="/2023/03/27/Obsidian%E7%AC%94%E8%AE%B0%E6%96%B9%E6%A1%88/"/>
+    <url>/2023/03/27/Obsidian%E7%AC%94%E8%AE%B0%E6%96%B9%E6%A1%88/</url>
+    
+    <content type="html"><![CDATA[<h1 id="目前笔记方案"><a href="#目前笔记方案" class="headerlink" title="目前笔记方案"></a>目前笔记方案</h1><p>一个月前,还用着 Notion 作我的笔记,虽然 Notion 的功能十分强大,我也用了一年多了,但是我还是不得不放弃使用 Notion,转向现在正在用的 Obsidian<br>之所以不再使用 Notion 是因为它的一个致命的问题(至少对我来说) —— 它不支持本地保存<br>Notion 的每一次访问都要向它的服务器发送请求以获取笔记文件,本地没有任何缓存,如果我要查看我的笔记,而网络恰好不怎么流畅的时候,光加载出文字就已经很吃力了,在加载几张图片,那可是十分令人头疼的一件事<br>而且 Notion 的服务器是位于国外的,访问就慢了一道<br>万一哪天它出了什么问题,比如服务器崩溃了,删库跑路了,我的笔记可就再也会不来了<br>所以转移笔记迫在眉睫,于是我就转向了现在的 Obsidian 方案,到目前为止已经用了一个多月了,体验起来很不错</p><h1 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h1><p>Arch Linux 官方库是有现成的包可以直接安装</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo pacman -S obsidian <br></code></pre></td></tr></table></figure><p>手机上可以在 Play 商店里面直接安装<br><img src="/img/2023-3-26-1.jpg" alt="Play 商店直接搜索就有了"></p><h1 id="笔记同步及备份方案"><a href="#笔记同步及备份方案" class="headerlink" title="笔记同步及备份方案"></a>笔记同步及备份方案</h1><p>软件使用起来很简单,创建一个目录就可以开始记笔记了,可是如果仅仅止步于此的话,那么各个终端的笔记是不能共享的,而且万一丢失了,也是没有备份的,所以需要做好笔记的同步和备份</p><h2 id="使用-Github-备份"><a href="#使用-Github-备份" class="headerlink" title="使用 Github 备份"></a>使用 Github 备份</h2><p>首先在 GitHub 上创建一个项目,并拉取到本地,完成必要的初始化<br>Obsidian 设置根目录为该项目路径<br>然后在 Obsidian 中选择 <code>设置</code> -&gt; <code>第三发插件</code> -&gt; <code>社区插件市场</code> -&gt; <code>安装 Obsidian Git</code><br>第一次安装第三方插件时会提醒关闭安全模式,关闭即可<br>然后在第三方插件里面开启 Obsidian Git,重启软件,这样就可以把笔记同步到自己的 GitHub 的项目里面了</p><p>手机上的步骤类似,不过手机上设置 GitHub 账号用的不是 GitHub 的密码,而是 <code>Personal access tokens</code><br>可以在 GitHub 网页端 <code>Settings</code> -&gt; <code>Developer settings</code> -&gt; <code>Personal access tokens</code> 中创建一个<br>然后在拉取镜像的时候按步骤填写信息就可以了<br>注意在拉取镜像的时候不能使用 SSH 链接(<a href="mailto:&#103;&#105;&#116;&#64;&#x67;&#x69;&#x74;&#104;&#117;&#x62;&#46;&#99;&#x6f;&#109;">&#103;&#105;&#116;&#64;&#x67;&#x69;&#x74;&#104;&#117;&#x62;&#46;&#99;&#x6f;&#109;</a>:XXXX&#x2F;XXXX.git),而应该使用 HTTPS 链接(<a href="https://github.com/XXXX/XXXX.git">https://github.com/XXXX/XXXX.git</a>)</p><h2 id="使用-WebDAV-同步jin备份"><a href="#使用-WebDAV-同步jin备份" class="headerlink" title="使用 WebDAV 同步jin备份"></a>使用 WebDAV 同步jin备份</h2><p>我使用的 WebDAV 是我通过阿里云盘自建的,如果有其他的 WebDAV 资源可以跳过搭建</p><h3 id="Docker-搭建阿里云盘-WebDAV"><a href="#Docker-搭建阿里云盘-WebDAV" class="headerlink" title="Docker 搭建阿里云盘 WebDAV"></a>Docker 搭建阿里云盘 WebDAV</h3><p>GitHub 上刚好有项目可把阿里云盘当成 WebDAV 来使用,<a href="https://github.com/messense/aliyundrive-webdav">项目地址</a><br>而且还能用 Docker 搭建,特别方便<br>按照项目的 README 获取到 tocken 后执行下面的命令</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker run -d --name=aliyundrive-webdav \<br>--restart=unless-stopped -p 28080:8080 \<br>-v /etc/aliyundrive-webdav/:/etc/aliyundrive-webdav/ \<br>-e REFRESH_TOKEN=&#x27;My_TOKENS&#x27; \<br>-e WEBDAV_AUTH_USER=Username \<br>-e WEBDAV_AUTH_PASSWORD=Password \<br>messense/aliyundrive-webdav<br></code></pre></td></tr></table></figure><ul><li>用户名和密码选项可以删除,即不需要账号和密码</li></ul><h3 id="安装并配置-Remotely-Save"><a href="#安装并配置-Remotely-Save" class="headerlink" title="安装并配置 Remotely Save"></a>安装并配置 Remotely Save</h3><p>在 Obsidian 中安装 Remotely Save 第三方插件<br>安装好后进行设置,选择远程服务设置为 WebDAV<br>服务器地址设置为 <code>http://IP-ADDRESS:28080/</code><br>填入用户名和密码就可以使用了</p><p>手机和电脑上设置同一个 WebDAV 服务器就可以在各终端间实现同步和数据备份了</p><hr><p>还好发现 Notion 的这一大缺点早,不然等以后用的多了,想把笔记迁移都困难<br>现在笔记都已经全部迁移到了 Obsidian 中,目前为止使用起来还是很顺手的 (´∀｀*)</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>姿势学习</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Obsidian</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>syncthing设备间文件同步</title>
     <link href="/2023/02/26/syncthing%E8%AE%BE%E5%A4%87%E9%97%B4%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5/"/>
     <url>/2023/02/26/syncthing%E8%AE%BE%E5%A4%87%E9%97%B4%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5/</url>
