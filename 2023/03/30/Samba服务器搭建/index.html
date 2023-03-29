@@ -18,26 +18,24 @@
   <meta name="author" content="NeroUMU">
   <meta name="keywords" content="">
   
-    <meta name="description" content="不记笔记的报应今天做 Linux 的实验时候,碰到要用 yum 来安装软件,由于习惯了 Arch Linux 的 pacman 包管理器,我竟一时忘了该怎么做明明之前是做过挂载光盘的,但就是忘记了该怎么做,还刚好没有做笔记于是又重新学了一遍 RHEL 挂载光盘安装软件了 挂载一次光盘创建一个用于挂载ISO的目录 1mkdir &#x2F;yum  编辑yum源文件 1vim &#x2F;etc&#x2F;yum.repos.d">
+    <meta name="description" content="刚好学习了搭建 Samba最近刚好学习了搭建 Samba 服务器,想起之前想搭建网络共享服务器时考虑过 Samba 服务器却没有成功,最后还是采用了别的方案既然正好解决了之前碰到的问题,那就记录下搭建的过程吧 搭建 Samba 服务器注意:为了使客户端可以连接上 Samba 服务器,记得把防火墙关了! 软件安装服务端只需要安装 Samba 就可以了,Arch Linux 和 RHEL 都一样 1p">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RHEL7自动挂载yum">
-<meta property="og:url" content="https://neroumu.top/2023/03/29/RHEL7%E8%87%AA%E5%8A%A8%E6%8C%82%E8%BD%BDyum/index.html">
+<meta property="og:title" content="Samba服务器搭建">
+<meta property="og:url" content="https://neroumu.top/2023/03/30/Samba%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
-<meta property="og:description" content="不记笔记的报应今天做 Linux 的实验时候,碰到要用 yum 来安装软件,由于习惯了 Arch Linux 的 pacman 包管理器,我竟一时忘了该怎么做明明之前是做过挂载光盘的,但就是忘记了该怎么做,还刚好没有做笔记于是又重新学了一遍 RHEL 挂载光盘安装软件了 挂载一次光盘创建一个用于挂载ISO的目录 1mkdir &#x2F;yum  编辑yum源文件 1vim &#x2F;etc&#x2F;yum.repos.d">
+<meta property="og:description" content="刚好学习了搭建 Samba最近刚好学习了搭建 Samba 服务器,想起之前想搭建网络共享服务器时考虑过 Samba 服务器却没有成功,最后还是采用了别的方案既然正好解决了之前碰到的问题,那就记录下搭建的过程吧 搭建 Samba 服务器注意:为了使客户端可以连接上 Samba 服务器,记得把防火墙关了! 软件安装服务端只需要安装 Samba 就可以了,Arch Linux 和 RHEL 都一样 1p">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://neroumu.top/img/linux.jpg">
-<meta property="article:published_time" content="2023-03-29T00:21:53.000Z">
-<meta property="article:modified_time" content="2023-03-28T12:37:25.578Z">
+<meta property="article:published_time" content="2023-03-30T04:20:52.000Z">
+<meta property="article:modified_time" content="2023-03-29T17:19:30.563Z">
 <meta property="article:author" content="NeroUMU">
-<meta property="article:tag" content="yum">
+<meta property="article:tag" content="Samba">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://neroumu.top/img/linux.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>RHEL7自动挂载yum - NeroUMU&#39;s BLOG</title>
+  <title>Samba服务器搭建 - NeroUMU&#39;s BLOG</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -205,7 +203,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="RHEL7自动挂载yum"></span>
+            <span id="subtitle" data-typed-text="Samba服务器搭建"></span>
           
         </div>
 
@@ -216,8 +214,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-28 20:21" pubdate>
-          2023年3月28日 晚上
+        <time datetime="2023-03-30 00:20" pubdate>
+          2023年3月30日 凌晨
         </time>
       </span>
     
@@ -229,7 +227,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          584 字
+          1.7k 字
         
       </span>
     
@@ -281,39 +279,81 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">RHEL7自动挂载yum</h1>
+            <h1 style="display: none">Samba服务器搭建</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="不记笔记的报应"><a href="#不记笔记的报应" class="headerlink" title="不记笔记的报应"></a>不记笔记的报应</h1><p>今天做 Linux 的实验时候,碰到要用 yum 来安装软件,由于习惯了 Arch Linux 的 pacman 包管理器,我竟一时忘了该怎么做<br>明明之前是做过挂载光盘的,但就是忘记了该怎么做,还刚好没有做笔记<br>于是又重新学了一遍 RHEL 挂载光盘安装软件了</p>
-<h1 id="挂载一次光盘"><a href="#挂载一次光盘" class="headerlink" title="挂载一次光盘"></a>挂载一次光盘</h1><p>创建一个用于挂载ISO的目录</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir /yum<br></code></pre></td></tr></table></figure>
+                <h1 id="刚好学习了搭建-Samba"><a href="#刚好学习了搭建-Samba" class="headerlink" title="刚好学习了搭建 Samba"></a>刚好学习了搭建 Samba</h1><p>最近刚好学习了搭建 Samba 服务器,想起之前想搭建网络共享服务器时考虑过 Samba 服务器却没有成功,最后还是采用了别的方案<br>既然正好解决了之前碰到的问题,那就记录下搭建的过程吧</p>
+<h1 id="搭建-Samba-服务器"><a href="#搭建-Samba-服务器" class="headerlink" title="搭建 Samba 服务器"></a>搭建 Samba 服务器</h1><p><code>注意</code>:为了使客户端可以连接上 Samba 服务器,记得把防火墙关了!</p>
+<h2 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h2><p>服务端只需要安装 Samba 就可以了,Arch Linux 和 RHEL 都一样</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pacman -S Samba<br></code></pre></td></tr></table></figure>
 
-<p>编辑yum源文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">vim /etc/yum.repos.d/local.repo<br></code></pre></td></tr></table></figure>
+<p>RHEL 安装命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">yum install samba<br></code></pre></td></tr></table></figure>
 
-<p>编辑如下内容</p>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs txt">[Local-Server]<br>name=local-server<br>baseurl=file:///yum<br>enabled=1<br>gpgcheck=0<br></code></pre></td></tr></table></figure>
+<h2 id="配置共享目录"><a href="#配置共享目录" class="headerlink" title="配置共享目录"></a>配置共享目录</h2><p>创建需要共享的目录,注意权限的设置<br>由于 Samba 的目录权限是取 Samba 的配置和实际目录的权限的交集,为了方便,我就设置为777的最高权限<br>实际情况按实际情况考虑</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir -m 777 /test<br></code></pre></td></tr></table></figure>
 
-<p>挂载光盘</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mount -t iso9660 -o loop /dev/cdrom /yum<br></code></pre></td></tr></table></figure>
+<p>创建 Samba 用户</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">groupadd test #创建用户组<br>useradd -g test test_user #创建用户<br>passwd test_user1 #设置密码<br></code></pre></td></tr></table></figure>
 
-<p>完成之后就可以使用 yum 命令来安装软件了,但是一旦重启,就得重新挂载一次<br>如果想要每一次开机都可以之间使用的话,需要设置开机自动挂载</p>
-<h1 id="开机自动挂载"><a href="#开机自动挂载" class="headerlink" title="开机自动挂载"></a>开机自动挂载</h1><p>编辑 <code>/etc/fstab</code> 文件,注意这个文件很重要,一定要再三小心,不然会开不了机</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">vim /etc/fstab<br></code></pre></td></tr></table></figure>
+<p>添加 Samba 账户,需要该用户实际存在,否则无法添加</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">smbpasswd -a test_user<br></code></pre></td></tr></table></figure>
 
-<p>添加如下配置</p>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs txt">/dev/cdrom /yum iso9660 defaults 0 0<br></code></pre></td></tr></table></figure>
+<p>设置 ACL</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">setfacl -m g:test_user:rwx /test<br></code></pre></td></tr></table></figure>
+<ul>
+<li>设置 test_user 用户拥有该目录的所有权限,实际情况实际考虑</li>
+</ul>
+<p>查看是否设置成功</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">getfacl /test<br></code></pre></td></tr></table></figure>
+
+<p>编辑 &#x2F;etc&#x2F;samba&#x2F;smb.conf 文件,Arch Linux 和 RHEL 的目录都一样,没有就新建一个<br>配置文件的详情可以查询 <a target="_blank" rel="noopener" href="https://man.archlinux.org/man/smb.conf.5">Arch Linux Wiki</a></p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs txt">[test]<br>        comment = test<br>        path = /test<br>        public = no<br>        writable = yes<br>        browseable = yes<br></code></pre></td></tr></table></figure>
+<ul>
+<li>[test] 共享名,可以随便命名</li>
+<li>comment 备注信息</li>
+<li>public 是否允许匿名访问</li>
+<li>writable 是否可写</li>
+<li>browseable 是否可浏览该目录</li>
+</ul>
+<p>这是最简单的配置文件,如果需要更多的配置,可以去网上找别人的配置或查询 wiki</p>
+<p>测试配置是否格式正确</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">testparm /etc/samba/smb.conf<br></code></pre></td></tr></table></figure>
+
+<p>重启服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl restart smb.service <br>systemctl restart nmb.service <br></code></pre></td></tr></table></figure>
+
+<h1 id="客户端连接"><a href="#客户端连接" class="headerlink" title="客户端连接"></a>客户端连接</h1><p>Arch Linux 的客户端 和 RHEL 用的软件一样,但名字不一样</p>
+<h2 id="安装软件"><a href="#安装软件" class="headerlink" title="安装软件"></a>安装软件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pacman -S smbclient cifs-utils<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">apt install samba-client cifs-utils<br></code></pre></td></tr></table></figure>
+
+<h2 id="测试连接"><a href="#测试连接" class="headerlink" title="测试连接"></a>测试连接</h2><p>验证是否可以连接 Samba 服务器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">smbclient -L &lt;IP/主机名&gt; <br></code></pre></td></tr></table></figure>
+<p>此方法为匿名登录,不需要输入密码,如果连接成功会输出 Samba 服务器共享的目录</p>
+<p>查看某用户的共享目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">smbclient -L &lt;IP/主机名&gt; -U username[%password]<br></code></pre></td></tr></table></figure>
+
+<h2 id="挂载共享目录"><a href="#挂载共享目录" class="headerlink" title="挂载共享目录"></a>挂载共享目录</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mount -t cifs //IP或主机名/共享目录名称 挂载点 -o user=&lt;username&gt;,password=&lt;password&gt;,uid=&lt;username&gt;,gid=&lt;group&gt;,workgroup=&lt;workgroup&gt;,ip=&lt;serverip&gt;,iocharset=utf8<br></code></pre></td></tr></table></figure>
+<ul>
+<li>user 用户名</li>
+<li>password 密码</li>
+<li>uid 挂载的uid</li>
+<li>gid 挂载的gid<br><code>使用 uid 和 gid 挂载选项时,注意文件权限</code></li>
+<li>workgroup 用户组</li>
+<li>ip 设置目标 IP 地址,如果请求的 UNC 名称的服务器名称部分可以解析,则此选项会自动设置,因此用户很少需要指定</li>
+<li>iocharset 用于将本地路径名与 Unicode 相互转换的字符集</li>
+</ul>
+<h2 id="自动挂载-Saamba-目录"><a href="#自动挂载-Saamba-目录" class="headerlink" title="自动挂载 Saamba 目录"></a>自动挂载 Saamba 目录</h2><p>编辑 &#x2F;etc&#x2F;fstab 文件,注意这个文件很重要,如果不小心打错了,容易开不了机</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs txt">//IP或主机名/共享目录名称 挂载点 cifs username=&lt;username&gt;,password=&lt;password&gt;,file_mode=0755,dir_mode=0755 0 0<br></code></pre></td></tr></table></figure>
 
 <p>使配置生效</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mount -a<br></code></pre></td></tr></table></figure>
 
-<p>挂载完成后就可以愉快的用 yum 来安装软件了</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">yum install httpd<br></code></pre></td></tr></table></figure>
-
 <hr>
-<p>这就是没养成记笔记习惯的坏处<br>如果之前做的时候把笔记记在电脑上,也不至于现在要用的时候狼狈的浪费时间去重新学习 ｜−・;）</p>
+<p>算是解决了一个常年的困难吧 (´▽&#96;ʃƪ)<br>以后碰到需要文件共享的时候,也可以用 Samba 服务器了 （●´∀｀）ノ♡</p>
 
                 
               </div>
@@ -332,7 +372,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="category-chain-item">学习记录</a>
   
   
 
@@ -347,7 +387,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/yum/">#yum</a>
+        <a href="/tags/Samba/">#Samba</a>
       
     </div>
   
@@ -361,18 +401,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/30/Samba%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/" title="Samba服务器搭建">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Samba服务器搭建</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/03/27/Obsidian%E7%AC%94%E8%AE%B0%E6%96%B9%E6%A1%88/" title="Obsidian笔记方案">
-                        <span class="hidden-mobile">Obsidian笔记方案</span>
+                      <a href="/2023/03/29/RHEL7%E8%87%AA%E5%8A%A8%E6%8C%82%E8%BD%BDyum/" title="RHEL7自动挂载yum">
+                        <span class="hidden-mobile">RHEL7自动挂载yum</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
