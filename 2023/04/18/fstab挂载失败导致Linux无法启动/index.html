@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://neroumu.top/img/hole.jpg">
 <meta property="article:published_time" content="2023-04-18T00:38:32.000Z">
-<meta property="article:modified_time" content="2023-04-17T13:47:42.086Z">
+<meta property="article:modified_time" content="2023-04-17T14:12:05.473Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="fstab">
 <meta name="twitter:card" content="summary_large_image">
@@ -229,7 +229,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          1.2k 字
+          1.3k 字
         
       </span>
     
@@ -299,10 +299,16 @@
 <h2 id="解决方案二"><a href="#解决方案二" class="headerlink" title="解决方案二"></a>解决方案二</h2><p>使用 <code>systemd</code> 开机挂载硬盘<br>由于我的硬盘是外接设备，不是直接连在主板上的，所以连接并不稳定，这就降低了系统的容错率<br>而当自动挂载硬盘的工作交给 <code>systemd</code>的话，系统启动就不会受到干扰，提高了系统的容错率</p>
 <p>在 <code>/etc/systemd/system</code> 创建挂载单元<br><code>注意</code>:挂载单元必须以它控制的挂载目录命名，且以<code>.mount</code>结尾，比如挂载点为 <code>/home/lennart</code>，那么它的挂载单元必须为<code>home-lennart.mount</code></p>
 <p>编辑单元文件</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs text">[Unit]<br>Description=Mount disk<br><br>[Mount]<br>What=设备UUID<br>Where=挂载点<br>Type=ext4<br>Options=rw,noatime<br><br>[Install]<br>WantedBy=multi-user.target<br></code></pre></td></tr></table></figure>
-
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs text">[Unit]<br>Description=Mount disk<br><br>[Mount]<br>What=/dev/disk/by-uuid/设备UUID<br>Where=/disk<br>Type=ext4<br>Options=rw,noatime<br><br>[Install]<br>WantedBy=multi-user.target<br></code></pre></td></tr></table></figure>
 <ul>
+<li>What 设备的绝对路径，注意 <code>/dev/disk/by-uuid</code> 是一个实际存在的目录，不要把他删了只留个UUID在那，会启动失败的  (ఠ్ఠ ˓̭ ఠ్ఠ)</li>
+<li>Where 挂载点</li>
+<li>Type 文件类型</li>
+<li>Option 可选项 <ul>
+<li>rw 读写</li>
 <li>noatime 完全禁用每次读取文件时将文件访问时间写入驱动器</li>
+</ul>
+</li>
 </ul>
 <p>配置完成后，运行如下命令使配置生效</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl daemon-reload<br>systemctl enable 挂载单元.mount --now<br></code></pre></td></tr></table></figure>
