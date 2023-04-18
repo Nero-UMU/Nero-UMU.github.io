@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://neroumu.top/img/posture.png">
 <meta property="article:published_time" content="2022-05-18T04:09:51.000Z">
-<meta property="article:modified_time" content="2023-04-18T07:48:30.793Z">
+<meta property="article:modified_time" content="2023-04-18T08:32:11.559Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Hexo">
 <meta name="twitter:card" content="summary_large_image">
@@ -229,7 +229,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          全文共2.2k 字
+          全文共2.3k 字
         
       </span>
     
@@ -241,7 +241,7 @@
         
         
           <!-- compatible with older versions-->
-          阅读全文需约19 分钟
+          阅读全文需约20 分钟
         
       </span>
     
@@ -349,6 +349,7 @@
 <p>如果碰到如下报错导致无法提交的情况↓</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs text">remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.<br>remote: Please see https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/ for more information.<br>fatal: &#x27;https://github.com/GitHub用户名/GitHub用户名.github.io.git/&#x27; 鉴权失败<br>FATAL &#123;<br>  err: Error: Spawn failed<br>      at ChildProcess.&lt;anonymous&gt; (/home/wjk/blog/node_modules/hexo-util/lib/spawn.js:51:21)<br>      at ChildProcess.emit (node:events:527:28)<br>      at ChildProcess._handle.onexit (node:internal/child_process:291:12) &#123;<br>    code: 128<br>  &#125;<br>&#125; Something&#x27;s wrong. Maybe you can find the solution here: %s https://hexo.io/docs/troubleshooting.html<br></code></pre></td></tr></table></figure>
 <p>解决方法<br>打开 Github 的 Settings<br>进入 Developer settings<br>打开 Personal access tokens<br>点击 Generate new token，生成一个新的 token，在输入密码的时候输入这个 token<br><img src="/img/2022-5-18-13.png" srcset="/img/loading.gif" lazyload><br><img src="/img/2022-5-18-14.png" srcset="/img/loading.gif" lazyload></p>
+<p>出现这种情况的原因是因为 GitHub 已经不再采用密码登录了，所以每一次上传都需要这个 token<br>这样做十分麻烦，所以在前面设置项目地址的时候，可以不设置为 HTTPS，而设置为 SSH<br><img src="/img/2023-4-18-1.png" srcset="/img/loading.gif" lazyload></p>
 <p>这样就能通过浏览器打开放置个人网站的仓库路径，博客搭建完成</p>
 <h2 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h2><p>先到 <a target="_blank" rel="noopener" href="https://www.namesilo.com/">https://www.namesilo.com/</a> 上注册一个账号，购买一个域名<br><img src="/img/2022-5-18-15.png" srcset="/img/loading.gif" lazyload alt="够买域名"><br><img src="/img/2022-5-18-16.png" srcset="/img/loading.gif" lazyload><br><img src="/img/2022-5-18-17.png" srcset="/img/loading.gif" lazyload><br>进入管理我的域名页面<br>管理 DNS<br><img src="/img/2022-5-18-18.png" srcset="/img/loading.gif" lazyload></p>
 <p>这里要添加两种解析，一种是 A ，一种是 CNAME<br>A 可能有多个，打开命令行 ping 自己的博客，会得到好几个IP，把它们都做一个解析<br>CNAME 的目标地址就是博客的地址<br><img src="/img/2022-5-18-19.png" srcset="/img/loading.gif" lazyload></p>
