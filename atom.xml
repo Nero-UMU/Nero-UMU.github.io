@@ -6,7 +6,7 @@
   <link href="https://neroumu.top/atom.xml" rel="self"/>
   
   <link href="https://neroumu.top/"/>
-  <updated>2023-04-18T16:26:55.529Z</updated>
+  <updated>2023-04-18T23:51:53.135Z</updated>
   <id>https://neroumu.top/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://neroumu.top/2023/04/19/Linux%E6%8A%A5%E9%94%99Bad-message/"/>
     <id>https://neroumu.top/2023/04/19/Linux%E6%8A%A5%E9%94%99Bad-message/</id>
     <published>2023-04-19T04:03:51.000Z</published>
-    <updated>2023-04-18T16:26:55.529Z</updated>
+    <updated>2023-04-18T23:51:53.135Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="发现有的文件无法被访问"><a href="#发现有的文件无法被访问" class="headerlink" title="发现有的文件无法被访问"></a>发现有的文件无法被访问</h1><p>前几天硬盘线路的余波，qBittorrent 的文件校验有几个错误的任务，重启校验有几个失败很正常<br>但是当我尝试去下载丢失的文件时，一直失败<br>所以我进到了那个任务的目录下，发现文件无法被查看，而且有如下报错</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">ls: cannot access XXXXXXXXXX: Bad message<br>rm: cannot remove XXXXXXXXXX: Bad message<br></code></pre></td></tr></table></figure><span id="more"></span><h1 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h1><p>先说结论：磁盘损坏<br>刚开始其实我就差不多知道答案，但我就是不相信，我尝试把这些损坏的文件删除了重新下载<br>但是这个文件不论是 <code>rm -rf</code> 还是 root 权限下的 <code>rm -rf</code>，都无法被删除，报错还都是一样的</p><h1 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h1><p>解决方案也很简单，把硬盘先卸载，然后在 root 权限下执行如下命令</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">fsck -t ext4 -v /dev/sdb<br></code></pre></td></tr></table></figure><ul><li>-t 给定档案系统的型式</li><li>-v 详细显示模式</li></ul><p>Linux fsck (file system check)命令用于检查与修复 Linux 档案系统，可以同时检查一个或多个 Linux 档案系统<br>然后按后续检查内容选择是否进行修复</p><hr><p>可恶啊（*థ౪థ），本以为解决了一个很早以前埋下的炸弹，没想到被炸了两次<br>被这炸弹炸了一次就算了，今天还来了个第二波，还好问题解决起来不难，只是刚开始无法接受，到最后还是接受了现实 (,,Ծ‸Ծ,, )<br>以后搭服务器，挂载硬盘的配置一定不会再轻易的编辑 <code>/etc/fstab</code> 文件了，如果觉得不稳定就用 <code>systemd</code> 吧  ⸍⚙̥ꇴ⚙̥⸌</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="发现有的文件无法被访问"><a href="#发现有的文件无法被访问" class="headerlink" title="发现有的文件无法被访问"></a>发现有的文件无法被访问</h1><p>前几天硬盘线路的余波，qBittorrent 的文件校验有几个错误的任务，重启校验有几个失败很正常<br>但是当我尝试去下载丢失的文件时，一直失败<br>所以我进到了那个任务的目录下，发现文件无法被查看，而且有如下报错</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">ls: cannot access XXXXXXXXXX: Bad message<br>rm: cannot remove XXXXXXXXXX: Bad message<br></code></pre></td></tr></table></figure><span id="more"></span><h1 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h1><p>先说结论：磁盘损坏<br>刚开始其实我就差不多知道答案，但我就是不相信，我尝试把这些损坏的文件删除了重新下载<br>但是这个文件不论是 <code>rm -rf</code> 还是 root 权限下的 <code>rm -rf</code>，都无法被删除，报错还都是一样的</p><h1 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h1><p>解决方案也很简单，把硬盘先卸载，然后在 root 权限下执行如下命令</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">fsck -t ext4 -v /dev/sdb<br></code></pre></td></tr></table></figure><ul><li>-t 给定档案系统的型式</li><li>-v 详细显示模式</li></ul><p>Linux fsck (file system check)命令用于检查与修复 Linux 档案系统，可以同时检查一个或多个 Linux 档案系统<br>然后按后续检查内容选择是否进行修复</p><hr><p>可恶啊（*థ౪థ），本以为解决了一个很早以前埋下的炸弹，没想到被炸了两次<br>被这炸弹炸了一次就算了，今天还来了个第二波，还好问题解决起来不难，只是刚开始无法接受，到最后还是接受了现实 (,,Ծ‸Ծ,, )<br>以后搭服务器，挂载硬盘的配置一定不会再轻易的编辑 <code>/etc/fstab</code> 文件了，如果觉得不稳定就用 <code>systemd</code> 吧 இдஇ</p>]]></content>
     
     
     <summary type="html">&lt;h1 id=&quot;发现有的文件无法被访问&quot;&gt;&lt;a href=&quot;#发现有的文件无法被访问&quot; class=&quot;headerlink&quot; title=&quot;发现有的文件无法被访问&quot;&gt;&lt;/a&gt;发现有的文件无法被访问&lt;/h1&gt;&lt;p&gt;前几天硬盘线路的余波，qBittorrent 的文件校验有几个错误的任务，重启校验有几个失败很正常&lt;br&gt;但是当我尝试去下载丢失的文件时，一直失败&lt;br&gt;所以我进到了那个任务的目录下，发现文件无法被查看，而且有如下报错&lt;/p&gt;
