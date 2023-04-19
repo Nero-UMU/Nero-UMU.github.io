@@ -18,16 +18,16 @@
   <meta name="author" content="NeroUMU">
   <meta name="keywords" content="">
   
-    <meta name="description" content="接口接口和面向对象语言有那么一点像,但又不完全像,接口中会定义一些方法,这些方法也是需要实现的但是接口同时也是一个数据类型,它可以被传递 隐式实现实现接口中的所有方法不需要用 “implements” 关键字这样接口的实现就可以出现在任何一个包中,不必提前准备 123456789101112131415161718192021222324252627282930313233&#x2F;&#x2F; 定义接口,需要实现">
+    <meta name="description" content="接口接口和面向对象语言有那么一点像,但又不完全像,接口中会定义一些方法,这些方法也是需要实现的但是接口同时也是一个数据类型,它可以被传递">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Go接口">
 <meta property="og:url" content="https://neroumu.top/2022/10/29/Go%E6%8E%A5%E5%8F%A3/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
-<meta property="og:description" content="接口接口和面向对象语言有那么一点像,但又不完全像,接口中会定义一些方法,这些方法也是需要实现的但是接口同时也是一个数据类型,它可以被传递 隐式实现实现接口中的所有方法不需要用 “implements” 关键字这样接口的实现就可以出现在任何一个包中,不必提前准备 123456789101112131415161718192021222324252627282930313233&#x2F;&#x2F; 定义接口,需要实现">
+<meta property="og:description" content="接口接口和面向对象语言有那么一点像,但又不完全像,接口中会定义一些方法,这些方法也是需要实现的但是接口同时也是一个数据类型,它可以被传递">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://neroumu.top/img/go.jpg">
 <meta property="article:published_time" content="2022-10-29T01:32:34.000Z">
-<meta property="article:modified_time" content="2022-12-06T12:05:52.667Z">
+<meta property="article:modified_time" content="2023-04-19T08:37:44.424Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Go">
 <meta name="twitter:card" content="summary_large_image">
@@ -297,6 +297,8 @@
               <div class="markdown-body">
                 
                 <h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>接口和面向对象语言有那么一点像,但又不完全像,接口中会定义一些方法,这些方法也是需要实现的<br>但是接口同时也是一个数据类型,它可以被传递</p>
+<span id="more"></span>
+
 <h2 id="隐式实现"><a href="#隐式实现" class="headerlink" title="隐式实现"></a>隐式实现</h2><p>实现接口中的所有方法不需要用 “implements” 关键字<br>这样接口的实现就可以出现在任何一个包中,不必提前准备</p>
 <figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs golang"><span class="hljs-comment">// 定义接口,需要实现 fun() 方法</span><br><span class="hljs-keyword">type</span> MyInt <span class="hljs-keyword">interface</span> &#123;<br>	fun()<br>&#125;<br><br><span class="hljs-comment">// 定义一个结构体</span><br><span class="hljs-keyword">type</span> vertex <span class="hljs-keyword">struct</span> &#123;<br>	S <span class="hljs-type">string</span><br>&#125;<br><br><span class="hljs-comment">// 也是一个自定义类型</span><br><span class="hljs-keyword">type</span> MyFloat <span class="hljs-type">float64</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(v vertex)</span></span> fun() &#123;<br>	fmt.Printf(<span class="hljs-string">&quot;用vertex实现了方法\n&quot;</span>)<br>	fmt.Println(v)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(f MyFloat)</span></span> fun() &#123;<br>	fmt.Printf(<span class="hljs-string">&quot;用MyFloat实现了方法\n&quot;</span>)<br>	fmt.Println(f)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-comment">// 用 vertex 实现一个接口</span><br>	<span class="hljs-keyword">var</span> i MyInt<br>	i = vertex&#123;<span class="hljs-string">&quot;hehe&quot;</span>&#125;<br>	i.fun()<br><br>    <span class="hljs-comment">// 用 MyFloat 实现一个接口</span><br>	<span class="hljs-keyword">var</span> j MyInt = MyFloat(<span class="hljs-number">20</span>)<br>	j.fun()<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>在上面的代码中,一个接口实例化出了两个变量 i, j<br>i 使用 vertex 结构实现了 fun()方法<br>j 使用 MyFloat 结构实现了 fun()方法<br>就因为他们在实现的时候,选择的实现方式不同,他们的 fun() 方法也就不一样<br>运行结果:</p>

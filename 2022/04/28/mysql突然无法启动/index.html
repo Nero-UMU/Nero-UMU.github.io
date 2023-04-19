@@ -26,7 +26,7 @@
 <meta property="og:description" content="今天上网课的时候学到了 mysql 的新东西，想试一下，打开 mysql 发现无法启动12Job for mysqld.service failed because the control process exited with error code.See &quot;systemctl status mysqld.service&quot; and &quot;journalctl -xeu">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-27T23:40:17.000Z">
-<meta property="article:modified_time" content="2022-12-06T12:05:52.663Z">
+<meta property="article:modified_time" content="2023-04-19T08:29:42.817Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="mysql">
 <meta name="twitter:card" content="summary_large_image">
@@ -227,7 +227,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          全文共552 字
+          全文共551 字
         
       </span>
     
@@ -295,7 +295,9 @@
               <div class="markdown-body">
                 
                 <h2 id="今天上网课的时候学到了-mysql-的新东西，想试一下，打开-mysql-发现无法启动"><a href="#今天上网课的时候学到了-mysql-的新东西，想试一下，打开-mysql-发现无法启动" class="headerlink" title="今天上网课的时候学到了 mysql 的新东西，想试一下，打开 mysql 发现无法启动"></a>今天上网课的时候学到了 mysql 的新东西，想试一下，打开 mysql 发现无法启动</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">Job for mysqld.service failed because the control process exited with error code.<br>See &quot;systemctl status mysqld.service&quot; and &quot;journalctl -xeu mysqld.service&quot; for details.<br></code></pre></td></tr></table></figure>
-<p>直接报了这个错误，搜了10多分钟，什么权限啊、所有者啊，都没用<br>然后气得我我直接</p>
+<span id="more"></span>
+
+<p>直接报了这个错误，搜了10多分钟，什么权限啊、所有者啊，都没用<br>然后气得我直接</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo pacman -Rss mysql<br></code></pre></td></tr></table></figure>
 <p>把 mysql 给卸了<br>然后重装了个 Mariadb</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo pacman -S mariadb<br></code></pre></td></tr></table></figure>

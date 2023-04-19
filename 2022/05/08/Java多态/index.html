@@ -18,15 +18,15 @@
   <meta name="author" content="NeroUMU">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Java 多态刚学完，记录一下，做个笔记 多态的定义用起来还是比较简单的: 12父类名称 对象名 &#x3D; new 子类名称();接口名称 对象名 &#x3D; new 实现类名称(); 原本使用子类或父类的时候，是左右都是子类或者父类名称，这里把左边的名称换成了父类名称定义很简单，理解后用起来也很简单 子类与父类的变量重名 直接通过对象名称访问成员变量，等号左边是谁，优先用谁，没有则向上找 间接访问成员方法访问">
+    <meta name="description" content="Java 多态刚学完，记录一下，做个笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java多态">
 <meta property="og:url" content="https://neroumu.top/2022/05/08/Java%E5%A4%9A%E6%80%81/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
-<meta property="og:description" content="Java 多态刚学完，记录一下，做个笔记 多态的定义用起来还是比较简单的: 12父类名称 对象名 &#x3D; new 子类名称();接口名称 对象名 &#x3D; new 实现类名称(); 原本使用子类或父类的时候，是左右都是子类或者父类名称，这里把左边的名称换成了父类名称定义很简单，理解后用起来也很简单 子类与父类的变量重名 直接通过对象名称访问成员变量，等号左边是谁，优先用谁，没有则向上找 间接访问成员方法访问">
+<meta property="og:description" content="Java 多态刚学完，记录一下，做个笔记">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-07T20:31:02.000Z">
-<meta property="article:modified_time" content="2022-12-06T12:05:52.663Z">
+<meta property="article:modified_time" content="2023-04-19T08:30:57.205Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary_large_image">
@@ -295,6 +295,8 @@
               <div class="markdown-body">
                 
                 <h1 id="Java-多态"><a href="#Java-多态" class="headerlink" title="Java 多态"></a>Java 多态</h1><p>刚学完，记录一下，做个笔记</p>
+<span id="more"></span>
+
 <h2 id="多态的定义"><a href="#多态的定义" class="headerlink" title="多态的定义"></a>多态的定义</h2><p>用起来还是比较简单的:</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">父类名称 对象名 = new 子类名称();<br>接口名称 对象名 = new 实现类名称();<br></code></pre></td></tr></table></figure>
 <p>原本使用子类或父类的时候，是左右都是子类或者父类名称，这里把左边的名称换成了父类名称<br>定义很简单，理解后用起来也很简单</p>

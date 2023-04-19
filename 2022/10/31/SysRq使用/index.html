@@ -18,16 +18,16 @@
   <meta name="author" content="NeroUMU">
   <meta name="keywords" content="">
   
-    <meta name="description" content="电脑老是卡死最近电脑老是突然卡死,感觉像是爆内存了,找来找去也没什么解决办法于是学到的了个新东西—SysRq这东西可有用了,在电脑卡死的时候可以尝试让电脑恢复,如果无法恢复还能尝试正常关机,而不是按电源键以后碰到系统卡死了可以用这种方法来不伤害内核的情况下重启电脑Kernel panic 可不有意思 ,,Ծ‸Ծ,, 开启 SysRqArch Linux 默认是不允许所有的 SysRq 命令的,所以">
+    <meta name="description" content="电脑老是卡死最近电脑老是突然卡死,感觉像是爆内存了,找来找去也没什么解决办法于是学到的了个新东西—SysRq这东西可有用了,在电脑卡死的时候可以尝试让电脑恢复,如果无法恢复还能尝试正常关机,而不是按电源键以后碰到系统卡死了可以用这种方法来不伤害内核的情况下重启电脑Kernel panic 可不有意思 ,,Ծ‸Ծ,,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SysRq使用">
 <meta property="og:url" content="https://neroumu.top/2022/10/31/SysRq%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
-<meta property="og:description" content="电脑老是卡死最近电脑老是突然卡死,感觉像是爆内存了,找来找去也没什么解决办法于是学到的了个新东西—SysRq这东西可有用了,在电脑卡死的时候可以尝试让电脑恢复,如果无法恢复还能尝试正常关机,而不是按电源键以后碰到系统卡死了可以用这种方法来不伤害内核的情况下重启电脑Kernel panic 可不有意思 ,,Ծ‸Ծ,, 开启 SysRqArch Linux 默认是不允许所有的 SysRq 命令的,所以">
+<meta property="og:description" content="电脑老是卡死最近电脑老是突然卡死,感觉像是爆内存了,找来找去也没什么解决办法于是学到的了个新东西—SysRq这东西可有用了,在电脑卡死的时候可以尝试让电脑恢复,如果无法恢复还能尝试正常关机,而不是按电源键以后碰到系统卡死了可以用这种方法来不伤害内核的情况下重启电脑Kernel panic 可不有意思 ,,Ծ‸Ծ,,">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://neroumu.top/img/linux.jpg">
 <meta property="article:published_time" content="2022-10-31T01:22:15.000Z">
-<meta property="article:modified_time" content="2023-04-18T16:30:33.804Z">
+<meta property="article:modified_time" content="2023-04-19T08:38:32.884Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="SysRq">
@@ -298,6 +298,8 @@
               <div class="markdown-body">
                 
                 <h1 id="电脑老是卡死"><a href="#电脑老是卡死" class="headerlink" title="电脑老是卡死"></a>电脑老是卡死</h1><p>最近电脑老是突然卡死,感觉像是爆内存了,找来找去也没什么解决办法<br>于是学到的了个新东西—SysRq<br>这东西可有用了,在电脑卡死的时候可以尝试让电脑恢复,如果无法恢复还能尝试正常关机,而不是按电源键<br>以后碰到系统卡死了可以用这种方法来不伤害内核的情况下重启电脑<br>Kernel panic 可不有意思 ,,Ծ‸Ծ,,</p>
+<span id="more"></span>
+
 <h2 id="开启-SysRq"><a href="#开启-SysRq" class="headerlink" title="开启 SysRq"></a>开启 SysRq</h2><p>Arch Linux 默认是不允许所有的 SysRq 命令的,所以要设置一下<br>将 1 写入到 &#x2F;proc&#x2F;sys&#x2F;kernel&#x2F;sysrq 中就可以了</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo echo &quot;1&quot; &gt; /proc/sys/kernel/sysrq<br></code></pre></td></tr></table></figure>
 <p>不过这只在本次开机有效,下次还是不行,所以可以设置为开机启动<br>将 <code>kernel.sysrq = 1</code> 写入到 <code>/etc/sysctl.d/99-sysctl.conf</code> 中就可以了</p>

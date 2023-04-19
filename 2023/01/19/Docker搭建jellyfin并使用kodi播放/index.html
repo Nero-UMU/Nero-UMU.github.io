@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://neroumu.top/img/posture.png">
 <meta property="article:published_time" content="2023-01-18T23:44:53.000Z">
-<meta property="article:modified_time" content="2023-04-18T16:41:38.930Z">
+<meta property="article:modified_time" content="2023-04-19T08:43:59.723Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Docker">
 <meta property="article:tag" content="Kodi">
@@ -297,7 +297,9 @@
             
               <div class="markdown-body">
                 
-                <h1 id="还是回到了-Jellyfin"><a href="#还是回到了-Jellyfin" class="headerlink" title="还是回到了 Jellyfin"></a>还是回到了 Jellyfin</h1><p>一些插件只能Jellyfin用,果然还是应该拥抱开源啊,所以我从 Emby 跳回了 Jellyfin<br>之所以重新使用 Jellyfin,是因为 Emby 无法获取番剧的封面图,介绍等信息,也不是 Emby 不行,应该说是 Emby 可以用的插件对中文支持度不高<br>插件 <a target="_blank" rel="noopener" href="https://github.com/kookxiang/jellyfin-plugin-bangumi">jellyfin-plugin-bangumi</a> 可以通过 <a target="_blank" rel="noopener" href="https://bangumi.tv/">bangumi</a> 的 ID 来获取信息,而且国内可以直连,但是 Emby 不支持手动安装插件,所以无法使用,这也是为什么我又回到 Jellyfin 的原因<br><img src="/img/2023-1-18-1.png" srcset="/img/loading.gif" lazyload alt="效果明显"><br><img src="/img/2023-1-18-2.png" srcset="/img/loading.gif" lazyload alt="封面图自动获取"><br><img src="/img/2023-1-18-3.png" srcset="/img/loading.gif" lazyload alt="剧集信息自动获取"></p>
+                <h2 id="还是回到了-Jellyfin"><a href="#还是回到了-Jellyfin" class="headerlink" title="还是回到了 Jellyfin"></a>还是回到了 Jellyfin</h2><p>一些插件只能Jellyfin用,果然还是应该拥抱开源啊,所以我从 Emby 跳回了 Jellyfin<br>之所以重新使用 Jellyfin,是因为 Emby 无法获取番剧的封面图,介绍等信息,也不是 Emby 不行,应该说是 Emby 可以用的插件对中文支持度不高<br>插件 <a target="_blank" rel="noopener" href="https://github.com/kookxiang/jellyfin-plugin-bangumi">jellyfin-plugin-bangumi</a> 可以通过 <a target="_blank" rel="noopener" href="https://bangumi.tv/">bangumi</a> 的 ID 来获取信息,而且国内可以直连,但是 Emby 不支持手动安装插件,所以无法使用,这也是为什么我又回到 Jellyfin 的原因</p>
+<span id="more"></span>
+<p><img src="/img/2023-1-18-1.png" srcset="/img/loading.gif" lazyload alt="效果明显"><br><img src="/img/2023-1-18-2.png" srcset="/img/loading.gif" lazyload alt="封面图自动获取"><br><img src="/img/2023-1-18-3.png" srcset="/img/loading.gif" lazyload alt="剧集信息自动获取"></p>
 <h2 id="搭建-Jellyfin"><a href="#搭建-Jellyfin" class="headerlink" title="搭建 Jellyfin"></a>搭建 Jellyfin</h2><p>很久以前我写过如何用 Docker 搭建 Jellyfin,这次我直接用 Docker-Compose 来搭建,可以直接替换自动追番里面的 Emby 配置<br>拉取镜像</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker pull jellyfin/jellyfin:latest<br></code></pre></td></tr></table></figure>
 

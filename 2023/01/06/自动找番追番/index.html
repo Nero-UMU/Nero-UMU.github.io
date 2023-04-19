@@ -18,16 +18,16 @@
   <meta name="author" content="NeroUMU">
   <meta name="keywords" content="">
   
-    <meta name="description" content="整个过程完整记录刚把我的自自动追番搞定,回头看过来十分的繁琐,所以我写了个 docker-compose 来简化 Docker 容器的创建顺便把整个流程走一遍,记录一下我的搭建过程docker-compose 放在文章的最后 前期准备工作将一个普通用户添加到 Docker 组中,最好不要使用 root 用户来运行 Docker我直接用的第一个创建的普通用户,所以 uid 和 gid 均为 1000">
+    <meta name="description" content="整个过程完整记录刚把我的自自动追番搞定,回头看过来十分的繁琐,所以我写了个 docker-compose 来简化 Docker 容器的创建顺便把整个流程走一遍,记录一下我的搭建过程docker-compose 放在文章的最后">
 <meta property="og:type" content="article">
 <meta property="og:title" content="自动找番追番">
 <meta property="og:url" content="https://neroumu.top/2023/01/06/%E8%87%AA%E5%8A%A8%E6%89%BE%E7%95%AA%E8%BF%BD%E7%95%AA/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
-<meta property="og:description" content="整个过程完整记录刚把我的自自动追番搞定,回头看过来十分的繁琐,所以我写了个 docker-compose 来简化 Docker 容器的创建顺便把整个流程走一遍,记录一下我的搭建过程docker-compose 放在文章的最后 前期准备工作将一个普通用户添加到 Docker 组中,最好不要使用 root 用户来运行 Docker我直接用的第一个创建的普通用户,所以 uid 和 gid 均为 1000">
+<meta property="og:description" content="整个过程完整记录刚把我的自自动追番搞定,回头看过来十分的繁琐,所以我写了个 docker-compose 来简化 Docker 容器的创建顺便把整个流程走一遍,记录一下我的搭建过程docker-compose 放在文章的最后">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://neroumu.top/img/posture.png">
 <meta property="article:published_time" content="2023-01-05T22:41:16.000Z">
-<meta property="article:modified_time" content="2023-04-18T16:29:46.929Z">
+<meta property="article:modified_time" content="2023-04-19T08:43:07.918Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Docker Compose">
 <meta name="twitter:card" content="summary_large_image">
@@ -297,6 +297,8 @@
               <div class="markdown-body">
                 
                 <h1 id="整个过程完整记录"><a href="#整个过程完整记录" class="headerlink" title="整个过程完整记录"></a>整个过程完整记录</h1><p>刚把我的自自动追番搞定,回头看过来十分的繁琐,所以我写了个 docker-compose 来简化 Docker 容器的创建<br>顺便把整个流程走一遍,记录一下我的搭建过程<br>docker-compose 放在文章的最后</p>
+<span id="more"></span>
+
 <h1 id="前期准备工作"><a href="#前期准备工作" class="headerlink" title="前期准备工作"></a>前期准备工作</h1><p>将一个普通用户添加到 Docker 组中,最好不要使用 root 用户来运行 Docker<br>我直接用的第一个创建的普通用户,所以 uid 和 gid 均为 1000</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">usermod -a -G docker &lt;uername&gt;<br></code></pre></td></tr></table></figure>
 

@@ -18,15 +18,15 @@
   <meta name="author" content="NeroUMU">
   <meta name="keywords" content="">
   
-    <meta name="description" content="感觉是个重点感觉是一个很重要的东西，很有必要记录下来，也觉得蛮有用的 泛型类我认为是一个定义一个类，这个类里面的数据类型不是固定的，可以让这个类处理多种数据类型的数据格式:定义一个含有泛型的类，就是在类的名称后面加一个&lt;E&gt;，把数据的类型换成E就可以了，E也可以换成其他的，只要有尖括号就行 123456789101112131415public class generic&lt;E&amp;g">
+    <meta name="description" content="感觉是个重点感觉是一个很重要的东西，很有必要记录下来，也觉得蛮有用的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java泛型">
 <meta property="og:url" content="https://neroumu.top/2022/05/14/Java%E6%B3%9B%E5%9E%8B/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
-<meta property="og:description" content="感觉是个重点感觉是一个很重要的东西，很有必要记录下来，也觉得蛮有用的 泛型类我认为是一个定义一个类，这个类里面的数据类型不是固定的，可以让这个类处理多种数据类型的数据格式:定义一个含有泛型的类，就是在类的名称后面加一个&lt;E&gt;，把数据的类型换成E就可以了，E也可以换成其他的，只要有尖括号就行 123456789101112131415public class generic&lt;E&amp;g">
+<meta property="og:description" content="感觉是个重点感觉是一个很重要的东西，很有必要记录下来，也觉得蛮有用的">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-13T20:19:26.000Z">
-<meta property="article:modified_time" content="2022-12-06T12:05:52.663Z">
+<meta property="article:modified_time" content="2023-04-19T08:31:26.328Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary_large_image">
@@ -295,6 +295,8 @@
               <div class="markdown-body">
                 
                 <h1 id="感觉是个重点"><a href="#感觉是个重点" class="headerlink" title="感觉是个重点"></a>感觉是个重点</h1><p>感觉是一个很重要的东西，很有必要记录下来，也觉得蛮有用的</p>
+<span id="more"></span>
+
 <h2 id="泛型类"><a href="#泛型类" class="headerlink" title="泛型类"></a>泛型类</h2><p>我认为是一个定义一个类，这个类里面的数据类型不是固定的，可以让这个类处理多种数据类型的数据<br>格式:<br>定义一个含有泛型的类，就是在类的名称后面加一个&lt;E&gt;，把数据的类型换成E就可以了，E也可以换成其他的，只要有尖括号就行</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">generic</span>&lt;E&gt;&#123; <span class="hljs-comment">//定义一个含有泛型的类</span><br>    <span class="hljs-keyword">private</span> E name;<br>    <br>    <span class="hljs-keyword">public</span> E <span class="hljs-title function_">getName</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> name;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setName</span><span class="hljs-params">(E name)</span> &#123;<br>        <span class="hljs-built_in">this</span>.name = name;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">show</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(name);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>使用:<br>使用泛型类有两种方式，一种是不用泛型，直接使用类，另一种是使用泛型</p>

@@ -18,15 +18,15 @@
   <meta name="author" content="NeroUMU">
   <meta name="keywords" content="">
   
-    <meta name="description" content="内网穿透解决了困扰一个学期的问题一个学期了，都快结束了，宿舍里的软路由刷了了个 Linux 系统当下载器兼服务器但校园网的质量怎么说呢。。。经常断网，然后 DHCP 重新给了个 IP 地址，然后我就连不上软路由了今天突然想到可以用内网穿透来解决 frp 使用在一台有公共 IP 地址的 VPS 上部署服务端，在软路由上部署客户端，客户端会主动连接到服务端的相应接口建立好连接后，只需要连接上有公网 I">
+    <meta name="description" content="内网穿透解决了困扰一个学期的问题一个学期了，都快结束了，宿舍里的软路由刷了了个 Linux 系统当下载器兼服务器但校园网的质量怎么说呢。。。经常断网，然后 DHCP 重新给了个 IP 地址，然后我就连不上软路由了今天突然想到可以用内网穿透来解决">
 <meta property="og:type" content="article">
 <meta property="og:title" content="frp内网穿透">
 <meta property="og:url" content="https://neroumu.top/2022/06/09/frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
-<meta property="og:description" content="内网穿透解决了困扰一个学期的问题一个学期了，都快结束了，宿舍里的软路由刷了了个 Linux 系统当下载器兼服务器但校园网的质量怎么说呢。。。经常断网，然后 DHCP 重新给了个 IP 地址，然后我就连不上软路由了今天突然想到可以用内网穿透来解决 frp 使用在一台有公共 IP 地址的 VPS 上部署服务端，在软路由上部署客户端，客户端会主动连接到服务端的相应接口建立好连接后，只需要连接上有公网 I">
+<meta property="og:description" content="内网穿透解决了困扰一个学期的问题一个学期了，都快结束了，宿舍里的软路由刷了了个 Linux 系统当下载器兼服务器但校园网的质量怎么说呢。。。经常断网，然后 DHCP 重新给了个 IP 地址，然后我就连不上软路由了今天突然想到可以用内网穿透来解决">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-09T04:00:16.000Z">
-<meta property="article:modified_time" content="2022-12-06T12:05:52.663Z">
+<meta property="article:modified_time" content="2023-04-19T08:34:23.849Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="frp">
 <meta name="twitter:card" content="summary_large_image">
@@ -295,6 +295,8 @@
               <div class="markdown-body">
                 
                 <h1 id="内网穿透解决了困扰一个学期的问题"><a href="#内网穿透解决了困扰一个学期的问题" class="headerlink" title="内网穿透解决了困扰一个学期的问题"></a>内网穿透解决了困扰一个学期的问题</h1><p>一个学期了，都快结束了，宿舍里的软路由刷了了个 Linux 系统当下载器兼服务器<br>但校园网的质量怎么说呢。。。<br>经常断网，然后 DHCP 重新给了个 IP 地址，然后我就连不上软路由了<br>今天突然想到可以用内网穿透来解决</p>
+<span id="more"></span>
+
 <h2 id="frp-使用"><a href="#frp-使用" class="headerlink" title="frp 使用"></a>frp 使用</h2><p>在一台有公共 IP 地址的 VPS 上部署服务端，在软路由上部署客户端，客户端会主动连接到服务端的相应接口<br>建立好连接后，只需要连接上有公网 IP 地址的 VPS 的相应端口就能连接到内网的软路由了<br>就这么简单的东西，我一个学期都没有拿来用一下，唉:(</p>
 <h2 id="配置SSH"><a href="#配置SSH" class="headerlink" title="配置SSH"></a>配置SSH</h2><p>先连接的上再说以后的事嘛<br>GitHub 上面下好最新的 release <a target="_blank" rel="noopener" href="https://github.com/fatedier/frp">https://github.com/fatedier/frp</a><br>解压</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">tar -xvzf frp_0.43.0_linux_amd64.tar.gz<br></code></pre></td></tr></table></figure>

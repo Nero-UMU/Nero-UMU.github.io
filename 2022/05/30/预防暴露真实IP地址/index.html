@@ -18,16 +18,16 @@
   <meta name="author" content="NeroUMU">
   <meta name="keywords" content="">
   
-    <meta name="description" content="发现的 IP 可能暴露在 https:&#x2F;&#x2F;browserleaks.com&#x2F;ip 上进行了一下测试，发现我的真实 IP 地址暴露了，别人可以通过两个漏洞来获取我的真实 IP 地址，然后来一个线下网友交流这两个漏洞分别是 WebRTC 泄露和 DNS 泄露 产生原因WebRTC 是一个支持网页浏览器进行实时语音对话或视频对话的API，很早就得到了广泛的应用但后来爆出了一个漏洞，就是 WebRTC 泄">
+    <meta name="description" content="发现的 IP 可能暴露在 https:&#x2F;&#x2F;browserleaks.com&#x2F;ip 上进行了一下测试，发现我的真实 IP 地址暴露了，别人可以通过两个漏洞来获取我的真实 IP 地址，然后来一个线下网友交流这两个漏洞分别是 WebRTC 泄露和 DNS 泄露">
 <meta property="og:type" content="article">
 <meta property="og:title" content="预防暴露真实IP地址">
 <meta property="og:url" content="https://neroumu.top/2022/05/30/%E9%A2%84%E9%98%B2%E6%9A%B4%E9%9C%B2%E7%9C%9F%E5%AE%9EIP%E5%9C%B0%E5%9D%80/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
-<meta property="og:description" content="发现的 IP 可能暴露在 https:&#x2F;&#x2F;browserleaks.com&#x2F;ip 上进行了一下测试，发现我的真实 IP 地址暴露了，别人可以通过两个漏洞来获取我的真实 IP 地址，然后来一个线下网友交流这两个漏洞分别是 WebRTC 泄露和 DNS 泄露 产生原因WebRTC 是一个支持网页浏览器进行实时语音对话或视频对话的API，很早就得到了广泛的应用但后来爆出了一个漏洞，就是 WebRTC 泄">
+<meta property="og:description" content="发现的 IP 可能暴露在 https:&#x2F;&#x2F;browserleaks.com&#x2F;ip 上进行了一下测试，发现我的真实 IP 地址暴露了，别人可以通过两个漏洞来获取我的真实 IP 地址，然后来一个线下网友交流这两个漏洞分别是 WebRTC 泄露和 DNS 泄露">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://neroumu.top/img/posture.png">
 <meta property="article:published_time" content="2022-05-30T04:03:08.000Z">
-<meta property="article:modified_time" content="2022-12-06T12:05:52.663Z">
+<meta property="article:modified_time" content="2023-04-19T08:33:02.042Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="IP">
 <meta name="twitter:card" content="summary_large_image">
@@ -297,6 +297,8 @@
               <div class="markdown-body">
                 
                 <h1 id="发现的-IP-可能暴露"><a href="#发现的-IP-可能暴露" class="headerlink" title="发现的 IP 可能暴露"></a>发现的 IP 可能暴露</h1><p>在 <a target="_blank" rel="noopener" href="https://browserleaks.com/ip">https://browserleaks.com/ip</a> 上进行了一下测试，发现我的真实 IP 地址暴露了，别人可以通过两个漏洞来获取我的真实 IP 地址，然后来一个线下网友交流<br>这两个漏洞分别是 WebRTC 泄露和 DNS 泄露</p>
+<span id="more"></span>
+
 <h2 id="产生原因"><a href="#产生原因" class="headerlink" title="产生原因"></a>产生原因</h2><p>WebRTC 是一个支持网页浏览器进行实时语音对话或视频对话的API，很早就得到了广泛的应用<br>但后来爆出了一个漏洞，就是 WebRTC 泄露，通过这个漏洞，使用 JavaScript 就能获取真实的 IP 地址<br>我觉得蛮恐怖的，因为在互联网就是需要安全的来访问嘛</p>
 <p>DNS 泄露的问题最核心的问题就是 DNS 配置不当，导致 DNS 查询的报文可能在网上到处传播，这就有可能暴露查询的内容<br>如果使用了不安全的 DNS 服务器，那么你的所以上网行为在别人面前就是裸奔</p>
 <h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>WebRTC 泄露是发生在浏览器上的，只要关闭 WebRTC 这一功能，需要的时候再打开就可以了<br>在 Firefox 的地址栏输入 about:config<br>进入设置界面，搜索 media.peerconnection.enabled，把这一项改成 false 就可以了<br><img src="/img/2022-5-30-1.png" srcset="/img/loading.gif" lazyload></p>

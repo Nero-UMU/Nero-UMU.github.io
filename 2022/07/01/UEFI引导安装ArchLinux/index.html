@@ -18,12 +18,12 @@
   <meta name="author" content="NeroUMU">
   <meta name="keywords" content="">
   
-    <meta name="description" content="记录一下安装 Arch安装 ArchLinux 作为实体机已经有一段时间了，现在来记录一下安装的过程正好刚才给另外一台主机也安装了 ArchLinux，又加强了一点印象 制作启动盘这里很简单，可以用 ventoy 制作一个启动盘，把 ISO 镜像放进U盘就可以了记得用 sha256sum 或 md5 计算下载后文件的哈希值，并和官网的进行对比将U盘插上主机，进入 BIOS 将U盘启动设置为首项重启">
+    <meta name="description" content="记录一下安装 Arch安装 ArchLinux 作为实体机已经有一段时间了，现在来记录一下安装的过程正好刚才给另外一台主机也安装了 ArchLinux，又加强了一点印象">
 <meta property="og:type" content="article">
 <meta property="og:title" content="UEFI引导安装ArchLinux">
 <meta property="og:url" content="https://neroumu.top/2022/07/01/UEFI%E5%BC%95%E5%AF%BC%E5%AE%89%E8%A3%85ArchLinux/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
-<meta property="og:description" content="记录一下安装 Arch安装 ArchLinux 作为实体机已经有一段时间了，现在来记录一下安装的过程正好刚才给另外一台主机也安装了 ArchLinux，又加强了一点印象 制作启动盘这里很简单，可以用 ventoy 制作一个启动盘，把 ISO 镜像放进U盘就可以了记得用 sha256sum 或 md5 计算下载后文件的哈希值，并和官网的进行对比将U盘插上主机，进入 BIOS 将U盘启动设置为首项重启">
+<meta property="og:description" content="记录一下安装 Arch安装 ArchLinux 作为实体机已经有一段时间了，现在来记录一下安装的过程正好刚才给另外一台主机也安装了 ArchLinux，又加强了一点印象">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://neroumu.top/img/2022-6-30-1.png">
 <meta property="og:image" content="https://neroumu.top/img/2022-6-30-2.png">
@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://neroumu.top/img/2022-6-30-8.png">
 <meta property="og:image" content="https://neroumu.top/img/2022-6-30-9.png">
 <meta property="article:published_time" content="2022-06-30T22:48:16.000Z">
-<meta property="article:modified_time" content="2022-12-06T12:05:52.663Z">
+<meta property="article:modified_time" content="2023-04-19T08:35:19.580Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="ArchLinux">
 <meta name="twitter:card" content="summary_large_image">
@@ -305,6 +305,8 @@
               <div class="markdown-body">
                 
                 <h1 id="记录一下安装-Arch"><a href="#记录一下安装-Arch" class="headerlink" title="记录一下安装 Arch"></a>记录一下安装 Arch</h1><p>安装 ArchLinux 作为实体机已经有一段时间了，现在来记录一下安装的过程<br>正好刚才给另外一台主机也安装了 ArchLinux，又加强了一点印象</p>
+<span id="more"></span>
+
 <h2 id="制作启动盘"><a href="#制作启动盘" class="headerlink" title="制作启动盘"></a>制作启动盘</h2><p>这里很简单，可以用 ventoy 制作一个启动盘，把 ISO 镜像放进U盘就可以了<br>记得用 sha256sum 或 md5 计算下载后文件的哈希值，并和官网的进行对比<br>将U盘插上主机，进入 BIOS 将U盘启动设置为首项<br>重启</p>
 <h2 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h2><p>进入 ventoy，选择 ArchLinux 镜像<br>选择 <code>Arch Linux install medium</code> 进入安装环境</p>
 <h3 id="验证引导模式"><a href="#验证引导模式" class="headerlink" title="验证引导模式"></a>验证引导模式</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ls /sys/firmware/efi/efivars<br></code></pre></td></tr></table></figure>

@@ -18,15 +18,15 @@
   <meta name="author" content="NeroUMU">
   <meta name="keywords" content="">
   
-    <meta name="description" content="每天学一点，久了就能学会很多量变 –&gt; 质变 static 关键字一旦用了 static 关键字，那么这样的内容就不再属于对象自己，而是属于类的凡是本类的对象，都共享同一份 1234567891011121314public class Student&amp;#123;    private int id;    private static int idCounter &#x3D; 0;        p">
+    <meta name="description" content="每天学一点，久了就能学会很多量变 –&gt; 质变 static 关键字一旦用了 static 关键字，那么这样的内容就不再属于对象自己，而是属于类的凡是本类的对象，都共享同一份">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java笔记">
 <meta property="og:url" content="https://neroumu.top/2022/05/04/Java%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
-<meta property="og:description" content="每天学一点，久了就能学会很多量变 –&gt; 质变 static 关键字一旦用了 static 关键字，那么这样的内容就不再属于对象自己，而是属于类的凡是本类的对象，都共享同一份 1234567891011121314public class Student&amp;#123;    private int id;    private static int idCounter &#x3D; 0;        p">
+<meta property="og:description" content="每天学一点，久了就能学会很多量变 –&gt; 质变 static 关键字一旦用了 static 关键字，那么这样的内容就不再属于对象自己，而是属于类的凡是本类的对象，都共享同一份">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-04T02:21:16.000Z">
-<meta property="article:modified_time" content="2022-12-06T12:05:52.663Z">
+<meta property="article:modified_time" content="2023-04-19T08:30:28.538Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary_large_image">
@@ -296,6 +296,8 @@
                 
                 <h1 id="每天学一点，久了就能学会很多"><a href="#每天学一点，久了就能学会很多" class="headerlink" title="每天学一点，久了就能学会很多"></a>每天学一点，久了就能学会很多</h1><p>量变 –&gt; 质变</p>
 <h2 id="static-关键字"><a href="#static-关键字" class="headerlink" title="static 关键字"></a>static 关键字</h2><p>一旦用了 static 关键字，那么这样的内容就不再属于对象自己，而是属于类的<br>凡是本类的对象，都共享同一份</p>
+<span id="more"></span>
+
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> id;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">idCounter</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Student</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-built_in">this</span>.id = ++idCounter;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Student</span><span class="hljs-params">(String name, <span class="hljs-type">int</span> age)</span> &#123;<br>        <span class="hljs-built_in">this</span>.name = name;<br>        <span class="hljs-built_in">this</span>.age = age;<br>        <span class="hljs-built_in">this</span>.id = ++idCounter;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>如上，可以定义一个用 static 关键字修饰的成员变量 idCounter ，再定义一个普通的用 private 修饰的成员变量 id ，就可以实现每创建一个对象，都可以自动获取 id 号，而且是可以自增的<br>这就是利用了 static 这个关键字<br>idCounter 这个变量属于这个类，在内存中只存储一次，所有对象的这个变量的值都是这个</p>
 <p>static 关键字不但可以修饰成员变量，还可以修饰成员方法<br>一旦使用static修饰成员方法，那么这个方法就成为了静态方法，静态方法不属于对象，是属于类的<br>概念和修饰成员变量差不多</p>

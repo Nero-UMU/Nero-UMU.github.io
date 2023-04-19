@@ -18,16 +18,16 @@
   <meta name="author" content="NeroUMU">
   <meta name="keywords" content="">
   
-    <meta name="description" content="跟着书做项目碰到了不认识的函数在边看书边敲代码的时候,碰到了一个不认识的函数,在学习 Golang 的基础的时候也没碰到过但是网上一搜,感觉又特别重要,所以琢磨了一个多小时,总算是明白是拿来做什么的了这个函数就是 runtime.Caller 及其他一起使用的函数 获取函数信息在很多文章里, Caller 出现最多的就是在日志部分因为它可以拿来获取调用者的各种信息,比如名称,行号等比如如下函数 1">
+    <meta name="description" content="跟着书做项目碰到了不认识的函数在边看书边敲代码的时候,碰到了一个不认识的函数,在学习 Golang 的基础的时候也没碰到过但是网上一搜,感觉又特别重要,所以琢磨了一个多小时,总算是明白是拿来做什么的了这个函数就是 runtime.Caller 及其他一起使用的函数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Go Caller的使用">
 <meta property="og:url" content="https://neroumu.top/2022/11/14/Go-Caller%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
-<meta property="og:description" content="跟着书做项目碰到了不认识的函数在边看书边敲代码的时候,碰到了一个不认识的函数,在学习 Golang 的基础的时候也没碰到过但是网上一搜,感觉又特别重要,所以琢磨了一个多小时,总算是明白是拿来做什么的了这个函数就是 runtime.Caller 及其他一起使用的函数 获取函数信息在很多文章里, Caller 出现最多的就是在日志部分因为它可以拿来获取调用者的各种信息,比如名称,行号等比如如下函数 1">
+<meta property="og:description" content="跟着书做项目碰到了不认识的函数在边看书边敲代码的时候,碰到了一个不认识的函数,在学习 Golang 的基础的时候也没碰到过但是网上一搜,感觉又特别重要,所以琢磨了一个多小时,总算是明白是拿来做什么的了这个函数就是 runtime.Caller 及其他一起使用的函数">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://neroumu.top/img/go.jpg">
 <meta property="article:published_time" content="2022-11-14T00:25:30.000Z">
-<meta property="article:modified_time" content="2022-12-06T12:05:52.667Z">
+<meta property="article:modified_time" content="2023-04-19T08:39:15.811Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Go">
 <meta name="twitter:card" content="summary_large_image">
@@ -297,6 +297,8 @@
               <div class="markdown-body">
                 
                 <h1 id="跟着书做项目碰到了不认识的函数"><a href="#跟着书做项目碰到了不认识的函数" class="headerlink" title="跟着书做项目碰到了不认识的函数"></a>跟着书做项目碰到了不认识的函数</h1><p>在边看书边敲代码的时候,碰到了一个不认识的函数,在学习 Golang 的基础的时候也没碰到过<br>但是网上一搜,感觉又特别重要,所以琢磨了一个多小时,总算是明白是拿来做什么的了<br>这个函数就是 runtime.Caller 及其他一起使用的函数</p>
+<span id="more"></span>
+
 <h2 id="获取函数信息"><a href="#获取函数信息" class="headerlink" title="获取函数信息"></a>获取函数信息</h2><p>在很多文章里, Caller 出现最多的就是在日志部分<br>因为它可以拿来获取调用者的各种信息,比如名称,行号等<br>比如如下函数</p>
 <figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs golang"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">printName</span><span class="hljs-params">()</span></span> <span class="hljs-type">string</span> &#123;<br>	pc, _, _, _ := runtime.Caller(<span class="hljs-number">1</span>) <span class="hljs-comment">// 本函数向上推一层即可获取调用者的 program counter(程序计数器)</span><br>	<span class="hljs-keyword">return</span> runtime.FuncForPC(pc).Name()<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">printCallerName</span><span class="hljs-params">()</span></span> <span class="hljs-type">string</span> &#123;<br>	&#123;<br>		pc, _, _, _ := runtime.Caller(<span class="hljs-number">2</span>)<br>		<span class="hljs-keyword">return</span> runtime.FuncForPC(pc).Name()<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p><code>printName()</code> 获取本函数名称<br><code>printCallerName()</code> 获取调用函数名称<br>runtime.Caller 需要传入一个 skip 参数,skip 是堆栈向前推几个的数量<br>因为函数的调用是压栈操作,0就表示本函数,1就表示向前推一个函数,printName()本身就是一个函数,所以往前推一个就是调用者了<br>printCallerName()是用来获取调用者的函数,0表示其本身,1表示调用者,2就表示调用者的调用者,也就是我们想获取的调用者</p>

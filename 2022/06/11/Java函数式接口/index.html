@@ -18,15 +18,15 @@
   <meta name="author" content="NeroUMU">
   <meta name="keywords" content="">
   
-    <meta name="description" content="函数式接口刚接触完全不理解是个什么东西，但学了一会后有那么一点感觉这东西的好处了 对函数式接口的理解我觉得这个东西就是为了简化代码，减轻内存压力的如果为了使用一个方法而重新写一个类并实例化它，就会浪费内存去存储这个类这时候，如果把这个方法变成一个函数，就可以简化代码，减少程序占的内存了 Supplier 接口就是返回一个结果的参数只有一个 get() 方法，用来获得结果使用方法 123456789">
+    <meta name="description" content="函数式接口刚接触完全不理解是个什么东西，但学了一会后有那么一点感觉这东西的好处了">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java函数式接口">
 <meta property="og:url" content="https://neroumu.top/2022/06/11/Java%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
-<meta property="og:description" content="函数式接口刚接触完全不理解是个什么东西，但学了一会后有那么一点感觉这东西的好处了 对函数式接口的理解我觉得这个东西就是为了简化代码，减轻内存压力的如果为了使用一个方法而重新写一个类并实例化它，就会浪费内存去存储这个类这时候，如果把这个方法变成一个函数，就可以简化代码，减少程序占的内存了 Supplier 接口就是返回一个结果的参数只有一个 get() 方法，用来获得结果使用方法 123456789">
+<meta property="og:description" content="函数式接口刚接触完全不理解是个什么东西，但学了一会后有那么一点感觉这东西的好处了">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-10T23:54:20.000Z">
-<meta property="article:modified_time" content="2022-12-06T12:05:52.663Z">
+<meta property="article:modified_time" content="2023-04-19T08:34:31.246Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary_large_image">
@@ -295,6 +295,8 @@
               <div class="markdown-body">
                 
                 <h1 id="函数式接口"><a href="#函数式接口" class="headerlink" title="函数式接口"></a>函数式接口</h1><p>刚接触完全不理解是个什么东西，但学了一会后有那么一点感觉这东西的好处了</p>
+<span id="more"></span>
+
 <h2 id="对函数式接口的理解"><a href="#对函数式接口的理解" class="headerlink" title="对函数式接口的理解"></a>对函数式接口的理解</h2><p>我觉得这个东西就是为了简化代码，减轻内存压力的<br>如果为了使用一个方法而重新写一个类并实例化它，就会浪费内存去存储这个类<br>这时候，如果把这个方法变成一个函数，就可以简化代码，减少程序占的内存了</p>
 <h2 id="Supplier-接口"><a href="#Supplier-接口" class="headerlink" title="Supplier 接口"></a>Supplier 接口</h2><p>就是返回一个结果的参数<br>只有一个 get() 方法，用来获得结果<br>使用方法</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>    <span class="hljs-type">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> getString(()-&gt;&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;demo&quot;</span>;<br>    &#125;);<br>    System.out.println(str);<br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title function_">getString</span><span class="hljs-params">(Supplier&lt;String&gt; sup)</span>&#123;<br>    <span class="hljs-keyword">return</span> sup.get();<br>&#125;<br></code></pre></td></tr></table></figure>

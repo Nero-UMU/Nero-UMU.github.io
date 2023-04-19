@@ -18,15 +18,15 @@
   <meta name="author" content="NeroUMU">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Java 异常处理看的我人麻了，学 Python 的异常处理的时候也没有这么晕啊 +_+ throw&#x2F;throws 关键字在定义方法的时候，如果方法没有捕获到一个检查性异常，可以在声明末尾处用 throws 抛出异常也可以用 throw 关键字抛出一个异常感觉 throw和throws这两个关键字有甩锅的意思，把自己处理不了的异常交给上一级来处理，直到有父类能够处理，最终交给JVM来处理">
+    <meta name="description" content="Java 异常处理看的我人麻了，学 Python 的异常处理的时候也没有这么晕啊 +_+">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java异常处理">
 <meta property="og:url" content="https://neroumu.top/2022/05/21/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
-<meta property="og:description" content="Java 异常处理看的我人麻了，学 Python 的异常处理的时候也没有这么晕啊 +_+ throw&#x2F;throws 关键字在定义方法的时候，如果方法没有捕获到一个检查性异常，可以在声明末尾处用 throws 抛出异常也可以用 throw 关键字抛出一个异常感觉 throw和throws这两个关键字有甩锅的意思，把自己处理不了的异常交给上一级来处理，直到有父类能够处理，最终交给JVM来处理">
+<meta property="og:description" content="Java 异常处理看的我人麻了，学 Python 的异常处理的时候也没有这么晕啊 +_+">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-20T19:30:35.000Z">
-<meta property="article:modified_time" content="2022-12-06T12:05:52.663Z">
+<meta property="article:modified_time" content="2023-04-19T08:32:24.342Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary_large_image">
@@ -295,6 +295,8 @@
               <div class="markdown-body">
                 
                 <h1 id="Java-异常处理"><a href="#Java-异常处理" class="headerlink" title="Java 异常处理"></a>Java 异常处理</h1><p>看的我人麻了，学 Python 的异常处理的时候也没有这么晕啊 +_+</p>
+<span id="more"></span>
+
 <h2 id="throw-x2F-throws-关键字"><a href="#throw-x2F-throws-关键字" class="headerlink" title="throw&#x2F;throws 关键字"></a>throw&#x2F;throws 关键字</h2><p>在定义方法的时候，如果方法没有捕获到一个检查性异常，可以在声明末尾处用 throws 抛出异常<br>也可以用 throw 关键字抛出一个异常<br>感觉 throw和throws这两个关键字有甩锅的意思，把自己处理不了的异常交给上一级来处理，直到有父类能够处理，最终交给JVM来处理</p>
 <p>下面定义了一个函数，返回传入的数组的指定索引的值</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getElement</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr,<span class="hljs-type">int</span> index)</span> <span class="hljs-keyword">throws</span> NullPointerException,ArrayIndexOutOfBoundsException&#123;<br>    <span class="hljs-keyword">if</span> (arr == <span class="hljs-literal">null</span>)&#123;<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">NullPointerException</span>(<span class="hljs-string">&quot;传递的数组是null&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">if</span> (index &gt;= arr.length)&#123;<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayIndexOutOfBoundsException</span>(<span class="hljs-string">&quot;索引超出范围&quot;</span>);<br>    &#125;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">ele</span> <span class="hljs-operator">=</span> arr[index];<br>    <span class="hljs-keyword">return</span> ele;<br>&#125;<br></code></pre></td></tr></table></figure>

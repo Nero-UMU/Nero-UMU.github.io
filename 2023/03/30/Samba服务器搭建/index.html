@@ -18,15 +18,15 @@
   <meta name="author" content="NeroUMU">
   <meta name="keywords" content="">
   
-    <meta name="description" content="刚好学习了搭建 Samba最近刚好学习了搭建 Samba 服务器,想起之前想搭建网络共享服务器时考虑过 Samba 服务器却没有成功,最后还是采用了别的方案既然正好解决了之前碰到的问题,那就记录下搭建的过程吧 搭建 Samba 服务器注意:为了使客户端可以连接上 Samba 服务器,记得把防火墙关了! 软件安装服务端只需要安装 Samba 就可以了,Arch Linux 和 RHEL 都一样 1p">
+    <meta name="description" content="刚好学习了搭建 Samba最近刚好学习了搭建 Samba 服务器,想起之前想搭建网络共享服务器时考虑过 Samba 服务器却没有成功,最后还是采用了别的方案既然正好解决了之前碰到的问题,那就记录下搭建的过程吧">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Samba服务器搭建">
 <meta property="og:url" content="https://neroumu.top/2023/03/30/Samba%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
-<meta property="og:description" content="刚好学习了搭建 Samba最近刚好学习了搭建 Samba 服务器,想起之前想搭建网络共享服务器时考虑过 Samba 服务器却没有成功,最后还是采用了别的方案既然正好解决了之前碰到的问题,那就记录下搭建的过程吧 搭建 Samba 服务器注意:为了使客户端可以连接上 Samba 服务器,记得把防火墙关了! 软件安装服务端只需要安装 Samba 就可以了,Arch Linux 和 RHEL 都一样 1p">
+<meta property="og:description" content="刚好学习了搭建 Samba最近刚好学习了搭建 Samba 服务器,想起之前想搭建网络共享服务器时考虑过 Samba 服务器却没有成功,最后还是采用了别的方案既然正好解决了之前碰到的问题,那就记录下搭建的过程吧">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-30T04:20:52.000Z">
-<meta property="article:modified_time" content="2023-04-18T16:41:03.447Z">
+<meta property="article:modified_time" content="2023-04-19T08:44:39.829Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Samba">
@@ -296,6 +296,8 @@
               <div class="markdown-body">
                 
                 <h1 id="刚好学习了搭建-Samba"><a href="#刚好学习了搭建-Samba" class="headerlink" title="刚好学习了搭建 Samba"></a>刚好学习了搭建 Samba</h1><p>最近刚好学习了搭建 Samba 服务器,想起之前想搭建网络共享服务器时考虑过 Samba 服务器却没有成功,最后还是采用了别的方案<br>既然正好解决了之前碰到的问题,那就记录下搭建的过程吧</p>
+<span id="more"></span>
+
 <h1 id="搭建-Samba-服务器"><a href="#搭建-Samba-服务器" class="headerlink" title="搭建 Samba 服务器"></a>搭建 Samba 服务器</h1><p><code>注意</code>:为了使客户端可以连接上 Samba 服务器,记得把防火墙关了!</p>
 <h2 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h2><p>服务端只需要安装 Samba 就可以了,Arch Linux 和 RHEL 都一样</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pacman -S Samba<br></code></pre></td></tr></table></figure>

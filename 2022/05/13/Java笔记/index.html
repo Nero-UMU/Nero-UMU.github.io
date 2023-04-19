@@ -18,15 +18,15 @@
   <meta name="author" content="NeroUMU">
   <meta name="keywords" content="">
   
-    <meta name="description" content="记录一下最近几天觉得比较重要的东西玩别的东西去了，java 都没学多少，不能再这么颓废下去了 集合常用方法Collection 是一个用到了泛型的接口，可以选择实例化一个实现类来使用，也可以用多态 12345678910Collection&lt;String&gt; coll &#x3D; new ArrayList&lt;&gt;();&#x2F;&#x2F;利用多态来创建一个集合coll.add(&quot;aaa&amp;qu">
+    <meta name="description" content="记录一下最近几天觉得比较重要的东西玩别的东西去了，java 都没学多少，不能再这么颓废下去了">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java笔记">
 <meta property="og:url" content="https://neroumu.top/2022/05/13/Java%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
-<meta property="og:description" content="记录一下最近几天觉得比较重要的东西玩别的东西去了，java 都没学多少，不能再这么颓废下去了 集合常用方法Collection 是一个用到了泛型的接口，可以选择实例化一个实现类来使用，也可以用多态 12345678910Collection&lt;String&gt; coll &#x3D; new ArrayList&lt;&gt;();&#x2F;&#x2F;利用多态来创建一个集合coll.add(&quot;aaa&amp;qu">
+<meta property="og:description" content="记录一下最近几天觉得比较重要的东西玩别的东西去了，java 都没学多少，不能再这么颓废下去了">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-13T13:59:40.000Z">
-<meta property="article:modified_time" content="2022-12-06T12:05:52.663Z">
+<meta property="article:modified_time" content="2023-04-19T08:31:33.991Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary_large_image">
@@ -295,6 +295,8 @@
               <div class="markdown-body">
                 
                 <h1 id="记录一下最近几天觉得比较重要的东西"><a href="#记录一下最近几天觉得比较重要的东西" class="headerlink" title="记录一下最近几天觉得比较重要的东西"></a>记录一下最近几天觉得比较重要的东西</h1><p>玩别的东西去了，java 都没学多少，不能再这么颓废下去了</p>
+<span id="more"></span>
+
 <h2 id="集合常用方法"><a href="#集合常用方法" class="headerlink" title="集合常用方法"></a>集合常用方法</h2><p>Collection 是一个用到了泛型的接口，可以选择实例化一个实现类来使用，也可以用多态</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java">Collection&lt;String&gt; coll = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<span class="hljs-comment">//利用多态来创建一个集合</span><br>coll.add(<span class="hljs-string">&quot;aaa&quot;</span>); <span class="hljs-comment">//add方法新增元素</span><br>coll.add(<span class="hljs-string">&quot;bbb&quot;</span>);<br>coll.add(<span class="hljs-string">&quot;ccc&quot;</span>);<br><span class="hljs-type">boolean</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> coll.remove(<span class="hljs-string">&quot;aaa&quot;</span>); <span class="hljs-comment">//remove方法移除元素,放回布尔值</span><br>System.out.println(coll.contains(<span class="hljs-string">&quot;ddd&quot;</span>)); <span class="hljs-comment">//contains方法判断是否包含元素</span><br>System.out.println(coll.isEmpty()); <span class="hljs-comment">//isEmpty判断集合是否为空</span><br>System.out.println(coll.size()); <span class="hljs-comment">//返回集合的长度</span><br>Object[] arr = coll.toArray(); <span class="hljs-comment">//把集合中的元素存储到数组中</span><br>coll.clear(); <span class="hljs-comment">//clear方法清空元素</span><br></code></pre></td></tr></table></figure>
 
