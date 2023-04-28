@@ -18,26 +18,29 @@
   <meta name="author" content="NeroUMU">
   <meta name="keywords" content="">
   
-    <meta name="description" content="实验搭建了NFS服务器Samba 服务器可以用于 Linux 和 Windows 之间的文件共享，而 NFS 可以用于 Linux 之间的文件共享以后肯定会用到的知识，做个笔记吧">
+    <meta name="description" content="实验搭建DHCP服务器做了搭建 DHCP 服务器的实验，中途碰到了许多问题，踩了好几个坑记录一下搭建过程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="NFS服务器搭建">
-<meta property="og:url" content="https://neroumu.top/2023/04/24/NFS%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:title" content="DHCP服务器搭建">
+<meta property="og:url" content="https://neroumu.top/2023/04/29/DHCP%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
-<meta property="og:description" content="实验搭建了NFS服务器Samba 服务器可以用于 Linux 和 Windows 之间的文件共享，而 NFS 可以用于 Linux 之间的文件共享以后肯定会用到的知识，做个笔记吧">
+<meta property="og:description" content="实验搭建DHCP服务器做了搭建 DHCP 服务器的实验，中途碰到了许多问题，踩了好几个坑记录一下搭建过程">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-04-24T04:48:57.000Z">
-<meta property="article:modified_time" content="2023-04-24T02:35:16.411Z">
+<meta property="og:image" content="https://neroumu.top/img/2023-4-28-1.png">
+<meta property="og:image" content="https://neroumu.top/img/2023-4-28-2.png">
+<meta property="article:published_time" content="2023-04-28T20:32:37.000Z">
+<meta property="article:modified_time" content="2023-04-28T10:08:21.067Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Linux">
-<meta property="article:tag" content="NFS">
-<meta property="article:tag" content="mount bind">
+<meta property="article:tag" content="DHCP">
+<meta property="article:tag" content="dhcrelay">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://neroumu.top/img/2023-4-28-1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>NFS服务器搭建 - NeroUMU&#39;s BLOG</title>
+  <title>DHCP服务器搭建 - NeroUMU&#39;s BLOG</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -204,7 +207,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="NFS服务器搭建"></span>
+            <span id="subtitle" data-typed-text="DHCP服务器搭建"></span>
           
         </div>
 
@@ -215,8 +218,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-24 00:48" pubdate>
-          2023年4月24日 凌晨
+        <time datetime="2023-04-28 16:32" pubdate>
+          2023年4月28日 下午
         </time>
       </span>
     
@@ -228,7 +231,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          全文共2.5k 字
+          全文共2.7k 字
         
       </span>
     
@@ -240,7 +243,7 @@
         
         
           <!-- compatible with older versions-->
-          阅读全文需约22 分钟
+          阅读全文需约23 分钟
         
       </span>
     
@@ -290,87 +293,64 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">NFS服务器搭建</h1>
+            <h1 style="display: none">DHCP服务器搭建</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="实验搭建了NFS服务器"><a href="#实验搭建了NFS服务器" class="headerlink" title="实验搭建了NFS服务器"></a>实验搭建了NFS服务器</h1><p>Samba 服务器可以用于 Linux 和 Windows 之间的文件共享，而 NFS 可以用于 Linux 之间的文件共享<br>以后肯定会用到的知识，做个笔记吧</p>
+                <h1 id="实验搭建DHCP服务器"><a href="#实验搭建DHCP服务器" class="headerlink" title="实验搭建DHCP服务器"></a>实验搭建DHCP服务器</h1><p>做了搭建 DHCP 服务器的实验，中途碰到了许多问题，踩了好几个坑<br>记录一下搭建过程</p>
 <span id="more"></span>
 
-<h1 id="搭建-NFS-服务器"><a href="#搭建-NFS-服务器" class="headerlink" title="搭建 NFS 服务器"></a>搭建 NFS 服务器</h1><p><code>注意</code>: 为了客户端能够连接上服务器，记得防火墙方行或者关闭防火墙</p>
-<h2 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h2><p>Arch Linux 只需要安装 nfs-utils</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pacman -S nfs-utils<br></code></pre></td></tr></table></figure>
+<h1 id="安装-DHCP-服务器"><a href="#安装-DHCP-服务器" class="headerlink" title="安装 DHCP 服务器"></a>安装 DHCP 服务器</h1><p>Arch Linux 安装 DHCP 服务器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pacman -S dhcp<br></code></pre></td></tr></table></figure>
 
-<p>RHEL 需要 rpcbind, rpc-utils 两个软件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">yum install rpcbind rpc-utils<br></code></pre></td></tr></table></figure>
+<p>RHEL 安装 DHCP 服务器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">yum install dhcp<br></code></pre></td></tr></table></figure>
 
-<h2 id="创建共享目录"><a href="#创建共享目录" class="headerlink" title="创建共享目录"></a>创建共享目录</h2><p>出于安全考虑，建议定义一个单独的目录为NFS根，这可以将用户限制在该挂载点中，绑定的挂载点(bind mounts)将文件系统上别处的目录与被分享的挂载点连接起来<br>此时就需要用到 <code>mount</code> 命令的 <code>bind</code>参数了</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir /music #共享目录<br>mkdir /movie #共享目录<br><br>mkdir /srv/nfs/music #NFS根目录<br>mkdir /srv/nfs/movie #NFS根目录<br><br>mount --bind /music /srv/nfs/music<br>mount --bind /movie /srv/nfs/movie<br></code></pre></td></tr></table></figure>
+<p>Arch Linux 的 配置文件为 <code>/etc/dhcpd.conf</code>，而 RHEL 的配置文件为 <code>/etc/dhcp/dhcpd.conf</code></p>
+<h1 id="搭建最简单的-DHCP-服务器"><a href="#搭建最简单的-DHCP-服务器" class="headerlink" title="搭建最简单的 DHCP 服务器"></a>搭建最简单的 DHCP 服务器</h1><p>编辑配置文件，写入一下内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs conf">default-lease-time 21600; #全局变量，默认租期时间<br>max-lease-time 43200; #最长租期时间<br>option domain-name-servers 172.16.10.10; #DNS 服务器<br>option subnet-mask 255.255.255.0; #子网掩码<br><br>subnet 172.16.10.0 netmask 255.255.255.0 &#123; #网段<br>	range 172.16.10.50 172.16.10.100; #IP地址范围<br>	option routers 172.16.10.10; #网关<br>	default-lease-time 600;<br>	max-lease-time 7200;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>自动挂载共享目录，编辑 <code>/etc/fstab</code></p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">/music /srv/nfs/music  none   bind   0   0<br>/movie /srv/nfs/movie  none   bind   0   0<br></code></pre></td></tr></table></figure>
+<p>开启 DHCP 服务，搭建完成</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl start dhcpd<br></code></pre></td></tr></table></figure>
 
-<h3 id="mount-bind-命令"><a href="#mount-bind-命令" class="headerlink" title="mount bind 命令"></a>mount bind 命令</h3><p>这也是我第一次知道这个参数的，在看了这个参数的描述后，发现这个方式来可以实现目录的”硬连接”，之所以硬链接打了引号，是因为目录不能做硬链接</p>
-<p>众所周知，软连接可以对目录进行操作，但是软连接可以理解为 Windows 中的快捷方式，所以并不能实现从一个位置访问另外一个位置的文件的功能</p>
-<p>但是，硬链接可以做到，然而硬链接只能对文件进行操作，不能对目录进行操作，当然，我们可以通过如下命令对一个目录下的所有的文件做硬链接</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">cp -l -r /foo /bar<br></code></pre></td></tr></table></figure>
-<ul>
-<li>cp 复制</li>
-<li>-l 硬链接复制</li>
-</ul>
-<p>虽然这样可以做到把一堆文件做到从 &#x2F;foo 硬链接到 &#x2F;bar 下，但是如果我对其中一个目录下的文件进行删除，或者创建新的文件，另外一个目录可以做到同步吗，答案是否定的，这时候 mount bind 就派上用场了</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mount --bind /foo /bar<br></code></pre></td></tr></table></figure>
+<h1 id="搭建超级作用域"><a href="#搭建超级作用域" class="headerlink" title="搭建超级作用域"></a>搭建超级作用域</h1><p>超级作用域就是可以同时分配多个网段的IP地址，将他们作为一个整体进行管理<br>编辑配置文件，写入一下配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs conf">default-lease-time 21600; #全局变量，默认租期时间<br>max-lease-time 43200; #最长租期时间<br>option domain-name-servers 172.16.10.10; #DNS 服务器<br>option subnet-mask 255.255.255.0; #子网掩码<br><br>shared-network 10And20 &#123; #超级作用域名字<br>    subnet 172.16.10.0 netmask 255.255.255.0 &#123; #网段<br>        range 172.16.10.50 172.16.10.100; #IP地址范围<br>        option routers 172.16.10.10; #网关<br>        default-lease-time 600;<br>        max-lease-time 7200;<br>    &#125;<br>    subnet 172.16.20.0 netmask 255.255.255.0 &#123; #网段<br>        range 172.16.20.50 172.16.20.100; #IP地址范围<br>        option routers 172.16.10.10; #网关<br>        default-lease-time 600;<br>        max-lease-time 7200;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>在搭建的时候，这两个网段还是要在一个局域网下<br>如果实在 VMWare 下配置的，将地址网段设置为 172.16.0.0&#x2F;16 即可，还有就是在配置 DHCP 服务器的时候，记得把 VMWare 自带的 DHCP 关闭<br><img src="/img/2023-4-28-1.png" srcset="/img/loading.gif" lazyload></p>
+<p>配置完成后，重启 DHCP 服务即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl restart dhcpd<br></code></pre></td></tr></table></figure>
 
-<p>通过 <code>--bind</code> 参数，将 &#x2F;bar 目录作为 &#x2F;foo 目录的一个镜像目录<br>这就很容易理解了，名字描述的很清楚了，就是作为一个镜像，一个改变了，另外一个就跟着改变</p>
-<p>这还不是 bind 的最好使用方法，在创建某一个目录的镜像后，它的挂载点中的文件就会被屏蔽掉，注意不是消失，而是被屏蔽了，消挂载后又会出现</p>
-<p>通过这种方式，可以用来做测试操作，假如要对 &#x2F;etc 下某文件进行修改测试，但是又怕改错了导致服务崩溃，这时就可以用 mount bind 了</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">cp -a /etc /tmp/etc<br>mount --bind /tmp/etc /etc<br></code></pre></td></tr></table></figure>
-<ul>
-<li>-a 保留链接、文件属性，并复制目录下的所有内容</li>
-</ul>
-<p>此时对 &#x2F;etc 下的任何修改都不会影响的原来的配置，因为原来的配置都被屏蔽了，现在的操作都是对 &#x2F;tmp&#x2F;etc 的文件进行操作<br>测试结束后，取消挂载，原 &#x2F;etc 下的文件又会重新出现，没有做任何修改</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">umount /etc<br></code></pre></td></tr></table></figure>
+<h1 id="搭建-DHCP-中继代理"><a href="#搭建-DHCP-中继代理" class="headerlink" title="搭建 DHCP 中继代理"></a>搭建 DHCP 中继代理</h1><p>DHCP 中继代理很少直接拿服务器来搭建，大多数是搭建在路由器等交换设备上的，不过既然都尝试着搭建了一下，也做个记录吧</p>
+<h2 id="DHCP-服务器"><a href="#DHCP-服务器" class="headerlink" title="DHCP 服务器"></a>DHCP 服务器</h2><p>编辑 DHCP 服务端的配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs conf">default-lease-time 21600; #全局变量，默认租期时间<br>max-lease-time 43200; #最长租期时间<br>option domain-name-servers 172.16.10.10; #DNS 服务器<br>option subnet-mask 255.255.255.0; #子网掩码<br><br>subnet 172.16.20.0 netmask 255.255.255.0 &#123;<br>	range 172.16.20.50 172.16.20.100;<br>	option routers 172.16.20.1; #网关，中继代理服务器在目标网段的网卡设置为这个 IP<br>	default-lease-time 600;<br>	max-lease-time 7200;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>通过 mount bind 来挂载共享目录可以将 NFS 的所有共享目录都在一个根 NFS 目录下<br>这样可以让程序运行起来更加安全，而且资源也更容易管理</p>
-<h2 id="编辑配置文件"><a href="#编辑配置文件" class="headerlink" title="编辑配置文件"></a>编辑配置文件</h2><p>NFS 的配置文件为 <code>/etc/exports</code><br>配置的格式如下</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">/共享目录 [主机或域(权限)]<br></code></pre></td></tr></table></figure>
-<p>权限选项:</p>
-<ul>
-<li>rw：读写</li>
-<li>ro：只读</li>
-<li>sync：同步模式，内存数据实时写入磁盘</li>
-<li>async：非同步模式，它会每隔一段时间才会将数据刷新到磁盘</li>
-<li>no_root_squash：客户端挂载NFS共享目录后，root用户不受约束，权限很大</li>
-<li>root_squash：客户端上的root用户受到约束，被限定成某个普通用户</li>
-<li>all_squash客户端上所有用户（包括root用户）在使用NFS共享目录时都被限定为一个普通用户</li>
-<li>anonuid：定义被限定用户的uid</li>
-<li>anongid：定义被限定用户的gid</li>
-</ul>
-<p>example1:</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">/srv/nfs/music  192.168.1.0/24(rw,sync)<br></code></pre></td></tr></table></figure>
-<p>对于 <code>/srv/nfs/music</code> 目录，192.168.1.0&#x2F;24 这个网段下的主机拥有读写权限，且内存数据实时写入磁盘</p>
-<p>example2:</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">/srv/nfs/movie 192.168.2.0/24(ro,all_squash) nero(rw,sync,all_squash,anonuid=65534,anongid=65534)<br></code></pre></td></tr></table></figure>
-<p>对于 <code>/srv/nfs/movie</code> 目录，192.168.2.0&#x2F;24 这个网段的主机拥有只读权限，且所有用户（包括root用户）在使用NFS共享目录时都被限定为一个普通用户<br>而 nero 这台主机拥有读写权限，所有用户（包括root用户）在使用NFS共享目录时都被限定为一个普通用户，并指定该普通用户的uid为65534,gid为65534</p>
-<h2 id="启用并运行服务"><a href="#启用并运行服务" class="headerlink" title="启用并运行服务"></a>启用并运行服务</h2><p>Arch Linux 运行如下命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl start nfs-server.service<br></code></pre></td></tr></table></figure>
+<p>中继代理服务器设置两张网卡，一个网卡在 DHCP 服务器所在的网段，另一个在目标网段下<br>如果是在 VMWare 下配置的话，如下设置网卡<br><img src="/img/2023-4-28-2.png" srcset="/img/loading.gif" lazyload></p>
+<p>DHCP 服务器使用 vmnet1 网卡，中继代理服务器使用两张网卡，客户端使用 vmnet2 网卡，并将自动分配IP地址关闭，否则DHCP服务器将无法正确分配IP地址</p>
+<p>DHCP 服务器添加一条从中继代理服务器到达目标网络的路由记录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ip route add 172.16.20.0/24 via 172.16.10.1<br></code></pre></td></tr></table></figure>
 
-<p>RHEL 运行如下命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl start rpcbind  <br>systemctl start nfs-server  <br>systemctl start nfs<br></code></pre></td></tr></table></figure>
+<h2 id="中继代理服务器"><a href="#中继代理服务器" class="headerlink" title="中继代理服务器"></a>中继代理服务器</h2><p>安装好 DHCP 服务后，开启路由转发功能</p>
+<p>临时有效，重启后关闭</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">echo 1 &gt; /proc/sys/net/ipv4/ip_forward<br></code></pre></td></tr></table></figure>
 
-<h2 id="客户端挂载-NFS-共享目录"><a href="#客户端挂载-NFS-共享目录" class="headerlink" title="客户端挂载 NFS 共享目录"></a>客户端挂载 NFS 共享目录</h2><p>安装客户端<br>Arch Linux 需要安装 nfs-utils</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pacman -S nfs-utils<br></code></pre></td></tr></table></figure>
+<p>若需永久有效，编辑文件 <code>/etc/sysctl.conf</code>，修改如下配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs conf">net.ipv4.ip_forward = 1<br></code></pre></td></tr></table></figure>
 
-<p>RHEL 也只需要安装 nfs-utils</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">yum install nfs-utils<br></code></pre></td></tr></table></figure>
+<p>立即生效</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sysctl -p<br></code></pre></td></tr></table></figure>
 
-<p>挂载共享目录,假设服务器地址为 192.168.10.10&#x2F;24</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir /music /movie<br>mount -t nfs 192.168.10.10:/srv/nfs/music /music<br>mount -t nfs 192.168.10.10:/srv/nfs/movie /movie<br></code></pre></td></tr></table></figure>
+<p>可以直接使用 <code>dhcrelay</code> 命令来启动中继代理服务，但是使用起来不太方便</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">dhcrelay -d --no-pid 172.16.10.10 #DHCP 服务器地址<br></code></pre></td></tr></table></figure>
 
-<p>这样共享目录就被挂载到了客户端</p>
+<p>所以编辑 <code>/etc/systemd/system/dhcrelay.service</code> 文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs conf">[Unit]<br>Description=DHCP Relay Agent Daemon<br>Documentation=man:dhcrelay(8)<br>Wants=network-online.target<br>After=network-online.target<br><br>[Service]<br>Type=notify<br>ExecStart=/usr/sbin/dhcrelay -d --no-pid 172.16.10.10<br><br>[Install]<br>WantedBy=multi-user.target<br></code></pre></td></tr></table></figure>
+
+<p>启动 dhcrelay 服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl --system daemon-reload<br>systemctl restart dhcrelay<br></code></pre></td></tr></table></figure>
+
+<p>至此，中继代理服务配置完成</p>
 <hr>
-<p>两个文件共享系统都学了一些，这样以后的文件共享的方法又有了新的方式<br>对于一个仓鼠来讲，存储容量是一大要务，文件存储后的共享更是一大要务 ٩(ˊᗜˋ*)و </p>
+<p>为了做这个实验，看了许多博客，途中翻到了大量复制粘贴的博客，顿时感到自己搭建这个博客是正确的，把有用的东西收集并整理，自己以后就可以很方便的回顾这些知识，而不需要再像大海捞针一般，从各种连错误一起复制的“镜像”博客中寻找需要的东西<br>系统的学习了 Linux 服务器后，才发现和我自己随便玩玩的差别还是很大的，学到了更多有用的知识 ✧٩(ˊωˋ*)و✧</p>
 
                 
               </div>
@@ -406,9 +386,9 @@
       
         <a href="/tags/Linux/">#Linux</a>
       
-        <a href="/tags/NFS/">#NFS</a>
+        <a href="/tags/DHCP/">#DHCP</a>
       
-        <a href="/tags/mount-bind/">#mount bind</a>
+        <a href="/tags/dhcrelay/">#dhcrelay</a>
       
     </div>
   
@@ -422,18 +402,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/29/DHCP%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/" title="DHCP服务器搭建">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">DHCP服务器搭建</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/19/Linux%E6%8A%A5%E9%94%99Bad-message/" title="Linux报错Bad message">
-                        <span class="hidden-mobile">Linux报错Bad message</span>
+                      <a href="/2023/04/24/NFS%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/" title="NFS服务器搭建">
+                        <span class="hidden-mobile">NFS服务器搭建</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
