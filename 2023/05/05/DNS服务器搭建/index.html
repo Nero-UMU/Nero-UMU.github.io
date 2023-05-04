@@ -18,29 +18,26 @@
   <meta name="author" content="NeroUMU">
   <meta name="keywords" content="">
   
-    <meta name="description" content="实验搭建DHCP服务器做了搭建 DHCP 服务器的实验，中途碰到了许多问题，踩了好几个坑记录一下搭建过程">
+    <meta name="description" content="实验搭建 DNS 服务器尝试搭建 DNS 服务器，中途碰到了些问题，解决后，将搭建的过程和步骤记录下来">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DHCP服务器搭建">
-<meta property="og:url" content="https://neroumu.top/2023/04/29/DHCP%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:title" content="DNS服务器搭建">
+<meta property="og:url" content="https://neroumu.top/2023/05/05/DNS%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
-<meta property="og:description" content="实验搭建DHCP服务器做了搭建 DHCP 服务器的实验，中途碰到了许多问题，踩了好几个坑记录一下搭建过程">
+<meta property="og:description" content="实验搭建 DNS 服务器尝试搭建 DNS 服务器，中途碰到了些问题，解决后，将搭建的过程和步骤记录下来">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://neroumu.top/img/2023-4-28-1.png">
-<meta property="og:image" content="https://neroumu.top/img/2023-4-28-2.png">
-<meta property="article:published_time" content="2023-04-28T20:32:37.000Z">
-<meta property="article:modified_time" content="2023-04-28T10:08:21.067Z">
+<meta property="article:published_time" content="2023-05-04T19:04:09.000Z">
+<meta property="article:modified_time" content="2023-05-04T08:26:26.978Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Linux">
-<meta property="article:tag" content="DHCP">
-<meta property="article:tag" content="dhcrelay">
+<meta property="article:tag" content="DNS">
+<meta property="article:tag" content="bind">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://neroumu.top/img/2023-4-28-1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>DHCP服务器搭建 - NeroUMU&#39;s BLOG</title>
+  <title>DNS服务器搭建 - NeroUMU&#39;s BLOG</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -207,7 +204,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="DHCP服务器搭建"></span>
+            <span id="subtitle" data-typed-text="DNS服务器搭建"></span>
           
         </div>
 
@@ -218,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-28 16:32" pubdate>
-          2023年4月28日 下午
+        <time datetime="2023-05-04 15:04" pubdate>
+          2023年5月4日 下午
         </time>
       </span>
     
@@ -231,7 +228,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          全文共2.7k 字
+          全文共3.3k 字
         
       </span>
     
@@ -243,7 +240,7 @@
         
         
           <!-- compatible with older versions-->
-          阅读全文需约23 分钟
+          阅读全文需约28 分钟
         
       </span>
     
@@ -293,64 +290,80 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">DHCP服务器搭建</h1>
+            <h1 style="display: none">DNS服务器搭建</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="实验搭建DHCP服务器"><a href="#实验搭建DHCP服务器" class="headerlink" title="实验搭建DHCP服务器"></a>实验搭建DHCP服务器</h1><p>做了搭建 DHCP 服务器的实验，中途碰到了许多问题，踩了好几个坑<br>记录一下搭建过程</p>
+                <h1 id="实验搭建-DNS-服务器"><a href="#实验搭建-DNS-服务器" class="headerlink" title="实验搭建 DNS 服务器"></a>实验搭建 DNS 服务器</h1><p>尝试搭建 DNS 服务器，中途碰到了些问题，解决后，将搭建的过程和步骤记录下来</p>
 <span id="more"></span>
 
-<h1 id="安装-DHCP-服务器"><a href="#安装-DHCP-服务器" class="headerlink" title="安装 DHCP 服务器"></a>安装 DHCP 服务器</h1><p>Arch Linux 安装 DHCP 服务器</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pacman -S dhcp<br></code></pre></td></tr></table></figure>
+<h1 id="安装软件"><a href="#安装软件" class="headerlink" title="安装软件"></a>安装软件</h1><p>DNS 用到的软件是 bind，直接安装即可<br>Arch Linux 和 RHEL7 用的都一样</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pacman -S bind<br></code></pre></td></tr></table></figure>
 
-<p>RHEL 安装 DHCP 服务器</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">yum install dhcp<br></code></pre></td></tr></table></figure>
+<p>RHEL7</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">yum install bind<br></code></pre></td></tr></table></figure>
 
-<p>Arch Linux 的 配置文件为 <code>/etc/dhcpd.conf</code>，而 RHEL 的配置文件为 <code>/etc/dhcp/dhcpd.conf</code></p>
-<h1 id="搭建最简单的-DHCP-服务器"><a href="#搭建最简单的-DHCP-服务器" class="headerlink" title="搭建最简单的 DHCP 服务器"></a>搭建最简单的 DHCP 服务器</h1><p>编辑配置文件，写入一下内容</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs conf">default-lease-time 21600; #全局变量，默认租期时间<br>max-lease-time 43200; #最长租期时间<br>option domain-name-servers 172.16.10.10; #DNS 服务器<br>option subnet-mask 255.255.255.0; #子网掩码<br><br>subnet 172.16.10.0 netmask 255.255.255.0 &#123; #网段<br>	range 172.16.10.50 172.16.10.100; #IP地址范围<br>	option routers 172.16.10.10; #网关<br>	default-lease-time 600;<br>	max-lease-time 7200;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="最基本的配置"><a href="#最基本的配置" class="headerlink" title="最基本的配置"></a>最基本的配置</h1><p>编辑 <code>/etc/named.conf</code> 文件，修改以下两个配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs conf">listen-on port 53 &#123; any; &#125;;<br>allow-query     &#123; any; &#125;;<br></code></pre></td></tr></table></figure>
+<p>设置ipv4的监听地址为所有地址，允许查询的主机为任意主机</p>
+<p>编辑 <code>/etc/named.rfc1912.zones</code> 文件，添加正向和反向的DNS解析</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs conf">zone &quot;example.com&quot; IN &#123; #正向解析<br>        type master;<br>        file &quot;data/master.example.com.zone&quot;; #zone文件的相对位置<br>&#125;;<br><br>zone &quot;1.168.192.in-addr.arpa&quot; IN &#123; #反向解析<br>        type master;<br>        file &quot;data/master.1.168.192.in-addr.arpa.zone&quot;;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-<p>开启 DHCP 服务，搭建完成</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl start dhcpd<br></code></pre></td></tr></table></figure>
+<p>保留权限的复制 &#x2F;var&#x2F;named&#x2F;named.localhost 到 &#x2F;var&#x2F;named&#x2F;data&#x2F;master.example.com.zone</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">cp -p /var/named/named.localhost /var/named/data/master.example.com.zone<br></code></pre></td></tr></table></figure>
 
-<h1 id="搭建超级作用域"><a href="#搭建超级作用域" class="headerlink" title="搭建超级作用域"></a>搭建超级作用域</h1><p>超级作用域就是可以同时分配多个网段的IP地址，将他们作为一个整体进行管理<br>编辑配置文件，写入一下配置</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs conf">default-lease-time 21600; #全局变量，默认租期时间<br>max-lease-time 43200; #最长租期时间<br>option domain-name-servers 172.16.10.10; #DNS 服务器<br>option subnet-mask 255.255.255.0; #子网掩码<br><br>shared-network 10And20 &#123; #超级作用域名字<br>    subnet 172.16.10.0 netmask 255.255.255.0 &#123; #网段<br>        range 172.16.10.50 172.16.10.100; #IP地址范围<br>        option routers 172.16.10.10; #网关<br>        default-lease-time 600;<br>        max-lease-time 7200;<br>    &#125;<br>    subnet 172.16.20.0 netmask 255.255.255.0 &#123; #网段<br>        range 172.16.20.50 172.16.20.100; #IP地址范围<br>        option routers 172.16.10.10; #网关<br>        default-lease-time 600;<br>        max-lease-time 7200;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>在搭建的时候，这两个网段还是要在一个局域网下<br>如果实在 VMWare 下配置的，将地址网段设置为 172.16.0.0&#x2F;16 即可，还有就是在配置 DHCP 服务器的时候，记得把 VMWare 自带的 DHCP 关闭<br><img src="/img/2023-4-28-1.png" srcset="/img/loading.gif" lazyload></p>
-<p>配置完成后，重启 DHCP 服务即可</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl restart dhcpd<br></code></pre></td></tr></table></figure>
+<p>编辑 <code>/var/named/data/master.example.com.zone</code> 文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs conf">$TTL 1D<br>@       IN SOA  example.com. root.example.com. (<br>                                        1       ; 序列号<br>                                        1D      ; 刷新时间<br>                                        1H      ; 重试时间<br>                                        1W      ; 过期时间<br>                                        3H )    ; 否定答案的TTL值<br>@       IN      NS      dns.example.com.<br>dns     IN      A       172.16.10.2<br>cw      IN      A       172.16.10.11<br>oa      IN      CNAME   jl<br>jl      IN      A       172.16.10.13<br>xs      IN      A       172.16.10.12<br></code></pre></td></tr></table></figure>
+<ul>
+<li>@代表当前区域的域名，可以用来引用当前域名</li>
+<li>SOA 表示资源类型为SOA</li>
+<li>example.com. 为主DNS的名称，按实际情况修改，以<code>.</code>结束</li>
+<li>root.example.com DNS服务器的管理员邮箱，@用点<code>.</code>来代替</li>
+<li>IN 代表Internet</li>
+<li><code>@     IN      NS      dns.example.com.</code> 记录表示当前区域的某DNS服务器的域名</li>
+<li><code>dns   IN      A       172.16.10.2</code> 表示该DNS服务器的IP地址为172.16.10.2</li>
+</ul>
+<p>同理复制一个反向解析文件 <code>data/master.1.168.192.in-addr.arpa.zone</code>，编辑如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs conf">$TTL 1D<br>@       IN SOA  10.16.172.in-addr.arpa. root.example.com. (<br>                                        1       ; 序列号<br>                                        1D      ; 刷新时间<br>                                        1H      ; 重试时间<br>                                        1W      ; 过期时间<br>                                        3H )    ; 否定答案的TTL值<br>@       IN      NS      dns.example.com.<br>2       IN      PTR     dns.example.com.<br>11      IN      PTR     cw.example.com.<br>12      IN      PTR     xs.example.com.<br>13      IN      PTR     jl.example.com.<br></code></pre></td></tr></table></figure>
 
-<h1 id="搭建-DHCP-中继代理"><a href="#搭建-DHCP-中继代理" class="headerlink" title="搭建 DHCP 中继代理"></a>搭建 DHCP 中继代理</h1><p>DHCP 中继代理很少直接拿服务器来搭建，大多数是搭建在路由器等交换设备上的，不过既然都尝试着搭建了一下，也做个记录吧</p>
-<h2 id="DHCP-服务器"><a href="#DHCP-服务器" class="headerlink" title="DHCP 服务器"></a>DHCP 服务器</h2><p>编辑 DHCP 服务端的配置</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs conf">default-lease-time 21600; #全局变量，默认租期时间<br>max-lease-time 43200; #最长租期时间<br>option domain-name-servers 172.16.10.10; #DNS 服务器<br>option subnet-mask 255.255.255.0; #子网掩码<br><br>subnet 172.16.20.0 netmask 255.255.255.0 &#123;<br>	range 172.16.20.50 172.16.20.100;<br>	option routers 172.16.20.1; #网关，中继代理服务器在目标网段的网卡设置为这个 IP<br>	default-lease-time 600;<br>	max-lease-time 7200;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>重启服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl restart named<br></code></pre></td></tr></table></figure>
 
-<p>中继代理服务器设置两张网卡，一个网卡在 DHCP 服务器所在的网段，另一个在目标网段下<br>如果是在 VMWare 下配置的话，如下设置网卡<br><img src="/img/2023-4-28-2.png" srcset="/img/loading.gif" lazyload></p>
-<p>DHCP 服务器使用 vmnet1 网卡，中继代理服务器使用两张网卡，客户端使用 vmnet2 网卡，并将自动分配IP地址关闭，否则DHCP服务器将无法正确分配IP地址</p>
-<p>DHCP 服务器添加一条从中继代理服务器到达目标网络的路由记录</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ip route add 172.16.20.0/24 via 172.16.10.1<br></code></pre></td></tr></table></figure>
+<p>客户端可以通过 <code>nslookup</code> 命令测试是否搭建完成</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">nslookup dns.example.com<br></code></pre></td></tr></table></figure>
 
-<h2 id="中继代理服务器"><a href="#中继代理服务器" class="headerlink" title="中继代理服务器"></a>中继代理服务器</h2><p>安装好 DHCP 服务后，开启路由转发功能</p>
-<p>临时有效，重启后关闭</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">echo 1 &gt; /proc/sys/net/ipv4/ip_forward<br></code></pre></td></tr></table></figure>
+<h1 id="搭建从服务器"><a href="#搭建从服务器" class="headerlink" title="搭建从服务器"></a>搭建从服务器</h1><p>从服务器安装好 bind 后，同样的修改 <code>/etc/named.conf</code> 中的两个 any<br>编辑 <code>/etc/named.rfc1912.zones</code> 文件，增加一个正向解析和一个反向解析，并设置类型为slave</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs conf">zone &quot;example.com&quot; IN &#123;<br>        type slave;<br>        file &quot;data/example.com.zone&quot;;<br>        masters &#123;172.16.10.10;&#125;; #主服务器IP地址<br>&#125;;<br><br>zone &quot;1.168.192.in-addr.arpa&quot; IN &#123;<br>        type slave;<br>        file &quot;data/slave.1.168.192.in-addr.arpa.zone&quot;;<br>        masters &#123;172.16.10.10;&#125;; #主服务器IP地址<br>&#125;;<br></code></pre></td></tr></table></figure>
+<p>重启服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl restart named<br></code></pre></td></tr></table></figure>
 
-<p>若需永久有效，编辑文件 <code>/etc/sysctl.conf</code>，修改如下配置</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs conf">net.ipv4.ip_forward = 1<br></code></pre></td></tr></table></figure>
+<p>此时在 <code>/var/named/slaves</code> 目录下可以看到正向和反向区域解析都已自动获取，配置完成</p>
+<h1 id="搭建-DNS-子域委派"><a href="#搭建-DNS-子域委派" class="headerlink" title="搭建 DNS 子域委派"></a>搭建 DNS 子域委派</h1><p>编辑 <code>/etc/named.conf</code> 文件，将服务器之间的认证机制关闭，否则后续会导致无法认证以至于无法委派子域，父域和子域都要配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs conf">dnssec-enable no;<br>dnssec-validation no;<br></code></pre></td></tr></table></figure>
 
-<p>立即生效</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sysctl -p<br></code></pre></td></tr></table></figure>
+<p>编辑子域服务器的 <code>/etc/named.rfc1912.zones</code> 文件，添加一个子域zone</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs conf">zone &quot;test.example.com&quot; IN &#123;<br>        type master;<br>        file &quot;data/test.example.com.zone&quot;;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-<p>可以直接使用 <code>dhcrelay</code> 命令来启动中继代理服务，但是使用起来不太方便</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">dhcrelay -d --no-pid 172.16.10.10 #DHCP 服务器地址<br></code></pre></td></tr></table></figure>
+<p>编辑 <code>/var/named/data/test.example.com.zone</code> 文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs conf">$TTL 1D<br>@       IN SOA  test.example.com. root.example.com. (<br>                                        1       ; serial<br>                                        1D      ; refresh<br>                                        1H      ; retry<br>                                        1W      ; expire<br>                                        3H )    ; minimum<br>@       IN      NS      dns1.test.example.com.<br>dns1    IN      A       172.16.10.11<br>guest   IN      A       172.16.10.20<br>ftp     IN      A       172.16.10.30<br></code></pre></td></tr></table></figure>
 
-<p>所以编辑 <code>/etc/systemd/system/dhcrelay.service</code> 文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs conf">[Unit]<br>Description=DHCP Relay Agent Daemon<br>Documentation=man:dhcrelay(8)<br>Wants=network-online.target<br>After=network-online.target<br><br>[Service]<br>Type=notify<br>ExecStart=/usr/sbin/dhcrelay -d --no-pid 172.16.10.10<br><br>[Install]<br>WantedBy=multi-user.target<br></code></pre></td></tr></table></figure>
+<p>其实就是在子域服务器上搭建一个新的 DNS 服务器，它管理的域名是 example.com 的一个子域 test<br>此时启动服务后，本服务器可以解析 test.example.com 的资源<br>但此时父域服务器无法解析子域管理的域名，需要给它授权才能解析到子域管理的域名<br>编辑父域服务器的 <code>/var/named/data/master.example.com.zone</code> 文件，添加子域服务器认证</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs conf">$TTL 1D<br>@       IN SOA  example.com. root.example.com. (<br>                                        1       ; serial<br>                                        1D      ; refresh<br>                                        1H      ; retry<br>                                        1W      ; expire<br>                                        3H )    ; minimum<br>@       IN      NS      dns.example.com.<br>dns     IN      A       172.16.10.2<br>cw      IN      A       172.16.10.11<br>oa      IN      CNAME   jl<br>jl      IN      A       172.16.10.13<br>xs      IN      A       172.16.10.12<br><br>test    IN      NS      dns1 #添加子域服务器，它管理的是test子域<br>dns1    IN      A       172.16.10.11 #子域服务器的IP地址<br></code></pre></td></tr></table></figure>
 
-<p>启动 dhcrelay 服务</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl --system daemon-reload<br>systemctl restart dhcrelay<br></code></pre></td></tr></table></figure>
-
-<p>至此，中继代理服务配置完成</p>
+<p>添加的两条解析的意思是如果碰到 test 这个域的域名解析，把它交给 dns1 所指向的服务器解析，dns1 指向的服务器为子域服务器的 IP 地址</p>
+<p>重启 named 服务后，客户端将DNS服务器设置为父域服务器，并尝试解析子域服务器管理的域名，可以得到未经过认证的解析结果</p>
+<h2 id="常见错误"><a href="#常见错误" class="headerlink" title="常见错误"></a>常见错误</h2><ol>
+<li><p>忘记关闭防火墙导致子域服务器配置失败</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl stop firewall<br>iptables -F<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>序列号不相同导致无法授权</p>
+</li>
+<li><p>认证机制未关闭，因为配置的时候没有配置认证，所以应该关闭认证，否则会无法授权</p>
+</li>
+</ol>
 <hr>
-<p>为了做这个实验，看了许多博客，途中翻到了大量复制粘贴的博客，顿时感到自己搭建这个博客是正确的，把有用的东西收集并整理，自己以后就可以很方便的回顾这些知识，而不需要再像大海捞针一般，从各种连错误一起复制的“镜像”博客中寻找需要的东西<br>系统的学习了 Linux 服务器后，才发现和我自己随便玩玩的差别还是很大的，学到了更多有用的知识 ✧٩(ˊωˋ*)و✧</p>
+<p>总算是把 DNS 服务器配置出来了，尤其是子域配置，配置了很久<br>之所以能在子域卡这么久，就是因为很多博主在配置的时候，都没有提到过关闭认证机制，导致我一直配置不成功，关闭之后，一下就成功了<br>从大量的重复、真真假假的文章中找答案真是太难受了，还是直接读官方文档好啊 ( ′ 3&#96;) sigh~</p>
 
                 
               </div>
@@ -386,9 +399,9 @@
       
         <a href="/tags/Linux/">#Linux</a>
       
-        <a href="/tags/DHCP/">#DHCP</a>
+        <a href="/tags/DNS/">#DNS</a>
       
-        <a href="/tags/dhcrelay/">#dhcrelay</a>
+        <a href="/tags/bind/">#bind</a>
       
     </div>
   
@@ -402,18 +415,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/05/05/DNS%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/" title="DNS服务器搭建">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">DNS服务器搭建</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/24/NFS%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/" title="NFS服务器搭建">
-                        <span class="hidden-mobile">NFS服务器搭建</span>
+                      <a href="/2023/04/29/DHCP%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/" title="DHCP服务器搭建">
+                        <span class="hidden-mobile">DHCP服务器搭建</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
