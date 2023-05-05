@@ -26,7 +26,7 @@
 <meta property="og:description" content="刚好学习了搭建 Samba最近刚好学习了搭建 Samba 服务器,想起之前想搭建网络共享服务器时考虑过 Samba 服务器却没有成功,最后还是采用了别的方案既然正好解决了之前碰到的问题,那就记录下搭建的过程吧">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-30T04:20:52.000Z">
-<meta property="article:modified_time" content="2023-04-19T08:44:39.829Z">
+<meta property="article:modified_time" content="2023-05-05T09:52:05.669Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Samba">
@@ -227,7 +227,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          全文共1.7k 字
+          全文共1.8k 字
         
       </span>
     
@@ -308,13 +308,13 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir -m 777 /test<br></code></pre></td></tr></table></figure>
 
 <p>创建 Samba 用户</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">groupadd test #创建用户组<br>useradd -g test test_user #创建用户<br>passwd test_user1 #设置密码<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">groupadd test #创建用户组<br>useradd -g test test_user #创建用户<br>passwd test_user #设置密码<br></code></pre></td></tr></table></figure>
 
 <p>添加 Samba 账户,需要该用户实际存在,否则无法添加</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">smbpasswd -a test_user<br></code></pre></td></tr></table></figure>
 
 <p>设置 ACL</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">setfacl -m g:test_user:rwx /test<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">setfacl -m g:test:rwx /test<br></code></pre></td></tr></table></figure>
 <ul>
 <li>设置 test_user 用户拥有该目录的所有权限,实际情况实际考虑</li>
 </ul>
@@ -336,6 +336,9 @@
 
 <p>重启服务</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl restart smb.service <br>systemctl restart nmb.service <br></code></pre></td></tr></table></figure>
+
+<p>关闭防火墙</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl stop firewalld<br>setenforce 0<br>iptables -F<br><br></code></pre></td></tr></table></figure>
 
 <h1 id="客户端连接"><a href="#客户端连接" class="headerlink" title="客户端连接"></a>客户端连接</h1><p>Arch Linux 的客户端 和 RHEL 用的软件一样,但名字不一样</p>
 <h2 id="安装软件"><a href="#安装软件" class="headerlink" title="安装软件"></a>安装软件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pacman -S smbclient cifs-utils<br></code></pre></td></tr></table></figure>

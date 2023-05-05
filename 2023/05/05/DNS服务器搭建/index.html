@@ -26,7 +26,7 @@
 <meta property="og:description" content="实验搭建 DNS 服务器尝试搭建 DNS 服务器，中途碰到了些问题，解决后，将搭建的过程和步骤记录下来">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-04T19:04:09.000Z">
-<meta property="article:modified_time" content="2023-05-04T08:26:26.978Z">
+<meta property="article:modified_time" content="2023-05-05T09:52:44.322Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="DNS">
@@ -355,7 +355,7 @@
 <p>重启 named 服务后，客户端将DNS服务器设置为父域服务器，并尝试解析子域服务器管理的域名，可以得到未经过认证的解析结果</p>
 <h2 id="常见错误"><a href="#常见错误" class="headerlink" title="常见错误"></a>常见错误</h2><ol>
 <li><p>忘记关闭防火墙导致子域服务器配置失败</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl stop firewall<br>iptables -F<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl stop firewalld<br>iptables -F<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>序列号不相同导致无法授权</p>
 </li>
