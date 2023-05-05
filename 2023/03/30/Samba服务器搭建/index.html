@@ -26,7 +26,7 @@
 <meta property="og:description" content="刚好学习了搭建 Samba最近刚好学习了搭建 Samba 服务器,想起之前想搭建网络共享服务器时考虑过 Samba 服务器却没有成功,最后还是采用了别的方案既然正好解决了之前碰到的问题,那就记录下搭建的过程吧">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-30T04:20:52.000Z">
-<meta property="article:modified_time" content="2023-05-05T10:00:29.453Z">
+<meta property="article:modified_time" content="2023-05-05T11:40:56.810Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Samba">
@@ -343,7 +343,7 @@
 <h1 id="客户端连接"><a href="#客户端连接" class="headerlink" title="客户端连接"></a>客户端连接</h1><p>Arch Linux 的客户端 和 RHEL 用的软件一样,但名字不一样</p>
 <h2 id="安装软件"><a href="#安装软件" class="headerlink" title="安装软件"></a>安装软件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pacman -S smbclient cifs-utils<br></code></pre></td></tr></table></figure>
 
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">apt install samba-client cifs-utils<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">yum install samba-client cifs-utils<br></code></pre></td></tr></table></figure>
 
 <h2 id="测试连接"><a href="#测试连接" class="headerlink" title="测试连接"></a>测试连接</h2><p>验证是否可以连接 Samba 服务器</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">smbclient -L &lt;IP/主机名&gt; <br></code></pre></td></tr></table></figure>
