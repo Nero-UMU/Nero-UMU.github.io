@@ -18,26 +18,26 @@
   <meta name="author" content="NeroUMU">
   <meta name="keywords" content="">
   
-    <meta name="description" content="实验搭建 DNS 服务器尝试搭建 DNS 服务器，中途碰到了些问题，解决后，将搭建的过程和步骤记录下来">
+    <meta name="description" content="封禁多次连接失败的 IP最近几天多次看我的服务器有大量连接失败的日志，其中有大量的不同用户名的尝试连接失败的记录虽然我已经更改了 SSH 的连接端口，并开启了唯密钥登录虽然这样入侵成功的概率很低很低，但是它大量的尝试连接也是会占用我的带宽和 CPU，这也是一种 DDoS攻击，名为 CC (ChallengeCollapsar，挑战黑洞) 攻击于是我就尝试禁止它们的连接">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DNS服务器搭建">
-<meta property="og:url" content="https://neroumu.top/2023/05/05/DNS%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:title" content="Linux自动封禁多次连接失败的IP">
+<meta property="og:url" content="https://neroumu.top/2023/05/19/Linux%E8%87%AA%E5%8A%A8%E5%B0%81%E7%A6%81%E5%A4%9A%E6%AC%A1%E8%BF%9E%E6%8E%A5%E5%A4%B1%E8%B4%A5%E7%9A%84IP/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
-<meta property="og:description" content="实验搭建 DNS 服务器尝试搭建 DNS 服务器，中途碰到了些问题，解决后，将搭建的过程和步骤记录下来">
+<meta property="og:description" content="封禁多次连接失败的 IP最近几天多次看我的服务器有大量连接失败的日志，其中有大量的不同用户名的尝试连接失败的记录虽然我已经更改了 SSH 的连接端口，并开启了唯密钥登录虽然这样入侵成功的概率很低很低，但是它大量的尝试连接也是会占用我的带宽和 CPU，这也是一种 DDoS攻击，名为 CC (ChallengeCollapsar，挑战黑洞) 攻击于是我就尝试禁止它们的连接">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-05-04T19:04:09.000Z">
-<meta property="article:modified_time" content="2023-05-15T09:20:31.399Z">
+<meta property="article:published_time" content="2023-05-19T03:45:59.000Z">
+<meta property="article:modified_time" content="2023-05-18T16:27:48.584Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Linux">
-<meta property="article:tag" content="DNS">
-<meta property="article:tag" content="bind">
+<meta property="article:tag" content="systemd">
+<meta property="article:tag" content="shell">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>DNS服务器搭建 - NeroUMU&#39;s BLOG</title>
+  <title>Linux自动封禁多次连接失败的IP - NeroUMU&#39;s BLOG</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -204,7 +204,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="DNS服务器搭建"></span>
+            <span id="subtitle" data-typed-text="Linux自动封禁多次连接失败的IP"></span>
           
         </div>
 
@@ -215,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-04 15:04" pubdate>
-          2023年5月4日 下午
+        <time datetime="2023-05-18 23:45" pubdate>
+          2023年5月18日 晚上
         </time>
       </span>
     
@@ -228,7 +228,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          全文共3.1k 字
+          全文共1.4k 字
         
       </span>
     
@@ -240,7 +240,7 @@
         
         
           <!-- compatible with older versions-->
-          阅读全文需约27 分钟
+          阅读全文需约13 分钟
         
       </span>
     
@@ -290,84 +290,38 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">DNS服务器搭建</h1>
+            <h1 style="display: none">Linux自动封禁多次连接失败的IP</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="实验搭建-DNS-服务器"><a href="#实验搭建-DNS-服务器" class="headerlink" title="实验搭建 DNS 服务器"></a>实验搭建 DNS 服务器</h1><p>尝试搭建 DNS 服务器，中途碰到了些问题，解决后，将搭建的过程和步骤记录下来</p>
+                <h1 id="封禁多次连接失败的-IP"><a href="#封禁多次连接失败的-IP" class="headerlink" title="封禁多次连接失败的 IP"></a>封禁多次连接失败的 IP</h1><p>最近几天多次看我的服务器有大量连接失败的日志，其中有大量的不同用户名的尝试连接失败的记录<br>虽然我已经更改了 SSH 的连接端口，并开启了唯密钥登录<br>虽然这样入侵成功的概率很低很低，但是它大量的尝试连接也是会占用我的带宽和 CPU，这也是一种 DDoS攻击，名为 CC (ChallengeCollapsar，挑战黑洞) 攻击<br>于是我就尝试禁止它们的连接</p>
 <span id="more"></span>
 
-<h1 id="安装软件"><a href="#安装软件" class="headerlink" title="安装软件"></a>安装软件</h1><p>DNS 用到的软件是 bind，直接安装即可<br>Arch Linux 和 RHEL7 用的都一样</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pacman -S bind<br></code></pre></td></tr></table></figure>
+<h1 id="编写-Shell-脚本"><a href="#编写-Shell-脚本" class="headerlink" title="编写 Shell 脚本"></a>编写 Shell 脚本</h1><p>为了获取到这些多次连接失败的 IP，地址，可以用如下的命令获取</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">lastb | awk &#x27;&#123;print $3&#125;&#x27; | sort | uniq -c | sed &#x27;/[A-Z]/d&#x27; | awk &#x27;&#123;if($1&gt;3) print$2&#125;&#x27;<br></code></pre></td></tr></table></figure>
+<p>命令 <code>lastb</code> 可以获取到连接失败的日志，后面从该日志中获取到重复次数超过3次的 IP 地址</p>
+<p>文件 <code>/etc/hosts.deny</code> 是一个黑名单，在该名单中的主机将被拒绝连接<br>所以创建脚本文件 &#x2F;opt&#x2F;AutoBanIP.sh</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">touch /opt/AutoBanIP.sh<br></code></pre></td></tr></table></figure>
 
-<p>RHEL7</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">yum install bind<br></code></pre></td></tr></table></figure>
+<p>编写如下代码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/bash</span><br>iplist=`lastb | awk &#x27;&#123;print $3&#125;&#x27; | sort | uniq -c | sed &#x27;/[A-Z]/d&#x27; | awk &#x27;&#123;if($1&gt;3) print$2&#125;&#x27;` # 获取需要封禁的 IP 地址列表<br>for ip in $iplist # 遍历该列表<br>do<br>        if (grep -q $ip /etc/hosts.deny) # 判断该 IP 地址是否已经存在于 /etc/hosts.deny 中<br>        then<br>                continue<br>        else<br>                echo &quot;sshd:$ip:deny&quot; &gt;&gt; /etc/hosts.deny # 添加该地址到黑名单中<br>        fi<br>done<br></code></pre></td></tr></table></figure>
 
-<h1 id="最基本的配置"><a href="#最基本的配置" class="headerlink" title="最基本的配置"></a>最基本的配置</h1><p>编辑 <code>/etc/named.conf</code> 文件，修改以下两个配置</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs conf">listen-on port 53 &#123; any; &#125;;<br>allow-query     &#123; any; &#125;;<br></code></pre></td></tr></table></figure>
-<p>设置ipv4的监听地址为所有地址，允许查询的主机为任意主机</p>
-<p>编辑 <code>/etc/named.rfc1912.zones</code> 文件，添加正向和反向的DNS解析</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs conf">zone &quot;hello.com&quot; IN &#123; #正向解析<br>        type master;<br>        file &quot;data/hello.com.zone&quot;;<br>&#125;;<br><br>zone &quot;10.16.172.in-addr.arpa&quot; IN &#123; #反向解析<br>        type master;<br>        file &quot;data/10.16.172.in-addr.arpa.zone&quot;;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h1 id="定时运行脚本"><a href="#定时运行脚本" class="headerlink" title="定时运行脚本"></a>定时运行脚本</h1><p>为了定时运行该脚本，需要编写两个文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">touch /etc/systemd/system/AutoBanIP.service /etc/systemd/system/AutoBanIP.timer<br></code></pre></td></tr></table></figure>
 
-<p>保留权限的复制 &#x2F;var&#x2F;named&#x2F;named.empty 到 &#x2F;var&#x2F;named&#x2F;data&#x2F;hello.com.zone</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">cp -p /var/named/named.empty /var/named/data/hello.com.zone<br></code></pre></td></tr></table></figure>
+<p>编辑 <code>/etc/systemd/system/AutoBanIP.service</code> 文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs conf">[Unit]<br>Description=Auto ban IP<br><br>[Service]<br>ExecStart=/opt/AutoBanIP.sh<br><br>[Install]<br>WantedBy=multi-user.target<br></code></pre></td></tr></table></figure>
 
-<p>编辑 <code>/var/named/data/hello.com.zone</code> 文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs conf">$TTL 3H<br>@       IN SOA  @ jkmail.neroumu.top. (<br>                                        1       ; 序列号<br>                                        1D      ; 刷新时间<br>                                        1H      ; 重试时间<br>                                        1W      ; 过期时间<br>                                        3H )    ; 否定答案的TTL值<br>        NS      @<br>        A       172.16.10.10<br>world   IN      A       172.16.10.20<br>nihao   IN      A       172.16.10.30<br></code></pre></td></tr></table></figure>
+<p>编辑 <code>/etc/systemd/system/AutoBanIP.timer</code> 文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs conf">[Unit]  <br>Description=Run AutoBanIP.sh evey 1 hour  <br>  <br>[Timer]<br>OnBootSec=30m<br>OnUnitActiveSec=30m <br> <br>[Install]  <br>WantedBy=timers.target<br></code></pre></td></tr></table></figure>
 
-<ul>
-<li>@ 代表当前区域的域名</li>
-<li>第一个 <code>@</code> 是当前区域的名字</li>
-<li>SOA 表示资源类型为SOA</li>
-<li>第二个 <code>@</code> 为主DNS的名称，表示下面哪一条资源记录是主 DNS </li>
-<li>jkmail.neroumu.top. DNS服务器的管理员邮箱，@用点 <code>.</code> 来代替</li>
-<li>IN 代表Internet</li>
-<li><code>NS      @</code> 其中 NS 表示这是一条域名服务器记录，@ 表示当前区域的服务器是域名服务器</li>
-<li><code>A       172.16.10.10</code> 表示当前区域的域名服务器的 IP 地址，也就是本机的 IP 地址</li>
-</ul>
-<p>同理复制一个反向解析文件 <code>data/10.16.172.in-addr.arpa.zone</code>，编辑如下</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs conf">$TTL 3H<br>@       IN SOA  @ jkmail.neroumu.top. (<br>                                        1       ; 序列号<br>                                        1D      ; 刷新时间<br>                                        1H      ; 重试时间<br>                                        1W      ; 过期时间<br>                                        3H )    ; 否定答案的TTL值<br>        NS      @<br>        A       127.0.0.1<br>10      IN      PTR     hello.com.<br>20      IN      PTR     world.hello.com.<br>30      IN      PTR     nihao.hello.com.<br></code></pre></td></tr></table></figure>
+<p><code>AutoBanIP.timer</code> 文件定义了每30分钟自动执行一次 <code>AutoBanIP.sh</code> 脚本</p>
+<p>编写完成后，运行如下命令启动脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl daemon-reload <br>systemctl enable --now AutoBanIP.timer <br></code></pre></td></tr></table></figure>
 
-<p>重启服务</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl restart named<br></code></pre></td></tr></table></figure>
-
-<p>客户端可以通过 <code>nslookup</code> 命令测试是否搭建完成</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">nslookup hello.com<br>nslookup nihao.hello.com<br><br>nslookup 172.16.10.10<br>nslookup 172.16.10.20<br></code></pre></td></tr></table></figure>
-
-<h1 id="搭建从服务器"><a href="#搭建从服务器" class="headerlink" title="搭建从服务器"></a>搭建从服务器</h1><p>从服务器安装好 bind 后，同样的修改 <code>/etc/named.conf</code> 中的两个 any<br>编辑 <code>/etc/named.rfc1912.zones</code> 文件，增加一个正向解析和一个反向解析，并设置类型为slave</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs conf">zone &quot;hello.com&quot; IN &#123;<br>        type slave;<br>        file &quot;slaves/hello.com.zone&quot;;<br>        masters &#123;172.16.10.10;&#125;; #主服务器IP地址<br>&#125;;<br><br>zone &quot;10.16.172.in-addr.arpa&quot; IN &#123;<br>        type slave;<br>        file &quot;slaves/10.16.172.in-addr.arpa.zone&quot;;<br>        masters &#123;172.16.10.10;&#125;; #主服务器IP地址<br>&#125;;<br></code></pre></td></tr></table></figure>
-<p>重启服务</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl restart named<br></code></pre></td></tr></table></figure>
-
-<p>此时在 <code>/var/named/slaves</code> 目录下可以看到正向和反向区域解析都已自动获取，配置完成</p>
-<h1 id="搭建-DNS-子域委派"><a href="#搭建-DNS-子域委派" class="headerlink" title="搭建 DNS 子域委派"></a>搭建 DNS 子域委派</h1><p>编辑 <code>/etc/named.conf</code> 文件，将服务器之间的认证机制关闭，否则后续会导致无法认证以至于无法委派子域，父域和子域都要配置</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs conf">dnssec-enable no;<br>dnssec-validation no;<br></code></pre></td></tr></table></figure>
-
-<p>编辑子域服务器的 <code>/etc/named.rfc1912.zones</code> 文件，添加一个子域zone</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs conf">zone &quot;sekai.hello.com&quot; IN &#123;<br>        type master;<br>        file &quot;data/sekai.hello.com.zone&quot;;<br>&#125;;<br></code></pre></td></tr></table></figure>
-
-<p>编辑 <code>/var/named/data/sekai.hello.com.zone</code> 文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs conf">$TTL 3H<br>@       IN SOA  @ jkmail.neroumu.top. (<br>                                        1       ; 序列号<br>                                        1D      ; 刷新时间<br>                                        1H      ; 重试时间<br>                                        1W      ; 过期时间<br>                                        3H )    ; 否定答案的TTL值<br>        NS      @<br>        A       172.16.10.11<br>kono    IN      A       172.16.10.40<br></code></pre></td></tr></table></figure>
-
-<p>其实就是在子域服务器上搭建一个新的 DNS 服务器，它管理的域名是 hello.com 的一个子域 sekai<br>此时启动服务后，本服务器可以解析 sekai.hello.com 的资源<br>但此时父域服务器无法解析子域管理的域名，需要给它授权才能解析到子域管理的域名<br>编辑父域服务器的 <code>/var/named/data/hello.com.zone</code> 文件，添加子域服务器认证</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs conf">$TTL 3H<br>@       IN SOA  @ jkmail.neroumu.top. (<br>                                        1       ; 序列号<br>                                        1D      ; 刷新时间<br>                                        1H      ; 重试时间<br>                                        1W      ; 过期时间<br>                                        3H )    ; 否定答案的TTL值<br>        NS      @<br>        A       172.16.10.10<br>world   IN      A       172.16.10.20<br>nihao   IN      A       172.16.10.30<br><br>sekai   IN      NS      dns1 #添加子域服务器，它管理的是sekai子域<br>dns1    IN      A       172.16.10.11 #子域服务器的IP地址<br></code></pre></td></tr></table></figure>
-
-<p>添加的两条解析的意思是如果碰到 sekai 这个域的域名解析，把它交给 dns1 所指向的服务器解析，dns1 指向的服务器为子域服务器的 IP 地址</p>
-<p>重启 named 服务后，客户端将DNS服务器设置为父域服务器，并尝试解析子域服务器管理的域名，可以得到未经过认证的解析结果</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">nslookup sekai.hello.com<br>nslookup kono.sekai.hello.com<br></code></pre></td></tr></table></figure>
-
-<h2 id="常见错误"><a href="#常见错误" class="headerlink" title="常见错误"></a>常见错误</h2><ol>
-<li><p>忘记关闭防火墙导致子域服务器配置失败</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl stop firewalld<br>iptables -F<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>序列号不相同导致无法授权</p>
-</li>
-<li><p>认证机制未关闭，因为配置的时候没有配置认证，所以应该关闭认证，否则会无法授权<br>编辑 <code>/etc/named.conf</code> 文件的如下配置</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs conf">dnssec-enable no;<br>dnssec-validation no;<br></code></pre></td></tr></table></figure></li>
-</ol>
 <hr>
-<p>总算是把 DNS 服务器配置出来了，尤其是子域配置，配置了很久<br>之所以能在子域卡这么久，就是因为很多博主在配置的时候，都没有提到过关闭认证机制，导致我一直配置不成功，关闭之后，一下就成功了<br>从大量的重复、真真假假的文章中找答案真是太难受了，还是直接读官方文档好啊 ( ′ 3&#96;) sigh~</p>
+<p>屏蔽脚本编写完成后，希望能减少这些连接失败的日志 (ꐦ°᷄д°᷅)<br>不知道怎么回事就被人盯上了我的服务器，里面也没什么好东西啊，希望后面能停止这种攻击吧，CC 攻击我没什么好处 (ノ▼Д▼)ノ</p>
 
                 
               </div>
@@ -386,7 +340,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="category-chain-item">学习记录</a>
+  <a href="/categories/%E5%A7%BF%E5%8A%BF%E5%AD%A6%E4%B9%A0/" class="category-chain-item">姿势学习</a>
   
   
 
@@ -403,9 +357,9 @@
       
         <a href="/tags/Linux/">#Linux</a>
       
-        <a href="/tags/DNS/">#DNS</a>
+        <a href="/tags/systemd/">#systemd</a>
       
-        <a href="/tags/bind/">#bind</a>
+        <a href="/tags/shell/">#shell</a>
       
     </div>
   
@@ -419,18 +373,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/05/19/Linux%E8%87%AA%E5%8A%A8%E5%B0%81%E7%A6%81%E5%A4%9A%E6%AC%A1%E8%BF%9E%E6%8E%A5%E5%A4%B1%E8%B4%A5%E7%9A%84IP/" title="Linux自动封禁多次连接失败的IP">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Linux自动封禁多次连接失败的IP</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/29/DHCP%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/" title="DHCP服务器搭建">
-                        <span class="hidden-mobile">DHCP服务器搭建</span>
+                      <a href="/2023/05/05/DNS%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/" title="DNS服务器搭建">
+                        <span class="hidden-mobile">DNS服务器搭建</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
