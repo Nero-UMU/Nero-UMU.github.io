@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>SSH关闭失效的连接</title>
+    <link href="/2023/05/20/SSH%E5%85%B3%E9%97%AD%E5%A4%B1%E6%95%88%E7%9A%84%E8%BF%9E%E6%8E%A5/"/>
+    <url>/2023/05/20/SSH%E5%85%B3%E9%97%AD%E5%A4%B1%E6%95%88%E7%9A%84%E8%BF%9E%E6%8E%A5/</url>
+    
+    <content type="html"><![CDATA[<h1 id="如何关闭失效的连接"><a href="#如何关闭失效的连接" class="headerlink" title="如何关闭失效的连接"></a>如何关闭失效的连接</h1><p>在使用 SSH 连接服务器的时候，难免会遭遇网络波动，这就有可能造成连接中断<br>有时候，连接虽然中断了，但是 SSH 的连接窗口却没有自动关闭，不论输入什么窗口都是无响应<br>通常这种情况我会直接杀死(kill)这个窗口<br>但这样做其实是很不好的一种习惯，但我一直没找到好的解决方法，今天正好碰到了这种情况的解决方案</p><span id="more"></span><h1 id="SSH-转义字符"><a href="#SSH-转义字符" class="headerlink" title="SSH 转义字符"></a>SSH 转义字符</h1><p>使用转义字符的方法很简单，按下回车后再输入一个 <code>~</code> 符号即可使用转义字符了<br>比如按下回车 + <code>~?</code>，就会输出帮助菜单</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs text">Supported escape sequences:<br> ~.   - terminate connection (and any multiplexed sessions)<br> ~B   - send a BREAK to the remote system<br> ~R   - request rekey<br> ~V/v - decrease/increase verbosity (LogLevel)<br> ~^Z  - suspend ssh<br> ~#   - list forwarded connections<br> ~&amp;   - background ssh (when waiting for connections to terminate)<br> ~?   - this message<br> ~~   - send the escape character by typing it twice<br>(Note that escapes are only recognized immediately after newline.)<br></code></pre></td></tr></table></figure><ul><li><code>~.</code> 终止会话</li><li><code>~B</code> 向远端系统发送 BREAK</li><li><code>~R</code> 请求重新加密连接</li><li><code>~V/v</code> 当写入错误写入到日志中时，下调&#x2F;上调日志的详细等级</li><li><code>~^Z</code> 挂起 ssh 连接，可以通过 <code>fg</code> 命令回到连接</li><li><code>~#</code> 列出转发的连接</li><li><code>~&amp;</code> 当等待 ssh 连接终止时，后台运行 ssh</li><li><code>~?</code> 打印帮助列表</li><li><code>~~</code> 当连接一台主机A后，用A主机连接B主机，向B主机发送一个 <code>~</code> 符号</li></ul><p>显然，当需要关闭失效的 ssh 连接窗口的时候，使用 <code>~.</code> 转义字符就可以关闭 ssh 连接的窗口了</p><hr><p>所以以后碰到连接无响应的时候，不用再杀死那个进程了，ssh 自带的功能就可以完成这一项任务，而且能更安全的断开这个假连接 (＠￣ー￣＠)<br>使用这些转义字符还能更好的使用 ssh 这个工具，学一学新东西何乐而不为呢 ( σ’ω’)σ </p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>ssh</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Linux自动封禁多次连接失败的IP</title>
     <link href="/2023/05/19/Linux%E8%87%AA%E5%8A%A8%E5%B0%81%E7%A6%81%E5%A4%9A%E6%AC%A1%E8%BF%9E%E6%8E%A5%E5%A4%B1%E8%B4%A5%E7%9A%84IP/"/>
     <url>/2023/05/19/Linux%E8%87%AA%E5%8A%A8%E5%B0%81%E7%A6%81%E5%A4%9A%E6%AC%A1%E8%BF%9E%E6%8E%A5%E5%A4%B1%E8%B4%A5%E7%9A%84IP/</url>

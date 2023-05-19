@@ -18,26 +18,25 @@
   <meta name="author" content="NeroUMU">
   <meta name="keywords" content="">
   
-    <meta name="description" content="封禁多次连接失败的 IP最近几天多次看我的服务器有大量连接失败的日志，其中有大量的不同用户名的尝试连接失败的记录虽然我已经更改了 SSH 的连接端口，并开启了唯密钥登录虽然这样入侵成功的概率很低很低，但是它大量的尝试连接也是会占用我的带宽和 CPU，这也是一种 DDoS攻击，名为 CC (ChallengeCollapsar，挑战黑洞) 攻击于是我就尝试禁止它们的连接">
+    <meta name="description" content="如何关闭失效的连接在使用 SSH 连接服务器的时候，难免会遭遇网络波动，这就有可能造成连接中断有时候，连接虽然中断了，但是 SSH 的连接窗口却没有自动关闭，不论输入什么窗口都是无响应通常这种情况我会直接杀死(kill)这个窗口但这样做其实是很不好的一种习惯，但我一直没找到好的解决方法，今天正好碰到了这种情况的解决方案">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux自动封禁多次连接失败的IP">
-<meta property="og:url" content="https://neroumu.top/2023/05/19/Linux%E8%87%AA%E5%8A%A8%E5%B0%81%E7%A6%81%E5%A4%9A%E6%AC%A1%E8%BF%9E%E6%8E%A5%E5%A4%B1%E8%B4%A5%E7%9A%84IP/index.html">
+<meta property="og:title" content="SSH关闭失效的连接">
+<meta property="og:url" content="https://neroumu.top/2023/05/20/SSH%E5%85%B3%E9%97%AD%E5%A4%B1%E6%95%88%E7%9A%84%E8%BF%9E%E6%8E%A5/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
-<meta property="og:description" content="封禁多次连接失败的 IP最近几天多次看我的服务器有大量连接失败的日志，其中有大量的不同用户名的尝试连接失败的记录虽然我已经更改了 SSH 的连接端口，并开启了唯密钥登录虽然这样入侵成功的概率很低很低，但是它大量的尝试连接也是会占用我的带宽和 CPU，这也是一种 DDoS攻击，名为 CC (ChallengeCollapsar，挑战黑洞) 攻击于是我就尝试禁止它们的连接">
+<meta property="og:description" content="如何关闭失效的连接在使用 SSH 连接服务器的时候，难免会遭遇网络波动，这就有可能造成连接中断有时候，连接虽然中断了，但是 SSH 的连接窗口却没有自动关闭，不论输入什么窗口都是无响应通常这种情况我会直接杀死(kill)这个窗口但这样做其实是很不好的一种习惯，但我一直没找到好的解决方法，今天正好碰到了这种情况的解决方案">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-05-19T03:45:59.000Z">
-<meta property="article:modified_time" content="2023-05-18T16:27:48.584Z">
+<meta property="article:published_time" content="2023-05-19T20:46:13.000Z">
+<meta property="article:modified_time" content="2023-05-19T08:46:50.941Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Linux">
-<meta property="article:tag" content="systemd">
-<meta property="article:tag" content="shell">
+<meta property="article:tag" content="ssh">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Linux自动封禁多次连接失败的IP - NeroUMU&#39;s BLOG</title>
+  <title>SSH关闭失效的连接 - NeroUMU&#39;s BLOG</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -204,7 +203,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Linux自动封禁多次连接失败的IP"></span>
+            <span id="subtitle" data-typed-text="SSH关闭失效的连接"></span>
           
         </div>
 
@@ -215,8 +214,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-18 23:45" pubdate>
-          2023年5月18日 晚上
+        <time datetime="2023-05-19 16:46" pubdate>
+          2023年5月19日 下午
         </time>
       </span>
     
@@ -228,7 +227,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          全文共1.4k 字
+          全文共914 字
         
       </span>
     
@@ -240,7 +239,7 @@
         
         
           <!-- compatible with older versions-->
-          阅读全文需约13 分钟
+          阅读全文需约8 分钟
         
       </span>
     
@@ -290,38 +289,31 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Linux自动封禁多次连接失败的IP</h1>
+            <h1 style="display: none">SSH关闭失效的连接</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="封禁多次连接失败的-IP"><a href="#封禁多次连接失败的-IP" class="headerlink" title="封禁多次连接失败的 IP"></a>封禁多次连接失败的 IP</h1><p>最近几天多次看我的服务器有大量连接失败的日志，其中有大量的不同用户名的尝试连接失败的记录<br>虽然我已经更改了 SSH 的连接端口，并开启了唯密钥登录<br>虽然这样入侵成功的概率很低很低，但是它大量的尝试连接也是会占用我的带宽和 CPU，这也是一种 DDoS攻击，名为 CC (ChallengeCollapsar，挑战黑洞) 攻击<br>于是我就尝试禁止它们的连接</p>
+                <h1 id="如何关闭失效的连接"><a href="#如何关闭失效的连接" class="headerlink" title="如何关闭失效的连接"></a>如何关闭失效的连接</h1><p>在使用 SSH 连接服务器的时候，难免会遭遇网络波动，这就有可能造成连接中断<br>有时候，连接虽然中断了，但是 SSH 的连接窗口却没有自动关闭，不论输入什么窗口都是无响应<br>通常这种情况我会直接杀死(kill)这个窗口<br>但这样做其实是很不好的一种习惯，但我一直没找到好的解决方法，今天正好碰到了这种情况的解决方案</p>
 <span id="more"></span>
 
-<h1 id="编写-Shell-脚本"><a href="#编写-Shell-脚本" class="headerlink" title="编写 Shell 脚本"></a>编写 Shell 脚本</h1><p>为了获取到这些多次连接失败的 IP，地址，可以用如下的命令获取</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">lastb | awk &#x27;&#123;print $3&#125;&#x27; | sort | uniq -c | sed &#x27;/[A-Z]/d&#x27; | awk &#x27;&#123;if($1&gt;3) print$2&#125;&#x27;<br></code></pre></td></tr></table></figure>
-<p>命令 <code>lastb</code> 可以获取到连接失败的日志，后面从该日志中获取到重复次数超过3次的 IP 地址</p>
-<p>文件 <code>/etc/hosts.deny</code> 是一个黑名单，在该名单中的主机将被拒绝连接<br>所以创建脚本文件 &#x2F;opt&#x2F;AutoBanIP.sh</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">touch /opt/AutoBanIP.sh<br></code></pre></td></tr></table></figure>
+<h1 id="SSH-转义字符"><a href="#SSH-转义字符" class="headerlink" title="SSH 转义字符"></a>SSH 转义字符</h1><p>使用转义字符的方法很简单，按下回车后再输入一个 <code>~</code> 符号即可使用转义字符了<br>比如按下回车 + <code>~?</code>，就会输出帮助菜单</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs text">Supported escape sequences:<br> ~.   - terminate connection (and any multiplexed sessions)<br> ~B   - send a BREAK to the remote system<br> ~R   - request rekey<br> ~V/v - decrease/increase verbosity (LogLevel)<br> ~^Z  - suspend ssh<br> ~#   - list forwarded connections<br> ~&amp;   - background ssh (when waiting for connections to terminate)<br> ~?   - this message<br> ~~   - send the escape character by typing it twice<br>(Note that escapes are only recognized immediately after newline.)<br></code></pre></td></tr></table></figure>
 
-<p>编写如下代码</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/bash</span><br>iplist=`lastb | awk &#x27;&#123;print $3&#125;&#x27; | sort | uniq -c | sed &#x27;/[A-Z]/d&#x27; | awk &#x27;&#123;if($1&gt;3) print$2&#125;&#x27;` # 获取需要封禁的 IP 地址列表<br>for ip in $iplist # 遍历该列表<br>do<br>        if (grep -q $ip /etc/hosts.deny) # 判断该 IP 地址是否已经存在于 /etc/hosts.deny 中<br>        then<br>                continue<br>        else<br>                echo &quot;sshd:$ip:deny&quot; &gt;&gt; /etc/hosts.deny # 添加该地址到黑名单中<br>        fi<br>done<br></code></pre></td></tr></table></figure>
-
-<h1 id="定时运行脚本"><a href="#定时运行脚本" class="headerlink" title="定时运行脚本"></a>定时运行脚本</h1><p>为了定时运行该脚本，需要编写两个文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">touch /etc/systemd/system/AutoBanIP.service /etc/systemd/system/AutoBanIP.timer<br></code></pre></td></tr></table></figure>
-
-<p>编辑 <code>/etc/systemd/system/AutoBanIP.service</code> 文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs conf">[Unit]<br>Description=Auto ban IP<br><br>[Service]<br>ExecStart=/opt/AutoBanIP.sh<br><br>[Install]<br>WantedBy=multi-user.target<br></code></pre></td></tr></table></figure>
-
-<p>编辑 <code>/etc/systemd/system/AutoBanIP.timer</code> 文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs conf">[Unit]  <br>Description=Run AutoBanIP.sh evey 1 hour  <br>  <br>[Timer]<br>OnBootSec=30m<br>OnUnitActiveSec=30m <br> <br>[Install]  <br>WantedBy=timers.target<br></code></pre></td></tr></table></figure>
-
-<p><code>AutoBanIP.timer</code> 文件定义了每30分钟自动执行一次 <code>AutoBanIP.sh</code> 脚本</p>
-<p>编写完成后，运行如下命令启动脚本</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl daemon-reload <br>systemctl enable --now AutoBanIP.timer <br></code></pre></td></tr></table></figure>
-
+<ul>
+<li><code>~.</code> 终止会话</li>
+<li><code>~B</code> 向远端系统发送 BREAK</li>
+<li><code>~R</code> 请求重新加密连接</li>
+<li><code>~V/v</code> 当写入错误写入到日志中时，下调&#x2F;上调日志的详细等级</li>
+<li><code>~^Z</code> 挂起 ssh 连接，可以通过 <code>fg</code> 命令回到连接</li>
+<li><code>~#</code> 列出转发的连接</li>
+<li><code>~&amp;</code> 当等待 ssh 连接终止时，后台运行 ssh</li>
+<li><code>~?</code> 打印帮助列表</li>
+<li><code>~~</code> 当连接一台主机A后，用A主机连接B主机，向B主机发送一个 <code>~</code> 符号</li>
+</ul>
+<p>显然，当需要关闭失效的 ssh 连接窗口的时候，使用 <code>~.</code> 转义字符就可以关闭 ssh 连接的窗口了</p>
 <hr>
-<p>屏蔽脚本编写完成后，希望能减少这些连接失败的日志 (ꐦ°᷄д°᷅)<br>不知道怎么回事就被人盯上了我的服务器，里面也没什么好东西啊，希望后面能停止这种攻击吧，CC 攻击我没什么好处 (ノ▼Д▼)ノ</p>
+<p>所以以后碰到连接无响应的时候，不用再杀死那个进程了，ssh 自带的功能就可以完成这一项任务，而且能更安全的断开这个假连接 (＠￣ー￣＠)<br>使用这些转义字符还能更好的使用 ssh 这个工具，学一学新东西何乐而不为呢 ( σ’ω’)σ </p>
 
                 
               </div>
@@ -340,7 +332,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%A7%BF%E5%8A%BF%E5%AD%A6%E4%B9%A0/" class="category-chain-item">姿势学习</a>
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
   
   
 
@@ -357,9 +349,7 @@
       
         <a href="/tags/Linux/">#Linux</a>
       
-        <a href="/tags/systemd/">#systemd</a>
-      
-        <a href="/tags/shell/">#shell</a>
+        <a href="/tags/ssh/">#ssh</a>
       
     </div>
   
@@ -373,18 +363,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/05/20/SSH%E5%85%B3%E9%97%AD%E5%A4%B1%E6%95%88%E7%9A%84%E8%BF%9E%E6%8E%A5/" title="SSH关闭失效的连接">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SSH关闭失效的连接</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/05/DNS%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/" title="DNS服务器搭建">
-                        <span class="hidden-mobile">DNS服务器搭建</span>
+                      <a href="/2023/05/19/Linux%E8%87%AA%E5%8A%A8%E5%B0%81%E7%A6%81%E5%A4%9A%E6%AC%A1%E8%BF%9E%E6%8E%A5%E5%A4%B1%E8%B4%A5%E7%9A%84IP/" title="Linux自动封禁多次连接失败的IP">
+                        <span class="hidden-mobile">Linux自动封禁多次连接失败的IP</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
