@@ -6,7 +6,7 @@ a:hover {
     cursor: url("/NeroPoint/链接选择.cur"), pointer;
 }
 
-.text {
+code {
     cursor: url("/NeroPoint/文本选择.cur"), text;
 }
 
