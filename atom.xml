@@ -6,7 +6,7 @@
   <link href="https://neroumu.top/atom.xml" rel="self"/>
   
   <link href="https://neroumu.top/"/>
-  <updated>2023-07-01T11:35:31.258Z</updated>
+  <updated>2023-10-27T16:25:21.833Z</updated>
   <id>https://neroumu.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Discord添加代理</title>
+    <link href="https://neroumu.top/2023/10/27/Discord%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%90%86/"/>
+    <id>https://neroumu.top/2023/10/27/Discord%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%90%86/</id>
+    <published>2023-10-27T15:50:48.000Z</published>
+    <updated>2023-10-27T16:25:21.833Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="桌面应用不走代理"><a href="#桌面应用不走代理" class="headerlink" title="桌面应用不走代理"></a>桌面应用不走代理</h2><p>最近在 Discord 聊天聊得很快乐，但是仅限于网页版，安装了客户端却一直无法打开，系统代理设置了还是不行<br>这里还得点名批评 Discord，居然没有设置代理的选项，所以找了别的方法成功进入了 Discord 客户端</p><span id="more"></span><h2 id="添加代理"><a href="#添加代理" class="headerlink" title="添加代理"></a>添加代理</h2><p>给 Discord 还是很简单的，进入目录 <code>usr/share/applications </code><br>编辑 <code>discord.desktop</code> 文件，修改 <code>Exec</code> 配置</p><p>在 <code>Exec</code> 后面添加一条代理命令 <code>--proxy-server=127.0.0.1:2020</code> 即可</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs conf">[Desktop Entry]<br>Name=Discord<br>StartupWMClass=discord<br>GenericName=Internet Messenger<br>Exec=/usr/bin/discord --proxy-server=127.0.0.1:2020<br>Icon=discord<br>Type=Application<br>Categories=Network;InstantMessaging;<br>Path=/usr/bin<br></code></pre></td></tr></table></figure><p>这样在启动 Discord 的时候就会设置走代理，可以愉快的使用客户端了</p><hr><p>最近复习考研，学习新东西的精力全都放在了上面，博客也就这么停了好几个月<br>等考试结束了，再回到以前的折腾吧</p>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;桌面应用不走代理&quot;&gt;&lt;a href=&quot;#桌面应用不走代理&quot; class=&quot;headerlink&quot; title=&quot;桌面应用不走代理&quot;&gt;&lt;/a&gt;桌面应用不走代理&lt;/h2&gt;&lt;p&gt;最近在 Discord 聊天聊得很快乐，但是仅限于网页版，安装了客户端却一直无法打开，系统代理设置了还是不行&lt;br&gt;这里还得点名批评 Discord，居然没有设置代理的选项，所以找了别的方法成功进入了 Discord 客户端&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Linux" scheme="https://neroumu.top/categories/Linux/"/>
+    
+    
+    <category term="Linux" scheme="https://neroumu.top/tags/Linux/"/>
+    
+    <category term="Proxy" scheme="https://neroumu.top/tags/Proxy/"/>
+    
+  </entry>
   
   <entry>
     <title>Arch Linux蓝牙连接后立刻断开</title>
