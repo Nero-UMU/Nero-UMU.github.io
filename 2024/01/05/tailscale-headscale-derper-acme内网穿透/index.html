@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://neroumu.top/img/2024-1-5-1.png">
 <meta property="og:image" content="https://neroumu.top/img/2024-1-5-2.png">
 <meta property="article:published_time" content="2024-01-05T11:17:26.000Z">
-<meta property="article:modified_time" content="2024-01-05T13:59:00.795Z">
+<meta property="article:modified_time" content="2024-01-06T04:24:28.822Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="acme">
@@ -351,7 +351,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">tailscale up<br></code></pre></td></tr></table></figure>
 
 <p>但是，如果不想使用tailscale官方的服务，那么就需要自己搭建了<br>此处搭建的中转服务器就是DERP服务，协调服务器就是headscale服务器</p>
-<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>我用的方案是最简单的方案，一台derper服务器，一台headscale,分别搭建在两个VPS上，这样不容易产生端口冲突的问题(因为我碰到了这样的问题)，于是先准备如下材料</p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>我用的方案是最简单的方案，一台derper服务器，一台headscale，分别搭建在两个VPS上，这样不容易产生端口冲突的问题(因为我碰到了这样的问题)，于是先准备如下材料</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs item">域名*1   derper搭建时需要<br>VPS*2   一台用作搭建derper，一台用作搭建headscale<br>Linux客户端   用作tailscale客户端<br></code></pre></td></tr></table></figure>
 
 <p>域名可以在<a target="_blank" rel="noopener" href="https://www.namesilo.com/">namesilo</a>上购买，一个 <code>.top</code> 的域名也就1、2美元一年<br>并创建一个 <code>A</code> 记录指向用于搭建derper的服务器的IP地址</p>
