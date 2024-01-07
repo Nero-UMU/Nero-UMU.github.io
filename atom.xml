@@ -6,7 +6,7 @@
   <link href="https://neroumu.top/atom.xml" rel="self"/>
   
   <link href="https://neroumu.top/"/>
-  <updated>2024-01-06T04:24:28.822Z</updated>
+  <updated>2024-01-07T17:22:56.993Z</updated>
   <id>https://neroumu.top/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>VirtualBox无法识别U盘</title>
+    <link href="https://neroumu.top/2024/01/08/VirtualBox%E6%97%A0%E6%B3%95%E8%AF%86%E5%88%ABU%E7%9B%98/"/>
+    <id>https://neroumu.top/2024/01/08/VirtualBox%E6%97%A0%E6%B3%95%E8%AF%86%E5%88%ABU%E7%9B%98/</id>
+    <published>2024-01-07T17:06:25.000Z</published>
+    <updated>2024-01-07T17:22:56.993Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="VirtualBox无法识别U盘"><a href="#VirtualBox无法识别U盘" class="headerlink" title="VirtualBox无法识别U盘"></a>VirtualBox无法识别U盘</h1><p>今天想着在U盘中安装一个 Ubuntu 系统的，但是没有额外的U盘，所以不能直接用启动盘安装<br>于是找到了用 VirtualBox 安装的方法<br>但是不知道为什么，VirtualBox 一直无法识别到U盘，导致无法进行下去<br>最后还是在仔细阅读 wiki 后才把问题解决</p><span id="more"></span><h1 id="VirtualBox-增强版"><a href="#VirtualBox-增强版" class="headerlink" title="VirtualBox 增强版"></a>VirtualBox 增强版</h1><p>VirtualBox 识别 USB 的功能不是自带的，需要安装第三方的增强包才能使用<br>而 aur 中已经有现成的包，可以直接安装</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">yay virtualbox-ext-oracle<br></code></pre></td></tr></table></figure><p>安装好后，重启系统 <code>reboot</code>，再打开 VirtualBox 就可以正确识别到插入的U盘了<br><img src="/img/2024-1-8-1.png"></p><h2 id="可能碰到的报错"><a href="#可能碰到的报错" class="headerlink" title="可能碰到的报错"></a>可能碰到的报错</h2><p>我在安装后想要插入U盘到虚拟机中时，遇到了依然无法识别的问题，仔细看报错信息是 <code>Error: VERR_PDM_NO_USB_PORTS</code><br>这是因为 USB 的控制器选择不对的问题，修改为 <code>USB 3.0 Controller</code> 即可<br><img src="/img/2024-1-8-2.png"></p><hr><p>开始准备毕设了，第一步先把环境搭建好吧(&#x2F;・・)ノ</p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;VirtualBox无法识别U盘&quot;&gt;&lt;a href=&quot;#VirtualBox无法识别U盘&quot; class=&quot;headerlink&quot; title=&quot;VirtualBox无法识别U盘&quot;&gt;&lt;/a&gt;VirtualBox无法识别U盘&lt;/h1&gt;&lt;p&gt;今天想着在U盘中安装一个 Ubuntu 系统的，但是没有额外的U盘，所以不能直接用启动盘安装&lt;br&gt;于是找到了用 VirtualBox 安装的方法&lt;br&gt;但是不知道为什么，VirtualBox 一直无法识别到U盘，导致无法进行下去&lt;br&gt;最后还是在仔细阅读 wiki 后才把问题解决&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="踩坑记录" scheme="https://neroumu.top/categories/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="ArchLinux" scheme="https://neroumu.top/tags/ArchLinux/"/>
+    
+    <category term="VirtualBox" scheme="https://neroumu.top/tags/VirtualBox/"/>
+    
+    <category term="USB" scheme="https://neroumu.top/tags/USB/"/>
+    
+  </entry>
   
   <entry>
     <title>tailscale+headscale+derper+acme内网穿透</title>
