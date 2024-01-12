@@ -23,29 +23,27 @@
   <meta name="author" content="NeroUMU">
   <meta name="keywords" content="">
   
-    <meta name="description" content="VirtualBox无法识别U盘今天想着在U盘中安装一个 Ubuntu 系统的，但是没有额外的U盘，所以不能直接用启动盘安装于是找到了用 VirtualBox 安装的方法但是不知道为什么，VirtualBox 一直无法识别到U盘，导致无法进行下去最后还是在仔细阅读 wiki 后才把问题解决">
+    <meta name="description" content="踩了个巨坑今天开始学习 PyTorch，在安装环境的时候，需要用到 pip3 安装 PyTorch本来是一件很简单的事，一条命令就可以搞定，没想到碰到了如下报错 1WARNING: Retrying (Retry(total&#x3D;0, connect&#x3D;None, read&#x3D;None, redirect&#x3D;None, status&#x3D;None)) after connection broken by &amp;#x">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VirtualBox无法识别U盘">
-<meta property="og:url" content="https://neroumu.top/2024/01/08/VirtualBox%E6%97%A0%E6%B3%95%E8%AF%86%E5%88%ABU%E7%9B%98/index.html">
+<meta property="og:title" content="解决pip3安装依赖时SSL问题">
+<meta property="og:url" content="https://neroumu.top/2024/01/12/%E8%A7%A3%E5%86%B3pip3%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96%E6%97%B6SSL%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
-<meta property="og:description" content="VirtualBox无法识别U盘今天想着在U盘中安装一个 Ubuntu 系统的，但是没有额外的U盘，所以不能直接用启动盘安装于是找到了用 VirtualBox 安装的方法但是不知道为什么，VirtualBox 一直无法识别到U盘，导致无法进行下去最后还是在仔细阅读 wiki 后才把问题解决">
+<meta property="og:description" content="踩了个巨坑今天开始学习 PyTorch，在安装环境的时候，需要用到 pip3 安装 PyTorch本来是一件很简单的事，一条命令就可以搞定，没想到碰到了如下报错 1WARNING: Retrying (Retry(total&#x3D;0, connect&#x3D;None, read&#x3D;None, redirect&#x3D;None, status&#x3D;None)) after connection broken by &amp;#x">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://neroumu.top/img/2024-1-8-1.png">
-<meta property="og:image" content="https://neroumu.top/img/2024-1-8-2.png">
-<meta property="article:published_time" content="2024-01-07T17:06:25.000Z">
-<meta property="article:modified_time" content="2024-01-07T17:22:56.993Z">
+<meta property="article:published_time" content="2024-01-12T14:10:00.000Z">
+<meta property="article:modified_time" content="2024-01-12T14:44:11.493Z">
 <meta property="article:author" content="NeroUMU">
-<meta property="article:tag" content="ArchLinux">
-<meta property="article:tag" content="VirtualBox">
-<meta property="article:tag" content="USB">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="OpenSSL">
+<meta property="article:tag" content="pip3">
+<meta property="article:tag" content="PyTorch">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://neroumu.top/img/2024-1-8-1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>VirtualBox无法识别U盘 - NeroUMU&#39;s BLOG</title>
+  <title>解决pip3安装依赖时SSL问题 - NeroUMU&#39;s BLOG</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -252,7 +250,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="VirtualBox无法识别U盘"></span>
+            <span id="subtitle" data-typed-text="解决pip3安装依赖时SSL问题"></span>
           
         </div>
 
@@ -263,8 +261,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-01-08 01:06" pubdate>
-          2024年1月8日 凌晨
+        <time datetime="2024-01-12 22:10" pubdate>
+          2024年1月12日 晚上
         </time>
       </span>
     
@@ -276,7 +274,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          全文共254 字
+          全文共521 字
         
       </span>
     
@@ -288,7 +286,7 @@
         
         
           <!-- compatible with older versions-->
-          阅读全文需约3 分钟
+          阅读全文需约5 分钟
         
       </span>
     
@@ -337,21 +335,43 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">VirtualBox无法识别U盘</h1>
+            <h1 id="seo-header">解决pip3安装依赖时SSL问题</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="VirtualBox无法识别U盘"><a href="#VirtualBox无法识别U盘" class="headerlink" title="VirtualBox无法识别U盘"></a>VirtualBox无法识别U盘</h1><p>今天想着在U盘中安装一个 Ubuntu 系统的，但是没有额外的U盘，所以不能直接用启动盘安装<br>于是找到了用 VirtualBox 安装的方法<br>但是不知道为什么，VirtualBox 一直无法识别到U盘，导致无法进行下去<br>最后还是在仔细阅读 wiki 后才把问题解决</p>
+                <h1 id="踩了个巨坑"><a href="#踩了个巨坑" class="headerlink" title="踩了个巨坑"></a>踩了个巨坑</h1><p>今天开始学习 PyTorch，在安装环境的时候，需要用到 <code>pip3</code> 安装 PyTorch<br>本来是一件很简单的事，一条命令就可以搞定，没想到碰到了如下报错</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs txt">WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by &#x27;SSLError(&quot;Can&#x27;t connect to HTTPS URL because the SSL module is not available.&quot;)&#x27;: /whl/cu90/torch/<br></code></pre></td></tr></table></figure>
+
+<p>意思是说因为 SSL 错误导致安装无法进行下去，没办法，只好开始Google之旅，找了中文的英文的解决方法，要么是复制粘贴的，要么是无法解决的，最后花了几个小时，终于解决了，于是写一篇踩坑记录记录下来</p>
 <span id="more"></span>
 
-<h1 id="VirtualBox-增强版"><a href="#VirtualBox-增强版" class="headerlink" title="VirtualBox 增强版"></a>VirtualBox 增强版</h1><p>VirtualBox 识别 USB 的功能不是自带的，需要安装第三方的增强包才能使用<br>而 aur 中已经有现成的包，可以直接安装</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">yay virtualbox-ext-oracle<br></code></pre></td></tr></table></figure>
+<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>之所以会碰到 PyTorch 安装失败，有几个原因</p>
+<ul>
+<li>OpenSSL 版本过低，Linux自带的版本是1.0.1的版本，需要至少1.1.1的版本</li>
+<li>Python 版本，需要在3.8-3.11之间</li>
+<li>未正确将SSL编译进Python</li>
+</ul>
+<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>首先要编译 OpenSSL，下载 OpenSSL 安装包，并解压，进入解压后的目录内</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">wget https://www.openssl.org/source/openssl-1.1.1w.tar.gz<br>tar -xvzf openssl-1.1.1w.tar.gz<br>cd openssl-1.1.1w<br></code></pre></td></tr></table></figure>
 
-<p>安装好后，重启系统 <code>reboot</code>，再打开 VirtualBox 就可以正确识别到插入的U盘了<br><img src="/img/2024-1-8-1.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="可能碰到的报错"><a href="#可能碰到的报错" class="headerlink" title="可能碰到的报错"></a>可能碰到的报错</h2><p>我在安装后想要插入U盘到虚拟机中时，遇到了依然无法识别的问题，仔细看报错信息是 <code>Error: VERR_PDM_NO_USB_PORTS</code><br>这是因为 USB 的控制器选择不对的问题，修改为 <code>USB 3.0 Controller</code> 即可<br><img src="/img/2024-1-8-2.png" srcset="/img/loading.gif" lazyload></p>
+<p>编译并安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">./config --prefix=/usr/local/ssl --openssldir=/usr/local/ssl no-zlib<br>make install<br></code></pre></td></tr></table></figure>
+
+<p>重新编译 Python，如果要安装 PyTorch，Python 的版本要在3.8-3.11之间<br>下载源码包，并解压缩，进入解压后的目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">wget https://www.python.org/ftp/python/3.8.18/Python-3.8.18.tar.xz<br>tar -xvf Python-3.8.18.tar.xz<br>cd Python-3.8.18<br></code></pre></td></tr></table></figure>
+
+<p>编辑 <code>Modules/Setup</code> 文件(很重要)，修改如下配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs conf"># Socket module helper for socket(2)<br>_socket socketmodule.c # 取消注释<br><br># Socket module helper for SSL support; you must comment out the other<br># socket line above, and possibly edit the SSL variable:<br>SSL=/usr/local/ssl # 修改为编译 OpenSSL 时设置的目录<br>_ssl _ssl.c \<br>        -DUSE_SSL -I$(SSL)/include -I$(SSL)/include/openssl \<br>        -L$(SSL)/lib -lssl -lcrypto<br></code></pre></td></tr></table></figure>
+
+<p>编译 Python</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">make<br>make install<br></code></pre></td></tr></table></figure>
+
+<p>这样就可以愉快的安装 PyTorch 了，注意版本到官网上去找对应的版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu90<br></code></pre></td></tr></table></figure>
+
 <hr>
-<p>开始准备毕设了，第一步先把环境搭建好吧(&#x2F;・・)ノ</p>
+<p>今天真的是踩了个大坑，本来还想从今天开始学习 PyTorch 呢，没想到搭建环境这一关就给我来了个下马威 ＼(º □ º l|l)&#x2F;<br>今天吧环境搭建的问题解决了，明天再开始学习 PyTorch，开始准备毕设吧─&#x3D;≡Σ((( つ＞＜)つ</p>
 
                 
               </div>
@@ -385,11 +405,13 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/ArchLinux/" class="print-no-link">#ArchLinux</a>
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
       
-        <a href="/tags/VirtualBox/" class="print-no-link">#VirtualBox</a>
+        <a href="/tags/OpenSSL/" class="print-no-link">#OpenSSL</a>
       
-        <a href="/tags/USB/" class="print-no-link">#USB</a>
+        <a href="/tags/pip3/" class="print-no-link">#pip3</a>
+      
+        <a href="/tags/PyTorch/" class="print-no-link">#PyTorch</a>
       
     </div>
   
@@ -403,18 +425,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/01/12/%E8%A7%A3%E5%86%B3pip3%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96%E6%97%B6SSL%E9%97%AE%E9%A2%98/" title="解决pip3安装依赖时SSL问题">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">解决pip3安装依赖时SSL问题</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/01/05/tailscale-headscale-derper-acme%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" title="tailscale+headscale+derper+acme内网穿透">
-                        <span class="hidden-mobile">tailscale+headscale+derper+acme内网穿透</span>
+                      <a href="/2024/01/08/VirtualBox%E6%97%A0%E6%B3%95%E8%AF%86%E5%88%ABU%E7%9B%98/" title="VirtualBox无法识别U盘">
+                        <span class="hidden-mobile">VirtualBox无法识别U盘</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

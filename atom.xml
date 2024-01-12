@@ -6,7 +6,7 @@
   <link href="https://neroumu.top/atom.xml" rel="self"/>
   
   <link href="https://neroumu.top/"/>
-  <updated>2024-01-07T17:22:56.993Z</updated>
+  <updated>2024-01-12T14:44:11.493Z</updated>
   <id>https://neroumu.top/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>解决pip3安装依赖时SSL问题</title>
+    <link href="https://neroumu.top/2024/01/12/%E8%A7%A3%E5%86%B3pip3%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96%E6%97%B6SSL%E9%97%AE%E9%A2%98/"/>
+    <id>https://neroumu.top/2024/01/12/%E8%A7%A3%E5%86%B3pip3%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96%E6%97%B6SSL%E9%97%AE%E9%A2%98/</id>
+    <published>2024-01-12T14:10:00.000Z</published>
+    <updated>2024-01-12T14:44:11.493Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="踩了个巨坑"><a href="#踩了个巨坑" class="headerlink" title="踩了个巨坑"></a>踩了个巨坑</h1><p>今天开始学习 PyTorch，在安装环境的时候，需要用到 <code>pip3</code> 安装 PyTorch<br>本来是一件很简单的事，一条命令就可以搞定，没想到碰到了如下报错</p><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs txt">WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by &#x27;SSLError(&quot;Can&#x27;t connect to HTTPS URL because the SSL module is not available.&quot;)&#x27;: /whl/cu90/torch/<br></code></pre></td></tr></table></figure><p>意思是说因为 SSL 错误导致安装无法进行下去，没办法，只好开始Google之旅，找了中文的英文的解决方法，要么是复制粘贴的，要么是无法解决的，最后花了几个小时，终于解决了，于是写一篇踩坑记录记录下来</p><span id="more"></span><h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>之所以会碰到 PyTorch 安装失败，有几个原因</p><ul><li>OpenSSL 版本过低，Linux自带的版本是1.0.1的版本，需要至少1.1.1的版本</li><li>Python 版本，需要在3.8-3.11之间</li><li>未正确将SSL编译进Python</li></ul><h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>首先要编译 OpenSSL，下载 OpenSSL 安装包，并解压，进入解压后的目录内</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">wget https://www.openssl.org/source/openssl-1.1.1w.tar.gz<br>tar -xvzf openssl-1.1.1w.tar.gz<br>cd openssl-1.1.1w<br></code></pre></td></tr></table></figure><p>编译并安装</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">./config --prefix=/usr/local/ssl --openssldir=/usr/local/ssl no-zlib<br>make install<br></code></pre></td></tr></table></figure><p>重新编译 Python，如果要安装 PyTorch，Python 的版本要在3.8-3.11之间<br>下载源码包，并解压缩，进入解压后的目录</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">wget https://www.python.org/ftp/python/3.8.18/Python-3.8.18.tar.xz<br>tar -xvf Python-3.8.18.tar.xz<br>cd Python-3.8.18<br></code></pre></td></tr></table></figure><p>编辑 <code>Modules/Setup</code> 文件(很重要)，修改如下配置</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs conf"># Socket module helper for socket(2)<br>_socket socketmodule.c # 取消注释<br><br># Socket module helper for SSL support; you must comment out the other<br># socket line above, and possibly edit the SSL variable:<br>SSL=/usr/local/ssl # 修改为编译 OpenSSL 时设置的目录<br>_ssl _ssl.c \<br>        -DUSE_SSL -I$(SSL)/include -I$(SSL)/include/openssl \<br>        -L$(SSL)/lib -lssl -lcrypto<br></code></pre></td></tr></table></figure><p>编译 Python</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">make<br>make install<br></code></pre></td></tr></table></figure><p>这样就可以愉快的安装 PyTorch 了，注意版本到官网上去找对应的版本</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu90<br></code></pre></td></tr></table></figure><hr><p>今天真的是踩了个大坑，本来还想从今天开始学习 PyTorch 呢，没想到搭建环境这一关就给我来了个下马威 ＼(º □ º l|l)&#x2F;<br>今天吧环境搭建的问题解决了，明天再开始学习 PyTorch，开始准备毕设吧─&#x3D;≡Σ((( つ＞＜)つ</p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;踩了个巨坑&quot;&gt;&lt;a href=&quot;#踩了个巨坑&quot; class=&quot;headerlink&quot; title=&quot;踩了个巨坑&quot;&gt;&lt;/a&gt;踩了个巨坑&lt;/h1&gt;&lt;p&gt;今天开始学习 PyTorch，在安装环境的时候，需要用到 &lt;code&gt;pip3&lt;/code&gt; 安装 PyTorch&lt;br&gt;本来是一件很简单的事，一条命令就可以搞定，没想到碰到了如下报错&lt;/p&gt;
+&lt;figure class=&quot;highlight txt&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs txt&quot;&gt;WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by &amp;#x27;SSLError(&amp;quot;Can&amp;#x27;t connect to HTTPS URL because the SSL module is not available.&amp;quot;)&amp;#x27;: /whl/cu90/torch/&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;意思是说因为 SSL 错误导致安装无法进行下去，没办法，只好开始Google之旅，找了中文的英文的解决方法，要么是复制粘贴的，要么是无法解决的，最后花了几个小时，终于解决了，于是写一篇踩坑记录记录下来&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="踩坑记录" scheme="https://neroumu.top/categories/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="Python" scheme="https://neroumu.top/tags/Python/"/>
+    
+    <category term="OpenSSL" scheme="https://neroumu.top/tags/OpenSSL/"/>
+    
+    <category term="pip3" scheme="https://neroumu.top/tags/pip3/"/>
+    
+    <category term="PyTorch" scheme="https://neroumu.top/tags/PyTorch/"/>
+    
+  </entry>
   
   <entry>
     <title>VirtualBox无法识别U盘</title>
