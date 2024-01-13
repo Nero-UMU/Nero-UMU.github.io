@@ -31,7 +31,7 @@
 <meta property="og:description" content="踩了个巨坑今天开始学习 PyTorch，在安装环境的时候，需要用到 pip3 安装 PyTorch本来是一件很简单的事，一条命令就可以搞定，没想到碰到了如下报错 1WARNING: Retrying (Retry(total&#x3D;0, connect&#x3D;None, read&#x3D;None, redirect&#x3D;None, status&#x3D;None)) after connection broken by &amp;#x">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-12T14:10:00.000Z">
-<meta property="article:modified_time" content="2024-01-12T14:51:34.231Z">
+<meta property="article:modified_time" content="2024-01-13T09:52:14.467Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="OpenSSL">
@@ -274,7 +274,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          全文共518 字
+          全文共519 字
         
       </span>
     
@@ -365,7 +365,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs conf"># Socket module helper for socket(2)<br>_socket socketmodule.c # 取消注释<br><br># Socket module helper for SSL support; you must comment out the other<br># socket line above, and possibly edit the SSL variable:<br>SSL=/usr/local/ssl # 修改为编译 OpenSSL 时设置的目录<br>_ssl _ssl.c \<br>        -DUSE_SSL -I$(SSL)/include -I$(SSL)/include/openssl \<br>        -L$(SSL)/lib -lssl -lcrypto<br></code></pre></td></tr></table></figure>
 
 <p>编译 Python</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">make<br>make install<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">./configure<br>make<br>make install<br></code></pre></td></tr></table></figure>
 
 <p>这样就可以愉快的安装 PyTorch 了，注意版本到官网上去找对应的版本</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu90<br></code></pre></td></tr></table></figure>
