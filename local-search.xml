@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>Jetson tx2安装Ubuntu18.04踩坑记录</title>
+    <link href="/2024/02/25/Jetson-tx2%E5%AE%89%E8%A3%85Ubuntu18-04%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/"/>
+    <url>/2024/02/25/Jetson-tx2%E5%AE%89%E8%A3%85Ubuntu18-04%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/</url>
+    
+    <content type="html"><![CDATA[<h1 id="珍爱生命，远离tx2"><a href="#珍爱生命，远离tx2" class="headerlink" title="珍爱生命，远离tx2"></a>珍爱生命，远离tx2</h1><p>最近为了毕设入了块 NVIDIA 的 Jetson tx2<br>刚到手就开始刷机，因为之前借别人的 Jetson tx1 的 Ubuntu 版本的是 16.04，这个版本太老了，有很多依赖问题，所以想着刷个 Ubuntu 18.04 到这块板子上<br>于是跟着网上找的别人的博客和官方文档，踩了两天的坑，总算是完成安装了<br>因此写下此篇博客以记录如何解决已经碰到的问题</p><span id="more"></span><h1 id="配置虚拟机"><a href="#配置虚拟机" class="headerlink" title="配置虚拟机"></a>配置虚拟机</h1><p>为了方便，我用的虚拟机，如果是直接用 PC 那更好</p><p>虚拟机要求如下:</p><ul><li>VMware (一定要 VMware，用 VirtualBox 会卡在刷系统的步骤)</li><li>网络类型为桥接(bridged)</li><li>Ubuntu 18.04 (因为要在 tx2 上安装ubuntu 18，所以虚拟机的版本也要是18的)</li><li>内存 &gt;&#x3D;8GB</li><li>存储 &gt;&#x3D; 100GB</li></ul><h1 id="安装-SDK-Manager"><a href="#安装-SDK-Manager" class="headerlink" title="安装 SDK Manager"></a>安装 SDK Manager</h1><p>安装好虚拟机后，首先更换软件源为<a href="https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/">清华软件源</a>，并更新软件</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo apt update &amp;&amp; sudo apt upgrade<br></code></pre></td></tr></table></figure><p>然后下载 <a href="https://developer.nvidia.com/sdk-manager">SDK Manager</a>，将下载到的 deb 包传输到虚拟机中，安装该软件包</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo dkpk --install sdkmanager_&lt;VERSION&gt;_amd64.deb<br></code></pre></td></tr></table></figure><p>如果碰到以下报错，说明是缺少了依赖</p><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs txt">dpkg: dependency problems prevent configuration of sdkmanager:<br> sdkmanager depends on libgconf-2-4; however:<br>  Package libgconf-2-4 is not installed.<br> sdkmanager depends on libcanberra-gtk-module; however:<br>  Package libcanberra-gtk-module is not installed.<br></code></pre></td></tr></table></figure><p>安装所需的软件即可</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo apt install libcanberra-gtk-module<br></code></pre></td></tr></table></figure><p>如果继续出错</p><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs txt">You might want to run &#x27;apt --fix-broken install&#x27; to correct these.<br>The following packages have unmet dependencies:<br> libcanberra-gtk-module : Depends: libcanberra-gtk0 (&gt;= 0.2) but it is not going to be installed<br> sdkmanager : Depends: libgconf-2-4 but it is not going to be installed<br>E: Unmet dependencies. Try &#x27;apt --fix-broken install&#x27; with no packages (or specify a solution).<br></code></pre></td></tr></table></figure><p>则继续修复即可</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo apt --fix-broken install<br></code></pre></td></tr></table></figure><p>然后重新安装即可</p><h1 id="给-Jetson-tx2-刷机"><a href="#给-Jetson-tx2-刷机" class="headerlink" title="给 Jetson tx2 刷机"></a>给 Jetson tx2 刷机</h1><p>打开 SDKManager，登陆 NVIDIA 账号，使用 Micro USB 连接电脑与 Jetson tx2<br>此时 SDKManager 会自动识别到开发板，按照下图全部都勾选上<br><img src="/img/2024-2-25-1.png"></p><p>如果没有识别，可以使开发板进入恢复模式:</p><ul><li>先给开发板断电</li><li>按下开发板电源键</li><li>按住 RECOVER 键</li><li>按一下 RESET 键</li><li>松开 RECOVER 键</li></ul><p>如果还是没有识别到，先在电脑上查看是否连接到了开发板</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">lsusb<br></code></pre></td></tr></table></figure><p>查看是否有如下字样</p><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs txt">NVIDIA Corp. T186 [TX2 Tegra Parker] recovery mode<br></code></pre></td></tr></table></figure><p>如果有，则参考 <a href="https://wiki.archlinux.org/title/VMware#USB_devices_not_recognized">Arch Wiki</a>，开启 VMware 的 USB 功能即可</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo vmware-usbarbitrator #开启<br><br>sudo vmware-usbarbitrator --kill #关闭<br></code></pre></td></tr></table></figure><p>然后设置虚拟机的 USB 即可<br><img src="/img/2024-2-25-2.png"></p><p>SDKManager 识别到 Jetson tx2 后，下一步开始安装即可<br><img src="/img/2024-2-25-3.png"></p><p>刷写过程中，会提示设置新系统的用户名和密码，别忘了</p><p>在系统刷写完成后，此时开发板与虚拟机的连接已经可以断开，后面安装 CUDA 等组件可以通过网络来安装<br>在开始安装组件之前，先给开发板连接屏幕和键鼠，用刚刚设置的密码登陆近系统，查看一下开发板的 IP 地址</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ip addr<br></code></pre></td></tr></table></figure><p>查看是否有自动分配的 <code>IP</code> 地址 <code>192.168.55.1</code>，如果有，则继续安装剩下的组件</p><p>经过一段时间的等待，系统及组件成功安装，重启开发板，关闭虚拟机就大功告成了</p><p>开发板重启后，登陆开发板，查看 Ubuntu 版本</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">lsb_release -a<br></code></pre></td></tr></table></figure><p>Ubuntu 18 系统安装完成</p><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs txt">Distributor ID: Ubuntu<br>Description:    Ubuntu 18.04.6 LTS<br>Release:        18.04<br>Codename:       bionic<br></code></pre></td></tr></table></figure><hr><p>为了给这个开发板安装系统，熬了一个晚上，天气还冷，躺在被窝里一个多小时才暖和起来，差点以为人要没了(x_x)⌒☆<br>不过这块开发板的 SD 卡可以正确识别，相较于借来的 Jetson tx1 来说，算是捡到宝了，毕竟是从咸鱼上买的二手的(★≧▽^))★☆</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>踩坑记录</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>Ubuntu</tag>
+      
+      <tag>Jetson tx2</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>解决pip3安装依赖时SSL问题</title>
     <link href="/2024/01/12/%E8%A7%A3%E5%86%B3pip3%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96%E6%97%B6SSL%E9%97%AE%E9%A2%98/"/>
     <url>/2024/01/12/%E8%A7%A3%E5%86%B3pip3%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96%E6%97%B6SSL%E9%97%AE%E9%A2%98/</url>
