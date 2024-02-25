@@ -1406,7 +1406,7 @@
     <link href="https://neroumu.top/2022/05/30/%E9%A2%84%E9%98%B2%E6%9A%B4%E9%9C%B2%E7%9C%9F%E5%AE%9EIP%E5%9C%B0%E5%9D%80/"/>
     <id>https://neroumu.top/2022/05/30/%E9%A2%84%E9%98%B2%E6%9A%B4%E9%9C%B2%E7%9C%9F%E5%AE%9EIP%E5%9C%B0%E5%9D%80/</id>
     <published>2022-05-29T16:03:08.000Z</published>
-    <updated>2023-05-15T09:20:31.396Z</updated>
+    <updated>2024-02-25T16:21:59.921Z</updated>
     
     <content type="html"><![CDATA[<h1 id="发现的-IP-可能暴露"><a href="#发现的-IP-可能暴露" class="headerlink" title="发现的 IP 可能暴露"></a>发现的 IP 可能暴露</h1><p>在 <a href="https://browserleaks.com/ip">https://browserleaks.com/ip</a> 上进行了一下测试，发现我的真实 IP 地址暴露了，别人可以通过两个漏洞来获取我的真实 IP 地址，然后来一个线下网友交流<br>这两个漏洞分别是 WebRTC 泄露和 DNS 泄露</p><span id="more"></span><h2 id="产生原因"><a href="#产生原因" class="headerlink" title="产生原因"></a>产生原因</h2><p>WebRTC 是一个支持网页浏览器进行实时语音对话或视频对话的API，很早就得到了广泛的应用<br>但后来爆出了一个漏洞，就是 WebRTC 泄露，通过这个漏洞，使用 JavaScript 就能获取真实的 IP 地址<br>我觉得蛮恐怖的，因为在互联网就是需要安全的来访问嘛</p><p>DNS 泄露的问题最核心的问题就是 DNS 配置不当，导致 DNS 查询的报文可能在网上到处传播，这就有可能暴露查询的内容<br>如果使用了不安全的 DNS 服务器，那么你的所以上网行为在别人面前就是裸奔</p><h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>WebRTC 泄露是发生在浏览器上的，只要关闭 WebRTC 这一功能，需要的时候再打开就可以了<br>在 Firefox 的地址栏输入 about:config<br>进入设置界面，搜索 media.peerconnection.enabled，把这一项改成 false 就可以了<br><img src="/img/2022-5-30-1.png"></p><p>DNS 泄露就设置好 DNS，国内就用腾讯云的 119.29.29.29，或者阿里云的 223.5.5.5<br>国外就用 Cloudflare 的 1.1.1.1，或者 Google 的 8.8.8.8<br>实在不行自己用 AdGuard 搭建一个私有 DNS 也不是不可以</p><hr><p>互联网真是太可怕了，一不小心就暴露了自己，本来上网就是想要有一个谁都不知道自己的世界，然而事实却不尽如人意<br>好好保护自己的隐私吧，别让自己在互联网上裸奔 ꒦ິ^꒦ິ</p>]]></content>
     
@@ -1419,6 +1419,8 @@
     
     
     <category term="IP" scheme="https://neroumu.top/tags/IP/"/>
+    
+    <category term="DNS" scheme="https://neroumu.top/tags/DNS/"/>
     
   </entry>
   
