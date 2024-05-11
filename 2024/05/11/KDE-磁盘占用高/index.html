@@ -23,30 +23,30 @@
   <meta name="author" content="NeroUMU">
   <meta name="keywords" content="">
   
-    <meta name="description" content="珍爱生命，远离tx2最近为了毕设入了块 NVIDIA 的 Jetson tx2刚到手就开始刷机，因为之前借别人的 Jetson tx1 的 Ubuntu 版本的是 16.04，这个版本太老了，有很多依赖问题，所以想着刷个 Ubuntu 18.04 到这块板子上于是跟着网上找的别人的博客和官方文档，踩了两天的坑，总算是完成安装了因此写下此篇博客以记录如何解决已经碰到的问题">
+    <meta name="description" content="KDE 磁盘占用高昨天拿 Linux 玩游戏(当然拿 Linux 玩游戏有点强人所难，Linux 拿 wine 玩玩 galgame 就够了)，发现游戏运行地异常慢，电脑也非常烫手所以我看了一下电脑的各项数据，发现了磁盘占用过高，于是尝试解决，最终找到的罪魁祸首就是 Baloo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Jetson tx2安装Ubuntu18.04踩坑记录">
-<meta property="og:url" content="https://neroumu.top/2024/02/25/Jetson-tx2%E5%AE%89%E8%A3%85Ubuntu18-04%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:title" content="KDE 磁盘占用高">
+<meta property="og:url" content="https://neroumu.top/2024/05/11/KDE-%E7%A3%81%E7%9B%98%E5%8D%A0%E7%94%A8%E9%AB%98/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
-<meta property="og:description" content="珍爱生命，远离tx2最近为了毕设入了块 NVIDIA 的 Jetson tx2刚到手就开始刷机，因为之前借别人的 Jetson tx1 的 Ubuntu 版本的是 16.04，这个版本太老了，有很多依赖问题，所以想着刷个 Ubuntu 18.04 到这块板子上于是跟着网上找的别人的博客和官方文档，踩了两天的坑，总算是完成安装了因此写下此篇博客以记录如何解决已经碰到的问题">
+<meta property="og:description" content="KDE 磁盘占用高昨天拿 Linux 玩游戏(当然拿 Linux 玩游戏有点强人所难，Linux 拿 wine 玩玩 galgame 就够了)，发现游戏运行地异常慢，电脑也非常烫手所以我看了一下电脑的各项数据，发现了磁盘占用过高，于是尝试解决，最终找到的罪魁祸首就是 Baloo">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://neroumu.top/img/2024-2-25-1.png">
-<meta property="og:image" content="https://neroumu.top/img/2024-2-25-2.png">
-<meta property="og:image" content="https://neroumu.top/img/2024-2-25-3.png">
-<meta property="article:published_time" content="2024-02-25T14:45:38.000Z">
-<meta property="article:modified_time" content="2024-02-25T15:58:25.786Z">
+<meta property="og:image" content="https://neroumu.top/img/2024-5-11-1.png">
+<meta property="og:image" content="https://neroumu.top/img/2024-5-11-2.png">
+<meta property="og:image" content="https://neroumu.top/img/2024-5-11-3.png">
+<meta property="article:published_time" content="2024-05-11T09:07:56.000Z">
+<meta property="article:modified_time" content="2024-05-11T10:16:38.831Z">
 <meta property="article:author" content="NeroUMU">
-<meta property="article:tag" content="Linux">
-<meta property="article:tag" content="Ubuntu">
-<meta property="article:tag" content="Jetson tx2">
+<meta property="article:tag" content="ArchLinux">
+<meta property="article:tag" content="KDE">
+<meta property="article:tag" content="Baloo">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://neroumu.top/img/2024-2-25-1.png">
+<meta name="twitter:image" content="https://neroumu.top/img/2024-5-11-1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Jetson tx2安装Ubuntu18.04踩坑记录 - NeroUMU&#39;s BLOG</title>
+  <title>KDE 磁盘占用高 - NeroUMU&#39;s BLOG</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -253,7 +253,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Jetson tx2安装Ubuntu18.04踩坑记录"></span>
+            <span id="subtitle" data-typed-text="KDE 磁盘占用高"></span>
           
         </div>
 
@@ -264,8 +264,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-02-25 22:45" pubdate>
-          2024年2月25日 晚上
+        <time datetime="2024-05-11 17:07" pubdate>
+          2024年5月11日 下午
         </time>
       </span>
     
@@ -277,7 +277,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          全文共831 字
+          全文共609 字
         
       </span>
     
@@ -289,7 +289,7 @@
         
         
           <!-- compatible with older versions-->
-          阅读全文需约7 分钟
+          阅读全文需约6 分钟
         
       </span>
     
@@ -338,76 +338,29 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Jetson tx2安装Ubuntu18.04踩坑记录</h1>
+            <h1 id="seo-header">KDE 磁盘占用高</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="珍爱生命，远离tx2"><a href="#珍爱生命，远离tx2" class="headerlink" title="珍爱生命，远离tx2"></a>珍爱生命，远离tx2</h1><p>最近为了毕设入了块 NVIDIA 的 Jetson tx2<br>刚到手就开始刷机，因为之前借别人的 Jetson tx1 的 Ubuntu 版本的是 16.04，这个版本太老了，有很多依赖问题，所以想着刷个 Ubuntu 18.04 到这块板子上<br>于是跟着网上找的别人的博客和官方文档，踩了两天的坑，总算是完成安装了<br>因此写下此篇博客以记录如何解决已经碰到的问题</p>
+                <h1 id="KDE-磁盘占用高"><a href="#KDE-磁盘占用高" class="headerlink" title="KDE 磁盘占用高"></a>KDE 磁盘占用高</h1><p>昨天拿 Linux 玩游戏(当然拿 Linux 玩游戏有点强人所难，Linux 拿 wine 玩玩 galgame 就够了)，发现游戏运行地异常慢，电脑也非常烫手<br>所以我看了一下电脑的各项数据，发现了磁盘占用过高，于是尝试解决，最终找到的罪魁祸首就是 Baloo<br><img src="/img/2024-5-11-1.png" srcset="/img/loading.gif" lazyload alt="磁盘高速运行"></p>
 <span id="more"></span>
 
-<h1 id="配置虚拟机"><a href="#配置虚拟机" class="headerlink" title="配置虚拟机"></a>配置虚拟机</h1><p>为了方便，我用的虚拟机，如果是直接用 PC 那更好</p>
-<p>虚拟机要求如下:</p>
-<ul>
-<li>VMware (一定要 VMware，用 VirtualBox 会卡在刷系统的步骤)</li>
-<li>网络类型为桥接(bridged)</li>
-<li>Ubuntu 18.04 (因为要在 tx2 上安装ubuntu 18，所以虚拟机的版本也要是18的)</li>
-<li>内存 &gt;&#x3D;8GB</li>
-<li>存储 &gt;&#x3D; 100GB</li>
-</ul>
-<h1 id="安装-SDK-Manager"><a href="#安装-SDK-Manager" class="headerlink" title="安装 SDK Manager"></a>安装 SDK Manager</h1><p>安装好虚拟机后，首先更换软件源为<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/">清华软件源</a>，并更新软件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo apt update &amp;&amp; sudo apt upgrade<br></code></pre></td></tr></table></figure>
+<h1 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h1><p>我先查看了 <code>htop</code>，调到 IO 项查看，发现有一个进程的 IO 特别高<br><img src="/img/2024-5-11-2.png" srcset="/img/loading.gif" lazyload alt="htop"></p>
+<p>由于一开始不知道这是什么进程，不敢随意乱关闭，不过一开始也没过它是病毒，比较它的路径里有 kf6 的字样，那应该就是 KDE 的问题了<br>于是去 <a target="_blank" rel="noopener" href="https://wiki.archlinuxcn.org/wiki/Baloo">wiki</a> 上查了一下这个进程，发现这只是个文件检索功能，用来快速搜索文件<br>比如打开 Dolphin 时为了展示文件，会需要用到它，krunner 也是<br>所以可以放心关闭它，除了使用过程中一些功能不能用到，其他功能都可以正常使用</p>
+<p>关闭 baloo</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">balooctl6 disable<br></code></pre></td></tr></table></figure>
 
-<p>然后下载 <a target="_blank" rel="noopener" href="https://developer.nvidia.com/sdk-manager">SDK Manager</a>，将下载到的 deb 包传输到虚拟机中，安装该软件包</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo dkpk --install sdkmanager_&lt;VERSION&gt;_amd64.deb<br></code></pre></td></tr></table></figure>
+<p>启动 baloo</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">balooctl6 enable<br></code></pre></td></tr></table></figure>
 
-<p>如果碰到以下报错，说明是缺少了依赖</p>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs txt">dpkg: dependency problems prevent configuration of sdkmanager:<br> sdkmanager depends on libgconf-2-4; however:<br>  Package libgconf-2-4 is not installed.<br> sdkmanager depends on libcanberra-gtk-module; however:<br>  Package libcanberra-gtk-module is not installed.<br></code></pre></td></tr></table></figure>
-
-<p>安装所需的软件即可</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo apt install libcanberra-gtk-module<br></code></pre></td></tr></table></figure>
-
-<p>如果继续出错</p>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs txt">You might want to run &#x27;apt --fix-broken install&#x27; to correct these.<br>The following packages have unmet dependencies:<br> libcanberra-gtk-module : Depends: libcanberra-gtk0 (&gt;= 0.2) but it is not going to be installed<br> sdkmanager : Depends: libgconf-2-4 but it is not going to be installed<br>E: Unmet dependencies. Try &#x27;apt --fix-broken install&#x27; with no packages (or specify a solution).<br></code></pre></td></tr></table></figure>
-
-<p>则继续修复即可</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo apt --fix-broken install<br></code></pre></td></tr></table></figure>
-
-<p>然后重新安装即可</p>
-<h1 id="给-Jetson-tx2-刷机"><a href="#给-Jetson-tx2-刷机" class="headerlink" title="给 Jetson tx2 刷机"></a>给 Jetson tx2 刷机</h1><p>打开 SDKManager，登陆 NVIDIA 账号，使用 Micro USB 连接电脑与 Jetson tx2<br>此时 SDKManager 会自动识别到开发板，按照下图全部都勾选上<br><img src="/img/2024-2-25-1.png" srcset="/img/loading.gif" lazyload></p>
-<p>如果没有识别，可以使开发板进入恢复模式:</p>
-<ul>
-<li>先给开发板断电</li>
-<li>按下开发板电源键</li>
-<li>按住 RECOVER 键</li>
-<li>按一下 RESET 键</li>
-<li>松开 RECOVER 键</li>
-</ul>
-<p>如果还是没有识别到，先在电脑上查看是否连接到了开发板</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">lsusb<br></code></pre></td></tr></table></figure>
-
-<p>查看是否有如下字样</p>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs txt">NVIDIA Corp. T186 [TX2 Tegra Parker] recovery mode<br></code></pre></td></tr></table></figure>
-
-<p>如果有，则参考 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/VMware#USB_devices_not_recognized">Arch Wiki</a>，开启 VMware 的 USB 功能即可</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo vmware-usbarbitrator #开启<br><br>sudo vmware-usbarbitrator --kill #关闭<br></code></pre></td></tr></table></figure>
-
-<p>然后设置虚拟机的 USB 即可<br><img src="/img/2024-2-25-2.png" srcset="/img/loading.gif" lazyload></p>
-<p>SDKManager 识别到 Jetson tx2 后，下一步开始安装即可<br><img src="/img/2024-2-25-3.png" srcset="/img/loading.gif" lazyload></p>
-<p>刷写过程中，会提示设置新系统的用户名和密码，别忘了</p>
-<p>在系统刷写完成后，此时开发板与虚拟机的连接已经可以断开，后面安装 CUDA 等组件可以通过网络来安装<br>在开始安装组件之前，先给开发板连接屏幕和键鼠，用刚刚设置的密码登陆近系统，查看一下开发板的 IP 地址</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ip addr<br></code></pre></td></tr></table></figure>
-
-<p>查看是否有自动分配的 <code>IP</code> 地址 <code>192.168.55.1</code>，如果有，则继续安装剩下的组件</p>
-<p>经过一段时间的等待，系统及组件成功安装，重启开发板，关闭虚拟机就大功告成了</p>
-<p>开发板重启后，登陆开发板，查看 Ubuntu 版本</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">lsb_release -a<br></code></pre></td></tr></table></figure>
-
-<p>Ubuntu 18 系统安装完成</p>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs txt">Distributor ID: Ubuntu<br>Description:    Ubuntu 18.04.6 LTS<br>Release:        18.04<br>Codename:       bionic<br></code></pre></td></tr></table></figure>
-
+<p>禁用 baloo 后，磁盘的占用就下降了<br><img src="/img/2024-5-11-3.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="添加排除路径"><a href="#添加排除路径" class="headerlink" title="添加排除路径"></a>添加排除路径</h1><p>后面我去看了一下 KDE <a target="_blank" rel="noopener" href="https://community.kde.org/Baloo/Configuration">官方的文档</a>，发现了一个更好的方法解决方法，就是添加排除路径<br>编辑 <code>~/.config/baloofilerc</code> 文件，在 <code>[General]</code> 下添加配置</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs txt">exclude folders[$e]=$HOME/FolderA,$HOME/FolderB<br></code></pre></td></tr></table></figure>
+<p>然后重启一下 Baloo 就好了</p>
+<h1 id="问题产生原因"><a href="#问题产生原因" class="headerlink" title="问题产生原因"></a>问题产生原因</h1><p>前面说了，这是个文件搜索工具，所以它需要扫描整个文件系统，我猜测，以前没有发生这种问题的原因应该是系统中的文件数量少，所以它很快就完成了工作<br>但是由于最近在做毕业设计，用到了 YOLO 来训练模型，电脑里面存了大量的图片，所以它在扫描整个文件系统上花费了大量的时间<br>解决 Baloo 占用过高的问题，可以尝试减少系统中的文件数量</p>
 <hr>
-<p>为了给这个开发板安装系统，熬了一个晚上，天气还冷，躺在被窝里一个多小时才暖和起来，差点以为人要没了(x_x)⌒☆<br>不过这块开发板的 SD 卡可以正确识别，相较于借来的 Jetson tx1 来说，算是捡到宝了，毕竟是从咸鱼上买的二手的(★≧▽^))★☆</p>
+<p>博客有一年多没有怎么好好更新了，去年是准备考研，最近录取结果出来了，成功上岸<br>最近半年也是在准备考研复试和毕业设计，所有又没时间，现在终于有时间好好的学点自己想学的东西了<br>不过今年放假想配一台电脑打游戏，不知道还会不会腾出时间来呢 ε&#x3D;ε&#x3D;┌( &gt;_&lt;)┘</p>
 
                 
               </div>
@@ -441,11 +394,11 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Linux/" class="print-no-link">#Linux</a>
+        <a href="/tags/ArchLinux/" class="print-no-link">#ArchLinux</a>
       
-        <a href="/tags/Ubuntu/" class="print-no-link">#Ubuntu</a>
+        <a href="/tags/KDE/" class="print-no-link">#KDE</a>
       
-        <a href="/tags/Jetson-tx2/" class="print-no-link">#Jetson tx2</a>
+        <a href="/tags/Baloo/" class="print-no-link">#Baloo</a>
       
     </div>
   
@@ -459,18 +412,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/05/11/KDE-%E7%A3%81%E7%9B%98%E5%8D%A0%E7%94%A8%E9%AB%98/" title="KDE 磁盘占用高">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">KDE 磁盘占用高</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/01/12/%E8%A7%A3%E5%86%B3pip3%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96%E6%97%B6SSL%E9%97%AE%E9%A2%98/" title="解决pip3安装依赖时SSL问题">
-                        <span class="hidden-mobile">解决pip3安装依赖时SSL问题</span>
+                      <a href="/2024/02/25/Jetson-tx2%E5%AE%89%E8%A3%85Ubuntu18-04%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" title="Jetson tx2安装Ubuntu18.04踩坑记录">
+                        <span class="hidden-mobile">Jetson tx2安装Ubuntu18.04踩坑记录</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>KDE 磁盘占用高</title>
+    <link href="/2024/05/11/KDE-%E7%A3%81%E7%9B%98%E5%8D%A0%E7%94%A8%E9%AB%98/"/>
+    <url>/2024/05/11/KDE-%E7%A3%81%E7%9B%98%E5%8D%A0%E7%94%A8%E9%AB%98/</url>
+    
+    <content type="html"><![CDATA[<h1 id="KDE-磁盘占用高"><a href="#KDE-磁盘占用高" class="headerlink" title="KDE 磁盘占用高"></a>KDE 磁盘占用高</h1><p>昨天拿 Linux 玩游戏(当然拿 Linux 玩游戏有点强人所难，Linux 拿 wine 玩玩 galgame 就够了)，发现游戏运行地异常慢，电脑也非常烫手<br>所以我看了一下电脑的各项数据，发现了磁盘占用过高，于是尝试解决，最终找到的罪魁祸首就是 Baloo<br><img src="/img/2024-5-11-1.png" alt="磁盘高速运行"></p><span id="more"></span><h1 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h1><p>我先查看了 <code>htop</code>，调到 IO 项查看，发现有一个进程的 IO 特别高<br><img src="/img/2024-5-11-2.png" alt="htop"></p><p>由于一开始不知道这是什么进程，不敢随意乱关闭，不过一开始也没过它是病毒，比较它的路径里有 kf6 的字样，那应该就是 KDE 的问题了<br>于是去 <a href="https://wiki.archlinuxcn.org/wiki/Baloo">wiki</a> 上查了一下这个进程，发现这只是个文件检索功能，用来快速搜索文件<br>比如打开 Dolphin 时为了展示文件，会需要用到它，krunner 也是<br>所以可以放心关闭它，除了使用过程中一些功能不能用到，其他功能都可以正常使用</p><p>关闭 baloo</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">balooctl6 disable<br></code></pre></td></tr></table></figure><p>启动 baloo</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">balooctl6 enable<br></code></pre></td></tr></table></figure><p>禁用 baloo 后，磁盘的占用就下降了<br><img src="/img/2024-5-11-3.png"></p><h1 id="添加排除路径"><a href="#添加排除路径" class="headerlink" title="添加排除路径"></a>添加排除路径</h1><p>后面我去看了一下 KDE <a href="https://community.kde.org/Baloo/Configuration">官方的文档</a>，发现了一个更好的方法解决方法，就是添加排除路径<br>编辑 <code>~/.config/baloofilerc</code> 文件，在 <code>[General]</code> 下添加配置</p><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs txt">exclude folders[$e]=$HOME/FolderA,$HOME/FolderB<br></code></pre></td></tr></table></figure><p>然后重启一下 Baloo 就好了</p><h1 id="问题产生原因"><a href="#问题产生原因" class="headerlink" title="问题产生原因"></a>问题产生原因</h1><p>前面说了，这是个文件搜索工具，所以它需要扫描整个文件系统，我猜测，以前没有发生这种问题的原因应该是系统中的文件数量少，所以它很快就完成了工作<br>但是由于最近在做毕业设计，用到了 YOLO 来训练模型，电脑里面存了大量的图片，所以它在扫描整个文件系统上花费了大量的时间<br>解决 Baloo 占用过高的问题，可以尝试减少系统中的文件数量</p><hr><p>博客有一年多没有怎么好好更新了，去年是准备考研，最近录取结果出来了，成功上岸<br>最近半年也是在准备考研复试和毕业设计，所有又没时间，现在终于有时间好好的学点自己想学的东西了<br>不过今年放假想配一台电脑打游戏，不知道还会不会腾出时间来呢 ε&#x3D;ε&#x3D;┌( &gt;_&lt;)┘</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>踩坑记录</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>ArchLinux</tag>
+      
+      <tag>KDE</tag>
+      
+      <tag>Baloo</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Jetson tx2安装Ubuntu18.04踩坑记录</title>
     <link href="/2024/02/25/Jetson-tx2%E5%AE%89%E8%A3%85Ubuntu18-04%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/"/>
     <url>/2024/02/25/Jetson-tx2%E5%AE%89%E8%A3%85Ubuntu18-04%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/</url>
