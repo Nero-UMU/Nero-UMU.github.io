@@ -6,7 +6,7 @@
   <link href="https://neroumu.top/atom.xml" rel="self"/>
   
   <link href="https://neroumu.top/"/>
-  <updated>2024-05-11T10:16:38.831Z</updated>
+  <updated>2024-05-18T07:35:48.869Z</updated>
   <id>https://neroumu.top/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux 搭建Minecraft服务器并添加Mod</title>
+    <link href="https://neroumu.top/2024/05/18/Linux-%E6%90%AD%E5%BB%BAMinecraft%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B9%B6%E6%B7%BB%E5%8A%A0Mod/"/>
+    <id>https://neroumu.top/2024/05/18/Linux-%E6%90%AD%E5%BB%BAMinecraft%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B9%B6%E6%B7%BB%E5%8A%A0Mod/</id>
+    <published>2024-05-18T06:46:28.000Z</published>
+    <updated>2024-05-18T07:35:48.869Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="应各群友要求，搭建一个Minecraft服务器"><a href="#应各群友要求，搭建一个Minecraft服务器" class="headerlink" title="应各群友要求，搭建一个Minecraft服务器"></a>应各群友要求，搭建一个Minecraft服务器</h1><p>最近群友们突然想玩 Minecraft 了，刚好最近 Minecraft 也在打折，所有有一起联机的打算<br>纯净版的 Minecraft 很快就会玩腻来，所以要搭服务器，当然是直接搭一个 Forge 服务器啦</p><span id="more"></span><h1 id="服务器搭建"><a href="#服务器搭建" class="headerlink" title="服务器搭建"></a>服务器搭建</h1><p>服务端搭建起来很简单，首先服务器的官方配置要求是2核4G内存，自己去各大云服务场商那里买就好了</p><h2 id="配置防火墙"><a href="#配置防火墙" class="headerlink" title="配置防火墙"></a>配置防火墙</h2><p>Minecraft 默认的端口是25565，所以需要修改一下防火墙，允许从外部连接这个端口<br>或者自行设置端口，防火墙开启对应的端口即可</p><h2 id="下载-Forge"><a href="#下载-Forge" class="headerlink" title="下载 Forge"></a>下载 Forge</h2><p>首先去 <a href="https://files.minecraftforge.net/net/minecraftforge/forge/">Forge</a> 下载想要的 Minecraft 版本的 Forge<br>这里我下载的是 1.7.10 版本 Minecraft 的 Forge<br><img src="/img/2024-5-18-1.png"></p><h2 id="安装-Forge"><a href="#安装-Forge" class="headerlink" title="安装 Forge"></a>安装 Forge</h2><p>首先在服务器上安装 Java</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">apt update &amp;&amp; apt upgrade -y &amp;&amp; apt install openjdk-8-jre<br></code></pre></td></tr></table></figure><p>验证安装是否成功</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">java -version<br></code></pre></td></tr></table></figure><p>如果输出了 Java 版本，则表示安装成功</p><p>在服务器上创建一个目录，然后把下载的 Forge 的 jar 包上传到这个目录下</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir ~/minecraft-server<br></code></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">scp forge-1.7.10-10.13.4.1614-1.7.10-installer.jar User@IP:/path/to/minecraft-server/<br></code></pre></td></tr></table></figure><p>服务器上安装 Forge</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">java -jar forge-1.7.10-10.13.4.1614-1.7.10-installer.jar --installServer<br></code></pre></td></tr></table></figure><p>等待安装好后，运行服务器</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">java -jar forge-1.7.10-10.13.4.1614-1.7.10-universal.jar --nogui<br></code></pre></td></tr></table></figure><p>第一次运行肯定会安装失败，因为这回生成一份协议，要求阅读后方可继续<br>修改 <code>eula.txt</code> 文件，将其中的 <code>eula</code> 的值修改为 <code>true</code></p><p>这样就可以再次启动</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">java -jar forge-1.7.10-10.13.4.1614-1.7.10-universal.jar --nogui<br></code></pre></td></tr></table></figure><p>等待世界生成完成后，就可以开始与群友们一起联机了</p><h2 id="安装-Mod"><a href="#安装-Mod" class="headerlink" title="安装 Mod"></a>安装 Mod</h2><p>Mod 的安装非常简单，只需要把需要的 Mod 的 jar 文件放在服务器的 <code>mods</code> 目录下即可<br>Mod 文件可以在 <a href="https://www.mcmod.cn/modlist.html">MC百科</a> 中下载</p><h2 id="后台运行"><a href="#后台运行" class="headerlink" title="后台运行"></a>后台运行</h2><p>安装 <code>tmux</code></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">apt install tmux<br></code></pre></td></tr></table></figure><p>运行 tmux，直接在命令行输入 <code>tmux</code> 即可<br>打开 tmux 后，开始运行服务器</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">java -jar forge-1.7.10-10.13.4.1614-1.7.10-universal.jar --nogui<br></code></pre></td></tr></table></figure><p>运行完成后，<code>Ctrl</code> + <code>b</code> 后再输入 <code>d</code> 即可使该窗口后台执行，关闭ssh连接后也可以继续运行</p><h1 id="客户端连接"><a href="#客户端连接" class="headerlink" title="客户端连接"></a>客户端连接</h1><p>网上大都是教如何在 Windows 上使用 Mod，我这里就演示个讲的比较少的，如何在 Linux 上使用 Mod 吧(Windows 连接同理，只有小部分不一样)<br>由于服务端使用了 Forge，所以客户端也需要安装 Forge，下载地址和上面一样，都是<a href="https://files.minecraftforge.net/net/minecraftforge/forge/">Forge</a>，版本要和服务端一致</p><p>下载好后，运行命令，或者直接双击安装即可</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">java -jar forge-1.7.10-10.13.4.1614-1.7.10-installer.jar<br></code></pre></td></tr></table></figure><p>选择安装 client 即可<br><img src="/img/2024-5-18-2.png"></p><p>将 Mod 的 jar 包放到安装目录下的 <code>mods</code> 目录下</p><p>打开 Minecraft-launcher，配置选择刚才安装的 Forge<br><img src="/img/2024-5-18-3.png"></p><p>然后就可以愉快的开始游戏了<br>enjoy it~</p><hr><p>因为之前搭建过泰拉瑞亚的服务器，所以觉得 Minecraft 服务器搭建起来不会很难<br>果不其然，搭建起来十分顺畅，没有碰到什么障碍<br>会不会是我的技术能力提高了呢 －＝≡ヘ(*・ω・)ノ</p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;应各群友要求，搭建一个Minecraft服务器&quot;&gt;&lt;a href=&quot;#应各群友要求，搭建一个Minecraft服务器&quot; class=&quot;headerlink&quot; title=&quot;应各群友要求，搭建一个Minecraft服务器&quot;&gt;&lt;/a&gt;应各群友要求，搭建一个Minecraft服务器&lt;/h1&gt;&lt;p&gt;最近群友们突然想玩 Minecraft 了，刚好最近 Minecraft 也在打折，所有有一起联机的打算&lt;br&gt;纯净版的 Minecraft 很快就会玩腻来，所以要搭服务器，当然是直接搭一个 Forge 服务器啦&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="姿势学习" scheme="https://neroumu.top/categories/%E5%A7%BF%E5%8A%BF%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="Linux" scheme="https://neroumu.top/tags/Linux/"/>
+    
+    <category term="Forge" scheme="https://neroumu.top/tags/Forge/"/>
+    
+    <category term="Minecraft" scheme="https://neroumu.top/tags/Minecraft/"/>
+    
+  </entry>
   
   <entry>
     <title>KDE 磁盘占用高</title>

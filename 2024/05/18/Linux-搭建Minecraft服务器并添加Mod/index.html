@@ -23,30 +23,30 @@
   <meta name="author" content="NeroUMU">
   <meta name="keywords" content="">
   
-    <meta name="description" content="KDE 磁盘占用高昨天拿 Linux 玩游戏(当然拿 Linux 玩游戏有点强人所难，Linux 拿 wine 玩玩 galgame 就够了)，发现游戏运行地异常慢，电脑也非常烫手所以我看了一下电脑的各项数据，发现了磁盘占用过高，于是尝试解决，最终找到的罪魁祸首就是 Baloo">
+    <meta name="description" content="应各群友要求，搭建一个Minecraft服务器最近群友们突然想玩 Minecraft 了，刚好最近 Minecraft 也在打折，所有有一起联机的打算纯净版的 Minecraft 很快就会玩腻来，所以要搭服务器，当然是直接搭一个 Forge 服务器啦">
 <meta property="og:type" content="article">
-<meta property="og:title" content="KDE 磁盘占用高">
-<meta property="og:url" content="https://neroumu.top/2024/05/11/KDE-%E7%A3%81%E7%9B%98%E5%8D%A0%E7%94%A8%E9%AB%98/index.html">
+<meta property="og:title" content="Linux 搭建Minecraft服务器并添加Mod">
+<meta property="og:url" content="https://neroumu.top/2024/05/18/Linux-%E6%90%AD%E5%BB%BAMinecraft%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B9%B6%E6%B7%BB%E5%8A%A0Mod/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
-<meta property="og:description" content="KDE 磁盘占用高昨天拿 Linux 玩游戏(当然拿 Linux 玩游戏有点强人所难，Linux 拿 wine 玩玩 galgame 就够了)，发现游戏运行地异常慢，电脑也非常烫手所以我看了一下电脑的各项数据，发现了磁盘占用过高，于是尝试解决，最终找到的罪魁祸首就是 Baloo">
+<meta property="og:description" content="应各群友要求，搭建一个Minecraft服务器最近群友们突然想玩 Minecraft 了，刚好最近 Minecraft 也在打折，所有有一起联机的打算纯净版的 Minecraft 很快就会玩腻来，所以要搭服务器，当然是直接搭一个 Forge 服务器啦">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://neroumu.top/img/2024-5-11-1.png">
-<meta property="og:image" content="https://neroumu.top/img/2024-5-11-2.png">
-<meta property="og:image" content="https://neroumu.top/img/2024-5-11-3.png">
-<meta property="article:published_time" content="2024-05-11T09:07:56.000Z">
-<meta property="article:modified_time" content="2024-05-11T10:16:38.831Z">
+<meta property="og:image" content="https://neroumu.top/img/2024-5-18-1.png">
+<meta property="og:image" content="https://neroumu.top/img/2024-5-18-2.png">
+<meta property="og:image" content="https://neroumu.top/img/2024-5-18-3.png">
+<meta property="article:published_time" content="2024-05-18T06:46:28.000Z">
+<meta property="article:modified_time" content="2024-05-18T07:35:48.869Z">
 <meta property="article:author" content="NeroUMU">
-<meta property="article:tag" content="ArchLinux">
-<meta property="article:tag" content="KDE">
-<meta property="article:tag" content="Baloo">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Forge">
+<meta property="article:tag" content="Minecraft">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://neroumu.top/img/2024-5-11-1.png">
+<meta name="twitter:image" content="https://neroumu.top/img/2024-5-18-1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>KDE 磁盘占用高 - NeroUMU&#39;s BLOG</title>
+  <title>Linux 搭建Minecraft服务器并添加Mod - NeroUMU&#39;s BLOG</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -253,7 +253,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="KDE 磁盘占用高"></span>
+            <span id="subtitle" data-typed-text="Linux 搭建Minecraft服务器并添加Mod"></span>
           
         </div>
 
@@ -264,8 +264,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-05-11 17:07" pubdate>
-          2024年5月11日 下午
+        <time datetime="2024-05-18 14:46" pubdate>
+          2024年5月18日 下午
         </time>
       </span>
     
@@ -277,7 +277,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          全文共609 字
+          全文共789 字
         
       </span>
     
@@ -289,7 +289,7 @@
         
         
           <!-- compatible with older versions-->
-          阅读全文需约6 分钟
+          阅读全文需约7 分钟
         
       </span>
     
@@ -338,29 +338,57 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">KDE 磁盘占用高</h1>
+            <h1 id="seo-header">Linux 搭建Minecraft服务器并添加Mod</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="KDE-磁盘占用高"><a href="#KDE-磁盘占用高" class="headerlink" title="KDE 磁盘占用高"></a>KDE 磁盘占用高</h1><p>昨天拿 Linux 玩游戏(当然拿 Linux 玩游戏有点强人所难，Linux 拿 wine 玩玩 galgame 就够了)，发现游戏运行地异常慢，电脑也非常烫手<br>所以我看了一下电脑的各项数据，发现了磁盘占用过高，于是尝试解决，最终找到的罪魁祸首就是 Baloo<br><img src="/img/2024-5-11-1.png" srcset="/img/loading.gif" lazyload alt="磁盘高速运行"></p>
+                <h1 id="应各群友要求，搭建一个Minecraft服务器"><a href="#应各群友要求，搭建一个Minecraft服务器" class="headerlink" title="应各群友要求，搭建一个Minecraft服务器"></a>应各群友要求，搭建一个Minecraft服务器</h1><p>最近群友们突然想玩 Minecraft 了，刚好最近 Minecraft 也在打折，所有有一起联机的打算<br>纯净版的 Minecraft 很快就会玩腻来，所以要搭服务器，当然是直接搭一个 Forge 服务器啦</p>
 <span id="more"></span>
 
-<h1 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h1><p>我先查看了 <code>htop</code>，调到 IO 项查看，发现有一个进程的 IO 特别高<br><img src="/img/2024-5-11-2.png" srcset="/img/loading.gif" lazyload alt="htop"></p>
-<p>由于一开始不知道这是什么进程，不敢随意乱关闭，不过一开始也没过它是病毒，比较它的路径里有 kf6 的字样，那应该就是 KDE 的问题了<br>于是去 <a target="_blank" rel="noopener" href="https://wiki.archlinuxcn.org/wiki/Baloo">wiki</a> 上查了一下这个进程，发现这只是个文件检索功能，用来快速搜索文件<br>比如打开 Dolphin 时为了展示文件，会需要用到它，krunner 也是<br>所以可以放心关闭它，除了使用过程中一些功能不能用到，其他功能都可以正常使用</p>
-<p>关闭 baloo</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">balooctl6 disable<br></code></pre></td></tr></table></figure>
+<h1 id="服务器搭建"><a href="#服务器搭建" class="headerlink" title="服务器搭建"></a>服务器搭建</h1><p>服务端搭建起来很简单，首先服务器的官方配置要求是2核4G内存，自己去各大云服务场商那里买就好了</p>
+<h2 id="配置防火墙"><a href="#配置防火墙" class="headerlink" title="配置防火墙"></a>配置防火墙</h2><p>Minecraft 默认的端口是25565，所以需要修改一下防火墙，允许从外部连接这个端口<br>或者自行设置端口，防火墙开启对应的端口即可</p>
+<h2 id="下载-Forge"><a href="#下载-Forge" class="headerlink" title="下载 Forge"></a>下载 Forge</h2><p>首先去 <a target="_blank" rel="noopener" href="https://files.minecraftforge.net/net/minecraftforge/forge/">Forge</a> 下载想要的 Minecraft 版本的 Forge<br>这里我下载的是 1.7.10 版本 Minecraft 的 Forge<br><img src="/img/2024-5-18-1.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="安装-Forge"><a href="#安装-Forge" class="headerlink" title="安装 Forge"></a>安装 Forge</h2><p>首先在服务器上安装 Java</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">apt update &amp;&amp; apt upgrade -y &amp;&amp; apt install openjdk-8-jre<br></code></pre></td></tr></table></figure>
 
-<p>启动 baloo</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">balooctl6 enable<br></code></pre></td></tr></table></figure>
+<p>验证安装是否成功</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">java -version<br></code></pre></td></tr></table></figure>
 
-<p>禁用 baloo 后，磁盘的占用就下降了<br><img src="/img/2024-5-11-3.png" srcset="/img/loading.gif" lazyload></p>
-<h1 id="添加排除路径"><a href="#添加排除路径" class="headerlink" title="添加排除路径"></a>添加排除路径</h1><p>后面我去看了一下 KDE <a target="_blank" rel="noopener" href="https://community.kde.org/Baloo/Configuration">官方的文档</a>，发现了一个更好的方法解决方法，就是添加排除路径<br>编辑 <code>~/.config/baloofilerc</code> 文件，在 <code>[General]</code> 下添加配置</p>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs txt">exclude folders[$e]=$HOME/FolderA,$HOME/FolderB<br></code></pre></td></tr></table></figure>
-<p>然后重启一下 Baloo 就好了</p>
-<h1 id="问题产生原因"><a href="#问题产生原因" class="headerlink" title="问题产生原因"></a>问题产生原因</h1><p>前面说了，这是个文件搜索工具，所以它需要扫描整个文件系统，我猜测，以前没有发生这种问题的原因应该是系统中的文件数量少，所以它很快就完成了工作<br>但是由于最近在做毕业设计，用到了 YOLO 来训练模型，电脑里面存了大量的图片，所以它在扫描整个文件系统上花费了大量的时间<br>解决 Baloo 占用过高的问题，可以尝试减少系统中的文件数量</p>
+<p>如果输出了 Java 版本，则表示安装成功</p>
+<p>在服务器上创建一个目录，然后把下载的 Forge 的 jar 包上传到这个目录下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir ~/minecraft-server<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">scp forge-1.7.10-10.13.4.1614-1.7.10-installer.jar User@IP:/path/to/minecraft-server/<br></code></pre></td></tr></table></figure>
+
+<p>服务器上安装 Forge</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">java -jar forge-1.7.10-10.13.4.1614-1.7.10-installer.jar --installServer<br></code></pre></td></tr></table></figure>
+
+<p>等待安装好后，运行服务器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">java -jar forge-1.7.10-10.13.4.1614-1.7.10-universal.jar --nogui<br></code></pre></td></tr></table></figure>
+
+<p>第一次运行肯定会安装失败，因为这回生成一份协议，要求阅读后方可继续<br>修改 <code>eula.txt</code> 文件，将其中的 <code>eula</code> 的值修改为 <code>true</code></p>
+<p>这样就可以再次启动</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">java -jar forge-1.7.10-10.13.4.1614-1.7.10-universal.jar --nogui<br></code></pre></td></tr></table></figure>
+
+<p>等待世界生成完成后，就可以开始与群友们一起联机了</p>
+<h2 id="安装-Mod"><a href="#安装-Mod" class="headerlink" title="安装 Mod"></a>安装 Mod</h2><p>Mod 的安装非常简单，只需要把需要的 Mod 的 jar 文件放在服务器的 <code>mods</code> 目录下即可<br>Mod 文件可以在 <a target="_blank" rel="noopener" href="https://www.mcmod.cn/modlist.html">MC百科</a> 中下载</p>
+<h2 id="后台运行"><a href="#后台运行" class="headerlink" title="后台运行"></a>后台运行</h2><p>安装 <code>tmux</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">apt install tmux<br></code></pre></td></tr></table></figure>
+
+<p>运行 tmux，直接在命令行输入 <code>tmux</code> 即可<br>打开 tmux 后，开始运行服务器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">java -jar forge-1.7.10-10.13.4.1614-1.7.10-universal.jar --nogui<br></code></pre></td></tr></table></figure>
+<p>运行完成后，<code>Ctrl</code> + <code>b</code> 后再输入 <code>d</code> 即可使该窗口后台执行，关闭ssh连接后也可以继续运行</p>
+<h1 id="客户端连接"><a href="#客户端连接" class="headerlink" title="客户端连接"></a>客户端连接</h1><p>网上大都是教如何在 Windows 上使用 Mod，我这里就演示个讲的比较少的，如何在 Linux 上使用 Mod 吧(Windows 连接同理，只有小部分不一样)<br>由于服务端使用了 Forge，所以客户端也需要安装 Forge，下载地址和上面一样，都是<a target="_blank" rel="noopener" href="https://files.minecraftforge.net/net/minecraftforge/forge/">Forge</a>，版本要和服务端一致</p>
+<p>下载好后，运行命令，或者直接双击安装即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">java -jar forge-1.7.10-10.13.4.1614-1.7.10-installer.jar<br></code></pre></td></tr></table></figure>
+
+<p>选择安装 client 即可<br><img src="/img/2024-5-18-2.png" srcset="/img/loading.gif" lazyload></p>
+<p>将 Mod 的 jar 包放到安装目录下的 <code>mods</code> 目录下</p>
+<p>打开 Minecraft-launcher，配置选择刚才安装的 Forge<br><img src="/img/2024-5-18-3.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后就可以愉快的开始游戏了<br>enjoy it~</p>
 <hr>
-<p>博客有一年多没有怎么好好更新了，去年是准备考研，最近录取结果出来了，成功上岸<br>最近半年也是在准备考研复试和毕业设计，所有又没时间，现在终于有时间好好的学点自己想学的东西了<br>不过今年放假想配一台电脑打游戏，不知道还会不会腾出时间来呢 ε&#x3D;ε&#x3D;┌( &gt;_&lt;)┘</p>
+<p>因为之前搭建过泰拉瑞亚的服务器，所以觉得 Minecraft 服务器搭建起来不会很难<br>果不其然，搭建起来十分顺畅，没有碰到什么障碍<br>会不会是我的技术能力提高了呢 －＝≡ヘ(*・ω・)ノ</p>
 
                 
               </div>
@@ -379,7 +407,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" class="category-chain-item">踩坑记录</a>
+  <a href="/categories/%E5%A7%BF%E5%8A%BF%E5%AD%A6%E4%B9%A0/" class="category-chain-item">姿势学习</a>
   
   
 
@@ -394,11 +422,11 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/ArchLinux/" class="print-no-link">#ArchLinux</a>
+        <a href="/tags/Linux/" class="print-no-link">#Linux</a>
       
-        <a href="/tags/KDE/" class="print-no-link">#KDE</a>
+        <a href="/tags/Forge/" class="print-no-link">#Forge</a>
       
-        <a href="/tags/Baloo/" class="print-no-link">#Baloo</a>
+        <a href="/tags/Minecraft/" class="print-no-link">#Minecraft</a>
       
     </div>
   
@@ -412,18 +440,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/05/18/Linux-%E6%90%AD%E5%BB%BAMinecraft%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B9%B6%E6%B7%BB%E5%8A%A0Mod/" title="Linux 搭建Minecraft服务器并添加Mod">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Linux 搭建Minecraft服务器并添加Mod</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/02/25/Jetson-tx2%E5%AE%89%E8%A3%85Ubuntu18-04%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" title="Jetson tx2安装Ubuntu18.04踩坑记录">
-                        <span class="hidden-mobile">Jetson tx2安装Ubuntu18.04踩坑记录</span>
+                      <a href="/2024/05/11/KDE-%E7%A3%81%E7%9B%98%E5%8D%A0%E7%94%A8%E9%AB%98/" title="KDE 磁盘占用高">
+                        <span class="hidden-mobile">KDE 磁盘占用高</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
