@@ -6,7 +6,7 @@
   <link href="https://neroumu.top/atom.xml" rel="self"/>
   
   <link href="https://neroumu.top/"/>
-  <updated>2024-06-22T17:36:09.231Z</updated>
+  <updated>2024-06-24T15:42:59.053Z</updated>
   <id>https://neroumu.top/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>组装了一台电脑</title>
+    <link href="https://neroumu.top/2024/06/24/%E7%BB%84%E8%A3%85%E4%BA%86%E4%B8%80%E5%8F%B0%E7%94%B5%E8%84%91/"/>
+    <id>https://neroumu.top/2024/06/24/%E7%BB%84%E8%A3%85%E4%BA%86%E4%B8%80%E5%8F%B0%E7%94%B5%E8%84%91/</id>
+    <published>2024-06-24T14:41:00.000Z</published>
+    <updated>2024-06-24T15:42:59.053Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="618-的时候自己组装了一台电脑"><a href="#618-的时候自己组装了一台电脑" class="headerlink" title="618 的时候自己组装了一台电脑"></a>618 的时候自己组装了一台电脑</h1><p>大学期间，一直有自己组装一台电脑的想法，所以一直有存钱的想法，但是钱要么是有什么突发状况需要用钱，导致一次清空，要么就是为了其他更重要的东西而付钱，导致一直没能存下多少钱，所以这个想法一直没能实现<br>就这样一直到了大四毕业，我的电脑还是停留在想象阶段<br>都已经大学毕业了，怎么一台性能可以满足我基本的游戏需求的电脑都没有呢？于是我找了各种方法扣钱出来，其中还包括考上研究生的奖学金，变卖了一个手办(不是尼禄的，尼禄的手办怎么能卖呢!)总算凑齐了足够的钱，可以开始配置我的电脑了</p><span id="more"></span><h1 id="配置选取"><a href="#配置选取" class="headerlink" title="配置选取"></a>配置选取</h1><p>主要还是靠微信小程序的装机助手完成的，不过一开始我就已经有显卡用4070，CPU用i7-14700k，主板用z790的想法了，所以配置选择起来就很快，再加上平时在B站上看的测评视频，配置很快就选好了，这里罗列一下我的配置</p><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs txt">CPU: i7-14700k<br>主板: ROG/STRIX Z790-A GAMING WIFI S 吹雪主板<br>GPU: 七彩虹/iGame RTX 4070 Super Ultra<br>内存: 七彩虹/32GB DDR5 6400<br>硬盘: 三星990 Pro 1TB SSD + 希捷1TB SSD<br>电源: 七彩虹/CF-850W 全模组电源<br>散热: 利民/AQUA ELITE 360 水冷散热<br>机箱: 爱国者海景房<br>机箱风扇: 爱国者极光Z12<br>显示器: 联想/Y27q-30<br>硅脂: 利民/TF9<br>贴纸: 尼禄贴纸(由于预算不够，就没有选择定制机箱，用贴纸代替吧)<br></code></pre></td></tr></table></figure><h1 id="配置组装"><a href="#配置组装" class="headerlink" title="配置组装"></a>配置组装</h1><p>从下单到配件全齐也就用了两到三天，开始着手安装吧<br>由于是第一次装机，没有什么经验，所以安装了一下午，装机的每一步都是按照B站UP主<a href="https://www.bilibili.com/video/BV1BG4y137mG/?share_source=copy_web&vd_source=80011aac86bf19cbb77445c06a6d2e4b">硬件茶谈的视频</a>来操作的<br>从CPU的安装到最后的第一次点亮，都是靠着这个视频来操作的，最终一次点亮，开机自动进入到了主板的BIOS界面<br>来看看我的主机吧(￣∇￣)<br><img src="/img/2024-6-24-1.jpg" alt="尼禄真是太可爱了{*≧∀≦}"><br><img src="/img/2024-6-24-2.jpg" alt="吹雪姬也很可爱(o^∀^)"></p><p>不过电脑组装起来不难，难的是怎么理线让机箱看起来好看，光理线这一步就用了我一个多小时，风扇是拆了装装了拆，好几个线的的接口也是换了又换，最终才达到了我想要的效果</p><h1 id="系统选择"><a href="#系统选择" class="headerlink" title="系统选择"></a>系统选择</h1><p>其实一开始是有装 Arch Linux 的想法的，但是考虑到 Nvidia 的驱动问题，所以就放弃了(So, Nvidia F*ck You!)<br>装Windows就太简单了，我装了个 Windows 10的系统，毕竟用 Windows 系统也少，用的最多的也就是 Windows 10了<br>直接去微软的官网下载<a href="https://www.microsoft.com/zh-cn/software-download/windows10">启动盘制作器</a>制作一个启动盘就好了，当然也可以用 <a href="https://github.com/ventoy/Ventoy">Ventoy</a> 来安装，这个更简单更方便</p><hr><p>安装好系统，就可以安装游戏，开始我的游戏之旅了ヽ(´▽｀；)&#x2F;♪<br>多年未实现的梦想，总算在今天实现了，感慨万分，于是我激动的用我新配的电脑启动了第一个游戏———————–<br>《魔女的夜宴》─&#x3D;≡Σ ﾍ( ´Д&#96;)ﾉ</p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;618-的时候自己组装了一台电脑&quot;&gt;&lt;a href=&quot;#618-的时候自己组装了一台电脑&quot; class=&quot;headerlink&quot; title=&quot;618 的时候自己组装了一台电脑&quot;&gt;&lt;/a&gt;618 的时候自己组装了一台电脑&lt;/h1&gt;&lt;p&gt;大学期间，一直有自己组装一台电脑的想法，所以一直有存钱的想法，但是钱要么是有什么突发状况需要用钱，导致一次清空，要么就是为了其他更重要的东西而付钱，导致一直没能存下多少钱，所以这个想法一直没能实现&lt;br&gt;就这样一直到了大四毕业，我的电脑还是停留在想象阶段&lt;br&gt;都已经大学毕业了，怎么一台性能可以满足我基本的游戏需求的电脑都没有呢？于是我找了各种方法扣钱出来，其中还包括考上研究生的奖学金，变卖了一个手办(不是尼禄的，尼禄的手办怎么能卖呢!)总算凑齐了足够的钱，可以开始配置我的电脑了&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="闲话" scheme="https://neroumu.top/categories/%E9%97%B2%E8%AF%9D/"/>
+    
+    
+    <category term="PC" scheme="https://neroumu.top/tags/PC/"/>
+    
+  </entry>
   
   <entry>
     <title>Linux 搭建Minecraft服务器并添加Mod</title>
