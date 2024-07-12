@@ -23,27 +23,27 @@
   <meta name="author" content="NeroUMU">
   <meta name="keywords" content="">
   
-    <meta name="description" content="目前笔记方案一个月前,还用着 Notion 作我的笔记,虽然 Notion 的功能十分强大,我也用了一年多了,但是我还是不得不放弃使用 Notion,转向现在正在用的 Obsidian之所以不再使用 Notion 是因为它的一个致命的问题(至少对我来说) —— 它不支持本地保存Notion 的每一次访问都要向它的服务器发送请求以获取笔记文件,本地没有任何缓存,如果我要查看我的笔记,而网络恰好不怎么">
+    <meta name="description" content="泰拉瑞亚mod服务器塔拉瑞亚原版服务器不支持添加mod，所以如果想要自建一个泰拉瑞亚的mod服务器的话，就需要使用开源的tModLoader来实现">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Obsidian笔记方案">
-<meta property="og:url" content="https://neroumu.top/2023/03/26/Obsidian%E7%AC%94%E8%AE%B0%E6%96%B9%E6%A1%88/index.html">
+<meta property="og:title" content="Linux搭建tModLoader服务器并添加mod">
+<meta property="og:url" content="https://neroumu.top/2024/07/12/Linux%E6%90%AD%E5%BB%BAtModLoader%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B9%B6%E6%B7%BB%E5%8A%A0mod/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
-<meta property="og:description" content="目前笔记方案一个月前,还用着 Notion 作我的笔记,虽然 Notion 的功能十分强大,我也用了一年多了,但是我还是不得不放弃使用 Notion,转向现在正在用的 Obsidian之所以不再使用 Notion 是因为它的一个致命的问题(至少对我来说) —— 它不支持本地保存Notion 的每一次访问都要向它的服务器发送请求以获取笔记文件,本地没有任何缓存,如果我要查看我的笔记,而网络恰好不怎么">
+<meta property="og:description" content="泰拉瑞亚mod服务器塔拉瑞亚原版服务器不支持添加mod，所以如果想要自建一个泰拉瑞亚的mod服务器的话，就需要使用开源的tModLoader来实现">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://neroumu.top/img/2023-3-26-1.jpg">
-<meta property="article:published_time" content="2023-03-26T13:50:28.000Z">
-<meta property="article:modified_time" content="2024-06-22T17:36:09.230Z">
+<meta property="article:published_time" content="2024-07-12T07:16:07.000Z">
+<meta property="article:modified_time" content="2024-07-12T08:31:20.582Z">
 <meta property="article:author" content="NeroUMU">
-<meta property="article:tag" content="Docker">
-<meta property="article:tag" content="Obsidian">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Server">
+<meta property="article:tag" content="Terraria">
+<meta property="article:tag" content="tModLoader">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://neroumu.top/img/2023-3-26-1.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Obsidian笔记方案 - NeroUMU&#39;s BLOG</title>
+  <title>Linux搭建tModLoader服务器并添加mod - NeroUMU&#39;s BLOG</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -250,7 +250,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Obsidian笔记方案"></span>
+            <span id="subtitle" data-typed-text="Linux搭建tModLoader服务器并添加mod"></span>
           
         </div>
 
@@ -261,8 +261,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-26 21:50" pubdate>
-          2023年3月26日 晚上
+        <time datetime="2024-07-12 15:16" pubdate>
+          2024年7月12日 下午
         </time>
       </span>
     
@@ -274,7 +274,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          全文共936 字
+          全文共605 字
         
       </span>
     
@@ -286,7 +286,7 @@
         
         
           <!-- compatible with older versions-->
-          阅读全文需约8 分钟
+          阅读全文需约6 分钟
         
       </span>
     
@@ -335,32 +335,33 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Obsidian笔记方案</h1>
+            <h1 id="seo-header">Linux搭建tModLoader服务器并添加mod</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="目前笔记方案"><a href="#目前笔记方案" class="headerlink" title="目前笔记方案"></a>目前笔记方案</h1><p>一个月前,还用着 Notion 作我的笔记,虽然 Notion 的功能十分强大,我也用了一年多了,但是我还是不得不放弃使用 Notion,转向现在正在用的 Obsidian<br>之所以不再使用 Notion 是因为它的一个致命的问题(至少对我来说) —— 它不支持本地保存<br>Notion 的每一次访问都要向它的服务器发送请求以获取笔记文件,本地没有任何缓存,如果我要查看我的笔记,而网络恰好不怎么流畅的时候,光加载出文字就已经很吃力了,在加载几张图片,那可是十分令人头疼的一件事<br>而且 Notion 的服务器是位于国外的,访问就慢了一道<br>万一哪天它出了什么问题,比如服务器崩溃了,删库跑路了,我的笔记可就再也会不来了<br>所以转移笔记迫在眉睫,于是我就转向了现在的 Obsidian 方案,到目前为止已经用了一个多月了,体验起来很不错</p>
+                <h1 id="泰拉瑞亚mod服务器"><a href="#泰拉瑞亚mod服务器" class="headerlink" title="泰拉瑞亚mod服务器"></a>泰拉瑞亚mod服务器</h1><p>塔拉瑞亚原版服务器不支持添加mod，所以如果想要自建一个泰拉瑞亚的mod服务器的话，就需要使用开源的<a target="_blank" rel="noopener" href="https://github.com/tModLoader/tModLoader">tModLoader</a>来实现</p>
 <span id="more"></span>
+<h1 id="自建tModLoader服务器"><a href="#自建tModLoader服务器" class="headerlink" title="自建tModLoader服务器"></a>自建tModLoader服务器</h1><p>首先下载tModloader的源代码，在 GitHub 的 Releases 里下载最新的版本，并解压</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">wget https://github.com/tModLoader/tModLoader/releases/download/v2024.05.3.3/tModLoader.zip<br><br>unzip -d tModLoader tModLoader.zip<br></code></pre></td></tr></table></figure>
 
-<h1 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h1><p>Arch Linux 官方库是有现成的包可以直接安装</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo pacman -S obsidian <br></code></pre></td></tr></table></figure>
+<p>安装 tmux</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo pacman -S tmux<br></code></pre></td></tr></table></figure>
 
-<p>手机上可以在 Play 商店里面直接安装<br><img src="/img/2023-3-26-1.jpg" srcset="/img/loading.gif" lazyload alt="Play 商店直接搜索就有了"></p>
-<h1 id="笔记同步及备份方案"><a href="#笔记同步及备份方案" class="headerlink" title="笔记同步及备份方案"></a>笔记同步及备份方案</h1><p>软件使用起来很简单,创建一个目录就可以开始记笔记了,可是如果仅仅止步于此的话,那么各个终端的笔记是不能共享的,而且万一丢失了,也是没有备份的,所以需要做好笔记的同步和备份</p>
-<h2 id="使用-Github-备份"><a href="#使用-Github-备份" class="headerlink" title="使用 Github 备份"></a>使用 Github 备份</h2><p>首先在 GitHub 上创建一个项目,并拉取到本地,完成必要的初始化<br>Obsidian 设置根目录为该项目路径<br>然后在 Obsidian 中选择 <code>设置</code> -&gt; <code>第三发插件</code> -&gt; <code>社区插件市场</code> -&gt; <code>安装 Obsidian Git</code><br>第一次安装第三方插件时会提醒关闭安全模式,关闭即可<br>然后在第三方插件里面开启 Obsidian Git,重启软件,这样就可以把笔记同步到自己的 GitHub 的项目里面了</p>
-<p>手机上的步骤类似,不过手机上设置 GitHub 账号用的不是 GitHub 的密码,而是 <code>Personal access tokens</code><br>可以在 GitHub 网页端 <code>Settings</code> -&gt; <code>Developer settings</code> -&gt; <code>Personal access tokens</code> 中创建一个<br>然后在拉取镜像的时候按步骤填写信息就可以了<br>注意在拉取镜像的时候不能使用 SSH 链接(<a href="mailto:&#103;&#105;&#x74;&#64;&#103;&#105;&#116;&#104;&#x75;&#x62;&#x2e;&#x63;&#x6f;&#x6d;">&#103;&#105;&#x74;&#64;&#103;&#105;&#116;&#104;&#x75;&#x62;&#x2e;&#x63;&#x6f;&#x6d;</a>:XXXX&#x2F;XXXX.git),而应该使用 HTTPS 链接(<a target="_blank" rel="noopener" href="https://github.com/XXXX/XXXX.git">https://github.com/XXXX/XXXX.git</a>)</p>
-<h2 id="使用-WebDAV-同步即备份"><a href="#使用-WebDAV-同步即备份" class="headerlink" title="使用 WebDAV 同步即备份"></a>使用 WebDAV 同步即备份</h2><p>我使用的 WebDAV 是我通过阿里云盘自建的,如果有其他的 WebDAV 资源可以跳过搭建</p>
-<h3 id="Docker-搭建阿里云盘-WebDAV"><a href="#Docker-搭建阿里云盘-WebDAV" class="headerlink" title="Docker 搭建阿里云盘 WebDAV"></a>Docker 搭建阿里云盘 WebDAV</h3><p>GitHub 上刚好有项目可把阿里云盘当成 WebDAV 来使用,<a target="_blank" rel="noopener" href="https://github.com/messense/aliyundrive-webdav">项目地址</a><br>而且还能用 Docker 搭建,特别方便<br>按照项目的 README 获取到 tocken 后执行下面的命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker run -d --name=aliyundrive-webdav \<br>--restart=unless-stopped -p 28080:8080 \<br>-v /etc/aliyundrive-webdav/:/etc/aliyundrive-webdav/ \<br>-e REFRESH_TOKEN=&#x27;My_TOKENS&#x27; \<br>-e WEBDAV_AUTH_USER=Username \<br>-e WEBDAV_AUTH_PASSWORD=Password \<br>messense/aliyundrive-webdav<br></code></pre></td></tr></table></figure>
+<p>创建一个 tmux 会话，并进入到 tModLoader 目录下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">tmux new -s tModLoader<br>cd tModLoader<br></code></pre></td></tr></table></figure>
 
-<ul>
-<li>用户名和密码选项可以删除,即不需要账号和密码</li>
-</ul>
-<h3 id="安装并配置-Remotely-Save"><a href="#安装并配置-Remotely-Save" class="headerlink" title="安装并配置 Remotely Save"></a>安装并配置 Remotely Save</h3><p>在 Obsidian 中安装 Remotely Save 第三方插件<br>安装好后进行设置,选择远程服务设置为 WebDAV<br>服务器地址设置为 <code>http://IP-ADDRESS:28080/</code><br>填入用户名和密码就可以使用了</p>
-<p>手机和电脑上设置同一个 WebDAV 服务器就可以在各终端间实现同步和数据备份了</p>
+<p>启动 tModLoader</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">bash start-tModLoaderServer.sh<br></code></pre></td></tr></table></figure>
+
+<p>然后根据输出的提示，创建新世界，运行创建好的世界，设置服务器的端口和密码，然后用快捷键 <code>Ctrl + b</code>，<code>d</code> 退出 tmux<br>要联机的玩家通过客户端的 tModLoader 就可以进入到服务器中一起玩耍了</p>
+<p>至此，一个纯净的、无mod的泰拉瑞亚服务器就搭建完成了</p>
+<h1 id="添加mod"><a href="#添加mod" class="headerlink" title="添加mod"></a>添加mod</h1><p>为了让所有人都可以运行mod，服务器端和客户端都要安装相同的 mod 才可以正常游玩<br>首先在 Steam 上进入到 tModLoader 的创意工坊，订阅自己想要的 mod，等待 mod 安装完成后，找到游戏 mod 的安装路径，这个路径可以进入游戏中，在管理 mod 中找到<br>此处会找到两个目录，一个是存储 mod 文件的目录，一个是设置是否运行 mod 的配置文件路径(enabled.json文件)</p>
+<p>将需要安装到服务器端的 mod 上传到服务器的 <code>$HOME/.local/share/Terraria/tModLoader/Mods/</code> 目录下，注意 mod 是以 <code>.tmod</code> 为后缀的<br>将 <code>enabled.json</code> 文件的内容拷贝到服务器的 <code>$HOME/.local/share/Terraria/tModLoader/Mods/enabled.josn</code> 文件中<br>如果服务器端和客户端要运行的 mod 是一样的，则不需要修改，若不一样，则修改为需要在服务器端运行的 mod 即可</p>
+<p>设置完成后，重新运行 tModLoader，如果在启动过程中的日志中看到了加载 mod 的输出，则说明 mod 安装成功，可以愉快的游玩了</p>
+<p>enjoy it~</p>
 <hr>
-<p>还好发现 Notion 的这一大缺点早,不然等以后用的多了,想把笔记迁移都困难<br>现在笔记都已经全部迁移到了 Obsidian 中,目前为止使用起来还是很顺手的 (´∀｀*)</p>
+<p>总体来说，自建泰拉瑞亚服务器和自建 Minecraft 服务器都差不多，配置好服务器端，然后服务器端和客户端都安装相同的 mod，然后就可以一起联机游玩了<br>当然这些都要感谢那些为此贡献了开源代码的开源项目，不然自建服务器也不会这么简单就实现了__φ(．．;)</p>
 
                 
               </div>
@@ -379,7 +380,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="category-chain-item">学习记录</a>
+  <a href="/categories/%E5%A7%BF%E5%8A%BF%E5%AD%A6%E4%B9%A0/" class="category-chain-item">姿势学习</a>
   
   
 
@@ -394,9 +395,13 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Docker/" class="print-no-link">#Docker</a>
+        <a href="/tags/Linux/" class="print-no-link">#Linux</a>
       
-        <a href="/tags/Obsidian/" class="print-no-link">#Obsidian</a>
+        <a href="/tags/Server/" class="print-no-link">#Server</a>
+      
+        <a href="/tags/Terraria/" class="print-no-link">#Terraria</a>
+      
+        <a href="/tags/tModLoader/" class="print-no-link">#tModLoader</a>
       
     </div>
   
@@ -410,18 +415,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/28/RHEL7%E8%87%AA%E5%8A%A8%E6%8C%82%E8%BD%BDyum/" title="RHEL7自动挂载yum">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">RHEL7自动挂载yum</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/26/syncthing%E8%AE%BE%E5%A4%87%E9%97%B4%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5/" title="syncthing设备间文件同步">
-                        <span class="hidden-mobile">syncthing设备间文件同步</span>
+                      <a href="/2024/06/24/%E7%BB%84%E8%A3%85%E4%BA%86%E4%B8%80%E5%8F%B0%E7%94%B5%E8%84%91/" title="组装了一台电脑">
+                        <span class="hidden-mobile">组装了一台电脑</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
