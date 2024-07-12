@@ -31,7 +31,7 @@
 <meta property="og:description" content="泰拉瑞亚mod服务器塔拉瑞亚原版服务器不支持添加mod，所以如果想要自建一个泰拉瑞亚的mod服务器的话，就需要使用开源的tModLoader来实现">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-12T07:16:07.000Z">
-<meta property="article:modified_time" content="2024-07-12T08:31:20.582Z">
+<meta property="article:modified_time" content="2024-07-12T08:37:35.838Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Server">
@@ -274,7 +274,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          全文共605 字
+          全文共609 字
         
       </span>
     
@@ -354,7 +354,7 @@
 <p>启动 tModLoader</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">bash start-tModLoaderServer.sh<br></code></pre></td></tr></table></figure>
 
-<p>然后根据输出的提示，创建新世界，运行创建好的世界，设置服务器的端口和密码，然后用快捷键 <code>Ctrl + b</code>，<code>d</code> 退出 tmux<br>要联机的玩家通过客户端的 tModLoader 就可以进入到服务器中一起玩耍了</p>
+<p>然后根据输出的提示，创建新世界，运行创建好的世界，设置服务器的端口和密码，然后用快捷键 <code>Ctrl + b</code>，<code>d</code> 让 tmux 在后台运行<br>要联机的玩家通过客户端的 tModLoader 就可以进入到服务器中一起玩耍了</p>
 <p>至此，一个纯净的、无mod的泰拉瑞亚服务器就搭建完成了</p>
 <h1 id="添加mod"><a href="#添加mod" class="headerlink" title="添加mod"></a>添加mod</h1><p>为了让所有人都可以运行mod，服务器端和客户端都要安装相同的 mod 才可以正常游玩<br>首先在 Steam 上进入到 tModLoader 的创意工坊，订阅自己想要的 mod，等待 mod 安装完成后，找到游戏 mod 的安装路径，这个路径可以进入游戏中，在管理 mod 中找到<br>此处会找到两个目录，一个是存储 mod 文件的目录，一个是设置是否运行 mod 的配置文件路径(enabled.json文件)</p>
 <p>将需要安装到服务器端的 mod 上传到服务器的 <code>$HOME/.local/share/Terraria/tModLoader/Mods/</code> 目录下，注意 mod 是以 <code>.tmod</code> 为后缀的<br>将 <code>enabled.json</code> 文件的内容拷贝到服务器的 <code>$HOME/.local/share/Terraria/tModLoader/Mods/enabled.josn</code> 文件中<br>如果服务器端和客户端要运行的 mod 是一样的，则不需要修改，若不一样，则修改为需要在服务器端运行的 mod 即可</p>
