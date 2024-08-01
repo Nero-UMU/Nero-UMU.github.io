@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>i7-14700k玩游戏闪退</title>
+    <link href="/2024/08/01/i7-14700k%E7%8E%A9%E6%B8%B8%E6%88%8F%E9%97%AA%E9%80%80/"/>
+    <url>/2024/08/01/i7-14700k%E7%8E%A9%E6%B8%B8%E6%88%8F%E9%97%AA%E9%80%80/</url>
+    
+    <content type="html"><![CDATA[<h1 id="玩Steam游戏闪退"><a href="#玩Steam游戏闪退" class="headerlink" title="玩Steam游戏闪退"></a>玩Steam游戏闪退</h1><p>最近用刚配的电脑打游戏，有一些游戏总是玩着玩着就突然闪退到桌面了，而且没有任何报错信息<br>总结了一下，目前碰到的闪退的游戏比如求生之路2(L4D2)，巫师1(Witcher1)，都是十几年前的老游戏了，虽然最近爆出了 Intel CPU 的13代和14代处理器出现了问题，虽然目前没有碰到什么比较严重的问题，比如经常蓝屏什么的，但玩游戏老是冷不丁的闪退也很烦人，所以尝试解决这个问题</p><span id="more"></span><h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>这次是碰到了鬼泣4特别版(Devil May Cry 4 Special Edition)打不开的问题，不是玩一半闪退，而是打开游戏后，弹了个游戏窗口瞬间闪退回桌面，而且也没有任何报错信息<br>在尝试了网络上和Steam讨论区里的解决方案后，都无法打开游戏<br>于是只能尝试从 CPU 上找解决方法</p><h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>我的主板是华硕的吹雪板，所以这个解决方法对于华硕主板来说是可能有用的<br>开机时，按 F2 键进入BIOS，按 F7 进入高级模式，找到 ASUS Multicore Enhancement，将其改为 Disabled，保存并重启<br>尝试打开游戏<br><img src="/img/2024-8-1-1.png" alt="游戏启动成功"></p><h1 id="问题原因猜测"><a href="#问题原因猜测" class="headerlink" title="问题原因猜测"></a>问题原因猜测</h1><p>我猜测可能是因为老游戏和 CPU 不适配，CPU 的频率太高，导致的游戏崩溃，关闭 MCE 就好了<br>当然也可能是老游戏是32位的，而 CPU 是64位的，Windows10 的兼容不好导致的<br>希望此番设置，机魂可以大悦</p><hr><p>最近和朋友玩求生之路2，老是玩着玩着就闪退了，经过这个设置的修改，希望以后可以不要闪退了ヽ(ー_ー )ノ</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>踩坑记录</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>CPU</tag>
+      
+      <tag>crash</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Linux搭建tModLoader服务器并添加mod</title>
     <link href="/2024/07/12/Linux%E6%90%AD%E5%BB%BAtModLoader%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B9%B6%E6%B7%BB%E5%8A%A0mod/"/>
     <url>/2024/07/12/Linux%E6%90%AD%E5%BB%BAtModLoader%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B9%B6%E6%B7%BB%E5%8A%A0mod/</url>
