@@ -6,7 +6,7 @@
   <link href="https://neroumu.top/atom.xml" rel="self"/>
   
   <link href="https://neroumu.top/"/>
-  <updated>2024-08-01T04:48:27.114Z</updated>
+  <updated>2024-09-17T16:23:19.801Z</updated>
   <id>https://neroumu.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Windows使用蓝牙耳机声音很闷</title>
+    <link href="https://neroumu.top/2024/09/18/Windows%E4%BD%BF%E7%94%A8%E8%93%9D%E7%89%99%E8%80%B3%E6%9C%BA%E5%A3%B0%E9%9F%B3%E5%BE%88%E9%97%B7/"/>
+    <id>https://neroumu.top/2024/09/18/Windows%E4%BD%BF%E7%94%A8%E8%93%9D%E7%89%99%E8%80%B3%E6%9C%BA%E5%A3%B0%E9%9F%B3%E5%BE%88%E9%97%B7/</id>
+    <published>2024-09-17T16:01:16.000Z</published>
+    <updated>2024-09-17T16:23:19.801Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天网上买了个麦克风好和朋友联机开麦打游戏，但是当我将麦克风连上我的电脑后，我的蓝牙耳机突然出现了问题<br>具体表现为:开启游戏后，语音软件的声音会听不见，应该是直接没了，其次游戏的声音会比较闷(有点难解释，但是就是听着不对劲)<br>到网上找了这个问题也没有什么解决方啊，最后在一个讨论其他问题的论坛帖子中，偶然找到了解决方法</p><span id="more"></span><h1 id="问题产生原因"><a href="#问题产生原因" class="headerlink" title="问题产生原因"></a>问题产生原因</h1><p>很显然是 Windows 的又一个 Bug，在处理蓝牙耳机的时候，会默认这个蓝牙耳机自带麦克风，即使我的蓝牙耳机没有麦克风<br>解决方法就是禁用这个不存在的麦克风，这样就可以使用自己的麦克风而不会产生干扰</p><h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>打开控制面板，找到 <code>声音</code> 设置选项<br><img src="/img/2024-09-18-1.png"></p><p>在 <code>播放</code> 选项中会找到两个耳机，后缀为 <code>Hands-Free AG Audio</code> 的为有麦克风耳机，后缀为 <code>Stereo</code> 的为普通的耳机<br>在此将 Windows 认为的有麦克风的耳机禁用掉，即可解决游戏声音很闷的问题<br><img src="/img/2024-09-18-2.png"></p><p>解决了游戏声音很闷的问题，还有进入游戏后语音交流软件没有声音的问题没解决<br>同样是在 <code>声音</code> 设置中，找到 <code>通信</code> 选项，将这里设置为 <code>不执行任何操作</code>，这样就可以解决进入游戏后，语音软件没有声音的问题了<br><img src="/img/2024-09-18-3.png"></p><hr><p>新到的麦克风刚插上就突然出现了问题，弄得我还以为我买到的麦克风是坏的，不过还好没事，将设置设置好后就好了<br><del>Windows就是不行，加入Arch Linux吧</del> ε&#x3D;ε&#x3D;ε&#x3D;ε&#x3D;┌(;￣▽￣)┘</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;今天网上买了个麦克风好和朋友联机开麦打游戏，但是当我将麦克风连上我的电脑后，我的蓝牙耳机突然出现了问题&lt;br&gt;具体表现为:开启游戏后，语音软件的声音会听不见，应该是直接没了，其次游戏的声音会比较闷(有点难解释，但是就是听着不对劲)&lt;br&gt;到网上找了这个问题也没有什么解决方啊，最后在一个讨论其他问题的论坛帖子中，偶然找到了解决方法&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="踩坑记录" scheme="https://neroumu.top/categories/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="Windows" scheme="https://neroumu.top/tags/Windows/"/>
+    
+    <category term="Bluetooth" scheme="https://neroumu.top/tags/Bluetooth/"/>
+    
+  </entry>
   
   <entry>
     <title>i7-14700k玩游戏闪退</title>
