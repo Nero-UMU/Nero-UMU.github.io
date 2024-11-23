@@ -1,0 +1,31 @@
+* {
+    cursor: url("/NeroPoint/正常点击.cur"), default;
+}
+
+a:hover {
+    cursor: url("/NeroPoint/链接选择.cur"), pointer;
+}
+
+code {
+    cursor: url("/NeroPoint/文本选择.cur"), text;
+}
+
+.move {
+    cursor: url("/NeroPoint/移动.cur"), move;
+}
+
+.no-drop {
+    cursor: url("/NeroPoint/不可用v2.cur"), no-drop;
+}
+
+.not-allowed{
+    cursor: url("/Neropoint/感叹号.cur"), not-allowed;
+}
+
+.help {
+    cursor: url("/NeroPoint/帮助选择.cur"), help;
+}
+
+.wait {
+    cursor: url("/NeroPoint/忙.cur"), wait;
+}
