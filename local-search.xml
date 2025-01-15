@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>Windows11安装DGL</title>
+    <link href="/2025/01/15/Windows11%E5%AE%89%E8%A3%85DGL/"/>
+    <url>/2025/01/15/Windows11%E5%AE%89%E8%A3%85DGL/</url>
+    
+    <content type="html"><![CDATA[<p>为了学习使用OpenHGNN，需要安装DGL，但是按照<a href="https://www.dgl.ai/pages/start.html">官网</a>的方法安装就是无法正常运行，于是找了一天的方法，总算是解决了</p><span id="more"></span><h1 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h1><p>我的环境是Windows11的系统，显卡是笔记本的4070显卡，所以安装了最新的驱动和CUDA12.6，CUDA的版本直接安装最新的即可，是向下兼容的<br>python 版本是<code>3.12.8</code>，注意目前最新的python版本不支持DGL，最高只支持<code>3.12</code>的版本</p><h1 id="报错原因"><a href="#报错原因" class="headerlink" title="报错原因"></a>报错原因</h1><p>报错信息我碰到的有如下两个</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">FileNotFoundError: Cannot find DGL C++ graphbolt library at D:\HGNN\code\.venv\Lib\site-packages\dgl\graphbolt\graphbolt_pytorch_2.4.1.dll<br></code></pre></td></tr></table></figure><p>这个报错的原因是DGL的安装包中缺少了<code>graphbolt_pytorch_2.4.1.dll</code>这个文件，而之所以缺少这个文件是因为DGL从2024年6月27日开始不支持Windows的最新版本更新了，所以这个文件在安装的时候就是不存在的，当然报错</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">ModuleNotFoundError: No module named &#x27;torchdata.datapipes&#x27;<br></code></pre></td></tr></table></figure><p>这个的原因是TorchData<a href="https://pypi.org/project/torchdata/">不再维护datapipes了</a>，所以如果没有碰到上面的报错，就可能碰到这个报错<br><img src="/img/2025-1-15-1.png"></p><h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>解决方法有两个</p><h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p><del>使用Linux，这样肯定不会有这个报错了，一劳永逸</del></p><h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>安装老版本的DGL<br>为了安装老版本的DGL，pytorch的版本也需要降级，可以去<a href="https://pytorch.org/get-started/previous-versions/">pytorch官网</a>找到老版本安装，使用如下命令可以安装pytorch2.2.1版本</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pip install torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 --index-url https://download.pytorch.org/whl/cu121<br></code></pre></td></tr></table></figure><p>然后使用如下命令安装DGL</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pip install  dgl -f https://data.dgl.ai/wheels/cu121/repo.html<br></code></pre></td></tr></table></figure><p>安装完成后别急，还可能碰到TorchData的报错，解决方法是降级TorchData</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pip install torchdata==0.7.1<br></code></pre></td></tr></table></figure><p>安装完这些后还可能碰到缺少pydantic的问题，安装一下即可</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">pip install pydantic<br></code></pre></td></tr></table></figure><p>至此，DGL就安装成功了，可以测试一下</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> dgl<br><span class="hljs-keyword">import</span> torch<br><br><span class="hljs-built_in">print</span>(dgl.__version__)<br><span class="hljs-built_in">print</span>(torch.__version__)<br></code></pre></td></tr></table></figure><p>输出可以看到正常的版本信息</p><hr><p>搞了一下午，刚开始还以为很简单的，按照官网的方法安装很快就可以安装好的，没想到还是碰到了各种各样的问题<br>希望以后能别再遇到这样的问题了，记录下来以备以后需要</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>踩坑记录</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Windows11</tag>
+      
+      <tag>DGL</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Ubuntu搭建OpenVPN服务器</title>
     <link href="/2024/12/10/Ubuntu%E6%90%AD%E5%BB%BAOpenVPN%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     <url>/2024/12/10/Ubuntu%E6%90%AD%E5%BB%BAOpenVPN%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
