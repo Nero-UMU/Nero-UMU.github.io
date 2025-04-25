@@ -33,13 +33,13 @@
 <meta property="og:image" content="https://neroumu.top/img/2024-1-5-1.png">
 <meta property="og:image" content="https://neroumu.top/img/2024-1-5-2.png">
 <meta property="article:published_time" content="2024-01-05T11:17:26.000Z">
-<meta property="article:modified_time" content="2025-04-25T10:53:37.030Z">
+<meta property="article:modified_time" content="2025-04-25T11:40:27.857Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="acme">
-<meta property="article:tag" content="tailscale">
-<meta property="article:tag" content="headscale">
-<meta property="article:tag" content="derper">
+<meta property="article:tag" content="Tailscale">
+<meta property="article:tag" content="Headscale">
+<meta property="article:tag" content="Derper">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://neroumu.top/img/2024-1-5-1.png">
   
@@ -373,10 +373,10 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">~/.acme.sh/acme.sh --installcert -d 域名 --fullchainpath /opt/derper/域名.crt --keypath /opt/derper/域名.key --ecc<br></code></pre></td></tr></table></figure>
 
 <h2 id="安装golang"><a href="#安装golang" class="headerlink" title="安装golang"></a>安装golang</h2><p>按照 <a target="_blank" rel="noopener" href="https://go.dev/">go.dev</a> 官网的方法，安装最新的golang<br>下载最新的golang包</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">wget https://go.dev/dl/go1.21.5.linux-amd64.tar.gz<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">wget https://go.dev/dl/go1.24.2.linux-amd64.tar.gz<br></code></pre></td></tr></table></figure>
 
 <p>删除可能残留的golang并安装最新的golang</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">rm -rf /usr/local/go &amp;&amp; tar -C /usr/local -xzf go1.21.5.linux-amd64.tar.gz<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">rm -rf /usr/local/go &amp;&amp; tar -C /usr/local -xzf go1.24.2.linux-amd64.tar.gz<br></code></pre></td></tr></table></figure>
 
 <p>将golang添加到环境变量中，可以将下列语句添加到 <code>/etc/profile</code> 中</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">export PATH=$PATH:/usr/local/go/bin<br></code></pre></td></tr></table></figure>
@@ -404,7 +404,7 @@
 <h1 id="搭建headscale"><a href="#搭建headscale" class="headerlink" title="搭建headscale"></a>搭建headscale</h1><p>headscale是用于连接建立的服务器，流量要求比较小，搭建的headscale可以顺便安装一个ui，不过用处不大，命令行足够了</p>
 <h2 id="安装headscale服务"><a href="#安装headscale服务" class="headerlink" title="安装headscale服务"></a>安装headscale服务</h2><p>在<a target="_blank" rel="noopener" href="https://github.com/juanfont/headscale/releases">headscale release</a>中找到适合的deb包，下载到服务器上</p>
 <p>安装</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">wget https://github.com/juanfont/headscale/releases/download/v0.23.0-alpha2/headscale_0.23.0-alpha2_linux_amd64.deb<br>dpkg --install headscale_0.23.0-alpha2_linux_amd64.deb<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">wget https://github.com/juanfont/headscale/releases/download/v0.25.1/headscale_0.25.1_linux_amd64.deb<br>dpkg --install headscale_0.25.1_linux_amd64.deb<br></code></pre></td></tr></table></figure>
 <p>设置开机自启动</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl enable headscale.service<br></code></pre></td></tr></table></figure>
 
@@ -500,11 +500,11 @@
       
         <a href="/tags/acme/" class="print-no-link">#acme</a>
       
-        <a href="/tags/tailscale/" class="print-no-link">#tailscale</a>
+        <a href="/tags/Tailscale/" class="print-no-link">#Tailscale</a>
       
-        <a href="/tags/headscale/" class="print-no-link">#headscale</a>
+        <a href="/tags/Headscale/" class="print-no-link">#Headscale</a>
       
-        <a href="/tags/derper/" class="print-no-link">#derper</a>
+        <a href="/tags/Derper/" class="print-no-link">#Derper</a>
       
     </div>
   
