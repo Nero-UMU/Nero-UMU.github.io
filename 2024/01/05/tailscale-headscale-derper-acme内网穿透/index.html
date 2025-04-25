@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://neroumu.top/img/2024-1-5-1.png">
 <meta property="og:image" content="https://neroumu.top/img/2024-1-5-2.png">
 <meta property="article:published_time" content="2024-01-05T11:17:26.000Z">
-<meta property="article:modified_time" content="2025-04-25T11:40:27.857Z">
+<meta property="article:modified_time" content="2025-04-25T13:07:14.847Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="acme">
@@ -422,7 +422,7 @@
 
 <h2 id="headscale使用自己搭建的derp服务器"><a href="#headscale使用自己搭建的derp服务器" class="headerlink" title="headscale使用自己搭建的derp服务器"></a>headscale使用自己搭建的derp服务器</h2><p>编辑 <code>/etc/headscale/derp.yaml</code> 文件，添加如下配置</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">regions:</span><br>  <span class="hljs-attr">901:</span><br>    <span class="hljs-attr">regionid:</span> <span class="hljs-number">901</span><br>    <span class="hljs-attr">regioncode:</span> <span class="hljs-string">DERP</span><br>    <span class="hljs-attr">regionname:</span> <span class="hljs-string">MYDERP</span><br>    <span class="hljs-attr">nodes:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">DERP_SERVER_1</span> <br>        <span class="hljs-attr">regionid:</span> <span class="hljs-number">901</span><br>        <span class="hljs-attr">hostname:</span> <span class="hljs-string">derper服务器的域名</span><br>        <span class="hljs-attr">stunport:</span> <span class="hljs-number">3478</span><br>        <span class="hljs-attr">stunonly:</span> <span class="hljs-literal">false</span><br>        <span class="hljs-attr">derpport:</span> <span class="hljs-number">12150</span><br><br></code></pre></td></tr></table></figure>
-<p>在编辑 <code>/etc/headscale/config.yaml</code> 文件，修改如下配置</p>
+<p>再编辑 <code>/etc/headscale/config.yaml</code> 文件，修改如下配置</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-comment"># 将官方的json配置注释掉，有自己的derp服务器就不用官方的了</span><br><span class="hljs-attr">urls:</span> []<br><span class="hljs-comment"># 使用刚才写好的配置</span><br><span class="hljs-attr">paths:</span> <br><span class="hljs-bullet">-</span> <span class="hljs-string">/etc/headscale/derp.yaml</span><br></code></pre></td></tr></table></figure>
 
 <p>重启headscale服务</p>
