@@ -6,7 +6,7 @@
   <link href="https://neroumu.top/atom.xml" rel="self"/>
   
   <link href="https://neroumu.top/"/>
-  <updated>2025-06-02T08:48:11.258Z</updated>
+  <updated>2025-06-02T09:02:14.311Z</updated>
   <id>https://neroumu.top/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://neroumu.top/2025/06/02/Jellyfin%E4%BD%BF%E7%94%A8pt%E4%B8%8B%E8%BD%BD%E7%9A%84%E6%95%B0%E6%8D%AE%E8%B8%A9%E5%9D%91/"/>
     <id>https://neroumu.top/2025/06/02/Jellyfin%E4%BD%BF%E7%94%A8pt%E4%B8%8B%E8%BD%BD%E7%9A%84%E6%95%B0%E6%8D%AE%E8%B8%A9%E5%9D%91/</id>
     <published>2025-06-02T08:47:35.000Z</published>
-    <updated>2025-06-02T08:48:11.258Z</updated>
+    <updated>2025-06-02T09:02:14.311Z</updated>
     
     <content type="html"><![CDATA[<h1 id="qBittorrent每次重启莫名其妙的文件丢失"><a href="#qBittorrent每次重启莫名其妙的文件丢失" class="headerlink" title="qBittorrent每次重启莫名其妙的文件丢失"></a>qBittorrent每次重启莫名其妙的文件丢失</h1><p>最近重装了一个新的 NAS，使用的是 Intel 的 N100 处理器，相较于上一台 J1900 性能得到了极大提升<br>在装好系统后，迁移种子到新的 NAS 上做种子的时候，发现有些种子会出现文件损失的情况，每次都需要手动强制重新校验，然后会发现有些文件丢失了需要重新下载<br>刚开始我不以为然，以为是小问题，但当我重启多了之后发现，经常会有重启后文件丢失的情况<br>我当然是不愿意怀疑是硬盘坏了的，毕竟新硬盘没用几天，怎么可能这么快就坏了呢<br>于是就尝试寻找一下问题出现的原因和解决的办法</p><span id="more"></span><h1 id="问题的发生地点"><a href="#问题的发生地点" class="headerlink" title="问题的发生地点"></a>问题的发生地点</h1><p>首先是在 qBittorrent 中查看丢失的是什么文件，发现大多数文件损失会出现在 pt 下载的资源下的<code>CDs</code>这个目录<br><img src="/img/2025-06-02-1.png"></p><p>这个目录通常存储的是音频文件还有封面图片，再看丢失的是什么文件，可以发现，丢失的大都是封面图片(cover.jpg)<br><img src="/img/2025-06-02-2.png"></p><p>为什么丢失的大多是这个文件呢，我带着疑问到文件目录下查看了这个文件的信息<br><img src="/img/2025-06-02-3.png"></p><p>可以看到，这些出问题的文件都是最近生成的，显然不是资源中自带的文件<br>那么问题的原因就很明显了，存在什么程序会生成同样的文件，并且会覆盖这个地方的文件</p><h1 id="问题的解决"><a href="#问题的解决" class="headerlink" title="问题的解决"></a>问题的解决</h1><p>很快我就联想到了这个文件生成时间我在做什么，我当时在 Jellyfin 对这个资源进行了手动刮削，其中有一项替换图片的选项，大概率就是这个步骤出现的问题<br>但是 Jellyfin 默认是不会在这个地方产生这样的文件的，于是我找到了 Jellyfin 的媒体库设置，找到了问题的根源<br><img src="/img/2025-06-02-4.png" alt="现已关闭"></p><p>在 Jellyfin 媒体库的设置中，这一项可以将刮削得到的图像保存到这个文件所在的目录下，即放在了一起<br>这一设置的本意是方便文件的迁移和编辑，是个很好的功能，但是它同时会保存封面图像(cover.jpg)在目录下，这正好与资源中自带的封面图像重名了，于是资源中的文件被覆盖，导致了 qBittorrent 每次重启校验都会发现文件丢失<br>虽然是个好功能，但是影响到了原资源，只好将其关闭了</p><hr><p>这个问题在上一台 NAS 上也时有发生，都没有太在意，直到最近新组了台 NAS 才发现这个问题愈发的严重，这才想到寻找解决的方法<br>以后对于软件的设置还是需要慎之又慎，在不清楚实际功能的情况下，还是保持开发者设置的默认选项吧(シ. .)シ</p>]]></content>
     
