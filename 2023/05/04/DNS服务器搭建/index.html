@@ -402,14 +402,18 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">nslookup sekai.hello.com<br>nslookup kono.sekai.hello.com<br></code></pre></td></tr></table></figure>
 
 <h2 id="常见错误"><a href="#常见错误" class="headerlink" title="常见错误"></a>常见错误</h2><ol>
-<li><p>忘记关闭防火墙导致子域服务器配置失败</p>
+<li>忘记关闭防火墙导致子域服务器配置失败</li>
+</ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl stop firewalld<br>iptables -F<br></code></pre></td></tr></table></figure>
-</li>
+
+<ol start="2">
 <li><p>序列号不相同导致无法授权</p>
 </li>
 <li><p>认证机制未关闭，因为配置的时候没有配置认证，所以应该关闭认证，否则会无法授权<br>编辑 <code>/etc/named.conf</code> 文件的如下配置</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs conf">dnssec-enable no;<br>dnssec-validation no;<br></code></pre></td></tr></table></figure></li>
+</li>
 </ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs conf">dnssec-enable no;<br>dnssec-validation no;<br></code></pre></td></tr></table></figure>
+
 <hr>
 <p>总算是把 DNS 服务器配置出来了，尤其是子域配置，配置了很久<br>之所以能在子域卡这么久，就是因为很多博主在配置的时候，都没有提到过关闭认证机制，导致我一直配置不成功，关闭之后，一下就成功了<br>从大量的重复、真真假假的文章中找答案真是太难受了，还是直接读官方文档好啊 ( ′ 3&#96;) sigh~</p>
 

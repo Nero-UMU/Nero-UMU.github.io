@@ -38,9 +38,10 @@
 <meta property="og:image" content="https://neroumu.top/img/2023-1-3-6.jpg">
 <meta property="og:image" content="https://neroumu.top/img/2023-1-3-7.jpg">
 <meta property="article:published_time" content="2023-01-02T16:46:12.000Z">
-<meta property="article:modified_time" content="2025-01-04T08:07:20.852Z">
+<meta property="article:modified_time" content="2025-06-03T02:57:31.774Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Docker">
+<meta property="article:tag" content="Jellyfin">
 <meta property="article:tag" content="emby">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://neroumu.top/img/2023-1-3-1.png">
@@ -357,7 +358,7 @@
 <p>其中 <code>--volume /disk:/mnt/share1</code> 后面的映射目录的格式不能变,只能是 share1,share2…<br>官方的命令里面包含 <code>--device /dev/vchiq:/dev/vchiq</code> 但是我没有加<br>可以通过查看 <code>/dev/vchiq</code> 是否存在来判断是否添加</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ls /dev/vchiq<br></code></pre></td></tr></table></figure>
 
-<h3 id="配置-emby"><a href="#配置-emby" class="headerlink" title="配置 emby"></a>配置 emby</h3><p>容器启动后,浏览器访问 <code>IP:8096</code> 进入 emby<br>语言选择中文后配置起来很方便,按照自己喜欢来配置,除了要注意一个地方<br>在添加媒体库的时候,内容类型选择电视节目,这样重命名后的视频文件才可以被分类<br><img src="/img/2023-1-3-1.png" srcset="/img/loading.gif" lazyload alt="①处选择电视节目,②处的挂载目录为/mnt/share1下的目录"></p>
+<h3 id="配置-emby"><a href="#配置-emby" class="headerlink" title="配置 emby"></a>配置 emby</h3><p>容器启动后,浏览器访问 <code>IP:8096</code> 进入 emby<br>语言选择中文后配置起来很方便,按照自己喜欢来配置,除了要注意一个地方<br>在添加媒体库的时候,内容类型选择电视节目,这样重命名后的视频文件才可以被分类<br><img src="/img/2023-1-3-1.png" srcset="/img/loading.gif" lazyload alt="①处选择电视节目,②处的挂载目录为&#x2F;mnt&#x2F;share1下的目录"></p>
 <p>设置好媒体库后,扫描一下就好了,可以看到 sonarr 归类的视频都整整齐齐的在播放列表里面</p>
 <h2 id="客户端播放"><a href="#客户端播放" class="headerlink" title="客户端播放"></a>客户端播放</h2><p>如果我的小主机再强一点就好了,但是不行,一旦emby播放视频,CPU 就会跑满<br><img src="/img/2023-1-3-2.png" srcset="/img/loading.gif" lazyload alt="直接进入烤机模式"></p>
 <p>所以我找了找其他的客户端,用流视频的方式播放,发现 CPU 的占用降低了许多<br>电脑上可以使用 jellyfin-media-player 来播放<br>项目地址 <a target="_blank" rel="noopener" href="https://github.com/jellyfin/jellyfin-media-player">https://github.com/jellyfin/jellyfin-media-player</a><br>可以通过编译来安装,但是我发现 Arch Linux aur 里面有编译好了的二进制包,可以直接安装,很是方便</p>
@@ -401,6 +402,8 @@
       <i class="iconfont icon-tags"></i>
       
         <a href="/tags/Docker/" class="print-no-link">#Docker</a>
+      
+        <a href="/tags/Jellyfin/" class="print-no-link">#Jellyfin</a>
       
         <a href="/tags/emby/" class="print-no-link">#emby</a>
       

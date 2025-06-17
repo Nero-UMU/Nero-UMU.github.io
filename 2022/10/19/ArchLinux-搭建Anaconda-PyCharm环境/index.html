@@ -364,11 +364,22 @@
 <p>如果这时候尝试安装 OpenCV 就会蹦出开头的那个错误<br>我使用 Anaconda 是要普通用户来运行,但是默认 Anaconda 只能 root 来运行,这就很矛盾了(当然这个时候 root 用户来安装就没有问题了(´･_･&#96;)</p>
 <p>所以这就需要创建一个普通用户的环境了</p>
 <ol>
-<li>进入 conda 命令行<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">source /opt/anaconda/bin/activate root<br></code></pre></td></tr></table></figure></li>
-<li>创建一个新环境<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">conda create --name myenv<br></code></pre></td></tr></table></figure></li>
-<li>更改运行的环境为刚才创建的环境<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">conda activate myenv <br></code></pre></td></tr></table></figure></li>
-<li>安装 OpenCV 环境<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">conda install opencv <br></code></pre></td></tr></table></figure></li>
+<li>进入 conda 命令行</li>
 </ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">source /opt/anaconda/bin/activate root<br></code></pre></td></tr></table></figure>
+<ol start="2">
+<li>创建一个新环境</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">conda create --name myenv<br></code></pre></td></tr></table></figure>
+<ol start="3">
+<li>更改运行的环境为刚才创建的环境</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">conda activate myenv <br></code></pre></td></tr></table></figure>
+<ol start="4">
+<li>安装 OpenCV 环境</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">conda install opencv <br></code></pre></td></tr></table></figure>
+
 <p>OpenCV 环境安装完成 (ﾟ∀ﾟ)</p>
 <h2 id="PyCharm-使用-Anaconda-环境"><a href="#PyCharm-使用-Anaconda-环境" class="headerlink" title="PyCharm 使用 Anaconda 环境"></a>PyCharm 使用 Anaconda 环境</h2><p>在 PyCharm 中选择 Python 环境为 &#x2F;opt&#x2F;anaconda&#x2F;envs&#x2F;myenv&#x2F;bin&#x2F;python<br><img src="/img/2022-10-19-1.png" srcset="/img/loading.gif" lazyload></p>
 <p>完成后在程序中尝试导入 cv2,运行不报错表示设置成功</p>

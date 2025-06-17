@@ -355,7 +355,7 @@
 
 <p>签发完成后，将服务端的 <code>pki/ca.crt</code> 和 <code>pki/issued/client.crt</code> 文件发送到客户端<br>至此，证书和密钥已经生成完毕，下面开始配置 openvpn 服务器</p>
 <h1 id="配置-Open-VPN-服务器"><a href="#配置-Open-VPN-服务器" class="headerlink" title="配置 Open VPN 服务器"></a>配置 Open VPN 服务器</h1><p>安装 openvpn，Ubuntu 安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install openvpn<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install openvpn<br></code></pre></td></tr></table></figure>
 
 <p>修改配置文件 <code>/etc/openvpn/server.conf</code>，如果没有，可以将 <code>/usr/share/doc/openvpn/examples/sample-config-files/server.conf</code> 复制到 <code>/etc/openvpn</code> 目录下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cp</span> /usr/share/doc/openvpn/examples/sample-config-files/server.conf /etc/openvpn/server.conf<br></code></pre></td></tr></table></figure>
@@ -371,7 +371,7 @@
 
 <p>配置完成后，启动 Open VPN，即可连接 openvpn 服务器</p>
 <h1 id="配置-Linux-客户端"><a href="#配置-Linux-客户端" class="headerlink" title="配置 Linux 客户端"></a>配置 Linux 客户端</h1><p>我是在 Arch Linux 上配置的，Arch Linux 的大部分操作都与 Ubuntu 相似，但有几处命令不同，这里可以查询 <a target="_blank" rel="noopener" href="https://wiki.archlinuxcn.org/wiki/OpenVPN">Arch Linux Wiki</a><br>安装 openvpn</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo pacman -S openvpn<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> pacman -S openvpn<br></code></pre></td></tr></table></figure>
 
 <p>将创建好的客户端证书(client.crt)、私钥(client.key)和服务端的CA证书(ca.crt)放在 <code>/etc/openvpn/client</code> 下<br>再创建配置文件 <code>/etc/openvpn/client/.client.conf</code>，内容与 Windows 客户端相同，注意一定是<code>.client.conf</code>，不能是 <code>client.conf</code></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs conf">client #这里表示客户端模式，不可自定义<br>dev tun<br>proto udp<br>remote 服务端IP 1194 #openvpn服务端的IP和端口号<br>resolv-retry infinite<br>nobind<br>ca ca.crt<br>cert client.crt<br>key client.key<br>verb 3<br>persist-key<br>comp-lzo<br></code></pre></td></tr></table></figure>

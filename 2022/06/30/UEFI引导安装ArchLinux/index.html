@@ -380,7 +380,7 @@
 
 <h3 id="硬盘分区"><a href="#硬盘分区" class="headerlink" title="硬盘分区"></a>硬盘分区</h3><p>很重要的一步，由于是用 UEFI 引导，所以需要创建两个分区，一个 EFI系统分区，一个根分区，如果需要 Swap 分区，可以查看 wiki<br>查看系统识别到的硬盘</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">fdisk -l<br></code></pre></td></tr></table></figure>
-<p><img src="/img/2022-6-30-2.png" srcset="/img/loading.gif" lazyload alt="可以看到有一块30G的硬盘 /dev/sda"></p>
+<p><img src="/img/2022-6-30-2.png" srcset="/img/loading.gif" lazyload alt="可以看到有一块30G的硬盘 &#x2F;dev&#x2F;sda"></p>
 <p>可以使用 cfdisk 分区</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">cfdisk /dev/sda<br></code></pre></td></tr></table></figure>
 <p><img src="/img/2022-6-30-3.png" srcset="/img/loading.gif" lazyload></p>

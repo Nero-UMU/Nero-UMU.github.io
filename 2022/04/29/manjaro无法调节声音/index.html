@@ -351,7 +351,7 @@
 <h1 id="声音无法调节的问题解决"><a href="#声音无法调节的问题解决" class="headerlink" title="声音无法调节的问题解决"></a>声音无法调节的问题解决</h1><p>查看了 &#x2F;etc&#x2F;environment</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">cat /etc/environment<br></code></pre></td></tr></table></figure>
 <p>找到了原因，里面的内容被某个脚本改写了，我也删掉了这个文件试了试</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">sudo rm <span class="hljs-regexp">/etc/</span>environment<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> /etc/environment<br></code></pre></td></tr></table></figure>
 <p>重启，扬声器设备被系统正确识别了<br>帮别人找问题阴差阳错的解决了自己几天前的问题(°ー°〃)</p>
 <hr>
 <p>后来我们一起回忆了一下最近有没有用管理员权限运行了一些自己不信任的脚本<br>原来我们都从 github 上找过一个自动刷课的脚本，拿虚拟机做了实验后，问题复现了<br>然后我们对视一笑，原来你也想这么弄，但没成功啊(ﾉ*･ω･)ﾉ</p>
