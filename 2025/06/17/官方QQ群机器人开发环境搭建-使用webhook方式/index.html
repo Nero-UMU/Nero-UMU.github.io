@@ -1,0 +1,782 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head><!-- hexo injector head_begin start -->
+    <link rel="stylesheet" href="/sakana-widget/lib/sakana.min.css"/>
+    <div id="sakana-widget" style="position:fixed;bottom:0;left:0;z-index:10"></div>
+    <script defer src="/js/sakana.js"></script>
+    <script async onload="initSakanaWidget()" src="/sakana-widget/lib/sakana.min.js"></script>
+    <!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/sword.svg">
+  <link rel="icon" href="/img/sword.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="NeroUMU">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="使用webhook方式搭建QQ群机器人最近突然想开发一个 QQ 群机器人，于是就去找了相关资料，发现有 websocket 和 webhook 两种方式，但是 websocket 方式将慢慢弃用转向 webhook 方式既然都弃用了，那肯定要选新的方式了，于是就尝试使用 webhook 方式来搭建一个 QQ 群机器人这篇文章用于记录机器人的开发环境搭建">
+<meta property="og:type" content="article">
+<meta property="og:title" content="官方QQ群机器人开发环境搭建(使用webhook方式)">
+<meta property="og:url" content="https://neroumu.top/2025/06/17/%E5%AE%98%E6%96%B9QQ%E7%BE%A4%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA-%E4%BD%BF%E7%94%A8webhook%E6%96%B9%E5%BC%8F/index.html">
+<meta property="og:site_name" content="NeroUMU&#39;s BLOG">
+<meta property="og:description" content="使用webhook方式搭建QQ群机器人最近突然想开发一个 QQ 群机器人，于是就去找了相关资料，发现有 websocket 和 webhook 两种方式，但是 websocket 方式将慢慢弃用转向 webhook 方式既然都弃用了，那肯定要选新的方式了，于是就尝试使用 webhook 方式来搭建一个 QQ 群机器人这篇文章用于记录机器人的开发环境搭建">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://neroumu.top/img/2025-06-17-1.png">
+<meta property="og:image" content="https://neroumu.top/img/2025-06-17-2.png">
+<meta property="og:image" content="https://neroumu.top/img/2025-06-17-3.jpg">
+<meta property="article:published_time" content="2025-06-17T12:02:14.000Z">
+<meta property="article:modified_time" content="2025-07-03T13:08:25.769Z">
+<meta property="article:author" content="NeroUMU">
+<meta property="article:tag" content="QQ">
+<meta property="article:tag" content="bot">
+<meta property="article:tag" content="webhook">
+<meta property="article:tag" content="NoneBot">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://neroumu.top/img/2025-06-17-1.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>官方QQ群机器人开发环境搭建(使用webhook方式) - NeroUMU&#39;s BLOG</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/NeroPoint.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"neroumu.top","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="NeroUMU's BLOG" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 80vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>NeroUMU&#39;s BLOG</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/bangumis/" target="_self">
+                <i class="iconfont icon-bookmark"></i>
+                <span>追番</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss"></i>
+                <span>RSS</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="官方QQ群机器人开发环境搭建(使用webhook方式)"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-06-17 20:02" pubdate>
+          2025年6月17日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          全文共1.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          阅读全文需约10 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">官方QQ群机器人开发环境搭建(使用webhook方式)</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="使用webhook方式搭建QQ群机器人"><a href="#使用webhook方式搭建QQ群机器人" class="headerlink" title="使用webhook方式搭建QQ群机器人"></a>使用webhook方式搭建QQ群机器人</h1><p>最近突然想开发一个 QQ 群机器人，于是就去找了相关资料，发现有 <code>websocket</code> 和 <code>webhook</code> 两种方式，但是 <code>websocket</code> 方式将慢慢弃用转向 <code>webhook</code> 方式<br>既然都弃用了，那肯定要选新的方式了，于是就尝试使用 <code>webhook</code> 方式来搭建一个 QQ 群机器人<br>这篇文章用于记录机器人的开发环境搭建</p>
+<span id="more"></span>
+
+<h1 id="创建机器人"><a href="#创建机器人" class="headerlink" title="创建机器人"></a>创建机器人</h1><p>首先根据<a target="_blank" rel="noopener" href="https://bot.q.qq.com/wiki/">文档</a>的描述，注册一个账号，然后在<a target="_blank" rel="noopener" href="https://q.qq.com/">QQ开放平台</a>创建一个机器人<br>机器人创建好之后，找一个自己是群主或者管理员的少于20个人的群，在沙箱配置中设置该群，然后在 QQ 群中将机器人加入群聊<br><img src="/img/2025-06-17-1.png" srcset="/img/loading.gif" lazyload><br>创建机器人之后，在开发管理中查看机器人的 <code>AppID</code>  和 <code>Token</code>，并生成 <code>AppSecret</code>，记好备用<br><img src="/img/2025-06-17-2.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="准备环境"><a href="#准备环境" class="headerlink" title="准备环境"></a>准备环境</h1><p>为了搭建官方 QQ 群机器人，需要一个经过 ICP 备案的域名，并将这个域名指向一台国内的服务器<br>域名指向服务器后，需要申请 SSL 证书，如果是国内的提供商，一般有免费的 SSL 证书可以直接申请，也可以使用 <a target="_blank" rel="noopener" href="https://github.com/acmesh-official/acme.sh">acme</a> 申请证书<br>申请 SSL 证书后，将证书上传到服务器以备后续使用</p>
+<h1 id="开发环境搭建"><a href="#开发环境搭建" class="headerlink" title="开发环境搭建"></a>开发环境搭建</h1><p>机器人框架我使用的是 <a target="_blank" rel="noopener" href="https://nonebot.dev/">NoneBot</a>，需要 Python3.9 以上的版本，Ubuntu 可以直接安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install python3.9 python3.9-venv python3.9-dev<br></code></pre></td></tr></table></figure>
+
+<p>然后创建一个虚拟环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> QQ_BOT<br><span class="hljs-built_in">cd</span> QQ_BOT<br>python3.9 -m venv .venv<br><br><span class="hljs-built_in">source</span> .venv/bin/activate<br>pip install pipx<br>pipx install nb-cli<br></code></pre></td></tr></table></figure>
+
+<p>按照文档安装 nonebot2 以及驱动器，为了使用 webhook 方式，需要安装 fastapi 和 httpx 这两个驱动器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">nb driver install nonebot2[fastapi]<br>nb driver install nonebot2[httpx]<br></code></pre></td></tr></table></figure>
+
+<p>再安装适配器，这里使用的官方 QQ 的适配器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nb adapter install nonebot-adapter-qq<br></code></pre></td></tr></table></figure>
+
+<h1 id="配置反向代理"><a href="#配置反向代理" class="headerlink" title="配置反向代理"></a>配置反向代理</h1><p>官方 QQ 群机器人必须使用 <code>HTTPS</code>，所以需要安装 nginx 来配置反向代理</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install nginx<br></code></pre></td></tr></table></figure>
+
+<p>创建配置文件 <code>/etc/nginx/sites-available/域名.conf</code>，并编辑如下配置，其中的域名请替换为自己的域名，自定义端口可以随意设置，只要与后面的机器人配置的端口一致即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs conf">server &#123;<br>    listen 80;<br>    server_name 域名;<br>    return 301 https://$host$request_uri;  # 强制HTTP跳转到HTTPS<br>&#125;<br><br>server &#123;<br>    listen 443 ssl http2;<br>    server_name 域名;<br><br>    # SSL证书路径<br>    ssl_certificate /path/to/your/domain.crt;<br>    ssl_certificate_key /path/to/your/domain.key;<br><br>    # SSL协议和加密套件<br>    ssl_protocols TLSv1.2 TLSv1.3;<br>    ssl_ciphers &#x27;ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256&#x27;;<br>    ssl_prefer_server_ciphers on;<br><br>    # 反向代理配置<br>    location /qq/webhook &#123;<br>        proxy_pass http://127.0.0.1:自定义端口/qq/webhook;<br>        proxy_set_header Host $host;<br>        proxy_set_header X-Real-IP $remote_addr;<br>        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;<br>        proxy_set_header X-Forwarded-Proto $scheme;<br>        proxy_http_version 1.1;<br>        proxy_set_header Upgrade $http_upgrade;<br>        proxy_set_header Connection &quot;upgrade&quot;;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>保存并退出后，使用命令链接配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">ln</span> -sf /etc/nginx/sites-available/域名.conf /etc/nginx/sites-enabled/<br></code></pre></td></tr></table></figure>
+
+<p>测试配置文件是否正确，并重载 nginx 服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> nginx -t<br><span class="hljs-built_in">sudo</span> systemctl reload nginx<br></code></pre></td></tr></table></figure>
+
+<h1 id="配置机器人"><a href="#配置机器人" class="headerlink" title="配置机器人"></a>配置机器人</h1><p>在 <code>QQ_BOT</code> 目录下创建一个 <code>.env</code> 文件，并编辑如下内容，其中的 <code>id</code> , <code>token</code> , <code>secret</code> 分别为前面开发管理中获取到的<code>AppID</code>  和 <code>Token</code>，和生成的 <code>AppSecret</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs conf">HOST=0.0.0.0<br>PORT=自定义端口，与nginx配置文件中的端口一致<br>COMMAND_START=[&quot;/&quot;, &quot;&quot;]<br>COMMAND_SEP=[&quot;.&quot;, &quot; &quot;]<br>DRIVER=~fastapi+~httpx<br>LOG_LEVEL=DEBUG<br>API_TIMEOUT=10.0<br>NICKNAME=[&quot;机器人昵称1&quot;, &quot;机器人昵称2&quot;]<br>SESSION_EXPIRE_TIMEOUT=00:02:00<br>QQ_IS_SANDBOX=true<br><br>QQ_BOTS=[&#123;&quot;id&quot;:&quot;xxx&quot;,&quot;token&quot;:&quot;xxx&quot;,&quot;secret&quot;:&quot;xxx&quot;,&quot;intent&quot;:&#123;&quot;c2c_group_at_messages&quot;:true&#125;,&quot;use_websocket&quot;:false&#125;]<br></code></pre></td></tr></table></figure>
+
+<h1 id="测试机器人"><a href="#测试机器人" class="headerlink" title="测试机器人"></a>测试机器人</h1><p>写一个简单的小功能测试机器人是否搭建完成<br>在 <code>QQ_BOT</code> 下创建机器人主文件 <code>bot.py</code>，内容如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> nonebot<br><span class="hljs-keyword">from</span> nonebot.adapters.qq <span class="hljs-keyword">import</span> Adapter <span class="hljs-keyword">as</span> QQAdapter<br><br>nonebot.init()<br><br>driver = nonebot.get_driver()<br>driver.register_adapter(QQAdapter)<br><br>nonebot.load_plugins(<span class="hljs-string">&quot;my_bot/plugins&quot;</span>)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    nonebot.run()<br></code></pre></td></tr></table></figure>
+
+<p>在 <code>QQ_BOT</code> 下创建一个目录，并再在其下创建一个 <code>plugins</code> 目录，在 <code>plugins</code> 目录下创建一个 <code>repeater.py</code> 文件，内容如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> nonebot <span class="hljs-keyword">import</span> on_message<br><span class="hljs-keyword">from</span> nonebot.adapters.qq <span class="hljs-keyword">import</span> MessageEvent, MessageSegment<br><br><span class="hljs-comment"># 捕获所有消息事件</span><br>repeater = on_message()<br><br><span class="hljs-meta">@repeater.handle()</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">repeat</span>(<span class="hljs-params">event: MessageEvent</span>):<br>    msg = event.get_plaintext()<br>    <span class="hljs-keyword">await</span> repeater.send(MessageSegment.text(msg))<br></code></pre></td></tr></table></figure>
+
+<p>目录结构如下</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs text">QQ_BOT/<br>├── bot.py<br>├── .env<br>├── my_bot/<br>│   └── plugins/<br>│   │   └── repeater.py<br></code></pre></td></tr></table></figure>
+
+<p>这段代码可以使机器人重复发送所有收到的消息，使用如下命令启动机器人</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> .venv/bin/activate<br>python bot.py<br></code></pre></td></tr></table></figure>
+
+<p>启动之后，在 QQ 开放平台的机器人页面中，回调配置地址设置为 <code>https://your_domain/qq/webhook/</code></p>
+<p>在沙箱群中，测试机器人是否正常运行<br><img src="/img/2025-06-17-3.jpg" srcset="/img/loading.gif" lazyload alt="测试成功"></p>
+<hr>
+<p>突然奇想想开发一个机器人，小时候用过一键脚本搭建过机器人，那时候还什么技术都不懂，只知道这样很好玩，现在长大了，学了很多技术了，可以尝试自己实现一个想要的功能了(★O∀O*)◇+｡</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="category-chain-item">学习记录</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/QQ/" class="print-no-link">#QQ</a>
+      
+        <a href="/tags/bot/" class="print-no-link">#bot</a>
+      
+        <a href="/tags/webhook/" class="print-no-link">#webhook</a>
+      
+        <a href="/tags/NoneBot/" class="print-no-link">#NoneBot</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/06/02/Jellyfin%E4%BD%BF%E7%94%A8pt%E4%B8%8B%E8%BD%BD%E7%9A%84%E6%95%B0%E6%8D%AE%E8%B8%A9%E5%9D%91/" title="Jellyfin使用pt下载的数据踩坑">
+                        <span class="hidden-mobile">Jellyfin使用pt下载的数据踩坑</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-dark';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'Nero-UMU/Nero-UMU.github.io');
+      s.setAttribute('issue-term', 'title');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <span>本博客使用</span> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <span>主题 | </span> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <span>框架 | </span> <a href="https://github.com" target="_blank" rel="nofollow noopener"><span>GitHub</span></a> <span>托管</span><br> <a href="https://icp.gov.moe/?keyword=20231215" target="_blank"><img src="/img/icon400.png" srcset="/img/loading.gif" lazyload height=25/>萌ICP备20231215号</a> <a style="text-decoration:none;color:#e77c8e;" href="https://travel.moe/go.html" title="异次元之旅-跃迁-我们一起去萌站成员的星球旅行吧！" target="_blank"><img src="https://travel.moe/images/icon/icon64pink.png" srcset="/img/loading.gif" lazyload style="width:24px;height:24px">异次元之旅</a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

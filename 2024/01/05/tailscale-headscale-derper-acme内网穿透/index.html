@@ -1,0 +1,861 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head><!-- hexo injector head_begin start -->
+    <link rel="stylesheet" href="/sakana-widget/lib/sakana.min.css"/>
+    <div id="sakana-widget" style="position:fixed;bottom:0;left:0;z-index:10"></div>
+    <script defer src="/js/sakana.js"></script>
+    <script async onload="initSakanaWidget()" src="/sakana-widget/lib/sakana.min.js"></script>
+    <!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/sword.svg">
+  <link rel="icon" href="/img/sword.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="NeroUMU">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="内网穿透的方法更改之前一直是用 frp 作为内网穿透的工具，用起来的有一些不方便的地方，但是总比没有强最近研究生考试刚结束，期末考试也结束了，留在学校没事干，就用 frp 内网穿透看放在家里的 NAS 上的番剧就这么看了几天，突然脑子转过来了，查了一下用作中转服务的服务器的流量，这不看不知道，一看吓一跳，短短几天用掉了100-200G的流量，这我怎么受得了于是我就找到了之前看到过的 ZeroTie">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tailscale+headscale+derper+acme内网穿透">
+<meta property="og:url" content="https://neroumu.top/2024/01/05/tailscale-headscale-derper-acme%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/index.html">
+<meta property="og:site_name" content="NeroUMU&#39;s BLOG">
+<meta property="og:description" content="内网穿透的方法更改之前一直是用 frp 作为内网穿透的工具，用起来的有一些不方便的地方，但是总比没有强最近研究生考试刚结束，期末考试也结束了，留在学校没事干，就用 frp 内网穿透看放在家里的 NAS 上的番剧就这么看了几天，突然脑子转过来了，查了一下用作中转服务的服务器的流量，这不看不知道，一看吓一跳，短短几天用掉了100-200G的流量，这我怎么受得了于是我就找到了之前看到过的 ZeroTie">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://neroumu.top/img/2024-1-5-1.png">
+<meta property="og:image" content="https://neroumu.top/img/2024-1-5-2.png">
+<meta property="article:published_time" content="2024-01-05T11:17:26.000Z">
+<meta property="article:modified_time" content="2025-07-03T13:08:25.768Z">
+<meta property="article:author" content="NeroUMU">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="acme">
+<meta property="article:tag" content="Tailscale">
+<meta property="article:tag" content="Headscale">
+<meta property="article:tag" content="Derper">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://neroumu.top/img/2024-1-5-1.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>tailscale+headscale+derper+acme内网穿透 - NeroUMU&#39;s BLOG</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/NeroPoint.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"neroumu.top","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="NeroUMU's BLOG" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 80vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>NeroUMU&#39;s BLOG</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/bangumis/" target="_self">
+                <i class="iconfont icon-bookmark"></i>
+                <span>追番</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml" target="_self">
+                <i class="iconfont icon-rss"></i>
+                <span>RSS</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="tailscale+headscale+derper+acme内网穿透"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-01-05 19:17" pubdate>
+          2024年1月5日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          全文共2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          阅读全文需约17 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">tailscale+headscale+derper+acme内网穿透</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="内网穿透的方法更改"><a href="#内网穿透的方法更改" class="headerlink" title="内网穿透的方法更改"></a>内网穿透的方法更改</h1><p>之前一直是用 <code>frp</code> 作为内网穿透的工具，用起来的有一些不方便的地方，但是总比没有强<br>最近研究生考试刚结束，期末考试也结束了，留在学校没事干，就用 <code>frp</code> 内网穿透看放在家里的 NAS 上的番剧<br>就这么看了几天，突然脑子转过来了，查了一下用作中转服务的服务器的流量，这不看不知道，一看吓一跳，短短几天用掉了100-200G的流量，这我怎么受得了<br>于是我就找到了之前看到过的 <code>ZeroTier</code>，在一个国内的服务器上搭建后，虽然内网穿透是实现了，但是走的是中转流量，这不还是要用掉大量的流量看番吗？？？<br>随即放弃 <code>ZeroTier</code> 方案，于是就找到了 <code>tailscale</code><br><code>tailscale</code> 用起来挺不错的，只是它的服务器搭建在国外，国内没有，所以速度会很慢，于是就想着自己搭建一个国内的管理器</p>
+<span id="more"></span>
+
+<h1 id="前提知识储备"><a href="#前提知识储备" class="headerlink" title="前提知识储备"></a>前提知识储备</h1><p>tailscale的工作由协调服务器和中转服务器完成，协调服务器用于让已验证的tailscale客户端建立p2p连接，中转服务器用于保证连接的正常进行<br>在网络通畅的情况下，协调服务器会让两个tailscale客户端完成p2p连接的建立，两台客户端建立连接完成后，就可以愉快的进行数据交换了，没有中转服务器的事，但是问题就是出在这，如果p2p连接建立失败，那么就需要中转服务器进行中转，以达到连接建立的目的<br>如果直接使用tailscale官方的服务，那么什么都不需要搭建，安装好tailscale客户端执行登录命令就可以连接</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">tailscale up<br></code></pre></td></tr></table></figure>
+
+<p>但是，如果不想使用tailscale官方的服务，那么就需要自己搭建了<br>此处搭建的中转服务器就是DERP服务，协调服务器就是headscale服务器</p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>我用的方案是最简单的方案，一台derper服务器，一台headscale，分别搭建在两个VPS上，这样不容易产生端口冲突的问题(因为我碰到了这样的问题)，于是先准备如下材料</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs item">域名*1   derper搭建时需要<br>VPS*2   一台用作搭建derper，一台用作搭建headscale<br>Linux客户端   用作tailscale客户端<br></code></pre></td></tr></table></figure>
+
+<p>域名可以在<a target="_blank" rel="noopener" href="https://www.namesilo.com/">namesilo</a>上购买，一个 <code>.top</code> 的域名也就1、2美元一年<br>并创建一个 <code>A</code> 记录指向用于搭建derper的服务器的IP地址</p>
+<p>搭建derper的服务器放行 <code>3478(UDP)</code> 端口，放行任意一个高位 <code>TCP</code> 端口(此处我使用的是12150端口)<br>搭建headscale服务器放行任意一个高位 <code>TCP</code> 端口(此处我用的是37125端口)</p>
+<h1 id="搭建derp服务"><a href="#搭建derp服务" class="headerlink" title="搭建derp服务"></a>搭建derp服务</h1><p>derper服务需要使用域名，虽然有不使用域名的方案，但是我还没用，先要域名解析到derper服务器</p>
+<h2 id="acme-申请证书"><a href="#acme-申请证书" class="headerlink" title="acme 申请证书"></a>acme 申请证书</h2><p>安装acme.sh</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">curl  https://get.acme.sh | sh<br></code></pre></td></tr></table></figure>
+
+<p>安装 socat</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">apt update &amp;&amp; apt upgrade &amp;&amp; apt install socat -y<br></code></pre></td></tr></table></figure>
+
+<p>使用acme申请letsencrypt免费证书</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">~/.acme.sh/acme.sh --issue -d 域名 --standalone -k ec-256 --server letsencrypt<br></code></pre></td></tr></table></figure>
+
+<p>创建 <code>/opt/derper</code> 目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir /opt/derper<br></code></pre></td></tr></table></figure>
+
+<p>并导出证书到此处</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">~/.acme.sh/acme.sh --installcert -d 域名 --fullchainpath /opt/derper/域名.crt --keypath /opt/derper/域名.key --ecc<br></code></pre></td></tr></table></figure>
+
+<h2 id="安装golang"><a href="#安装golang" class="headerlink" title="安装golang"></a>安装golang</h2><p>按照 <a target="_blank" rel="noopener" href="https://go.dev/">go.dev</a> 官网的方法，安装最新的golang<br>下载最新的golang包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">wget https://go.dev/dl/go1.24.2.linux-amd64.tar.gz<br></code></pre></td></tr></table></figure>
+
+<p>删除可能残留的golang并安装最新的golang</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">rm -rf /usr/local/go &amp;&amp; tar -C /usr/local -xzf go1.24.2.linux-amd64.tar.gz<br></code></pre></td></tr></table></figure>
+
+<p>将golang添加到环境变量中，可以将下列语句添加到 <code>/etc/profile</code> 中</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">export PATH=$PATH:/usr/local/go/bin<br></code></pre></td></tr></table></figure>
+
+<p>如果添加了，source一下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">source /etc/profile<br></code></pre></td></tr></table></figure>
+
+<p>查看是否安装成功</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">go version<br></code></pre></td></tr></table></figure>
+
+<h2 id="安装derp"><a href="#安装derp" class="headerlink" title="安装derp"></a>安装derp</h2><p>首先将derp项目拉到本地，同时会把已将编译好的二进制也拉过来</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">go install tailscale.com/cmd/derper@main<br></code></pre></td></tr></table></figure>
+
+<p>将编译好的derp放到 <code>/opt/derper</code> 中</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">cp ~/go/bin/derper /opt/derper<br></code></pre></td></tr></table></figure>
+
+<p>编辑 <code>/etc/systemd/system/derper.service</code> 文件，写入如下内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs conf">[Unit]<br>Description=Start Derper<br>After=network.target<br>Wants=network.target<br>[Service]<br>User=root<br>Restart=always<br>ExecStart=/opt/derper/derper -hostname 域名 -a :12150 -http-port 12151 -certmode manual -certdir /opt/derper<br>RestartPreventExitStatus=1<br>[Install]<br>WantedBy=multi-user.target<br></code></pre></td></tr></table></figure>
+
+<p>其中 <code>ExecStart</code> 中的 <code>-a</code> 后面的参数就是derper服务器防火墙需要放行的端口，而 <code>-http-port</code> 仅为了防止端口冲突，随便设置一个就好了，如果这个服务器是一个人用的，可以追加 <code>--verify-clients</code> 参数，只允许验证过的客户端使用这个derper服务器</p>
+<p>启动并设置开机启动derp</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl enable --now derper.service<br></code></pre></td></tr></table></figure>
+
+<p>浏览器访问 <code>域名:12150</code> 可以看到derper搭建完成<br><img src="/img/2024-1-5-1.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="搭建headscale"><a href="#搭建headscale" class="headerlink" title="搭建headscale"></a>搭建headscale</h1><p>headscale是用于连接建立的服务器，流量要求比较小，搭建的headscale可以顺便安装一个ui，不过用处不大，命令行足够了</p>
+<h2 id="安装headscale服务"><a href="#安装headscale服务" class="headerlink" title="安装headscale服务"></a>安装headscale服务</h2><p>在<a target="_blank" rel="noopener" href="https://github.com/juanfont/headscale/releases">headscale release</a>中找到适合的deb包，下载到服务器上</p>
+<p>安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">wget https://github.com/juanfont/headscale/releases/download/v0.25.1/headscale_0.25.1_linux_amd64.deb<br>dpkg --install headscale_0.25.1_linux_amd64.deb<br></code></pre></td></tr></table></figure>
+<p>设置开机自启动</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl enable headscale.service<br></code></pre></td></tr></table></figure>
+
+<h2 id="修改headscale配置文件"><a href="#修改headscale配置文件" class="headerlink" title="修改headscale配置文件"></a>修改headscale配置文件</h2><p>编辑 <code>/etc/headscale/config.yaml</code> 文件，修改如下配置，端口记得防火墙放行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yamml">server_url: http://本服务器IP地址:37125<br></code></pre></td></tr></table></figure>
+
+<h2 id="设置反向代理"><a href="#设置反向代理" class="headerlink" title="设置反向代理"></a>设置反向代理</h2><p>安装nginx</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">apt update &amp;&amp; apt upgrade &amp;&amp; apt install nginx -y<br></code></pre></td></tr></table></figure>
+
+<p>编辑 <code>/etc/nginx/sites-available/default</code> 文件，添加如下配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs conf">map $http_upgrade $connection_upgrade &#123;<br>        default keep-alive;<br>        &#x27;websocket&#x27;     upgrade;<br>        &#x27;&#x27;      close;<br>&#125;<br><br>server &#123;<br>        listen 37125;<br>        listen [::]:37125;<br>        server_name 本服务器的IP地址;<br>        location / &#123;<br>                proxy_pass http://127.0.0.1:8080;<br>                proxy_http_version 1.1;<br>                proxy_set_header Upgrade $http_upgrade;<br>                proxy_set_header Connection $connection_upgrade;<br>                proxy_set_header Host $server_name;<br>                proxy_buffering off;<br>                proxy_set_header X-Real-IP $remote_addr;<br>                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;<br>                proxy_set_header X-Forwarded-Proto $http_x_forwarded_proto;<br>                add_header Strict-Transport-Security &quot;max-age=15552000; includeSubDomains&quot; always;<br>        &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这样就可以启动nginx和headscale了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl restart nginx<br>systemctl restart headscale<br></code></pre></td></tr></table></figure>
+
+<h2 id="headscale使用自己搭建的derp服务器"><a href="#headscale使用自己搭建的derp服务器" class="headerlink" title="headscale使用自己搭建的derp服务器"></a>headscale使用自己搭建的derp服务器</h2><p>编辑 <code>/etc/headscale/derp.yaml</code> 文件，添加如下配置</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">regions:</span><br>  <span class="hljs-attr">901:</span><br>    <span class="hljs-attr">regionid:</span> <span class="hljs-number">901</span><br>    <span class="hljs-attr">regioncode:</span> <span class="hljs-string">DERP</span><br>    <span class="hljs-attr">regionname:</span> <span class="hljs-string">MYDERP</span><br>    <span class="hljs-attr">nodes:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">DERP_SERVER_1</span> <br>        <span class="hljs-attr">regionid:</span> <span class="hljs-number">901</span><br>        <span class="hljs-attr">hostname:</span> <span class="hljs-string">derper服务器的域名</span><br>        <span class="hljs-attr">stunport:</span> <span class="hljs-number">3478</span><br>        <span class="hljs-attr">stunonly:</span> <span class="hljs-literal">false</span><br>        <span class="hljs-attr">derpport:</span> <span class="hljs-number">12150</span><br><br></code></pre></td></tr></table></figure>
+<p>再编辑 <code>/etc/headscale/config.yaml</code> 文件，修改如下配置</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-comment"># 将官方的json配置注释掉，有自己的derp服务器就不用官方的了</span><br><span class="hljs-attr">urls:</span> []<br><span class="hljs-comment"># 使用刚才写好的配置</span><br><span class="hljs-attr">paths:</span> <br><span class="hljs-bullet">-</span> <span class="hljs-string">/etc/headscale/derp.yaml</span><br></code></pre></td></tr></table></figure>
+
+<p>重启headscale服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl restart headscale<br></code></pre></td></tr></table></figure>
+
+<h1 id="tailscale客户端加入headscale中"><a href="#tailscale客户端加入headscale中" class="headerlink" title="tailscale客户端加入headscale中"></a>tailscale客户端加入headscale中</h1><p>headscale先创建用户，以便tailscale客户端注册验证</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">headscale user create &lt;username&gt;<br></code></pre></td></tr></table></figure>
+
+<p>tailscale客户端执行如下命令加入headscale协调服务器中，并验证</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo tailscale up --login-server http://headscale的服务器的IP地址:37125<br></code></pre></td></tr></table></figure>
+
+<p>这回跳出一个网址，复制该网址到浏览器打开，会获得一串验证密钥<br><img src="/img/2024-1-5-2.png" srcset="/img/loading.gif" lazyload></p>
+<p>在headscale端执行验证命令即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">headscale nodes register --user &lt;username&gt; --key &lt;key-string&gt;<br></code></pre></td></tr></table></figure>
+
+<p>连接完成后，可以通过命令查看连接的状态</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">tailscale status<br>tailscale netcheck<br></code></pre></td></tr></table></figure>
+
+<h1 id="可能会遇到的问题"><a href="#可能会遇到的问题" class="headerlink" title="可能会遇到的问题"></a>可能会遇到的问题</h1><p>如下是我碰到的几个问题以及它们的解决方案</p>
+<h2 id="derper无法连接的问题"><a href="#derper无法连接的问题" class="headerlink" title="derper无法连接的问题"></a>derper无法连接的问题</h2><p>首先先看一下是否正确搭建了derper服务，如果都没问题，看看是否在搭建derper服务时，添加了 <code>--verify-clients</code> 参数<br>如果是因为添加了 <code>--verify-clients</code> 参数的原因导致的，那么 derper 服务器也安装 tailscale 并注册到 headscale 中就可以了</p>
+<h2 id="DNS-覆盖-overwriting-问题"><a href="#DNS-覆盖-overwriting-问题" class="headerlink" title="DNS 覆盖(overwriting)问题"></a>DNS 覆盖(overwriting)问题</h2><p>目前只出现在了 Arch Linux 的 tailscale 客户端上，原因是 <code>dhcpcd</code> 服务器会修改 DNS 的配置导致的，所有做如下修改即可<br>不允许dhcpcd修改resolve.conf配置，修改 <code>/etc/dhcpcd.conf</code> 文件，添加如下配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs conf">nohook resolv.conf<br></code></pre></td></tr></table></figure>
+
+<p>重启dhcpcd服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl restart dhcpcd<br></code></pre></td></tr></table></figure>
+
+<p>不允许NetworkManager修改resolve.conf配置，修改 <code>/etc/NetworkManager/NetworkManager.conf</code> 文件，添加如下配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs conf">[main]<br>dns=none<br></code></pre></td></tr></table></figure>
+
+<p>重启服务NetworkManager服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl restart NetworkManager<br></code></pre></td></tr></table></figure>
+
+<p>让systemd-resolved来管理resolve.conf配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs conf">ln -rsf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf<br>systemctl enable --now systemd-resolved<br></code></pre></td></tr></table></figure>
+
+<p>重启tailscale服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">systemctl restart tailscaled<br></code></pre></td></tr></table></figure>
+
+<hr>
+<p>考完研了，又有大把的时间可以折腾了(ゝ∀･)b<br>该说折腾了个tailscale是省了流量吗，毕竟为了搭建tailscale用了整整3天，踩了好多的坑，做梦都在敲命令(☍﹏⁰)<br>然后折腾着折腾着，我已经到家了，不需要内网穿透，直接用内网就能不用流量开看了(｡ŏ_ŏ)<br>嘛，至少我有学会了个新技能不是吗<br>不过这个假期也不能全拿来折腾了，还得准备考研复试和毕业设计呢( º﹃º )</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%A7%BF%E5%8A%BF%E5%AD%A6%E4%B9%A0/" class="category-chain-item">姿势学习</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Linux/" class="print-no-link">#Linux</a>
+      
+        <a href="/tags/acme/" class="print-no-link">#acme</a>
+      
+        <a href="/tags/Tailscale/" class="print-no-link">#Tailscale</a>
+      
+        <a href="/tags/Headscale/" class="print-no-link">#Headscale</a>
+      
+        <a href="/tags/Derper/" class="print-no-link">#Derper</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/01/08/VirtualBox%E6%97%A0%E6%B3%95%E8%AF%86%E5%88%ABU%E7%9B%98/" title="VirtualBox无法识别U盘">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">VirtualBox无法识别U盘</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/01/01/%E6%96%B0%E5%B9%B4%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" title="新年第一篇博客">
+                        <span class="hidden-mobile">新年第一篇博客</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      var light = 'github-dark';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'Nero-UMU/Nero-UMU.github.io');
+      s.setAttribute('issue-term', 'title');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <span>本博客使用</span> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <span>主题 | </span> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <span>框架 | </span> <a href="https://github.com" target="_blank" rel="nofollow noopener"><span>GitHub</span></a> <span>托管</span><br> <a href="https://icp.gov.moe/?keyword=20231215" target="_blank"><img src="/img/icon400.png" srcset="/img/loading.gif" lazyload height=25/>萌ICP备20231215号</a> <a style="text-decoration:none;color:#e77c8e;" href="https://travel.moe/go.html" title="异次元之旅-跃迁-我们一起去萌站成员的星球旅行吧！" target="_blank"><img src="https://travel.moe/images/icon/icon64pink.png" srcset="/img/loading.gif" lazyload style="width:24px;height:24px">异次元之旅</a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
