@@ -26,7 +26,7 @@
     <meta name="description" content="更新编译花的时间太长了最近更新系统的时候花的时间增加了很多,很大一个原因就是编译用了很多时间这时候一看,好家伙,16核只有1核在工作,其他15个在围观,怪不得编译得这么慢于是我就想着可不可以多线程编译,这样更新就快一点呢最后这个问题成功解决了">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pacman及yay 多线程编译">
-<meta property="og:url" content="https://neroumu.top/2022/10/18/pacman%E5%8F%8Ayay-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E8%AF%91/index.html">
+<meta property="og:url" content="https://neroumu.moe/2022/10/18/pacman%E5%8F%8Ayay-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E8%AF%91/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
 <meta property="og:description" content="更新编译花的时间太长了最近更新系统的时候花的时间增加了很多,很大一个原因就是编译用了很多时间这时候一看,好家伙,16核只有1核在工作,其他15个在围观,怪不得编译得这么慢于是我就想着可不可以多线程编译,这样更新就快一点呢最后这个问题成功解决了">
 <meta property="og:locale" content="zh_CN">
@@ -83,7 +83,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"neroumu.top","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"neroumu.moe","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;

@@ -26,7 +26,7 @@
     <meta name="description" content="封禁多次连接失败的 IP最近几天多次看我的服务器有大量连接失败的日志，其中有大量的不同用户名的尝试连接失败的记录虽然我已经更改了 SSH 的连接端口，并开启了唯密钥登录虽然这样入侵成功的概率很低很低，但是它大量的尝试连接也是会占用我的带宽和 CPU，这也是一种 DDoS攻击，名为 CC (ChallengeCollapsar，挑战黑洞) 攻击于是我就尝试禁止它们的连接">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux自动封禁多次连接失败的IP">
-<meta property="og:url" content="https://neroumu.top/2023/05/18/Linux%E8%87%AA%E5%8A%A8%E5%B0%81%E7%A6%81%E5%A4%9A%E6%AC%A1%E8%BF%9E%E6%8E%A5%E5%A4%B1%E8%B4%A5%E7%9A%84IP/index.html">
+<meta property="og:url" content="https://neroumu.moe/2023/05/18/Linux%E8%87%AA%E5%8A%A8%E5%B0%81%E7%A6%81%E5%A4%9A%E6%AC%A1%E8%BF%9E%E6%8E%A5%E5%A4%B1%E8%B4%A5%E7%9A%84IP/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
 <meta property="og:description" content="封禁多次连接失败的 IP最近几天多次看我的服务器有大量连接失败的日志，其中有大量的不同用户名的尝试连接失败的记录虽然我已经更改了 SSH 的连接端口，并开启了唯密钥登录虽然这样入侵成功的概率很低很低，但是它大量的尝试连接也是会占用我的带宽和 CPU，这也是一种 DDoS攻击，名为 CC (ChallengeCollapsar，挑战黑洞) 攻击于是我就尝试禁止它们的连接">
 <meta property="og:locale" content="zh_CN">
@@ -84,7 +84,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"neroumu.top","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"neroumu.moe","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;

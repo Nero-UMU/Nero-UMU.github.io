@@ -26,23 +26,23 @@
     <meta name="description" content="换了好几个输入法自从把电脑的系统换成 manjaro 之后，输入法就是一个很有必要考虑的事情了毕竟是中国人，电脑里怎么的都得输入一些中文，处理个文档，搜个问题之类的刚开始电脑用的是 Fcitx 加了一个皮肤，就这么用了几个月，直到电脑蹦了的那一天重装了系统后，又要安装输入法，然后就用了 Fcitx-sougoupinyin ，用了一周，感觉还不错但后来发现 Fcitx 已经不维护了，用不维护的软件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Fcitx5安装">
-<meta property="og:url" content="https://neroumu.top/2022/05/31/Fcitx5%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:url" content="https://neroumu.moe/2022/05/31/Fcitx5%E5%AE%89%E8%A3%85/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
 <meta property="og:description" content="换了好几个输入法自从把电脑的系统换成 manjaro 之后，输入法就是一个很有必要考虑的事情了毕竟是中国人，电脑里怎么的都得输入一些中文，处理个文档，搜个问题之类的刚开始电脑用的是 Fcitx 加了一个皮肤，就这么用了几个月，直到电脑蹦了的那一天重装了系统后，又要安装输入法，然后就用了 Fcitx-sougoupinyin ，用了一周，感觉还不错但后来发现 Fcitx 已经不维护了，用不维护的软件">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://neroumu.top/img/2022-5-31-1.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-5-31-2.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-5-31-3.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-5-31-4.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-5-31-5.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-5-31-6.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-5-31-1.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-5-31-2.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-5-31-3.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-5-31-4.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-5-31-5.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-5-31-6.png">
 <meta property="article:published_time" content="2022-05-30T16:03:13.000Z">
 <meta property="article:modified_time" content="2025-07-03T13:08:25.766Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Fcitx5">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://neroumu.top/img/2022-5-31-1.png">
+<meta name="twitter:image" content="https://neroumu.moe/img/2022-5-31-1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -90,7 +90,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"neroumu.top","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"neroumu.moe","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;

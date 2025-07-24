@@ -26,27 +26,27 @@
     <meta name="description" content="自动寻找并下载影视最近买的12TB的硬盘到手了,测试过后没问题就把它接到了我的小服务器上于是立马开始搭建我期待已久的自动下载器在用 Docker 搭建的过程中,也碰到了许多没碰到过的问题,最后也都解决了这些问题把搭建的过程记录一下,这样以后也能少走点弯路,少踩点坑">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker搭建自动下载器">
-<meta property="og:url" content="https://neroumu.top/2022/12/26/Docker%E6%90%AD%E5%BB%BA%E8%87%AA%E5%8A%A8%E4%B8%8B%E8%BD%BD%E5%99%A8/index.html">
+<meta property="og:url" content="https://neroumu.moe/2022/12/26/Docker%E6%90%AD%E5%BB%BA%E8%87%AA%E5%8A%A8%E4%B8%8B%E8%BD%BD%E5%99%A8/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
 <meta property="og:description" content="自动寻找并下载影视最近买的12TB的硬盘到手了,测试过后没问题就把它接到了我的小服务器上于是立马开始搭建我期待已久的自动下载器在用 Docker 搭建的过程中,也碰到了许多没碰到过的问题,最后也都解决了这些问题把搭建的过程记录一下,这样以后也能少走点弯路,少踩点坑">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://neroumu.top/img/2022-12-26-1.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-12-26-2.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-12-26-3.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-12-26-11.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-12-26-4.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-12-26-5.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-12-26-6.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-12-26-7.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-12-26-8.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-12-26-9.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-12-26-10.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-12-26-12.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-12-26-13.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-12-26-14.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-12-26-15.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-12-26-16.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-12-26-17.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-12-26-1.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-12-26-2.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-12-26-3.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-12-26-11.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-12-26-4.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-12-26-5.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-12-26-6.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-12-26-7.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-12-26-8.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-12-26-9.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-12-26-10.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-12-26-12.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-12-26-13.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-12-26-14.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-12-26-15.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-12-26-16.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-12-26-17.png">
 <meta property="article:published_time" content="2022-12-26T08:09:37.000Z">
 <meta property="article:modified_time" content="2025-07-03T13:08:25.767Z">
 <meta property="article:author" content="NeroUMU">
@@ -55,7 +55,7 @@
 <meta property="article:tag" content="qBittorrent">
 <meta property="article:tag" content="sonarr">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://neroumu.top/img/2022-12-26-1.png">
+<meta name="twitter:image" content="https://neroumu.moe/img/2022-12-26-1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -103,7 +103,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"neroumu.top","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"neroumu.moe","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;

@@ -26,12 +26,12 @@
     <meta name="description" content="内网穿透的方法更改之前一直是用 frp 作为内网穿透的工具，用起来的有一些不方便的地方，但是总比没有强最近研究生考试刚结束，期末考试也结束了，留在学校没事干，就用 frp 内网穿透看放在家里的 NAS 上的番剧就这么看了几天，突然脑子转过来了，查了一下用作中转服务的服务器的流量，这不看不知道，一看吓一跳，短短几天用掉了100-200G的流量，这我怎么受得了于是我就找到了之前看到过的 ZeroTie">
 <meta property="og:type" content="article">
 <meta property="og:title" content="tailscale+headscale+derper+acme内网穿透">
-<meta property="og:url" content="https://neroumu.top/2024/01/05/tailscale-headscale-derper-acme%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/index.html">
+<meta property="og:url" content="https://neroumu.moe/2024/01/05/tailscale-headscale-derper-acme%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
 <meta property="og:description" content="内网穿透的方法更改之前一直是用 frp 作为内网穿透的工具，用起来的有一些不方便的地方，但是总比没有强最近研究生考试刚结束，期末考试也结束了，留在学校没事干，就用 frp 内网穿透看放在家里的 NAS 上的番剧就这么看了几天，突然脑子转过来了，查了一下用作中转服务的服务器的流量，这不看不知道，一看吓一跳，短短几天用掉了100-200G的流量，这我怎么受得了于是我就找到了之前看到过的 ZeroTie">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://neroumu.top/img/2024-1-5-1.png">
-<meta property="og:image" content="https://neroumu.top/img/2024-1-5-2.png">
+<meta property="og:image" content="https://neroumu.moe/img/2024-1-5-1.png">
+<meta property="og:image" content="https://neroumu.moe/img/2024-1-5-2.png">
 <meta property="article:published_time" content="2024-01-05T11:17:26.000Z">
 <meta property="article:modified_time" content="2025-07-03T13:08:25.768Z">
 <meta property="article:author" content="NeroUMU">
@@ -41,7 +41,7 @@
 <meta property="article:tag" content="Headscale">
 <meta property="article:tag" content="Derper">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://neroumu.top/img/2024-1-5-1.png">
+<meta name="twitter:image" content="https://neroumu.moe/img/2024-1-5-1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -89,7 +89,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"neroumu.top","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"neroumu.moe","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;

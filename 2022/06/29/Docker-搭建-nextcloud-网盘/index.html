@@ -26,20 +26,20 @@
     <meta name="description" content="搭建个人网盘终于想起来要搭建一个个人网盘，于是学习了一下使用 docker 搭建了一个个人网盘，记录一下搭建的过程使用 mysql 作为数据库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker 搭建 nextcloud 网盘">
-<meta property="og:url" content="https://neroumu.top/2022/06/29/Docker-%E6%90%AD%E5%BB%BA-nextcloud-%E7%BD%91%E7%9B%98/index.html">
+<meta property="og:url" content="https://neroumu.moe/2022/06/29/Docker-%E6%90%AD%E5%BB%BA-nextcloud-%E7%BD%91%E7%9B%98/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
 <meta property="og:description" content="搭建个人网盘终于想起来要搭建一个个人网盘，于是学习了一下使用 docker 搭建了一个个人网盘，记录一下搭建的过程使用 mysql 作为数据库">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://neroumu.top/img/2022-6-29-1.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-6-29-2.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-6-29-3.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-6-29-4.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-6-29-1.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-6-29-2.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-6-29-3.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-6-29-4.png">
 <meta property="article:published_time" content="2022-06-28T16:24:18.000Z">
 <meta property="article:modified_time" content="2025-07-03T13:08:25.766Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://neroumu.top/img/2022-6-29-1.png">
+<meta name="twitter:image" content="https://neroumu.moe/img/2022-6-29-1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -87,7 +87,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"neroumu.top","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"neroumu.moe","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;

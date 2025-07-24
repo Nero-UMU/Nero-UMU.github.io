@@ -26,7 +26,7 @@
     <meta name="description" content="如何关闭失效的连接在使用 SSH 连接服务器的时候，难免会遭遇网络波动，这就有可能造成连接中断有时候，连接虽然中断了，但是 SSH 的连接窗口却没有自动关闭，不论输入什么窗口都是无响应通常这种情况我会直接杀死(kill)这个窗口但这样做其实是很不好的一种习惯，但我一直没找到好的解决方法，今天正好碰到了这种情况的解决方案">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SSH关闭失效的连接">
-<meta property="og:url" content="https://neroumu.top/2023/05/19/SSH%E5%85%B3%E9%97%AD%E5%A4%B1%E6%95%88%E7%9A%84%E8%BF%9E%E6%8E%A5/index.html">
+<meta property="og:url" content="https://neroumu.moe/2023/05/19/SSH%E5%85%B3%E9%97%AD%E5%A4%B1%E6%95%88%E7%9A%84%E8%BF%9E%E6%8E%A5/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
 <meta property="og:description" content="如何关闭失效的连接在使用 SSH 连接服务器的时候，难免会遭遇网络波动，这就有可能造成连接中断有时候，连接虽然中断了，但是 SSH 的连接窗口却没有自动关闭，不论输入什么窗口都是无响应通常这种情况我会直接杀死(kill)这个窗口但这样做其实是很不好的一种习惯，但我一直没找到好的解决方法，今天正好碰到了这种情况的解决方案">
 <meta property="og:locale" content="zh_CN">
@@ -83,7 +83,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"neroumu.top","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"neroumu.moe","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;

@@ -26,18 +26,18 @@
     <meta name="description" content="升级树莓派树莓派用了一段时间之后发现，我之前装的系统是32位的 ArchLinux但树莓派4b本身是支持64位系统的，所以捣鼓了一天，把系统升级了一下其实也就是编译了一个系统 还有就是官方的 aarch64 镜像有问题，按照 wiki 安装是无法成功的现在可以安装 64 位 ArchLinux 的方法只能自己编译一个了">
 <meta property="og:type" content="article">
 <meta property="og:title" content="树莓派编译ArchLinux aarch64内核">
-<meta property="og:url" content="https://neroumu.top/2022/07/09/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%BC%96%E8%AF%91ArchLinux-aarch64%E5%86%85%E6%A0%B8/index.html">
+<meta property="og:url" content="https://neroumu.moe/2022/07/09/%E6%A0%91%E8%8E%93%E6%B4%BE%E7%BC%96%E8%AF%91ArchLinux-aarch64%E5%86%85%E6%A0%B8/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
 <meta property="og:description" content="升级树莓派树莓派用了一段时间之后发现，我之前装的系统是32位的 ArchLinux但树莓派4b本身是支持64位系统的，所以捣鼓了一天，把系统升级了一下其实也就是编译了一个系统 还有就是官方的 aarch64 镜像有问题，按照 wiki 安装是无法成功的现在可以安装 64 位 ArchLinux 的方法只能自己编译一个了">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://neroumu.top/img/2022-7-9-1.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-7-9-2.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-7-9-1.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-7-9-2.png">
 <meta property="article:published_time" content="2022-07-09T13:00:27.000Z">
 <meta property="article:modified_time" content="2025-07-03T13:08:25.766Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="aarch64">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://neroumu.top/img/2022-7-9-1.png">
+<meta name="twitter:image" content="https://neroumu.moe/img/2022-7-9-1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -85,7 +85,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"neroumu.top","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"neroumu.moe","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;

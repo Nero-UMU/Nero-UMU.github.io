@@ -26,18 +26,18 @@
     <meta name="description" content="vmware下红帽系统无法连接网络之前在 manjaro 上碰到过类似的在虚拟机中的系统无法连接到网络暑假把电脑的系统换成了 ArchLinux,里面的数据和配置都被清空了,然后也没有管 vmware 的网络这回事了之前还以为是 manjaro 的问题,换成 ArchLinux 后就没有这样的问题了没想到是我太天真了,无法连接网络的问题还是没能解决但我根着之前的博客做了之后没能解决问题,于是又尝试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RHEL在vmware下无法连接网络">
-<meta property="og:url" content="https://neroumu.top/2022/09/15/RHEL%E5%9C%A8vmware%E4%B8%8B%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5%E7%BD%91%E7%BB%9C/index.html">
+<meta property="og:url" content="https://neroumu.moe/2022/09/15/RHEL%E5%9C%A8vmware%E4%B8%8B%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5%E7%BD%91%E7%BB%9C/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
 <meta property="og:description" content="vmware下红帽系统无法连接网络之前在 manjaro 上碰到过类似的在虚拟机中的系统无法连接到网络暑假把电脑的系统换成了 ArchLinux,里面的数据和配置都被清空了,然后也没有管 vmware 的网络这回事了之前还以为是 manjaro 的问题,换成 ArchLinux 后就没有这样的问题了没想到是我太天真了,无法连接网络的问题还是没能解决但我根着之前的博客做了之后没能解决问题,于是又尝试">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://neroumu.top/img/2022-9-15-1.png">
-<meta property="og:image" content="https://neroumu.top/img/2022-9-15-2.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-9-15-1.png">
+<meta property="og:image" content="https://neroumu.moe/img/2022-9-15-2.png">
 <meta property="article:published_time" content="2022-09-15T14:34:15.000Z">
 <meta property="article:modified_time" content="2025-07-03T13:08:25.766Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="RHEL">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://neroumu.top/img/2022-9-15-1.png">
+<meta name="twitter:image" content="https://neroumu.moe/img/2022-9-15-1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -85,7 +85,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"neroumu.top","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"neroumu.moe","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
