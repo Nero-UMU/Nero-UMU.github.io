@@ -6,7 +6,7 @@
   <link href="https://neroumu.moe/atom.xml" rel="self"/>
   
   <link href="https://neroumu.moe/"/>
-  <updated>2025-07-23T08:57:39.422Z</updated>
+  <updated>2026-01-15T06:57:01.889Z</updated>
   <id>https://neroumu.moe/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>纪念首次制作游戏MOD订阅量破千</title>
+    <link href="https://neroumu.moe/2026/01/15/%E7%BA%AA%E5%BF%B5%E9%A6%96%E6%AC%A1%E5%88%B6%E4%BD%9C%E6%B8%B8%E6%88%8FMOD%E8%AE%A2%E9%98%85%E9%87%8F%E7%A0%B4%E5%8D%83/"/>
+    <id>https://neroumu.moe/2026/01/15/%E7%BA%AA%E5%BF%B5%E9%A6%96%E6%AC%A1%E5%88%B6%E4%BD%9C%E6%B8%B8%E6%88%8FMOD%E8%AE%A2%E9%98%85%E9%87%8F%E7%A0%B4%E5%8D%83/</id>
+    <published>2026-01-15T06:31:35.000Z</published>
+    <updated>2026-01-15T06:57:01.889Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="首次尝试制作MOD"><a href="#首次尝试制作MOD" class="headerlink" title="首次尝试制作MOD"></a>首次尝试制作MOD</h1><p>今年年初，趁着元旦放假，在实验室给虚拟桌宠模拟器这款游戏写了一个简单的插件，并上传到了 Steam 创意工坊，就在这几天，插件的订阅量已破千，特此更新一篇博客纪念这个时刻</p><span id="more"></span><h1 id="插件展示"><a href="#插件展示" class="headerlink" title="插件展示"></a>插件展示</h1><p>这个插件(VPetWalk，<a href="https://github.com/Nero-UMU/VpetPlugin_VPetWalk">开源地址</a>)的想法来源于天选姬的类似功能，无聊的时候喜欢用方向键控制天选姬在桌面上走来走去，当想在虚拟桌宠模拟器这款游戏上使用时发现并没有类似的功能，而且创意工坊还没有人上传这样功能的插件，于是我就第一次尝试给游戏制作插件，并开源代码，上传创意工坊供其他玩家使用<br><img src="/img/2026-1-15-1.png" alt="创意工坊页面"></p><p>没想到这款插件还挺受社区欢迎的，现在已经有1200多个订阅者了，创意工坊也出现了星级评价，能够得到社区的认可，我花了几天的时间入门学习制作插件也是值得的<br><img src="/img/2026-1-15-2.png" alt="当前的订阅数据"></p><hr><p><del>也算是一个摸鱼的产物吧</del><br>自己花心思做出来的产物能得到社区的认可还是挺高兴的，给了我做下一个MOD的信心(有时间一定做|･ω･)</p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;首次尝试制作MOD&quot;&gt;&lt;a href=&quot;#首次尝试制作MOD&quot; class=&quot;headerlink&quot; title=&quot;首次尝试制作MOD&quot;&gt;&lt;/a&gt;首次尝试制作MOD&lt;/h1&gt;&lt;p&gt;今年年初，趁着元旦放假，在实验室给虚拟桌宠模拟器这款游戏写了一个简单的插件，并上传到了 Steam 创意工坊，就在这几天，插件的订阅量已破千，特此更新一篇博客纪念这个时刻&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="学习记录" scheme="https://neroumu.moe/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="MOD" scheme="https://neroumu.moe/tags/MOD/"/>
+    
+    <category term="VPet" scheme="https://neroumu.moe/tags/VPet/"/>
+    
+    <category term="C#" scheme="https://neroumu.moe/tags/C/"/>
+    
+  </entry>
   
   <entry>
     <title>真的需要玩PT吗</title>
