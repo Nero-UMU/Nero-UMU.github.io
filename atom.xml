@@ -6,7 +6,7 @@
   <link href="https://neroumu.moe/atom.xml" rel="self"/>
   
   <link href="https://neroumu.moe/"/>
-  <updated>2026-01-15T06:57:01.889Z</updated>
+  <updated>2026-03-03T05:13:31.846Z</updated>
   <id>https://neroumu.moe/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用Suwayomi实现Mihon阅读漫画多设备同步</title>
+    <link href="https://neroumu.moe/2026/03/03/%E4%BD%BF%E7%94%A8Suwayomi%E5%AE%9E%E7%8E%B0Mihon%E9%98%85%E8%AF%BB%E6%BC%AB%E7%94%BB%E5%A4%9A%E8%AE%BE%E5%A4%87%E5%90%8C%E6%AD%A5/"/>
+    <id>https://neroumu.moe/2026/03/03/%E4%BD%BF%E7%94%A8Suwayomi%E5%AE%9E%E7%8E%B0Mihon%E9%98%85%E8%AF%BB%E6%BC%AB%E7%94%BB%E5%A4%9A%E8%AE%BE%E5%A4%87%E5%90%8C%E6%AD%A5/</id>
+    <published>2026-03-03T02:48:20.000Z</published>
+    <updated>2026-03-03T05:13:31.846Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Mihon-没有多设备同步功能"><a href="#Mihon-没有多设备同步功能" class="headerlink" title="Mihon 没有多设备同步功能"></a>Mihon 没有多设备同步功能</h1><p>使用 <code>Mihon</code> 阅读漫画已经有一年多了，这个软件是我目前用过最舒服的漫画资源管理和阅读器。但是这个软件也有一个痛点一直没能解决，那就是多设备同步的问题，而这个问题终于被 <code>Suwayomi</code> 成功解决。问题解决后写下这个解决方案方便以后查阅</p><span id="more"></span><h1 id="什么是-Suwayomi"><a href="#什么是-Suwayomi" class="headerlink" title="什么是 Suwayomi"></a>什么是 Suwayomi</h1><p>Suwayomi-Server 是一个经过改造后的 Mihon，可以理解为它是一个部署完成后24小时不间断运行的 Mihon，在 Mihon 上安装 Suwayomi 插件后可以在任何设备上阅读上面的漫画资源，并且可以实现漫画阅读进度同步的功能</p><h1 id="Suwayomi-服务器搭建"><a href="#Suwayomi-服务器搭建" class="headerlink" title="Suwayomi 服务器搭建"></a>Suwayomi 服务器搭建</h1><p>搭建 Suwayomi 有几种不同的方法，我这里继续使用 Docker 搭建，在一个空的目录下编辑 <code>docker-compose.yaml</code> 文件，内容如下</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&quot;233&quot;</span><br><br><span class="hljs-attr">services:</span><br><br>  <span class="hljs-attr">suwayomi_server:</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">ghcr.io/suwayomi/suwayomi-server:stable</span><br>    <span class="hljs-attr">container_name:</span> <span class="hljs-string">Suwayomi-Server</span><br>    <span class="hljs-attr">volumes:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/&lt;PATH&gt;/&lt;TO&gt;/&lt;downloads-dir&gt;:/home/suwayomi/.local/share/Tachidesk/downloads</span> <span class="hljs-comment"># 此处为下载漫画的目录，为防止出错，此目录要放在第一行</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/&lt;PATH&gt;/&lt;TO&gt;/&lt;config-dir&gt;:/home/suwayomi/.local/share/Tachidesk</span> <span class="hljs-comment"># 此处为 Suwayomi 的配置文件目录</span><br>    <span class="hljs-attr">ports:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-number">4567</span><span class="hljs-string">:4567</span><br>    <span class="hljs-attr">restart:</span> <span class="hljs-string">unless-stopped</span><br></code></pre></td></tr></table></figure><p>使用命令启动 Docker 容器</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker compose up -d<br></code></pre></td></tr></table></figure><p>容器启动后，浏览器打开 <code>服务器IP:4567</code>，即可进入 Suwayomi 的管理页面，然后和使用 Mihon 一样，在设置中添加扩展库、安装需要的漫画插件</p><h1 id="Mihon-漫画资源迁移至-Suwayomi-服务器"><a href="#Mihon-漫画资源迁移至-Suwayomi-服务器" class="headerlink" title="Mihon 漫画资源迁移至 Suwayomi 服务器"></a>Mihon 漫画资源迁移至 Suwayomi 服务器</h1><p>在 Mihon 的设置中找到数据与存储，点击创建备份<br><img src="/img/2026-3-3-1.jpg"></p><p>然后在 Suwayomi 服务器的设置中找到备份设置，选择恢复备份，恢复文件使用从 Mihon 中保存到的备份文件<br><img src="/img/2026-3-3-2.png"></p><p>注意 Suwayomi 也要安装和 Mihon 中使用到的一样的插件，否则会无法阅读该插件下的漫画<del>(废话，没有插件怎么看漫画)</del><br>备份恢复完成后，就可以在书架中看到 Mihon 中收藏的漫画资源了<br><img src="/img/2026-3-3-3.png"></p><p>现在已经可以直接通过浏览器阅读漫画了，在书架中选择要阅读的漫画资源，可以成功获取漫画的信息，章节信息<br><img src="/img/2026-3-3-4.png"></p><p>选择要阅读的章节，可以成功在浏览器中阅读漫画资源<br><img src="/img/2026-3-3-5.png"></p><h1 id="Mihon-阅读-Suwayomi-资源"><a href="#Mihon-阅读-Suwayomi-资源" class="headerlink" title="Mihon 阅读 Suwayomi 资源"></a>Mihon 阅读 Suwayomi 资源</h1><p>要在 Mihon 上阅读 Suwayomi 的资源，首先得在 Mihon 上安装 Suwayomi 插件，在 Mihon 中添加插件库</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs url">https://raw.githubusercontent.com/suwayomi/tachiyomi-extension/repo/index.min.json<br></code></pre></td></tr></table></figure><p>找到 Suwayomi 插件，安装，在插件的设置中，设置 Suwayomi 服务器地址，重启应用，就可以在插件中看到服务器上的漫画资源了</p><h2 id="漫画资源迁移至-Suwayomi"><a href="#漫画资源迁移至-Suwayomi" class="headerlink" title="漫画资源迁移至 Suwayomi"></a>漫画资源迁移至 Suwayomi</h2><p>直接使用 Mihon 自带的迁移功能，在 Mihon 的书架页面，选择需要迁移的漫画<br><img src="/img/2026-3-3-6.jpg"></p><p>迁移的目标就选择 Suwayomi，等待迁移即可<br><img src="/img/2026-3-3-7.jpg"></p><p>迁移完成后，就可以在 Mihon 中阅读 Suwayomi 的漫画资源了<br><img src="/img/2026-3-3-8.jpg"></p><p>其他设备也可以用同样的方法迁移漫画资源至 Suwayomi，也可以在一台设备迁移完成后，使用这台设备新生成的备份文件快速迁移</p><h1 id="漫画阅读进度同步"><a href="#漫画阅读进度同步" class="headerlink" title="漫画阅读进度同步"></a>漫画阅读进度同步</h1><p>要实现多设备的阅读进度同步，要在 Mihon 的设置中找到进度同步，选择启动 Suwayomi<br><img src="/img/2026-3-3-9.jpg"></p><p>当开启了 Suwayomi 进度同步，每阅读完一话，会自动将阅读进度同步到 Suwayomi 服务器上，其他设备在更新时会自动拉取阅读进度，至此实现了 Mihon 多设备漫画阅读进度同步的功能</p><hr><p>Mihon 的多设备漫画资源同步问题在刚开始使用的时候并不在意，因为那时我只在手机上阅读漫画，直到我专门购买了一台平板电脑用于看漫画之后，两台设备的资源不同步问题才显现出来<br>也尝试过用手动备份，然后使用 Syncthing 同步备份文件，在另一台设备上手动恢复，但是这个方案基本就是手动同步了，非常的麻烦，索性放弃<br>现在的 Suwayomi 服务器加 Mihon 是目前最舒适的解决方案，漫画阅读体验更好了(ノ￣ω￣)ノ</p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;Mihon-没有多设备同步功能&quot;&gt;&lt;a href=&quot;#Mihon-没有多设备同步功能&quot; class=&quot;headerlink&quot; title=&quot;Mihon 没有多设备同步功能&quot;&gt;&lt;/a&gt;Mihon 没有多设备同步功能&lt;/h1&gt;&lt;p&gt;使用 &lt;code&gt;Mihon&lt;/code&gt; 阅读漫画已经有一年多了，这个软件是我目前用过最舒服的漫画资源管理和阅读器。但是这个软件也有一个痛点一直没能解决，那就是多设备同步的问题，而这个问题终于被 &lt;code&gt;Suwayomi&lt;/code&gt; 成功解决。问题解决后写下这个解决方案方便以后查阅&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="姿势学习" scheme="https://neroumu.moe/categories/%E5%A7%BF%E5%8A%BF%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="Docker" scheme="https://neroumu.moe/tags/Docker/"/>
+    
+    <category term="Docker Compose" scheme="https://neroumu.moe/tags/Docker-Compose/"/>
+    
+    <category term="NAS" scheme="https://neroumu.moe/tags/NAS/"/>
+    
+    <category term="Suwayomi" scheme="https://neroumu.moe/tags/Suwayomi/"/>
+    
+    <category term="Mihon" scheme="https://neroumu.moe/tags/Mihon/"/>
+    
+  </entry>
   
   <entry>
     <title>纪念首次制作游戏MOD订阅量破千</title>
