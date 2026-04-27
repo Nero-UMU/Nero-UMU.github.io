@@ -31,7 +31,7 @@
 <meta property="og:description" content="在自己电脑上搭建了一个OpenClaw最近 DeepSeek v4 模型上线了，能力非常不错，而且 Agent 能力大幅度提高，加上 DeepSeek 的 API 本身挺便宜的，于是就在自己的电脑上搭建了一个 OpenClaw，并使用 DeepSeek 的 API">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-04-27T05:13:40.000Z">
-<meta property="article:modified_time" content="2026-04-27T06:43:09.282Z">
+<meta property="article:modified_time" content="2026-04-27T07:43:22.260Z">
 <meta property="article:author" content="NeroUMU">
 <meta property="article:tag" content="QQ">
 <meta property="article:tag" content="bot">
@@ -275,7 +275,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          全文共604 字
+          全文共874 字
         
       </span>
     
@@ -287,7 +287,7 @@
         
         
           <!-- compatible with older versions-->
-          阅读全文需约6 分钟
+          阅读全文需约8 分钟
         
       </span>
     
@@ -372,6 +372,17 @@
 
 <p>命令执行后，会自动在剪贴板中增加一行包含 Token 的登录链接，直接在浏览器粘贴这个链接进入 OpenClaw 的控制面板<br>在 <code>节点</code> 选项卡中，找到 <code>Devices</code>，配对 QQ Bot</p>
 <h1 id="开始使用-OpenClaw"><a href="#开始使用-OpenClaw" class="headerlink" title="开始使用 OpenClaw"></a>开始使用 OpenClaw</h1><p>在 QQ 的聊天列表中找到前面连接的 Bot，发送消息测试是否运行正常<br>由于 OpenClaw 是运行在 WSL 中的，所以使用需要打开一个 PowerShell 窗口，使用命令进入 WSL 系统<br>不过因为安装好之后 OpenClaw 自动设置了开机自启，所以进入 WSL 系统之后，OpenClaw 会自动运行</p>
+<h1 id="设置开机自启-WSL"><a href="#设置开机自启-WSL" class="headerlink" title="设置开机自启 WSL"></a>设置开机自启 WSL</h1><p>设置开机自启 WSL 后，就可以实现开机自启 OpenClaw 了，以后也不用留一个不能关掉的窗口在那了</p>
+<ul>
+<li>首先打开任务计划程序，右侧选择<code>创建任务</code></li>
+<li>常规标签中，名称随便起，自己认识就好了，勾选不管用户是否登录都要运行，勾选使用最高权限运行，配置选择 Windows 10</li>
+<li>触发器标签中，新建一个，开始任务选择启动时</li>
+<li>操作标签中，新建一个，操作设置为启动程序，程序或脚本设置为<code>C:\Windows\System32\wsl.exe</code>，参数设置为 <code>-d ubuntu --user [WSL中的用户名]</code></li>
+<li>条件标签中，取消勾选只有在计算机使用交流电源时才启动此任务</li>
+<li>设置标签中，勾选如果任务失败，按以下频率重新启动，间隔 1 分钟，尝试 3 次</li>
+<li>确认后，输入账号的密码创建任务</li>
+<li>至此，每次电脑开机都会自动启动 WSL，启动成功后就会自动启动 OpenClaw 了</li>
+</ul>
 <hr>
 <p>DeepSeek v4 模型确实不错，能力够用，最重要的是 API 便宜|･ω･)</p>
 
