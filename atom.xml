@@ -6,7 +6,7 @@
   <link href="https://neroumu.moe/atom.xml" rel="self"/>
   
   <link href="https://neroumu.moe/"/>
-  <updated>2026-03-03T05:13:31.846Z</updated>
+  <updated>2026-04-27T06:43:09.282Z</updated>
   <id>https://neroumu.moe/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>WSL搭建OpenClaw并连接官方QQ机器人</title>
+    <link href="https://neroumu.moe/2026/04/27/WSL%E6%90%AD%E5%BB%BAOpenClaw%E5%B9%B6%E8%BF%9E%E6%8E%A5%E5%AE%98%E6%96%B9QQ%E6%9C%BA%E5%99%A8%E4%BA%BA/"/>
+    <id>https://neroumu.moe/2026/04/27/WSL%E6%90%AD%E5%BB%BAOpenClaw%E5%B9%B6%E8%BF%9E%E6%8E%A5%E5%AE%98%E6%96%B9QQ%E6%9C%BA%E5%99%A8%E4%BA%BA/</id>
+    <published>2026-04-27T05:13:40.000Z</published>
+    <updated>2026-04-27T06:43:09.282Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="在自己电脑上搭建了一个OpenClaw"><a href="#在自己电脑上搭建了一个OpenClaw" class="headerlink" title="在自己电脑上搭建了一个OpenClaw"></a>在自己电脑上搭建了一个OpenClaw</h1><p>最近 DeepSeek v4 模型上线了，能力非常不错，而且 Agent 能力大幅度提高，加上 DeepSeek 的 API 本身挺便宜的，于是就在自己的电脑上搭建了一个 OpenClaw，并使用 DeepSeek 的 API</p><span id="more"></span><h1 id="事先准备工作"><a href="#事先准备工作" class="headerlink" title="事先准备工作"></a>事先准备工作</h1><p>先去 <a href="https://platform.deepseek.com/">DeepSeek开放平台</a>和<a href="https://platform.moonshot.cn/">Kimi开放平台</a>创建 API keys，DeepSeek 的 API 用于模型的正常使用，Kimi 的 API 用于网络搜索(也就是当 AI 搜索访问网页的时候，会使用这个 API)<br>Windows 管理员权限运行 PowerShell，运行如下命令安装 WSL 和 Ubuntu 系统</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--install</span><br></code></pre></td></tr></table></figure><h1 id="WSL-中安装-OpenClaw"><a href="#WSL-中安装-OpenClaw" class="headerlink" title="WSL 中安装 OpenClaw"></a>WSL 中安装 OpenClaw</h1><p>安装OpenClaw需要先在 WSL 中准备好 Nodejs 环境</p><h2 id="进入-WSL"><a href="#进入-WSL" class="headerlink" title="进入 WSL"></a>进入 WSL</h2><p>打开 PowerShell，执行下面命令，进入 WSL 系统，第一次进入会要求设置用户名和密码</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">ubuntu<br></code></pre></td></tr></table></figure><h2 id="安装-Nodejs-环境"><a href="#安装-Nodejs-环境" class="headerlink" title="安装 Nodejs 环境"></a>安装 Nodejs 环境</h2><p>按照 <a href="https://nodejs.org/en/download">Nodejs</a> 的指导，下载安装 nvm 和 Nodejs</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash &amp;&amp;<br>\. <span class="hljs-string">&quot;<span class="hljs-variable">$HOME</span>/.nvm/nvm.sh&quot;</span> &amp;&amp;<br>nvm install 24<br></code></pre></td></tr></table></figure><p>安装完成后，查看是否安装完成</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">node -v &amp;&amp;<br>npm -v<br></code></pre></td></tr></table></figure><h2 id="安装-OpenClaw"><a href="#安装-OpenClaw" class="headerlink" title="安装 OpenClaw"></a>安装 OpenClaw</h2><p>使用下面的命令安装 OpenClaw</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm i -g openclaw<br></code></pre></td></tr></table></figure><p>安装完成后，输入下面的命令，直接指定使用 DeepSeek 的 API 密钥作为认证方式进入初始化</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">openclaw onboard --auth-choice deepseek-api-key<br></code></pre></td></tr></table></figure><p>然后按照提示选择适合自己的配置，在 <code>Enter DeepSeek API key</code> 处输入前面获取得到的 DeepSeek 的 API<br>在 <code>Select channel</code> 选项处选择 <code>QQ Bot (Official API)</code>，使用 QQ 机器人，选择合适的方式绑定 QQ 机器人<br>在 <code>Search provider</code> 选项处选择 <code>Kimi (Moonshot)</code>，并输入前面获取得到的 Kimi 的 API<br>后面的 skills 什么的按照自己的需求安装即可</p><h1 id="安装后的设置"><a href="#安装后的设置" class="headerlink" title="安装后的设置"></a>安装后的设置</h1><p>安装完成后，WSL 中输入如下命令测试是否运行正常</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl --user status openclaw-gateway.service<br></code></pre></td></tr></table></figure><p>如果运行正常，执行如下命令</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">openclaw dashboard<br></code></pre></td></tr></table></figure><p>命令执行后，会自动在剪贴板中增加一行包含 Token 的登录链接，直接在浏览器粘贴这个链接进入 OpenClaw 的控制面板<br>在 <code>节点</code> 选项卡中，找到 <code>Devices</code>，配对 QQ Bot</p><h1 id="开始使用-OpenClaw"><a href="#开始使用-OpenClaw" class="headerlink" title="开始使用 OpenClaw"></a>开始使用 OpenClaw</h1><p>在 QQ 的聊天列表中找到前面连接的 Bot，发送消息测试是否运行正常<br>由于 OpenClaw 是运行在 WSL 中的，所以使用需要打开一个 PowerShell 窗口，使用命令进入 WSL 系统<br>不过因为安装好之后 OpenClaw 自动设置了开机自启，所以进入 WSL 系统之后，OpenClaw 会自动运行</p><hr><p>DeepSeek v4 模型确实不错，能力够用，最重要的是 API 便宜|･ω･)</p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;在自己电脑上搭建了一个OpenClaw&quot;&gt;&lt;a href=&quot;#在自己电脑上搭建了一个OpenClaw&quot; class=&quot;headerlink&quot; title=&quot;在自己电脑上搭建了一个OpenClaw&quot;&gt;&lt;/a&gt;在自己电脑上搭建了一个OpenClaw&lt;/h1&gt;&lt;p&gt;最近 DeepSeek v4 模型上线了，能力非常不错，而且 Agent 能力大幅度提高，加上 DeepSeek 的 API 本身挺便宜的，于是就在自己的电脑上搭建了一个 OpenClaw，并使用 DeepSeek 的 API&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="姿势学习" scheme="https://neroumu.moe/categories/%E5%A7%BF%E5%8A%BF%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="QQ" scheme="https://neroumu.moe/tags/QQ/"/>
+    
+    <category term="bot" scheme="https://neroumu.moe/tags/bot/"/>
+    
+    <category term="DeepSeek" scheme="https://neroumu.moe/tags/DeepSeek/"/>
+    
+    <category term="WSL" scheme="https://neroumu.moe/tags/WSL/"/>
+    
+    <category term="OpenClaw" scheme="https://neroumu.moe/tags/OpenClaw/"/>
+    
+  </entry>
   
   <entry>
     <title>使用Suwayomi实现Mihon阅读漫画多设备同步</title>

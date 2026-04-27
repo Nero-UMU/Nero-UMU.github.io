@@ -23,38 +23,28 @@
   <meta name="author" content="NeroUMU">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Mihon 没有多设备同步功能使用 Mihon 阅读漫画已经有一年多了，这个软件是我目前用过最舒服的漫画资源管理和阅读器。但是这个软件也有一个痛点一直没能解决，那就是多设备同步的问题，而这个问题终于被 Suwayomi 成功解决。问题解决后写下这个解决方案方便以后查阅">
+    <meta name="description" content="在自己电脑上搭建了一个OpenClaw最近 DeepSeek v4 模型上线了，能力非常不错，而且 Agent 能力大幅度提高，加上 DeepSeek 的 API 本身挺便宜的，于是就在自己的电脑上搭建了一个 OpenClaw，并使用 DeepSeek 的 API">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用Suwayomi实现Mihon阅读漫画多设备同步">
-<meta property="og:url" content="https://neroumu.moe/2026/03/03/%E4%BD%BF%E7%94%A8Suwayomi%E5%AE%9E%E7%8E%B0Mihon%E9%98%85%E8%AF%BB%E6%BC%AB%E7%94%BB%E5%A4%9A%E8%AE%BE%E5%A4%87%E5%90%8C%E6%AD%A5/index.html">
+<meta property="og:title" content="WSL搭建OpenClaw并连接官方QQ机器人">
+<meta property="og:url" content="https://neroumu.moe/2026/04/27/WSL%E6%90%AD%E5%BB%BAOpenClaw%E5%B9%B6%E8%BF%9E%E6%8E%A5%E5%AE%98%E6%96%B9QQ%E6%9C%BA%E5%99%A8%E4%BA%BA/index.html">
 <meta property="og:site_name" content="NeroUMU&#39;s BLOG">
-<meta property="og:description" content="Mihon 没有多设备同步功能使用 Mihon 阅读漫画已经有一年多了，这个软件是我目前用过最舒服的漫画资源管理和阅读器。但是这个软件也有一个痛点一直没能解决，那就是多设备同步的问题，而这个问题终于被 Suwayomi 成功解决。问题解决后写下这个解决方案方便以后查阅">
+<meta property="og:description" content="在自己电脑上搭建了一个OpenClaw最近 DeepSeek v4 模型上线了，能力非常不错，而且 Agent 能力大幅度提高，加上 DeepSeek 的 API 本身挺便宜的，于是就在自己的电脑上搭建了一个 OpenClaw，并使用 DeepSeek 的 API">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://neroumu.moe/img/2026-3-3-1.jpg">
-<meta property="og:image" content="https://neroumu.moe/img/2026-3-3-2.png">
-<meta property="og:image" content="https://neroumu.moe/img/2026-3-3-3.png">
-<meta property="og:image" content="https://neroumu.moe/img/2026-3-3-4.png">
-<meta property="og:image" content="https://neroumu.moe/img/2026-3-3-5.png">
-<meta property="og:image" content="https://neroumu.moe/img/2026-3-3-6.jpg">
-<meta property="og:image" content="https://neroumu.moe/img/2026-3-3-7.jpg">
-<meta property="og:image" content="https://neroumu.moe/img/2026-3-3-8.jpg">
-<meta property="og:image" content="https://neroumu.moe/img/2026-3-3-9.jpg">
-<meta property="article:published_time" content="2026-03-03T02:48:20.000Z">
-<meta property="article:modified_time" content="2026-03-03T05:13:31.846Z">
+<meta property="article:published_time" content="2026-04-27T05:13:40.000Z">
+<meta property="article:modified_time" content="2026-04-27T06:43:09.282Z">
 <meta property="article:author" content="NeroUMU">
-<meta property="article:tag" content="Docker">
-<meta property="article:tag" content="Docker Compose">
-<meta property="article:tag" content="NAS">
-<meta property="article:tag" content="Suwayomi">
-<meta property="article:tag" content="Mihon">
+<meta property="article:tag" content="QQ">
+<meta property="article:tag" content="bot">
+<meta property="article:tag" content="DeepSeek">
+<meta property="article:tag" content="WSL">
+<meta property="article:tag" content="OpenClaw">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://neroumu.moe/img/2026-3-3-1.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>使用Suwayomi实现Mihon阅读漫画多设备同步 - NeroUMU&#39;s BLOG</title>
+  <title>WSL搭建OpenClaw并连接官方QQ机器人 - NeroUMU&#39;s BLOG</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -261,7 +251,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="使用Suwayomi实现Mihon阅读漫画多设备同步"></span>
+            <span id="subtitle" data-typed-text="WSL搭建OpenClaw并连接官方QQ机器人"></span>
           
         </div>
 
@@ -272,8 +262,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-03-03 10:48" pubdate>
-          2026年3月3日 上午
+        <time datetime="2026-04-27 13:13" pubdate>
+          2026年4月27日 下午
         </time>
       </span>
     
@@ -285,7 +275,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          全文共1.1k 字
+          全文共604 字
         
       </span>
     
@@ -297,7 +287,7 @@
         
         
           <!-- compatible with older versions-->
-          阅读全文需约9 分钟
+          阅读全文需约6 分钟
         
       </span>
     
@@ -346,39 +336,44 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">使用Suwayomi实现Mihon阅读漫画多设备同步</h1>
+            <h1 id="seo-header">WSL搭建OpenClaw并连接官方QQ机器人</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Mihon-没有多设备同步功能"><a href="#Mihon-没有多设备同步功能" class="headerlink" title="Mihon 没有多设备同步功能"></a>Mihon 没有多设备同步功能</h1><p>使用 <code>Mihon</code> 阅读漫画已经有一年多了，这个软件是我目前用过最舒服的漫画资源管理和阅读器。但是这个软件也有一个痛点一直没能解决，那就是多设备同步的问题，而这个问题终于被 <code>Suwayomi</code> 成功解决。问题解决后写下这个解决方案方便以后查阅</p>
+                <h1 id="在自己电脑上搭建了一个OpenClaw"><a href="#在自己电脑上搭建了一个OpenClaw" class="headerlink" title="在自己电脑上搭建了一个OpenClaw"></a>在自己电脑上搭建了一个OpenClaw</h1><p>最近 DeepSeek v4 模型上线了，能力非常不错，而且 Agent 能力大幅度提高，加上 DeepSeek 的 API 本身挺便宜的，于是就在自己的电脑上搭建了一个 OpenClaw，并使用 DeepSeek 的 API</p>
 <span id="more"></span>
 
-<h1 id="什么是-Suwayomi"><a href="#什么是-Suwayomi" class="headerlink" title="什么是 Suwayomi"></a>什么是 Suwayomi</h1><p>Suwayomi-Server 是一个经过改造后的 Mihon，可以理解为它是一个部署完成后24小时不间断运行的 Mihon，在 Mihon 上安装 Suwayomi 插件后可以在任何设备上阅读上面的漫画资源，并且可以实现漫画阅读进度同步的功能</p>
-<h1 id="Suwayomi-服务器搭建"><a href="#Suwayomi-服务器搭建" class="headerlink" title="Suwayomi 服务器搭建"></a>Suwayomi 服务器搭建</h1><p>搭建 Suwayomi 有几种不同的方法，我这里继续使用 Docker 搭建，在一个空的目录下编辑 <code>docker-compose.yaml</code> 文件，内容如下</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&quot;233&quot;</span><br><br><span class="hljs-attr">services:</span><br><br>  <span class="hljs-attr">suwayomi_server:</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">ghcr.io/suwayomi/suwayomi-server:stable</span><br>    <span class="hljs-attr">container_name:</span> <span class="hljs-string">Suwayomi-Server</span><br>    <span class="hljs-attr">volumes:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/&lt;PATH&gt;/&lt;TO&gt;/&lt;downloads-dir&gt;:/home/suwayomi/.local/share/Tachidesk/downloads</span> <span class="hljs-comment"># 此处为下载漫画的目录，为防止出错，此目录要放在第一行</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">/&lt;PATH&gt;/&lt;TO&gt;/&lt;config-dir&gt;:/home/suwayomi/.local/share/Tachidesk</span> <span class="hljs-comment"># 此处为 Suwayomi 的配置文件目录</span><br>    <span class="hljs-attr">ports:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-number">4567</span><span class="hljs-string">:4567</span><br>    <span class="hljs-attr">restart:</span> <span class="hljs-string">unless-stopped</span><br></code></pre></td></tr></table></figure>
+<h1 id="事先准备工作"><a href="#事先准备工作" class="headerlink" title="事先准备工作"></a>事先准备工作</h1><p>先去 <a target="_blank" rel="noopener" href="https://platform.deepseek.com/">DeepSeek开放平台</a>和<a target="_blank" rel="noopener" href="https://platform.moonshot.cn/">Kimi开放平台</a>创建 API keys，DeepSeek 的 API 用于模型的正常使用，Kimi 的 API 用于网络搜索(也就是当 AI 搜索访问网页的时候，会使用这个 API)<br>Windows 管理员权限运行 PowerShell，运行如下命令安装 WSL 和 Ubuntu 系统</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--install</span><br></code></pre></td></tr></table></figure>
 
-<p>使用命令启动 Docker 容器</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker compose up -d<br></code></pre></td></tr></table></figure>
+<h1 id="WSL-中安装-OpenClaw"><a href="#WSL-中安装-OpenClaw" class="headerlink" title="WSL 中安装 OpenClaw"></a>WSL 中安装 OpenClaw</h1><p>安装OpenClaw需要先在 WSL 中准备好 Nodejs 环境</p>
+<h2 id="进入-WSL"><a href="#进入-WSL" class="headerlink" title="进入 WSL"></a>进入 WSL</h2><p>打开 PowerShell，执行下面命令，进入 WSL 系统，第一次进入会要求设置用户名和密码</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">ubuntu<br></code></pre></td></tr></table></figure>
 
-<p>容器启动后，浏览器打开 <code>服务器IP:4567</code>，即可进入 Suwayomi 的管理页面，然后和使用 Mihon 一样，在设置中添加扩展库、安装需要的漫画插件</p>
-<h1 id="Mihon-漫画资源迁移至-Suwayomi-服务器"><a href="#Mihon-漫画资源迁移至-Suwayomi-服务器" class="headerlink" title="Mihon 漫画资源迁移至 Suwayomi 服务器"></a>Mihon 漫画资源迁移至 Suwayomi 服务器</h1><p>在 Mihon 的设置中找到数据与存储，点击创建备份<br><img src="/img/2026-3-3-1.jpg" srcset="/img/loading.gif" lazyload></p>
-<p>然后在 Suwayomi 服务器的设置中找到备份设置，选择恢复备份，恢复文件使用从 Mihon 中保存到的备份文件<br><img src="/img/2026-3-3-2.png" srcset="/img/loading.gif" lazyload></p>
-<p>注意 Suwayomi 也要安装和 Mihon 中使用到的一样的插件，否则会无法阅读该插件下的漫画<del>(废话，没有插件怎么看漫画)</del><br>备份恢复完成后，就可以在书架中看到 Mihon 中收藏的漫画资源了<br><img src="/img/2026-3-3-3.png" srcset="/img/loading.gif" lazyload></p>
-<p>现在已经可以直接通过浏览器阅读漫画了，在书架中选择要阅读的漫画资源，可以成功获取漫画的信息，章节信息<br><img src="/img/2026-3-3-4.png" srcset="/img/loading.gif" lazyload></p>
-<p>选择要阅读的章节，可以成功在浏览器中阅读漫画资源<br><img src="/img/2026-3-3-5.png" srcset="/img/loading.gif" lazyload></p>
-<h1 id="Mihon-阅读-Suwayomi-资源"><a href="#Mihon-阅读-Suwayomi-资源" class="headerlink" title="Mihon 阅读 Suwayomi 资源"></a>Mihon 阅读 Suwayomi 资源</h1><p>要在 Mihon 上阅读 Suwayomi 的资源，首先得在 Mihon 上安装 Suwayomi 插件，在 Mihon 中添加插件库</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs url">https://raw.githubusercontent.com/suwayomi/tachiyomi-extension/repo/index.min.json<br></code></pre></td></tr></table></figure>
+<h2 id="安装-Nodejs-环境"><a href="#安装-Nodejs-环境" class="headerlink" title="安装 Nodejs 环境"></a>安装 Nodejs 环境</h2><p>按照 <a target="_blank" rel="noopener" href="https://nodejs.org/en/download">Nodejs</a> 的指导，下载安装 nvm 和 Nodejs</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash &amp;&amp;<br>\. <span class="hljs-string">&quot;<span class="hljs-variable">$HOME</span>/.nvm/nvm.sh&quot;</span> &amp;&amp;<br>nvm install 24<br></code></pre></td></tr></table></figure>
 
-<p>找到 Suwayomi 插件，安装，在插件的设置中，设置 Suwayomi 服务器地址，重启应用，就可以在插件中看到服务器上的漫画资源了</p>
-<h2 id="漫画资源迁移至-Suwayomi"><a href="#漫画资源迁移至-Suwayomi" class="headerlink" title="漫画资源迁移至 Suwayomi"></a>漫画资源迁移至 Suwayomi</h2><p>直接使用 Mihon 自带的迁移功能，在 Mihon 的书架页面，选择需要迁移的漫画<br><img src="/img/2026-3-3-6.jpg" srcset="/img/loading.gif" lazyload></p>
-<p>迁移的目标就选择 Suwayomi，等待迁移即可<br><img src="/img/2026-3-3-7.jpg" srcset="/img/loading.gif" lazyload></p>
-<p>迁移完成后，就可以在 Mihon 中阅读 Suwayomi 的漫画资源了<br><img src="/img/2026-3-3-8.jpg" srcset="/img/loading.gif" lazyload></p>
-<p>其他设备也可以用同样的方法迁移漫画资源至 Suwayomi，也可以在一台设备迁移完成后，使用这台设备新生成的备份文件快速迁移</p>
-<h1 id="漫画阅读进度同步"><a href="#漫画阅读进度同步" class="headerlink" title="漫画阅读进度同步"></a>漫画阅读进度同步</h1><p>要实现多设备的阅读进度同步，要在 Mihon 的设置中找到进度同步，选择启动 Suwayomi<br><img src="/img/2026-3-3-9.jpg" srcset="/img/loading.gif" lazyload></p>
-<p>当开启了 Suwayomi 进度同步，每阅读完一话，会自动将阅读进度同步到 Suwayomi 服务器上，其他设备在更新时会自动拉取阅读进度，至此实现了 Mihon 多设备漫画阅读进度同步的功能</p>
+<p>安装完成后，查看是否安装完成</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">node -v &amp;&amp;<br>npm -v<br></code></pre></td></tr></table></figure>
+
+<h2 id="安装-OpenClaw"><a href="#安装-OpenClaw" class="headerlink" title="安装 OpenClaw"></a>安装 OpenClaw</h2><p>使用下面的命令安装 OpenClaw</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm i -g openclaw<br></code></pre></td></tr></table></figure>
+
+<p>安装完成后，输入下面的命令，直接指定使用 DeepSeek 的 API 密钥作为认证方式进入初始化</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">openclaw onboard --auth-choice deepseek-api-key<br></code></pre></td></tr></table></figure>
+
+<p>然后按照提示选择适合自己的配置，在 <code>Enter DeepSeek API key</code> 处输入前面获取得到的 DeepSeek 的 API<br>在 <code>Select channel</code> 选项处选择 <code>QQ Bot (Official API)</code>，使用 QQ 机器人，选择合适的方式绑定 QQ 机器人<br>在 <code>Search provider</code> 选项处选择 <code>Kimi (Moonshot)</code>，并输入前面获取得到的 Kimi 的 API<br>后面的 skills 什么的按照自己的需求安装即可</p>
+<h1 id="安装后的设置"><a href="#安装后的设置" class="headerlink" title="安装后的设置"></a>安装后的设置</h1><p>安装完成后，WSL 中输入如下命令测试是否运行正常</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl --user status openclaw-gateway.service<br></code></pre></td></tr></table></figure>
+
+<p>如果运行正常，执行如下命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">openclaw dashboard<br></code></pre></td></tr></table></figure>
+
+<p>命令执行后，会自动在剪贴板中增加一行包含 Token 的登录链接，直接在浏览器粘贴这个链接进入 OpenClaw 的控制面板<br>在 <code>节点</code> 选项卡中，找到 <code>Devices</code>，配对 QQ Bot</p>
+<h1 id="开始使用-OpenClaw"><a href="#开始使用-OpenClaw" class="headerlink" title="开始使用 OpenClaw"></a>开始使用 OpenClaw</h1><p>在 QQ 的聊天列表中找到前面连接的 Bot，发送消息测试是否运行正常<br>由于 OpenClaw 是运行在 WSL 中的，所以使用需要打开一个 PowerShell 窗口，使用命令进入 WSL 系统<br>不过因为安装好之后 OpenClaw 自动设置了开机自启，所以进入 WSL 系统之后，OpenClaw 会自动运行</p>
 <hr>
-<p>Mihon 的多设备漫画资源同步问题在刚开始使用的时候并不在意，因为那时我只在手机上阅读漫画，直到我专门购买了一台平板电脑用于看漫画之后，两台设备的资源不同步问题才显现出来<br>也尝试过用手动备份，然后使用 Syncthing 同步备份文件，在另一台设备上手动恢复，但是这个方案基本就是手动同步了，非常的麻烦，索性放弃<br>现在的 Suwayomi 服务器加 Mihon 是目前最舒适的解决方案，漫画阅读体验更好了(ノ￣ω￣)ノ</p>
+<p>DeepSeek v4 模型确实不错，能力够用，最重要的是 API 便宜|･ω･)</p>
 
                 
               </div>
@@ -412,15 +407,15 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Docker/" class="print-no-link">#Docker</a>
+        <a href="/tags/QQ/" class="print-no-link">#QQ</a>
       
-        <a href="/tags/Docker-Compose/" class="print-no-link">#Docker Compose</a>
+        <a href="/tags/bot/" class="print-no-link">#bot</a>
       
-        <a href="/tags/NAS/" class="print-no-link">#NAS</a>
+        <a href="/tags/DeepSeek/" class="print-no-link">#DeepSeek</a>
       
-        <a href="/tags/Suwayomi/" class="print-no-link">#Suwayomi</a>
+        <a href="/tags/WSL/" class="print-no-link">#WSL</a>
       
-        <a href="/tags/Mihon/" class="print-no-link">#Mihon</a>
+        <a href="/tags/OpenClaw/" class="print-no-link">#OpenClaw</a>
       
     </div>
   
@@ -434,18 +429,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/04/27/WSL%E6%90%AD%E5%BB%BAOpenClaw%E5%B9%B6%E8%BF%9E%E6%8E%A5%E5%AE%98%E6%96%B9QQ%E6%9C%BA%E5%99%A8%E4%BA%BA/" title="WSL搭建OpenClaw并连接官方QQ机器人">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">WSL搭建OpenClaw并连接官方QQ机器人</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/01/15/%E7%BA%AA%E5%BF%B5%E9%A6%96%E6%AC%A1%E5%88%B6%E4%BD%9C%E6%B8%B8%E6%88%8FMOD%E8%AE%A2%E9%98%85%E9%87%8F%E7%A0%B4%E5%8D%83/" title="纪念首次制作游戏MOD订阅量破千">
-                        <span class="hidden-mobile">纪念首次制作游戏MOD订阅量破千</span>
+                      <a href="/2026/03/03/%E4%BD%BF%E7%94%A8Suwayomi%E5%AE%9E%E7%8E%B0Mihon%E9%98%85%E8%AF%BB%E6%BC%AB%E7%94%BB%E5%A4%9A%E8%AE%BE%E5%A4%87%E5%90%8C%E6%AD%A5/" title="使用Suwayomi实现Mihon阅读漫画多设备同步">
+                        <span class="hidden-mobile">使用Suwayomi实现Mihon阅读漫画多设备同步</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
