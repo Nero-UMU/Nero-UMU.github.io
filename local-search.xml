@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>国内部署Nitter无法加载图片解决方案</title>
+    <link href="/2026/05/03/%E5%9B%BD%E5%86%85%E9%83%A8%E7%BD%B2Nitter%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E5%9B%BE%E7%89%87%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    <url>/2026/05/03/%E5%9B%BD%E5%86%85%E9%83%A8%E7%BD%B2Nitter%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E5%9B%BE%E7%89%87%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</url>
+    
+    <content type="html"><![CDATA[<h1 id="源码安装-Nitter-无法加载图片"><a href="#源码安装-Nitter-无法加载图片" class="headerlink" title="源码安装 Nitter 无法加载图片"></a>源码安装 Nitter 无法加载图片</h1><p><a href="https://github.com/zedeus/nitter">Nitter</a> 是一个开源的 Twitter&#x2F;X 替代前端，通过搭建 Nitter 可以实现无广告浏览推特，可以用别人公开的服务器，也可以自建<br>今天使用源码自建 Nitter 服务器时，发现在软件内设置代理后，可以正常获取文字信息但是无法获取图片，找了各种方法，最终解决，故在此记录</p><span id="more"></span><h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>在使用命令启动 Nitter 后，访问网页，查看日志会报如下错误</p><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs txt">[media] Proxying exception, error: Network is unreachable, url: https://pbs.twimg.com/profile_images/...<br></code></pre></td></tr></table></figure><p><code>Network is unreachable</code> 意思是说完全无法建立到与 <code>pbs.twimg.com</code> 的连接<br>刚开始认为是代理的路由出现问题，将如下推特的图片地址添加到代理的路由中，发现 Nitter 依旧无法获取图片</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs conf">twitter.com<br>x.com<br>twimg.com<br>pbs.twimg.com<br>video.twimg.com<br>abs.twimg.com<br>t.co<br>api.twitter.com<br></code></pre></td></tr></table></figure><p>使用 <code>curl</code> 命令处理其中的 URL 链接，发现是可以正常返回图片的</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">正常访问</span><br>curl -v --proxy http://代理IP地址:port https://pbs.twimg.com/profile_images/xxx.jpg -o /dev/null<br></code></pre></td></tr></table></figure><p>在 Nitter 的配置文件 <code>nitter.conf</code> 中填写代理配置</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs conf">proxy = &quot;http://代理IP地址:port&quot;<br></code></pre></td></tr></table></figure><p>配置后重启，错误从又变成了</p><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs txt">[media] Proxying exception, error: Connection was closed before full request has been made <br></code></pre></td></tr></table></figure><p>这说明 Nitter 确实成功设置了代理，但 Nitter 对代理请求存在问题，连接握手失败，<code>nitter.conf</code> 中的 <code>proxy</code> 配置不能代理图片请求，需要使用其他方法来代理图片请求</p><h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>使用 <code>proxychains4</code> 在系统层面强制所有出站流量走代理<br>首先安装 <code>proxychains4</code>，可以直接用包管理器安装</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo apt install proxychains4<br></code></pre></td></tr></table></figure><p>编辑 <code>/etc/proxychains4.conf</code>，配置如下</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs conf"># 允许直连本地地址<br>dynamic_chain<br># 排除本地地址，否则 Redis 也会被代理拦截<br>localnet 127.0.0.0/255.0.0.0<br>localnet ::1/128<br><br># 注释掉strict_chain<br>#strict_chain<br><br># 代理列表<br>[ProxyList]<br>http 127.0.0.1 本地代理端口<br></code></pre></td></tr></table></figure><p>配置成功后，重启 Nitter 成功获取到了推文的图片</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">proxychains4 ./nitter -c nitter.conf<br></code></pre></td></tr></table></figure><h1 id="修改-systemd-服务配置"><a href="#修改-systemd-服务配置" class="headerlink" title="修改 systemd 服务配置"></a>修改 systemd 服务配置</h1><p>在 nitter.service 文件中加入 proxychains4，使 Nitter 作为后台服务时也能正确走代理</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs conf">[Unit]<br>Description=Nitter (An alternative Twitter front-end)<br>After=syslog.target<br>After=network.target<br><br>[Service]<br>Type=simple<br># set user and group<br>User=用户ID<br>Group=群组ID<br># configure location<br>WorkingDirectory=/path/to/NitterDir<br>ExecStart=/usr/bin/proxychains4 /path/to/Nitter -c /path/to/Nitter.conf<br>Restart=always<br>RestartSec=15<br><br>[Install]<br>WantedBy=multi-user.target<br></code></pre></td></tr></table></figure><p>重载并重启服务</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo systemctl daemon-reload<br>sudo systemctl restart nitter<br>sudo systemctl status nitter<br></code></pre></td></tr></table></figure><hr><p>本以为搭建一个 Nitter 非常简单的，没想到碰到了代理的问题，设置来设置去还是没能找到解决的方案，最后还是靠 AI 帮助，使用 proxychains4 成功地代理了 Nitter ( ￣ー￣)φ__</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>踩坑记录</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>Nitter</tag>
+      
+      <tag>proxychains4</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>WSL搭建OpenClaw并连接官方QQ机器人</title>
     <link href="/2026/04/27/WSL%E6%90%AD%E5%BB%BAOpenClaw%E5%B9%B6%E8%BF%9E%E6%8E%A5%E5%AE%98%E6%96%B9QQ%E6%9C%BA%E5%99%A8%E4%BA%BA/"/>
     <url>/2026/04/27/WSL%E6%90%AD%E5%BB%BAOpenClaw%E5%B9%B6%E8%BF%9E%E6%8E%A5%E5%AE%98%E6%96%B9QQ%E6%9C%BA%E5%99%A8%E4%BA%BA/</url>
